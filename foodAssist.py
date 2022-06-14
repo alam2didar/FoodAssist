@@ -31,6 +31,8 @@ class FoodAssist(qtw.QWidget):
     # Hand tracking thread
     create_worker(self)
 
+    # This is a new branch
+
   def check_button_press(self):
     HandPosGlobal().dispatchEvent("HandPosition")
 
