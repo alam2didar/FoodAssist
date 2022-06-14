@@ -1,0 +1,19 @@
+-updated DepthCameraModule.py
+calibration of parameter in applyColorMap due to changed distance from projector to table
+
+-added ButtonPositionModule.py
+set positions of buttons easier
+
+-updated worker.py
+add method to activate / deactivate worker
+emitting hand_x, hand_y, hand_z, counter
+import ButtonPositionModule
+instantializes button_positioner
+
+-updated foodassist.py
+take counter instead of gesture from emitted
+show fullscreen
+create_worker for each UI
+onIntReady for each UI
+calibration of coordinates in onIntReady due to changed distance from projector to table
+use button_positioner.check_in_area to check whether button is touched
