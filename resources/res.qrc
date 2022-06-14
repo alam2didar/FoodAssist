@@ -1,0 +1,45 @@
+<RCC>
+  <qresource prefix="img">
+    <file>Icon Detected.svg</file>
+    <file>Arrow Rright Short.svg</file>
+    <file>Arrow Bar Right.svg</file>
+    <file>Partying Face.png</file>
+  </qresource>
+  <qresource prefix="detected steps">
+    <file>Detected Step1.png</file>
+    <file>Detected Step2.png</file>
+    <file>Detected Step3.png</file>
+    <file>Detected Step4.png</file>
+  </qresource>
+  <qresource prefix="buttons">
+    <file>Sub Step 1.svg</file>
+    <file>Sub Step 2.svg</file>
+    <file>Sub Step 3.svg</file>
+    <file>Sub Step 4.svg</file>
+    <file>Button Skip.svg</file>
+    <file>Button No.svg</file>
+    <file>Button Restart.svg</file>
+    <file>Button Start.svg</file>
+    <file>Button Yes.svg</file>
+    <file>Button Exit.svg</file>
+    <file>Button Next.svg</file>
+  </qresource>
+  <qresource prefix="steps">
+    <file>1.1-What.jpg</file>
+    <file>1.2-Where.jpg</file>
+    <file>1.3-How.jpg</file>
+    <file>1.4-End.jpg</file>
+    <file>2.1-What.jpg</file>
+    <file>2.2-Where.jpg</file>
+    <file>2.3-How.jpg</file>
+    <file>2.4-End.jpg</file>
+    <file>3.1-What.jpg</file>
+    <file>3.2-Where.jpg</file>
+    <file>3.3-How.jpg</file>
+    <file>3.4-End.jpg</file>
+    <file>4.1-What.jpg</file>
+    <file>4.2-Where.jpg</file>
+    <file>4.3-How.jpg</file>
+    <file>4.4-End.jpg</file>
+  </qresource>
+</RCC>
