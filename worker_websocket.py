@@ -83,3 +83,4 @@ class WorkerWebsocket(QObject):
         print("Server started ...")
         # asyncio.get_event_loop().run_forever()
         loop.run_forever()
+        self.websocket_finished.emit()
