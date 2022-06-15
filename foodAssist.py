@@ -9,7 +9,7 @@ import res_rc
 from handPosGlobal import HandPosGlobal
 import os
 import worker
-import seaborn as sns
+import worker_evaluator
 import initializer
 
 class FoodAssist(qtw.QWidget):
