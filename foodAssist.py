@@ -700,6 +700,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
+    # create evaluator
+    create_evaluator(self)
+    # debug - setting evaluation_flag to False
+    self.obj_evaluator.evaluate(self.archive_file_name, False)
 
   # check if message received
   def onEvaluationFinished(self, fig_1_name, fig_2_name, result_text):
