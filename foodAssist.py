@@ -607,9 +607,6 @@ class Step_4_UI(qtw.QWidget):
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
     self.button_sub_step1.clicked.connect(self.sub_step1)
-    self.button_sub_step2.clicked.connect(self.sub_step2)
-    self.button_sub_step3.clicked.connect(self.sub_step3)
-    self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker(self)
   
@@ -654,21 +651,6 @@ class Step_4_UI(qtw.QWidget):
   
   @qtc.pyqtSlot()
   def sub_step1(self):
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step2(self):
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step3(self):
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step4(self):
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
