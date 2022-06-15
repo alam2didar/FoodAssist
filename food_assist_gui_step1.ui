@@ -12,7 +12,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1680</width>
+    <width>1583</width>
     <height>1020</height>
    </rect>
   </property>
@@ -249,11 +249,14 @@
        </property>
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>260</y>
-         <width>1241</width>
-         <height>161</height>
+         <x>0</x>
+         <y>270</y>
+         <width>1251</width>
+         <height>241</height>
         </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="text">
         <string/>

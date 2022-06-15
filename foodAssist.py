@@ -302,6 +302,7 @@ class Step_1_UI(qtw.QWidget):
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
+    self.button_step1.clicked.connect(self.step1)
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.button_sub_step2.clicked.connect(self.sub_step2)
     self.button_sub_step3.clicked.connect(self.sub_step3)
@@ -352,6 +353,11 @@ class Step_1_UI(qtw.QWidget):
     else:
       self.player.play()
   
+  @qtc.pyqtSlot()
+  def step1(self):
+    self.playlist.setCurrentIndex(0)
+    self.player.setPosition(0)
+    self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
     self.playlist.setCurrentIndex(1)
@@ -406,6 +412,7 @@ class Step_2_UI(qtw.QWidget):
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
+    self.button_step2.clicked.connect(self.step2)
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.button_sub_step2.clicked.connect(self.sub_step2)
     self.button_sub_step3.clicked.connect(self.sub_step3)
@@ -452,6 +459,11 @@ class Step_2_UI(qtw.QWidget):
     else:
       self.player.play()
 
+  @qtc.pyqtSlot()
+  def step2(self):
+    self.playlist.setCurrentIndex(0)
+    self.player.setPosition(0)
+    self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
     self.playlist.setCurrentIndex(1)
@@ -507,6 +519,7 @@ class Step_3_UI(qtw.QWidget):
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
+    self.button_step3.clicked.connect(self.step3)
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.button_sub_step2.clicked.connect(self.sub_step2)
     self.button_sub_step3.clicked.connect(self.sub_step3)
@@ -553,6 +566,11 @@ class Step_3_UI(qtw.QWidget):
     else:
       self.player.play()
   
+  @qtc.pyqtSlot()
+  def step3(self):
+    self.playlist.setCurrentIndex(0)
+    self.player.setPosition(0)
+    self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
     self.playlist.setCurrentIndex(1)
@@ -606,10 +624,8 @@ class Step_4_UI(qtw.QWidget):
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
+    self.button_step4.clicked.connect(self.step4)
     self.button_sub_step1.clicked.connect(self.sub_step1)
-    self.button_sub_step2.clicked.connect(self.sub_step2)
-    self.button_sub_step3.clicked.connect(self.sub_step3)
-    self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker(self)
   
@@ -653,22 +669,12 @@ class Step_4_UI(qtw.QWidget):
       self.player.play()
   
   @qtc.pyqtSlot()
+  def step4(self):
+    self.playlist.setCurrentIndex(0)
+    self.player.setPosition(0)
+    self.player.play()
+  @qtc.pyqtSlot()
   def sub_step1(self):
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step2(self):
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step3(self):
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step4(self):
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
