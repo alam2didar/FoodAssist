@@ -7,7 +7,7 @@ sns.set(style='whitegrid', palette='muted', font_scale=1)
 
 class WorkerEvaluator(QObject):
 
-    evaluation_finished = pyqtSignal(str, str, str)
+    evaluation_finished = False
     fig_1_name = None
     fig_2_name = None
     result_text = None
