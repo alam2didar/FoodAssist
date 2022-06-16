@@ -1,5 +1,8 @@
 class ButtonPositioner:
     def __init__(self):
+        # add attributes
+        self.last_button_clicked = None
+        self.counter = 0
         # left_button area
         self.left_button_left = 320
         self.left_button_right = 450
@@ -50,40 +53,53 @@ class ButtonPositioner:
         self.restart_button_short = 1200
         self.restart_button_long = 1250
 
+    def update_last_button_and_counter(self, type):
+        # if last button clicked is this button, then increase counter
+        if self.last_button_clicked is type:
+            self.counter = self.counter + 1
+        # otherwise reset counter
+        else:
+            self.counter = 0
+        # update last button clicked
+        self.last_button_clicked = type
+        # return true only after accumulated 20 times
+        if self.counter>=20:
+            return True
+
     def check_in_area(self, x, y, z, type):
         if type == "left":
             if x >= self.left_button_left and x <= self.left_button_right and \
             y>= self.left_button_top and y<= self.left_button_bottom and \
             z>= self.left_button_short and z <= self.left_button_long:
-                return True
+                return self.update_last_button_and_counter(type)
         if type == "right":
+            # check if in area
             if x >= self.right_button_left and x <= self.right_button_right and \
             y>= self.right_button_top and y<= self.right_button_bottom and \
             z>= self.right_button_short and z <= self.right_button_long:
-                return True
+                return self.update_last_button_and_counter(type)
         if type == "step_1":
             if x >= self.step_1_button_left and x <= self.step_1_button_right and \
             y>= self.step_1_button_top and y<= self.step_1_button_bottom and \
             z>= self.step_1_button_short and z <= self.step_1_button_long:
-                return True
+                return self.update_last_button_and_counter(type)
         if type == "step_2":
             if x >= self.step_2_button_left and x <= self.step_2_button_right and \
             y>= self.step_2_button_top and y<= self.step_2_button_bottom and \
             z>= self.step_2_button_short and z <= self.step_2_button_long:
-                return True
+                return self.update_last_button_and_counter(type)
         if type == "step_3":
             if x >= self.step_3_button_left and x <= self.step_3_button_right and \
             y>= self.step_3_button_top and y<= self.step_3_button_bottom and \
             z>= self.step_3_button_short and z <= self.step_3_button_long:
-                return True
+                return self.update_last_button_and_counter(type)
         if type == "step_4":
             if x >= self.step_4_button_left and x <= self.step_4_button_right and \
             y>= self.step_4_button_top and y<= self.step_4_button_bottom and \
             z>= self.step_4_button_short and z <= self.step_4_button_long:
-                return True
+                return self.update_last_button_and_counter(type)
         if type == "restart":
             if x >= self.restart_button_left and x <= self.restart_button_right and \
             y>= self.restart_button_top and y<= self.restart_button_bottom and \
             z>= self.restart_button_short and z <= self.restart_button_long:
-                return True
-        return False
+                return self.update_last_button_and_counter(type)
