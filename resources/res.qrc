@@ -12,6 +12,7 @@
     <file>Detected Step4.png</file>
   </qresource>
   <qresource prefix="buttons">
+    <file>Button View.svg</file>
     <file>Sub Step 1.svg</file>
     <file>Sub Step 2.svg</file>
     <file>Sub Step 3.svg</file>
