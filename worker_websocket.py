@@ -5,6 +5,8 @@ import websockets
 import json
 import time
 
+# Creates a Websocket (Open for the entire duration when app is running)
+# Smart watch communicates through this websocket
 class WorkerWebsocket(QObject):
     websocket_finished = pyqtSignal()
     websocket_message = pyqtSignal(str, int)
@@ -55,7 +57,7 @@ class WorkerWebsocket(QObject):
                                 result_feature = 1
                             elif prob_2 == temp_max:
                                 result_feature = 2
-                            # emit result_type, result_feature
+                            # emit result_type, result_feature (emitting gesture recognition from smart watch)
                             self.websocket_message.emit(sensor_type, result_feature)
                         else:
                             # no matching probability over 0.5 found
