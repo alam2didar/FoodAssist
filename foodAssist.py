@@ -8,7 +8,7 @@ from PyQt5 import QtTest
 import res_rc
 from handPosGlobal import HandPosGlobal
 import os
-import worker
+import worker_handpos
 import worker_evaluator
 import initializer
 
@@ -27,7 +27,7 @@ class FoodAssist(qtw.QWidget):
     self.start_button.clicked.connect(self.button_pressed)
 
     # Hand tracking thread
-    create_worker(self)
+    create_worker_handpos(self)
 
   def check_button_press(self):
     HandPosGlobal().dispatchEvent("HandPosition")
@@ -70,7 +70,7 @@ class Placing_Meat_UI(qtw.QWidget):
     self.box_h = 0
 
     self.button_skip.clicked.connect(self.skip_step_detection)
-    create_worker(self)
+    create_worker_handpos(self)
 
   def paintEvent(self, event):
     qp = qtg.QPainter(self)
@@ -128,7 +128,7 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -169,7 +169,7 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -210,7 +210,7 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -251,7 +251,7 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -316,7 +316,7 @@ class Step_1_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -423,7 +423,7 @@ class Step_2_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -527,7 +527,7 @@ class Step_3_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -626,7 +626,7 @@ class Step_4_UI(qtw.QWidget):
     self.button_step4.clicked.connect(self.step4)
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.player.pause()
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -689,7 +689,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
-    create_worker(self)
+    create_worker_handpos(self)
 
     # pass on my_initializer
     self.my_initializer = my_initializer
@@ -700,7 +700,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # archive file
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
     # create evaluator
-    create_evaluator(self)
+    create_worker_evaluator(self)
     # debug - setting evaluation_flag to False
     self.obj_evaluator.evaluate(self.archive_file_name, False)
 
@@ -762,7 +762,7 @@ class Menu_Default_UI(qtw.QWidget):
     self.button_step3.clicked.connect(self.step3_button_pressed)
     self.button_step4.clicked.connect(self.step4_button_pressed)
     self.button_restart.clicked.connect(self.restart_button_pressed)
-    create_worker(self)
+    create_worker_handpos(self)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -830,9 +830,9 @@ class Menu_Default_UI(qtw.QWidget):
     self.close()
 
 # Helper Functions
-def create_worker(self):
+def create_worker_handpos(self):
   # 1 - create Worker and Thread inside the Form # no parent
-  self.obj = worker.Worker()
+  self.obj = worker_handpos.WorkerHandPos()
   self.thread = qtc.QThread()
 
   # 2 - Connect Worker`s Signals to Form method slots to post data.
