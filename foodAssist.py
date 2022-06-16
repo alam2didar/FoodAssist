@@ -25,7 +25,6 @@ class FoodAssist(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
 
     self.start_button.clicked.connect(self.button_pressed)
-    self.start_label.adjustSize()
 
     # Hand tracking thread
     create_worker(self)
