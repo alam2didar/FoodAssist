@@ -701,8 +701,8 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
     # create worker evaluator
     create_worker_evaluator(self)
-    # debug - setting evaluation_flag to False
-    self.obj_evaluator.evaluate(self.archive_file_name, False)
+    # debug - setting evaluation_flag to True
+    self.obj_evaluator.evaluate(self.archive_file_name, True)
 
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
