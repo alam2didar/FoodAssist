@@ -853,13 +853,10 @@ def create_worker_handpos(self):
   # 6 - Start the thread
   self.thread.start()
 
-def create_evaluator(self):
+def create_worker_evaluator(self):
   # 1 - create Worker and Thread inside the Form # no parent
   self.obj_evaluator = worker_evaluator.WorkerEvaluator()
   self.thread_evaluator = qtc.QThread()
-
-  # 2 - Connect Worker`s Signals to Form method slots to post data.
-  self.obj_evaluator.evaluation_finished.connect(self.onEvaluationFinished)
 
   # 3 - Move the Worker object to the Thread object
   self.obj_evaluator.moveToThread(self.thread_evaluator)
