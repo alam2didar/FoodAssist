@@ -689,6 +689,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
+    self.button_view.clicked.connect(self.button_view_clicked)
+    self.label_new_plot_1.setHidden(True)
+    self.label_new_plot_2.setHidden(True)
     create_worker_handpos(self)
 
     # pass on my_initializer
@@ -715,6 +718,25 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_exit.click()
+
+  # check if message received
+  def button_view_clicked(self):
+    # show result
+    if self.obj_evaluator.evaluation_finished:
+      print("reaching point - displaying result")
+      # set image and text to show result
+      self.label_new_plot_1.setHidden(False)
+      self.label_new_plot_2.setHidden(False)
+      self.start_label.setHidden(True)
+      self.label.setHidden(True)
+      new_pixmap_1 = qtg.QPixmap(self.obj_evaluator.fig_1_name)
+      self.label_new_plot_1.setPixmap(new_pixmap_1)
+      new_pixmap_2 = qtg.QPixmap(self.obj_evaluator.fig_2_name)
+      self.label_new_plot_2.setPixmap(new_pixmap_2)
+      self.label_new_plot_3.setText(self.obj_evaluator.result_text)
+    else:
+      print("Evaluation not finished or not possible")
+      self.label_new_plot_3.setText("Evaluation not finished or not possible")
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
