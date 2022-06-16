@@ -692,6 +692,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.button_view.clicked.connect(self.button_view_clicked)
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
+    self.label_new_plot_3.setHidden(True)
     create_worker_handpos(self)
 
     # pass on my_initializer
@@ -730,12 +731,14 @@ class Tutorial_Ends_UI(qtw.QWidget):
       # set image and text to show result
       self.label_new_plot_1.setHidden(False)
       self.label_new_plot_2.setHidden(False)
+      self.label_new_plot_3.setHidden(False)
       new_pixmap_1 = qtg.QPixmap(self.obj_evaluator.fig_1_name)
       self.label_new_plot_1.setPixmap(new_pixmap_1)
       new_pixmap_2 = qtg.QPixmap(self.obj_evaluator.fig_2_name)
       self.label_new_plot_2.setPixmap(new_pixmap_2)
       self.label_new_plot_3.setText(self.obj_evaluator.result_text)
     else:
+      self.label_new_plot_3.setHidden(False)
       print("Evaluation not finished or not possible")
       self.label_new_plot_3.setText("Evaluation not finished or not possible")
 
