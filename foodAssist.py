@@ -704,18 +704,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # debug - setting evaluation_flag to False
     self.obj_evaluator.evaluate(self.archive_file_name, False)
 
-  # check if message received
-  def onEvaluationFinished(self, fig_1_name, fig_2_name, result_text):
-    # show result
-    # set image to show result
-    new_pixmap_1 = qtg.QPixmap(fig_1_name)
-    self.label_new_plot_1.setPixmap(new_pixmap_1)
-    # set image to show result
-    new_pixmap_2 = qtg.QPixmap(fig_2_name)
-    self.label_new_plot_2.setPixmap(new_pixmap_2)
-    # set text to show result
-    self.label_new_plot_3.setText(result_text)
-
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Tutorial Ends - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
