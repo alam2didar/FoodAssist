@@ -37,7 +37,7 @@ class FoodAssist(qtw.QWidget):
     print(f'In UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
     # if x >= 1310 and x <=1370 and y>= 600 and y<= 660 and z>= 960 and z <= 1115:
     # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated:
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
       time.sleep(0.20)
       self.start_button.click()
@@ -83,7 +83,7 @@ class Placing_Meat_UI(qtw.QWidget):
   def onIntReady(self, x, y, z, c):
     print(f'In Placing Meat - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
     # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_skip.click()
