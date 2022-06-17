@@ -740,7 +740,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     else:
       self.label_new_plot_3.setHidden(False)
       print("Evaluation not finished or not possible")
-      self.label_new_plot_3.setText("Evaluation not finished or not possible")
+      self.label_new_plot_3.setText("Evaluation not possible or not finished")
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
