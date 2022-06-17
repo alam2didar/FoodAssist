@@ -7,7 +7,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 class WorkerRecorder(QObject):
     archive_finished = pyqtSignal()
     permission_to_write = False
-    current_file_name = "record_current.csv"
+    current_file_name = "records\\record_current.csv"
     file_writer = None
 
     @pyqtSlot()
@@ -37,7 +37,7 @@ class WorkerRecorder(QObject):
         try:
             # archive - renaming file
             archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
-            archive_file_name = "record_{}.csv".format(archive_time)
+            archive_file_name = "records\\record_{}.csv".format(archive_time)
             os.rename(self.current_file_name, archive_file_name)
             print("archived successfully")
             # send signal to create new
