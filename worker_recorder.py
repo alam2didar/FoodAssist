@@ -7,7 +7,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 class WorkerRecorder(QObject):
     archive_finished = pyqtSignal()
     permission_to_write = False
-    current_file_name = "record_current.csv"
+    current_file_name = "records\\record_current.csv"
     file_writer = None
 
     @pyqtSlot()
@@ -31,21 +31,19 @@ class WorkerRecorder(QObject):
     def archive_old(self):
         archive_file_name = None
         self.disable_writing()
+        # close file writer before archiving
+        if self.file_writer is not None:
+            self.file_writer.close()
         try:
-            if self.file_writer is not None:
-                self.file_writer.close()
-            if not self.permission_to_write:
-                # archive - renaming file
-                archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
-                archive_file_name = "record_{}.csv".format(archive_time)
-                os.rename(self.current_file_name, archive_file_name)
-                print("archived successfully")
-                # send signal to create new
-                self.archive_finished.emit()
-            else:
-                print("no permission to write")
+            # archive - renaming file
+            archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
+            archive_file_name = "records\\record_{}.csv".format(archive_time)
+            os.rename(self.current_file_name, archive_file_name)
+            print("archived successfully")
+            # send signal to create new
+            self.archive_finished.emit()
         except FileNotFoundError:
-            print("File Not Found")
+            print("warning - file not found")
             # send signal to create new
             self.archive_finished.emit()
         return archive_file_name
