@@ -671,20 +671,22 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
     self.label_new_plot_3.setHidden(True)
-    create_worker_handpos(self, self.my_initializer)
 
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
+
     # close file
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
+    
     # create worker evaluator
     create_worker_evaluator(self)
     # debug - setting evaluation_flag to True
     self.obj_evaluator.evaluate(self.archive_file_name, True)
+    create_worker_handpos(self, self.my_initializer)
 
   # check if the button is touched
   def onIntReady(self, x, y, z):
