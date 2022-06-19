@@ -487,7 +487,7 @@ class Step_3_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_step3.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
-    file0= os.path.join(os.path.dirname(__file__), ".\step-videos\step3.mp4")
+    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step3.mp4")
     file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep1.mp4")
     file2 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep2.mp4")
     file3 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep3-4.mp4")
@@ -589,7 +589,7 @@ class Step_4_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
-    file0= os.path.join(os.path.dirname(__file__), ".\step-videos\step4.mp4")
+    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step4.mp4")
     file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step4-Final step.mp4")
     self.video_files_list = [file0, file1]
     for f in self.video_files_list:
