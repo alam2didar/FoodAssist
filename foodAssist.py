@@ -1,4 +1,3 @@
-from handPosGlobal import HandPosGlobal
 import initializer
 import os
 import PyQt5.QtCore as qtc
@@ -26,9 +25,6 @@ class FoodAssist(qtw.QWidget):
 
     # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
-
-  def check_button_press(self):
-    HandPosGlobal().dispatchEvent("HandPosition")
 
   # check if the button is touched
   def onIntReady(self, x, y, z):
