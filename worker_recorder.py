@@ -25,14 +25,15 @@ class WorkerRecorder(QObject):
     @pyqtSlot()
     def close_file(self):
         # close file writer
-        self.file_writer.close()
+        if self.file_writer:
+            self.file_writer.close()
 
     @pyqtSlot()
     def archive_old(self):
         archive_file_name = None
         self.disable_writing()
         # close file writer before archiving
-        if self.file_writer is not None:
+        if self.file_writer:
             self.file_writer.close()
         try:
             # archive - renaming file
@@ -50,14 +51,14 @@ class WorkerRecorder(QObject):
 
     @pyqtSlot()
     def create_new(self):
-        if not self.permission_to_write:
+        if not self.permission_to_write and self.file_writer:
             # new file writer
             self.file_writer = open(self.current_file_name, "w")
             print("open file writer successfully")
 
     @pyqtSlot()
     def write_record(self, current_step, sensor_type, result_feature):
-        if self.permission_to_write:
+        if self.permission_to_write and self.file_writer:
             # get current time
             current_time = datetime.datetime.now()
             current_time_s = current_time.strftime("%y%m%d%H%M%S")
