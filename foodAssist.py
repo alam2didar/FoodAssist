@@ -1,5 +1,4 @@
 import sys
-import time
 import PyQt5.QtCore as qtc
 import PyQt5.QtGui as qtg
 import PyQt5.QtWidgets as qtw
@@ -27,17 +26,16 @@ class FoodAssist(qtw.QWidget):
     self.start_button.clicked.connect(self.button_pressed)
 
     # Hand tracking thread
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
 
   def check_button_press(self):
     HandPosGlobal().dispatchEvent("HandPosition")
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
+  def onIntReady(self, x, y, z):
+    print(f'In UI recived: X: {x}, Y:{y}, Z:{z}')
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.start_button.click()
 
   @qtc.pyqtSlot()
@@ -68,7 +66,7 @@ class Placing_Meat_UI(qtw.QWidget):
     self.box_h = 0
 
     self.button_skip.clicked.connect(self.skip_step_detection)
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
 
   def paintEvent(self, event):
     qp = qtg.QPainter(self)
@@ -78,11 +76,10 @@ class Placing_Meat_UI(qtw.QWidget):
     qp.drawRect(self.box_x, self.box_y, self.box_w, self.box_h)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Placing Meat - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
+  def onIntReady(self, x, y, z):
+    print(f'In Placing Meat - UI recived: X: {x}, Y:{y}, Z:{z}')
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_skip.click()
 
   @qtc.pyqtSlot()
@@ -125,18 +122,16 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Entry Step 1 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Entry Step 1 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -166,18 +161,16 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Entry Step 2 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Entry Step 2 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -207,18 +200,16 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Entry Step 3 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Entry Step 3 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_no.click()
   
   @qtc.pyqtSlot()
@@ -248,18 +239,16 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Entry Step 4 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Entry Step 4 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -313,18 +302,16 @@ class Step_1_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Step 1 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Step 1 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_exit.click()
 
   @qtc.pyqtSlot()
@@ -420,18 +407,16 @@ class Step_2_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Step 2 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Step 2 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_exit.click()
 
   @qtc.pyqtSlot()
@@ -524,18 +509,16 @@ class Step_3_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Step 3 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Step 3 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_exit.click()
 
   @qtc.pyqtSlot()
@@ -623,18 +606,16 @@ class Step_4_UI(qtw.QWidget):
     self.button_step4.clicked.connect(self.step4)
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.player.pause()
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Step 4 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Step 4 - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_exit.click()
 
   @qtc.pyqtSlot()
@@ -690,7 +671,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
     self.label_new_plot_3.setHidden(True)
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
 
     # pass on my_initializer
     self.my_initializer = my_initializer
@@ -706,15 +687,13 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.obj_evaluator.evaluate(self.archive_file_name, True)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Tutorial Ends - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Tutorial Ends - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_restart.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_exit.click()
 
   # check if message received
@@ -773,30 +752,25 @@ class Menu_Default_UI(qtw.QWidget):
     self.button_step3.clicked.connect(self.step3_button_pressed)
     self.button_step4.clicked.connect(self.step4_button_pressed)
     self.button_restart.clicked.connect(self.restart_button_pressed)
-    create_worker_handpos(self)
+    create_worker_handpos(self, self.my_initializer)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, c):
-    print(f'In Tutorial Ends - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    if self.obj.button_positioner.check_in_area(x, y, z, "step_1") and self.obj.worker_activated and c > 50:
+  def onIntReady(self, x, y, z):
+    print(f'In Tutorial Ends - UI recived: X: {x}, Y:{y}, Z:{z}')
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_1) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "step_2") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_2) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_step2.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "step_3") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_3) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_step3.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "step_4") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, "restart") and self.obj.worker_activated and c > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated:
       self.obj.deactivate()
-      time.sleep(0.20)
       self.button_restart.click()
 
   @qtc.pyqtSlot()
@@ -841,9 +815,9 @@ class Menu_Default_UI(qtw.QWidget):
     self.close()
 
 # Helper Functions
-def create_worker_handpos(self):
+def create_worker_handpos(self, my_initializer):
   # 1 - create Worker and Thread inside the Form # no parent
-  self.obj = worker_handpos.WorkerHandPos()
+  self.obj = worker_handpos.WorkerHandPos(my_initializer.my_depth_camera)
   self.thread = qtc.QThread()
 
   # 2 - Connect Worker`s Signals to Form method slots to post data.
