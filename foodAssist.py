@@ -18,7 +18,6 @@ class FoodAssist(qtw.QWidget):
     uic.loadUi('food_assist_gui_start.ui', self)
      # enable custom window hint
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
-    self.resize(1680, 1050)
 
     # pass on my_initializer
     self.my_initializer = my_initializer
@@ -60,7 +59,6 @@ class Placing_Meat_UI(qtw.QWidget):
     super().__init__()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_placing_meat.ui', self)
-    self.resize(1920, 1200)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -129,7 +127,6 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_entry_step1.ui', self)
-    self.resize(1920, 1200)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     create_worker(self)
@@ -137,12 +134,10 @@ class Entry_Step_1_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Entry Step 1 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_yes.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -173,7 +168,6 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
-    self.resize(1920, 1200)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     create_worker(self)
@@ -181,12 +175,10 @@ class Entry_Step_2_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Entry Step 2 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_yes.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -217,7 +209,6 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_entry_step3.ui', self)
-    self.resize(1920, 1200)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     create_worker(self)
@@ -225,12 +216,10 @@ class Entry_Step_3_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Entry Step 3 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_yes.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -261,7 +250,6 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
-    self.resize(1920, 1200)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     create_worker(self)
@@ -269,12 +257,10 @@ class Entry_Step_4_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Entry Step 4 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_yes.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -306,7 +292,6 @@ class Step_1_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.enable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_step1.ui', self)
-    self.resize(1680, 1050)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
     file0 = os.path.join(os.path.dirname(__file__), "video-step1.mp4")
@@ -337,12 +322,10 @@ class Step_1_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Step 1 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_next.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -418,7 +401,6 @@ class Step_2_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.enable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_step2.ui', self)
-    self.resize(1680, 1050)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
     file0 = os.path.join(os.path.dirname(__file__), "video-step2.mp4")
@@ -447,12 +429,10 @@ class Step_2_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Step 2 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_next.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -524,7 +504,6 @@ class Step_3_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.enable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_step3.ui', self)
-    self.resize(1680, 1050)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
     file0= os.path.join(os.path.dirname(__file__), "video-step3.mp4")
@@ -554,12 +533,10 @@ class Step_3_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Step 3 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_next.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -631,7 +608,6 @@ class Step_4_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.enable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
-    self.resize(1680, 1050)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
     file0= os.path.join(os.path.dirname(__file__), "video-step4.mp4")
@@ -656,12 +632,10 @@ class Step_4_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Step 4 - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_next.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -714,7 +688,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     super().__init__()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_tutorial_ends.ui', self)
-    self.resize(1680, 1050)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     create_worker(self)
@@ -743,12 +716,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Tutorial Ends - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 320 and x <= 450 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "left") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_restart.click()
-    # if x >= 480 and x <= 600 and y>= 400 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "right") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -783,7 +754,6 @@ class Menu_Default_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_menu_default.ui', self)
-    self.resize(1680, 1050)
     self.button_step1.clicked.connect(self.step1_button_pressed)
     self.button_step2.clicked.connect(self.step2_button_pressed)
     self.button_step3.clicked.connect(self.step3_button_pressed)
@@ -794,27 +764,22 @@ class Menu_Default_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
     print(f'In Tutorial Ends - UI recived: X: {x}, Y:{y}, Z:{z}, Counter: {c}')
-    # if x >= 215 and x <= 255 and y>= 395 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "step_1") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_step1.click()
-    # if x >= 280 and x <= 320 and y>= 395 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "step_2") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_step2.click()
-    # if x >= 340 and x <= 370 and y>= 395 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "step_3") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_step3.click()
-    # if x >= 385 and x <= 425 and y>= 395 and y<= 455 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "step_4") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
       self.button_step4.click()
-    # if x >= 300 and x <= 350 and y>= 435 and y<= 460 and z>= 1200 and z <= 1250 and self.obj.worker_activated and c > 50:
     if self.obj.button_positioner.check_in_area(x, y, z, "restart") and self.obj.worker_activated and c > 50:
       self.obj.deactivate()
       time.sleep(0.20)
@@ -894,8 +859,6 @@ def main():
   food_assist.showFullScreen()
   # run the app
   sys.exit(app.exec_())
-  # ex.show()
-  # sys.exit(app.exec_())
 if __name__ == '__main__':
   main()
 
