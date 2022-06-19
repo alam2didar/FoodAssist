@@ -60,11 +60,7 @@ class DepthCamera:
             return False, None, None
 
         depth_image = np.asanyarray(depth_frame.get_data())
-        print("depth image shape: ", depth_image.shape)
         color_image = np.asanyarray(color_frame.get_data())
-        print("color image shape: ", color_image.shape)
-        # print("depth shape:", depth_image.shape)
-        # print("color shape:", color_image.shape)
 
         # remove background - Set pixels further than clipping_distance to grey
         grey_color = 153

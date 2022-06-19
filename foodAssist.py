@@ -1,15 +1,13 @@
-import sys
+import initializer
+import os
 import PyQt5.QtCore as qtc
 import PyQt5.QtGui as qtg
 import PyQt5.QtWidgets as qtw
 from PyQt5 import uic, QtMultimedia
-from PyQt5 import QtTest
 import res_rc
-from handPosGlobal import HandPosGlobal
-import os
+import sys
 import worker_handpos
 import worker_evaluator
-import initializer
 
 class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
@@ -27,9 +25,6 @@ class FoodAssist(qtw.QWidget):
 
     # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
-
-  def check_button_press(self):
-    HandPosGlobal().dispatchEvent("HandPosition")
 
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -279,11 +274,11 @@ class Step_1_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_step1.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
-    file0 = os.path.join(os.path.dirname(__file__), "video-step1.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), "Step1-substep1.mp4")
-    file2 = os.path.join(os.path.dirname(__file__), "Step1-substep2.mp4")
-    file3 = os.path.join(os.path.dirname(__file__), "Step1-substep3.mp4")
-    file4 = os.path.join(os.path.dirname(__file__), "Step1-substep4.mp4")
+    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step1.mp4")
+    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep1.mp4")
+    file2 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep2.mp4")
+    file3 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep3.mp4")
+    file4 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep4.mp4")
     self.video_files_list = [file0, file1, file2, file3, file4]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
@@ -386,9 +381,9 @@ class Step_2_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_step2.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
-    file0 = os.path.join(os.path.dirname(__file__), "video-step2.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), "Step2-substep1.mp4")
-    file2 = os.path.join(os.path.dirname(__file__), "Step2-substep2-4.mp4")
+    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step2.mp4")
+    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step2-substep1.mp4")
+    file2 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step2-substep2-4.mp4")
     self.video_files_list = [file0, file1, file2]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
@@ -487,10 +482,10 @@ class Step_3_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_step3.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
-    file0= os.path.join(os.path.dirname(__file__), "video-step3.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), "Step3-substep1.mp4")
-    file2 = os.path.join(os.path.dirname(__file__), "Step3-substep2.mp4")
-    file3 = os.path.join(os.path.dirname(__file__), "Step3-substep3-4.mp4")
+    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step3.mp4")
+    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep1.mp4")
+    file2 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep2.mp4")
+    file3 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep3-4.mp4")
     self.video_files_list = [file0, file1, file2, file3]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
@@ -589,8 +584,8 @@ class Step_4_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
-    file0= os.path.join(os.path.dirname(__file__), "video-step4.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), "Step4-Final step.mp4")
+    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step4.mp4")
+    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step4-Final step.mp4")
     self.video_files_list = [file0, file1]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
@@ -671,20 +666,22 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
     self.label_new_plot_3.setHidden(True)
-    create_worker_handpos(self, self.my_initializer)
 
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
+
     # close file
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
+    
     # create worker evaluator
     create_worker_evaluator(self)
     # debug - setting evaluation_flag to True
     self.obj_evaluator.evaluate(self.archive_file_name, True)
+    create_worker_handpos(self, self.my_initializer)
 
   # check if the button is touched
   def onIntReady(self, x, y, z):
