@@ -44,7 +44,6 @@ class FoodAssist(qtw.QWidget):
 class Placing_Meat_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_placing_meat.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
@@ -60,12 +59,16 @@ class Placing_Meat_UI(qtw.QWidget):
     self.button_skip.clicked.connect(self.skip_step_detection)
     create_worker_handpos(self, self.my_initializer)
 
-  def paintEvent(self, event):
-    qp = qtg.QPainter(self)
-    br = qtg.QBrush(qtg.QColor(255, 255, 255, 255))  
-    qp.setBrush(br)   
-    # qp.drawRect(qtc.QRect(self.begin, self.end)) 
-    qp.drawRect(self.box_x, self.box_y, self.box_w, self.box_h)
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintDetectionBoxEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
 
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -96,11 +99,17 @@ class Placing_Meat_UI(qtw.QWidget):
   def drawDetectionBox(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
         print('Detected step: ', step)
-        # qp.drawRect(QtCore.QRect(self.begin, self.end))
         self.box_x = x
         self.box_y = y
         self.box_w = width
         self.box_h = height
+
+        # with calculated parameters
+        # self.box_x = int(1.714*(x-500))
+        # self.box_y = int(1.714*(y-40))
+        # self.box_w = int(1.714*width)
+        # self.box_h = int(1.714*height)
+
         self.update()
 
 class Entry_Step_1_UI(qtw.QWidget):
@@ -296,6 +305,17 @@ class Step_1_UI(qtw.QWidget):
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintDetectionBoxEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -366,6 +386,22 @@ class Step_1_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+
+        # with calculated parameters
+        # self.box_x = int(1.714*(x-500))
+        # self.box_y = int(1.714*(y-40))
+        # self.box_w = int(1.714*width)
+        # self.box_h = int(1.714*height)
+
+        self.update()
  
 ########## Step 2 UI class ##########
 class Step_2_UI(qtw.QWidget):
@@ -403,6 +439,17 @@ class Step_2_UI(qtw.QWidget):
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintDetectionBoxEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -469,6 +516,22 @@ class Step_2_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+
+        # with calculated parameters
+        # self.box_x = int(1.714*(x-500))
+        # self.box_y = int(1.714*(y-40))
+        # self.box_w = int(1.714*width)
+        # self.box_h = int(1.714*height)
+
+        self.update()
         
 ########## Step 3 UI class ##########
 class Step_3_UI(qtw.QWidget):
@@ -507,6 +570,17 @@ class Step_3_UI(qtw.QWidget):
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintDetectionBoxEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -573,6 +647,22 @@ class Step_3_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+
+        # with calculated parameters
+        # self.box_x = int(1.714*(x-500))
+        # self.box_y = int(1.714*(y-40))
+        # self.box_w = int(1.714*width)
+        # self.box_h = int(1.714*height)
+
+        self.update()
 
 ########## Step 4 UI class ##########
 class Step_4_UI(qtw.QWidget):
@@ -605,6 +695,17 @@ class Step_4_UI(qtw.QWidget):
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+  
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintDetectionBoxEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -656,6 +757,22 @@ class Step_4_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+
+        # with calculated parameters
+        # self.box_x = int(1.714*(x-500))
+        # self.box_y = int(1.714*(y-40))
+        # self.box_w = int(1.714*width)
+        # self.box_h = int(1.714*height)
+
+        self.update()
 
 ########## Tutorial Ends UI class ##########
 class Tutorial_Ends_UI(qtw.QWidget):
