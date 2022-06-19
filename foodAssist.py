@@ -14,9 +14,6 @@ class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     uic.loadUi('food_assist_gui_start.ui', self)
-     # enable custom window hint
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
-
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -117,7 +114,7 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -156,7 +153,6 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -195,7 +191,7 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -234,7 +230,7 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -274,7 +270,8 @@ class Step_1_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 1
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+
     self.ui = uic.loadUi('food_assist_gui_step1.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -286,6 +283,7 @@ class Step_1_UI(qtw.QWidget):
     self.video_files_list = [file0, file1, file2, file3, file4]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
+    
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
     self.player.setVideoOutput(self.ui.VideoWidget)
@@ -381,7 +379,8 @@ class Step_2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 2
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+
     self.ui = uic.loadUi('food_assist_gui_step2.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -391,6 +390,7 @@ class Step_2_UI(qtw.QWidget):
     self.video_files_list = [file0, file1, file2]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
+
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
     self.player.setVideoOutput(self.ui.VideoWidget)
@@ -482,7 +482,8 @@ class Step_3_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 3
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+
     self.ui = uic.loadUi('food_assist_gui_step3.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -493,6 +494,7 @@ class Step_3_UI(qtw.QWidget):
     self.video_files_list = [file0, file1, file2, file3]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
+
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
     self.player.setVideoOutput(self.ui.VideoWidget)
@@ -584,7 +586,8 @@ class Step_4_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 4
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+  
     self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -662,7 +665,6 @@ class Step_4_UI(qtw.QWidget):
 class Tutorial_Ends_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
@@ -670,7 +672,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
     self.label_new_plot_3.setHidden(True)
-
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -680,7 +681,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
-    
     # create worker evaluator
     create_worker_evaluator(self)
     # debug - setting evaluation_flag to True
@@ -746,7 +746,7 @@ class Menu_Default_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_menu_default.ui', self)
     self.button_step1.clicked.connect(self.step1_button_pressed)
     self.button_step2.clicked.connect(self.step2_button_pressed)
