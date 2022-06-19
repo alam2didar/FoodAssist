@@ -9,7 +9,6 @@ class DepthCamera:
         self.pipeline = rs.pipeline()
         self.config = rs.config()
 
-        # resolution has to 640 x 480, otherwise RuntimeError: Couldn't resolve requests
         self.depth_width = 1280
         self.depth_height = 720
         self.color_width = 1920
