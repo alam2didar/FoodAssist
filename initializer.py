@@ -42,7 +42,7 @@ class Initializer(qtc.QObject):
     self.thread_recorder.start()
     
     # Create WorkerDetection thread
-    self.obj_detection = worker_detection.WorkerDetection()
+    self.obj_detection = worker_detection.WorkerDetection(self.my_depth_camera)
     self.thread_detection = qtc.QThread()
     self.obj_detection.detectionParams.connect(self.onDetection)
     self.obj_detection.moveToThread(self.thread_detection)
