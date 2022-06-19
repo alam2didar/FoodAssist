@@ -1,7 +1,7 @@
 import PyQt5.QtCore as qtc
+import DepthCameraModule as dcm
 import worker_websocket
 import worker_recorder
-import worker_evaluator
 import worker_detection
 
 class Initializer(qtc.QObject):
@@ -15,7 +15,11 @@ class Initializer(qtc.QObject):
     # Following are the detection parameters
     self.detected_step = 0
 
+    # Initialize Depth Camera Intel Realsense
+    self.my_depth_camera = dcm.DepthCamera()
+
     # Create WorkerWebsocket thread
+    # 1 - create Worker and Thread inside the Form # no parent
     self.obj_websocket = worker_websocket.WorkerWebsocket()
     self.thread_websocket = qtc.QThread()
     # 2 - Connect Worker`s Signals to Form method slots to post data.
