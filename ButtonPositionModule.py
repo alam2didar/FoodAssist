@@ -28,5 +28,5 @@ class ButtonPositioner:
         # redo to make it simpler
         if x > button_type.left and x < button_type.right and y> button_type.top and y< button_type.bottom and z> button_type.short and z < button_type.long:
             # invoke function to increase counter if needed
-            # return self.update_last_button_and_counter(button_type)
-            pass
+            print("checked in area")
+            return self.update_last_button_and_counter(button_type)
