@@ -65,8 +65,22 @@ class Placing_Meat_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
+
     self.button_skip.clicked.connect(self.skip_step_detection)
     create_worker(self)
+
+  def paintEvent(self, event):
+    qp = qtg.QPainter(self)
+    br = qtg.QBrush(qtg.QColor(255, 255, 255, 255))  
+    qp.setBrush(br)   
+    # qp.drawRect(qtc.QRect(self.begin, self.end)) 
+    qp.drawRect(self.box_x, self.box_y, self.box_w, self.box_h)
 
   # check if the button is touched
   def onIntReady(self, x, y, z, c):
@@ -95,6 +109,16 @@ class Placing_Meat_UI(qtw.QWidget):
       # self.entry_step_1_ui.show()
       self.entry_step_1_ui.showFullScreen()
       self.close()
+
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        # qp.drawRect(QtCore.QRect(self.begin, self.end))
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+        self.update()
 
 class Entry_Step_1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
