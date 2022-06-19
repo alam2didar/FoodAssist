@@ -1,15 +1,14 @@
-import sys
+from handPosGlobal import HandPosGlobal
+import initializer
+import os
 import PyQt5.QtCore as qtc
 import PyQt5.QtGui as qtg
 import PyQt5.QtWidgets as qtw
 from PyQt5 import uic, QtMultimedia
-from PyQt5 import QtTest
 import res_rc
-from handPosGlobal import HandPosGlobal
-import os
+import sys
 import worker_handpos
 import worker_evaluator
-import initializer
 
 class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
