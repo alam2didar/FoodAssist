@@ -9,6 +9,7 @@ class Initializer(qtc.QObject):
   # flag to start/block workers
   # start_worker = False
   start_worker = True
+  interval_between_uis = 15
 
   def __init__(self):
     super().__init__()
@@ -72,5 +73,8 @@ class Initializer(qtc.QObject):
   def onDetection(self, x, y, width, height, step):
       self.detected_step = step
       # calibrate x,y,w,h for projection with k=1.65 and (x,y) = (405,220)
-      self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
+      if x == 0 or y == 0:
+        self.detectionParams.emit(0,0,0,0,0)
+      else:
+        self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
         
