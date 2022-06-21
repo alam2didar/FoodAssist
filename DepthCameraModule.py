@@ -72,7 +72,7 @@ class DepthCamera:
         # the greater alpha is, the shorter the focus is
         # depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
         # depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.0262), cv2.COLORMAP_HSV)
-        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.0226), cv2.COLORMAP_HSV)
+        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.0234), cv2.COLORMAP_HSV)
         # calibrated alpha after distance change
 
         return True, depth_image, depth_colormap, color_image, bg_removed
