@@ -7,7 +7,8 @@ import worker_detection
 class Initializer(qtc.QObject):
   detectionParams = qtc.pyqtSignal(int, int, int, int, int)
   # flag to start/block workers
-  start_worker = False
+  # start_worker = False
+  start_worker = True
 
   def __init__(self):
     super().__init__()
@@ -20,8 +21,8 @@ class Initializer(qtc.QObject):
     # Initialize Depth Camera Intel Realsense
     #####
     # comment for no camera device
-    # self.my_depth_camera = dcm.DepthCamera()
-    self.my_depth_camera = None
+    self.my_depth_camera = dcm.DepthCamera()
+    # self.my_depth_camera = None
     #####
 
     # Create WorkerWebsocket thread
@@ -70,5 +71,6 @@ class Initializer(qtc.QObject):
   # send detection box paramas to the respective UI  
   def onDetection(self, x, y, width, height, step):
       self.detected_step = step
-      self.detectionParams.emit(x, y, width, height, step)
+      # calibrate x,y,w,h for projection with k=1.65 and (x,y) = (405,220)
+      self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
         
