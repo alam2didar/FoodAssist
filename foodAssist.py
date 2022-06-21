@@ -25,7 +25,8 @@ class FoodAssist(qtw.QWidget):
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    print("In Food Assist: ", counter)
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.start_button.click()
 
@@ -72,7 +73,7 @@ class Placing_Meat_UI(qtw.QWidget):
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_skip.click()
 
@@ -119,10 +120,10 @@ class Entry_Step_1_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_no.click()
 
@@ -156,10 +157,10 @@ class Entry_Step_2_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_no.click()
 
@@ -194,10 +195,10 @@ class Entry_Step_3_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_no.click()
   
@@ -232,10 +233,10 @@ class Entry_Step_4_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_no.click()
 
@@ -312,10 +313,10 @@ class Step_1_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_exit.click()
 
@@ -442,10 +443,10 @@ class Step_2_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_exit.click()
 
@@ -569,10 +570,10 @@ class Step_3_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_exit.click()
 
@@ -690,10 +691,10 @@ class Step_4_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_exit.click()
 
@@ -775,10 +776,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_restart.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_exit.click()
 
@@ -842,19 +843,19 @@ class Menu_Default_UI(qtw.QWidget):
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_1) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_1) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_2) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_2) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_step2.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_3) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_3) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_step3.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > 50:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_restart.click()
 
