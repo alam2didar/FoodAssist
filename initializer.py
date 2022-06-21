@@ -6,6 +6,9 @@ import worker_detection
 
 class Initializer(qtc.QObject):
   detectionParams = qtc.pyqtSignal(int, int, int, int, int)
+  # flag to start/block workers
+  # start_worker = False
+  start_worker = True
 
   def __init__(self):
     super().__init__()
@@ -16,7 +19,11 @@ class Initializer(qtc.QObject):
     self.detected_step = 0
 
     # Initialize Depth Camera Intel Realsense
+    #####
+    # comment for no camera device
     self.my_depth_camera = dcm.DepthCamera()
+    # self.my_depth_camera = None
+    #####
 
     # Create WorkerWebsocket thread
     # 1 - create Worker and Thread inside the Form # no parent
@@ -31,7 +38,8 @@ class Initializer(qtc.QObject):
     # 5 - Connect Thread started signal to Worker operational slot method
     self.thread_websocket.started.connect(self.obj_websocket.create_websocket)
     # 6 - Start the thread
-    self.thread_websocket.start()
+    if self.start_worker:
+      self.thread_websocket.start()
 
     # Create WorkerRecorder thread
     self.obj_recorder = worker_recorder.WorkerRecorder()
@@ -39,7 +47,8 @@ class Initializer(qtc.QObject):
     self.obj_recorder.moveToThread(self.thread_recorder)
     self.obj_recorder.archive_finished.connect(self.obj_recorder.create_new)
     self.thread_recorder.started.connect(self.obj_recorder.archive_old)
-    self.thread_recorder.start()
+    if self.start_worker:
+      self.thread_recorder.start()
     
     # Create WorkerDetection thread
     self.obj_detection = worker_detection.WorkerDetection(self.my_depth_camera)
@@ -48,7 +57,8 @@ class Initializer(qtc.QObject):
     self.obj_detection.moveToThread(self.thread_detection)
     self.obj_detection.finished.connect(self.thread_detection.quit)
     self.thread_detection.started.connect(self.obj_detection.detectStep)
-    self.thread_detection.start()
+    if self.start_worker:
+      self.thread_detection.start()
 
   # check if message received
   def onWebsocketMessage(self, sensor_type, result_feature):
@@ -61,5 +71,6 @@ class Initializer(qtc.QObject):
   # send detection box paramas to the respective UI  
   def onDetection(self, x, y, width, height, step):
       self.detected_step = step
-      self.detectionParams.emit(x, y, width, height, step)
+      # calibrate x,y,w,h for projection with k=1.65 and (x,y) = (405,220)
+      self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
         

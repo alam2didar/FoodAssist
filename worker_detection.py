@@ -11,8 +11,11 @@ def zoom(img, zoom_factor=2):
 class WorkerDetection(QObject):
     finished = pyqtSignal()
     detectionParams = pyqtSignal(int, int, int, int, int)
-
     worker_activated = True
+    
+    def __init__(self, depth_camera):
+        super().__init__()
+        self.depth_camera = depth_camera
 
     @pyqtSlot()
     def activate(self):
@@ -32,20 +35,18 @@ class WorkerDetection(QObject):
             with open("classes.txt", "r") as f:
                 classes = f.read().splitlines()
             
-            print('Camera is on..')
-            # Select Camera
-            # cap = cv2.VideoCapture(2)
-            cap = cv2.VideoCapture(1)
-            
             font = cv2.FONT_HERSHEY_PLAIN
             colors = np.random.uniform(0, 255, size=(100, 3))
             while True:
                 print('Capturing camera..')
-                ret, img_original = cap.read()
+                # get frames from depth camera and crop
+                ret, _, _, img_original, _ = self.depth_camera.getFrame()
                 y_size = img_original.shape[0]
                 x_size = img_original.shape[1]
-                centerX,centerY=int(y_size/2),int(x_size/2)
-                cropped = img_original[centerY-100:y_size, 100:x_size-100]
+                centerY, centerX = int(y_size/2),int(x_size/2)
+                cropped = img_original[centerY:y_size, 100:x_size-100]
+                print("Cropped image shape: ", cropped.shape)
+                # zoom image
                 # img = zoom(img_temp, 3)
                 img = zoom(cropped, 8)
                 if not ret:
@@ -89,23 +90,24 @@ class WorkerDetection(QObject):
 
                         # undo zoom and crop effect by reversing the calculation
                         pt1_x = int(x/8)+100
-                        pt1_y = int(y/8)+centerY-100
+                        pt1_y = int(y/8)+centerY
                         pt1 = (pt1_x, pt1_y)
                         pt2_x = int((x+w)/8)+100
-                        pt2_y = int((y+h)/8)+centerY-100
+                        pt2_y = int((y+h)/8)+centerY
                         pt2 = (pt2_x, pt2_y)
 
                         self.detectionParams.emit(pt1_x, pt1_y, int(w/8), int(h/8), class_ids[i]+1)
 
                         cv2.rectangle(img_original, pt1, pt2, color, 2)
                         cv2.putText(img_original, label + " " + confidence, (pt1_x, pt1_y+20), font, 2, (255,255,255), 2)
-                
-                cv2.imshow('Detected:', img_original)
+                else:
+                    # if no detection, send box params (x,y,w,h) as 0
+                    self.detectionParams.emit(0, 0, 0, 0, 0)
+                cv2.imshow('Detection Window', img_original)
                 key = cv2.waitKey(1)
                 if key==27:
                     break
 
-            cap.release()
             cv2.destroyAllWindows()
 
 

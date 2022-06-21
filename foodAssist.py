@@ -13,9 +13,6 @@ class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     uic.loadUi('food_assist_gui_start.ui', self)
-     # enable custom window hint
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
-
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -47,7 +44,6 @@ class FoodAssist(qtw.QWidget):
 class Placing_Meat_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_placing_meat.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
@@ -63,12 +59,17 @@ class Placing_Meat_UI(qtw.QWidget):
     self.button_skip.clicked.connect(self.skip_step_detection)
     create_worker_handpos(self, self.my_initializer)
 
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
-    qp = qtg.QPainter(self)
-    br = qtg.QBrush(qtg.QColor(255, 255, 255, 255))  
-    qp.setBrush(br)   
-    # qp.drawRect(qtc.QRect(self.begin, self.end)) 
-    qp.drawRect(self.box_x, self.box_y, self.box_w, self.box_h)
+    print("In Paint event (x,y,w.h): ", self.box_x, self.box_y, self.box_w, self.box_h )
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
 
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -99,7 +100,6 @@ class Placing_Meat_UI(qtw.QWidget):
   def drawDetectionBox(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
         print('Detected step: ', step)
-        # qp.drawRect(QtCore.QRect(self.begin, self.end))
         self.box_x = x
         self.box_y = y
         self.box_w = width
@@ -113,7 +113,7 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -152,7 +152,6 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -191,7 +190,7 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -230,7 +229,7 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
@@ -270,7 +269,13 @@ class Step_1_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 1
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
+
     self.ui = uic.loadUi('food_assist_gui_step1.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -282,6 +287,7 @@ class Step_1_UI(qtw.QWidget):
     self.video_files_list = [file0, file1, file2, file3, file4]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
+    
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
     self.player.setVideoOutput(self.ui.VideoWidget)
@@ -298,6 +304,17 @@ class Step_1_UI(qtw.QWidget):
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -368,6 +385,15 @@ class Step_1_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+        self.update()
  
 ########## Step 2 UI class ##########
 class Step_2_UI(qtw.QWidget):
@@ -377,7 +403,12 @@ class Step_2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 2
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
+
     self.ui = uic.loadUi('food_assist_gui_step2.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -387,6 +418,7 @@ class Step_2_UI(qtw.QWidget):
     self.video_files_list = [file0, file1, file2]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
+
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
     self.player.setVideoOutput(self.ui.VideoWidget)
@@ -403,6 +435,17 @@ class Step_2_UI(qtw.QWidget):
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -469,6 +512,15 @@ class Step_2_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+        self.update()
         
 ########## Step 3 UI class ##########
 class Step_3_UI(qtw.QWidget):
@@ -478,7 +530,12 @@ class Step_3_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 3
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
+
     self.ui = uic.loadUi('food_assist_gui_step3.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -489,6 +546,7 @@ class Step_3_UI(qtw.QWidget):
     self.video_files_list = [file0, file1, file2, file3]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
+
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
     self.player.setVideoOutput(self.ui.VideoWidget)
@@ -505,6 +563,17 @@ class Step_3_UI(qtw.QWidget):
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -571,6 +640,15 @@ class Step_3_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+        self.update()
 
 ########## Step 4 UI class ##########
 class Step_4_UI(qtw.QWidget):
@@ -580,7 +658,12 @@ class Step_4_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = 4
     self.my_initializer.obj_recorder.enable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
+  
     self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -602,6 +685,17 @@ class Step_4_UI(qtw.QWidget):
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.player.pause()
     create_worker_handpos(self, self.my_initializer)
+  
+  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
+  def paintEvent(self, event):
+    box_painter = qtg.QPainter(self)
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
+    path = qtg.QPainterPath() ;
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
+    box_painter.setPen(pen);
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
+    box_painter.drawPath(path);
   
   # check if the button is touched
   def onIntReady(self, x, y, z):
@@ -653,12 +747,20 @@ class Step_4_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  def drawDetectionBox(self, x, y, width, height, step):
+        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+        print('Detected step: ', step)
+        self.box_x = x
+        self.box_y = y
+        self.box_w = width
+        self.box_h = height
+        self.update()
 
 ########## Tutorial Ends UI class ##########
 class Tutorial_Ends_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
     self.ui = uic.loadUi('food_assist_gui_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
@@ -666,7 +768,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
     self.label_new_plot_3.setHidden(True)
-
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -676,7 +777,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
-    
     # create worker evaluator
     create_worker_evaluator(self)
     # debug - setting evaluation_flag to True
@@ -742,7 +842,7 @@ class Menu_Default_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.setWindowFlags(qtc.Qt.CustomizeWindowHint | qtc.Qt.WindowTitleHint)
+
     self.ui = uic.loadUi('food_assist_gui_menu_default.ui', self)
     self.button_step1.clicked.connect(self.step1_button_pressed)
     self.button_step2.clicked.connect(self.step2_button_pressed)

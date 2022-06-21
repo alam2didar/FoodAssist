@@ -38,15 +38,15 @@ class WorkerHandPos(QObject):
         while self.worker_activated:
             counter = counter + 1
 # debug no camera
-            # get images
-            ret, depth_image, depth_colormap, color_image, bg_removed = self.depth_camera.getFrame()
-            # find point based on depth contour
-            point = self.depth_contour_finder.findPosition(depth_colormap)
-            # use knuckle coordinates to find distance
-            distance = int(self.depth_extractor.getHandPosition(point, depth_image, self.depth_camera)*1000)
-            # create hand_position object
-            hand_x, hand_y, hand_z = point[0], point[1], distance
-            self.intReady.emit(hand_x, hand_y, hand_z)
+            # # get images
+            # ret, depth_image, depth_colormap, color_image, bg_removed = self.depth_camera.getFrame()
+            # # find point based on depth contour
+            # point = self.depth_contour_finder.findPosition(depth_colormap)
+            # # use knuckle coordinates to find distance
+            # distance = int(self.depth_extractor.getHandPosition(point, depth_image, self.depth_camera)*1000)
+            # # create hand_position object
+            # hand_x, hand_y, hand_z = point[0], point[1], distance
+            # self.intReady.emit(hand_x, hand_y, hand_z)
 # debug no camera
 
         # finish upon breaking out of loop

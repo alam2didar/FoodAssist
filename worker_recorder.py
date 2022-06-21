@@ -46,6 +46,7 @@ class WorkerRecorder(QObject):
             print("warning - file not found")
             archive_file_name = None
             # send signal to create new
+            archive_file_name = None
             self.archive_finished.emit()
         return archive_file_name
 
