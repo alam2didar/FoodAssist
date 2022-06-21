@@ -60,7 +60,8 @@ class Placing_Meat_UI(qtw.QWidget):
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintDetectionBoxEvent(self, event):
+  def paintEvent(self, event):
+    print("In Paint event (x,y,w.h): ", self.box_x, self.box_y, self.box_w, self.box_h )
     box_painter = qtg.QPainter(self)
     box_painter.setRenderHint(qtg.QPainter.Antialiasing);
     path = qtg.QPainterPath() ;
@@ -103,13 +104,6 @@ class Placing_Meat_UI(qtw.QWidget):
         self.box_y = y
         self.box_w = width
         self.box_h = height
-
-        # with calculated parameters
-        # self.box_x = int(1.714*(x-500))
-        # self.box_y = int(1.714*(y-40))
-        # self.box_w = int(1.714*width)
-        # self.box_h = int(1.714*height)
-
         self.update()
 
 class Entry_Step_1_UI(qtw.QWidget):
@@ -277,6 +271,11 @@ class Step_1_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.enable_writing()
     self.my_initializer.detectionParams.connect(self.drawDetectionBox)
 
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
+
     self.ui = uic.loadUi('food_assist_gui_step1.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
@@ -307,7 +306,7 @@ class Step_1_UI(qtw.QWidget):
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintDetectionBoxEvent(self, event):
+  def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
     box_painter.setRenderHint(qtg.QPainter.Antialiasing);
     path = qtg.QPainterPath() ;
@@ -394,13 +393,6 @@ class Step_1_UI(qtw.QWidget):
         self.box_y = y
         self.box_w = width
         self.box_h = height
-
-        # with calculated parameters
-        # self.box_x = int(1.714*(x-500))
-        # self.box_y = int(1.714*(y-40))
-        # self.box_w = int(1.714*width)
-        # self.box_h = int(1.714*height)
-
         self.update()
  
 ########## Step 2 UI class ##########
@@ -412,6 +404,10 @@ class Step_2_UI(qtw.QWidget):
     self.my_initializer.current_step = 2
     self.my_initializer.obj_recorder.enable_writing()
     self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
 
     self.ui = uic.loadUi('food_assist_gui_step2.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
@@ -441,7 +437,7 @@ class Step_2_UI(qtw.QWidget):
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintDetectionBoxEvent(self, event):
+  def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
     box_painter.setRenderHint(qtg.QPainter.Antialiasing);
     path = qtg.QPainterPath() ;
@@ -524,13 +520,6 @@ class Step_2_UI(qtw.QWidget):
         self.box_y = y
         self.box_w = width
         self.box_h = height
-
-        # with calculated parameters
-        # self.box_x = int(1.714*(x-500))
-        # self.box_y = int(1.714*(y-40))
-        # self.box_w = int(1.714*width)
-        # self.box_h = int(1.714*height)
-
         self.update()
         
 ########## Step 3 UI class ##########
@@ -542,6 +531,10 @@ class Step_3_UI(qtw.QWidget):
     self.my_initializer.current_step = 3
     self.my_initializer.obj_recorder.enable_writing()
     self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
 
     self.ui = uic.loadUi('food_assist_gui_step3.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
@@ -572,7 +565,7 @@ class Step_3_UI(qtw.QWidget):
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintDetectionBoxEvent(self, event):
+  def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
     box_painter.setRenderHint(qtg.QPainter.Antialiasing);
     path = qtg.QPainterPath() ;
@@ -655,13 +648,6 @@ class Step_3_UI(qtw.QWidget):
         self.box_y = y
         self.box_w = width
         self.box_h = height
-
-        # with calculated parameters
-        # self.box_x = int(1.714*(x-500))
-        # self.box_y = int(1.714*(y-40))
-        # self.box_w = int(1.714*width)
-        # self.box_h = int(1.714*height)
-
         self.update()
 
 ########## Step 4 UI class ##########
@@ -673,6 +659,10 @@ class Step_4_UI(qtw.QWidget):
     self.my_initializer.current_step = 4
     self.my_initializer.obj_recorder.enable_writing()
     self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.box_x = 0
+    self.box_y = 0
+    self.box_w = 0
+    self.box_h = 0
   
     self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
@@ -697,7 +687,7 @@ class Step_4_UI(qtw.QWidget):
     create_worker_handpos(self, self.my_initializer)
   
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintDetectionBoxEvent(self, event):
+  def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
     box_painter.setRenderHint(qtg.QPainter.Antialiasing);
     path = qtg.QPainterPath() ;
@@ -765,13 +755,6 @@ class Step_4_UI(qtw.QWidget):
         self.box_y = y
         self.box_w = width
         self.box_h = height
-
-        # with calculated parameters
-        # self.box_x = int(1.714*(x-500))
-        # self.box_y = int(1.714*(y-40))
-        # self.box_w = int(1.714*width)
-        # self.box_h = int(1.714*height)
-
         self.update()
 
 ########## Tutorial Ends UI class ##########
