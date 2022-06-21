@@ -84,15 +84,15 @@ while True:
     cv2.drawContours(color_image, right_hand_contour, -1, (0, 255, 0), 3)
     # cv2.drawContours(color_image, [c], -1, (0, 255, 0), 2)
     # offset for coordinates, using hand as cursor
-    offset_x = 15
-    offset_y = 25
+    offset_x = 0
+    offset_y = -50
     if most_right_tip_x != 0 and most_right_tip_y != 0:
         cv2.circle(color_image, (most_right_tip_x + offset_x, most_right_tip_y + offset_y), 7, (255, 255, 255), -1)
     cv2.putText(color_image, "tip", (most_right_tip_x - 20, most_right_tip_y - 20),
     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
     print((most_right_tip_x, most_right_tip_y))
 
-    scale_percent = 200
+    scale_percent = 75
     width = int(color_image.shape[1] * scale_percent / 100)
     height = int(color_image.shape[0] * scale_percent / 100)
     dim = (width, height)
