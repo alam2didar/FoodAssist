@@ -2,22 +2,28 @@
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 import pandas as pd
 import seaborn as sns
+import time
 
 sns.set(style='whitegrid', palette='muted', font_scale=1)
 
 class WorkerEvaluator(QObject):
-
-    evaluation_finished = False
+    first_delay_reached = pyqtSignal()
+    evaluation_result = pyqtSignal(bool)
     fig_1_name = None
     fig_2_name = None
     result_text = None
 
     @pyqtSlot()
+    def first_delay(self):
+        # slow down to adapt to UI
+        time.sleep(2)
+        self.first_delay_reached.emit()
+
+    @pyqtSlot()
     def evaluate(self, archive_file_name, evaluation_flag):
+        success_flag = False
         if evaluation_flag:
-            if archive_file_name is None:
-                print("archive_file_name is None")
-            else:
+            if archive_file_name:
                 try:
                     print("archive_file_name is: ", archive_file_name)
                     # load data to process
@@ -55,9 +61,13 @@ class WorkerEvaluator(QObject):
                         self.result_text = "In step 1, you have been scoring the chopping gesture (picture 1) as frequently as the expert."
                     elif result_ratio >= 0 and result_ratio <= 0.4:
                         self.result_text = "In step 1, you have been scoring the chopping gesture (picture 1) less frequently than the expert."
-                    # set evaluation finished flag
-                    self.evaluation_finished = True
-                    print("reaching point - evaluation finished")
+                    success_flag = True
+                    print("reaching point - evaluation successful")
                 except ValueError:
                     print(ValueError)
                     print("reaching point - error encountered")
+                    success_flag = False
+            else:
+                print("archive_file_name is none")
+                success_flag = False
+        self.evaluation_result.emit(success_flag)
