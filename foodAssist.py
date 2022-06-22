@@ -755,10 +755,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_view.clicked.connect(self.button_view_clicked)
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
     self.label_new_plot_3.setHidden(True)
+    self.button_view.setHidden(True)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -770,9 +770,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.archive_file_name = self.my_initializer.obj_recorder.archive_old()
     # create worker evaluator
     create_worker_evaluator(self)
+    create_worker_handpos(self, self.my_initializer)
+
+  def onFirstDelayReached(self):
     # debug - setting evaluation_flag to True
     self.obj_evaluator.evaluate(self.archive_file_name, True)
-    create_worker_handpos(self, self.my_initializer)
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
@@ -783,13 +785,12 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.obj.deactivate()
       self.button_exit.click()
 
-  # check if message received
-  def button_view_clicked(self):
+  def onEvaluationResult(self, success_flag):
     # hide labels upon clicking
     self.start_label.setHidden(True)
     self.label.setHidden(True)
     # show result
-    if self.obj_evaluator.evaluation_finished:
+    if success_flag:
       print("reaching point - displaying result")
       # set image and text to show result
       self.label_new_plot_1.setHidden(False)
@@ -799,11 +800,28 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.label_new_plot_1.setPixmap(new_pixmap_1)
       new_pixmap_2 = qtg.QPixmap(self.obj_evaluator.fig_2_name)
       self.label_new_plot_2.setPixmap(new_pixmap_2)
-      self.label_new_plot_3.setText(self.obj_evaluator.result_text)
+      self.label_new_plot_3.setText("Click button to view more details")
+      self.button_view.setHidden(False)
+      self.button_view.clicked.connect(self.button_view_clicked)
     else:
+      print("reaching point - evaluation not successful")
       self.label_new_plot_3.setHidden(False)
-      print("Evaluation not finished or not possible")
-      self.label_new_plot_3.setText("Evaluation not possible or not finished")
+      self.label_new_plot_3.setText("Sorry, we weren't able to process your data, would you like to connect mobile app and start again?")
+# debug - show template result
+      self.label_new_plot_2.setHidden(False)
+      self.label_new_plot_2.setText("Click the view button to see the expert's analysis.")
+      self.button_view.setHidden(False)
+      self.button_view.clicked.connect(self.button_view_clicked)
+# debug - show template result
+
+  # check if button clicked
+  def button_view_clicked(self):
+    # view results
+    self.label_new_plot_1.setHidden(True)
+    self.label_new_plot_2.setHidden(True)
+    self.label_new_plot_3.setHidden(True)
+    self.button_view.setHidden(True)
+    # to do - show template result
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
@@ -929,8 +947,15 @@ def create_worker_evaluator(self):
   self.obj_evaluator = worker_evaluator.WorkerEvaluator()
   self.thread_evaluator = qtc.QThread()
 
+  # 2 - Connect Worker`s Signals to Form method slots to post data.
+  self.obj_evaluator.first_delay_reached.connect(self.onFirstDelayReached)
+  self.obj_evaluator.evaluation_result.connect(self.onEvaluationResult)
+
   # 3 - Move the Worker object to the Thread object
   self.obj_evaluator.moveToThread(self.thread_evaluator)
+
+  # 5 - Connect Thread started signal to Worker operational slot method
+  self.thread_evaluator.started.connect(self.obj_evaluator.first_delay)
 
   # * - Thread finished signal will close the app (if needed!)
   # self.thread.finished.connect(app.exit)
