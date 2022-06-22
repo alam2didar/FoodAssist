@@ -30,12 +30,9 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1680</width>
-    <height>1050</height>
+    <width>1920</width>
+    <height>1200</height>
    </size>
-  </property>
-  <property name="cursor">
-   <cursorShape>ArrowCursor</cursorShape>
   </property>
   <property name="windowTitle">
    <string>Food Assist</string>
