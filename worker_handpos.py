@@ -38,24 +38,25 @@ class WorkerHandPos(QObject):
         while self.worker_activated:
             counter = counter + 1
 # debug no camera
-            # get images
-            ret, depth_image, depth_colormap, color_image, bg_removed = self.depth_camera.getFrame()
-            # alternative 1 - find point based on mediapipe
-            color_image_to_process, results = self.hand_detector.findHands(color_image)
-            # find specified knuckle coordinates INDEX_FINGER_TIP
-            if use_mediapipe:
-                point = self.hand_detector.findPosition(color_image_to_process, results, targetId=8)
-            # alternative 2 - find point based on depth contour
-            # if not point and use_depth_contour:
-            #     point = self.depth_contour_finder.findPosition(depth_colormap)
-            # after finding point - use knuckle coordinates to find distance
-            if point:
-                distance = self.depth_extractor.getHandPosition(point, depth_image, self.depth_camera)
-                if distance:
-                    distance = int(distance*1000)
-                    print("Hand position (x, y, z): ", (point[0], point[1], distance))
-                    # only emit message with valid values
-                    self.intReady.emit(point[0], point[1], distance, counter)
+            if self.depth_camera:
+                # get images
+                ret, depth_image, depth_colormap, color_image, bg_removed = self.depth_camera.getFrame()
+                # alternative 1 - find point based on mediapipe
+                color_image_to_process, results = self.hand_detector.findHands(color_image)
+                # find specified knuckle coordinates INDEX_FINGER_TIP
+                if use_mediapipe:
+                    point = self.hand_detector.findPosition(color_image_to_process, results, targetId=8)
+                # alternative 2 - find point based on depth contour
+                # if not point and use_depth_contour:
+                #     point = self.depth_contour_finder.findPosition(depth_colormap)
+                # after finding point - use knuckle coordinates to find distance
+                if point:
+                    distance = self.depth_extractor.getHandPosition(point, depth_image, self.depth_camera)
+                    if distance:
+                        distance = int(distance*1000)
+                        print("Hand position (x, y, z): ", (point[0], point[1], distance))
+                        # only emit message with valid values
+                        self.intReady.emit(point[0], point[1], distance, counter)
 # debug no camera
 
         # finish upon breaking out of loop
