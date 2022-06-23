@@ -16,7 +16,7 @@ class WorkerEvaluator(QObject):
     @pyqtSlot()
     def first_delay(self):
         # slow down to adapt to UI
-        time.sleep(2)
+        time.sleep(0.2)
         self.first_delay_reached.emit()
 
     @pyqtSlot()
