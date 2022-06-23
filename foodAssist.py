@@ -818,6 +818,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
+    self.button_view.clicked.connect(self.button_view_clicked)
     self.label_new_plot_1.setHidden(True)
     self.label_new_plot_2.setHidden(True)
     self.label_new_plot_3.setHidden(True)
@@ -848,6 +849,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.obj.deactivate()
+      self.button_view.click()
 
   def onEvaluationResult(self, success_flag):
     # hide labels upon clicking
@@ -857,14 +861,12 @@ class Tutorial_Ends_UI(qtw.QWidget):
     if success_flag:
       self.label_new_plot_3.setText(self.obj_evaluator.result_text)
       self.button_view.setHidden(False)
-      self.button_view.clicked.connect(self.button_view_clicked)
     else:
       print("reaching point - evaluation not successful")
       self.label_new_plot_3.setHidden(False)
       self.label_new_plot_3.setText("Sorry, we weren't able to process your data, would you like to connect mobile app and start again?")
       # to do - show template result?
       self.button_view.setHidden(False)
-      self.button_view.clicked.connect(self.button_view_clicked)
 
   # check if button clicked
   def button_view_clicked(self):
