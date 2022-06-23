@@ -256,3 +256,5 @@ compile_commands.json
 *.mp4
 *.weights
 *.png
+*.avi
+*.mp4
