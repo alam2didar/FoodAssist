@@ -62,12 +62,13 @@ class Initializer(qtc.QObject):
       self.thread_detection.start()
 
   # check if message received
-  def onWebsocketMessage(self, sensor_type, result_feature):
+  def onWebsocketMessage(self, sensor_type, message):
     # get current step
-    if self.current_step and sensor_type and result_feature:
-      self.obj_recorder.write_record(self.current_step, sensor_type, result_feature)
+    if self.current_step:
+      self.obj_recorder.write_record(self.current_step, sensor_type, message)
+      print("writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
     else:
-      print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type)
+      print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
 
   # send detection box paramas to the respective UI  
   def onDetection(self, x, y, width, height, step):
