@@ -18,17 +18,17 @@ class ButtonPositioner:
         self.nav_d = type('nav_d', (ButtonPositioner,), {'left': 1475, 'right': 1559, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
         self.v_cont = type('v_cont', (ButtonPositioner,), {'left': 834, 'right': 1371, 'top': 382, 'bottom': 538, 'short': 1200, 'long': 1400})
 
-    def update_last_button_and_counter(self, type):
+    def update_last_button_and_counter(self, button_type):
         # if last button clicked is this button, then increase counter
-        if self.last_button_clicked is type:
-            self.counter = self.counter + 1 + (1 if type is self.v_cont else 0)
+        if self.last_button_clicked is button_type:
+            self.counter = self.counter + 1
         # otherwise reset counter
         else:
             self.counter = 0
         # update last button clicked
-        self.last_button_clicked = type
+        self.last_button_clicked = button_type
         # return true only after accumulated 10 times
-        if self.counter >= 10:
+        if self.counter >= 10 and button_type is not self.v_cont:
             return True
 
     def check_in_area(self, x, y, z, button_type):
