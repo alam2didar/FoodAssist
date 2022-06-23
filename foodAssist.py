@@ -27,7 +27,6 @@ class FoodAssist(qtw.QWidget):
   def onIntReady(self, x, y, z, counter):
     print("In Food Assist: ", counter)
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.large) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.start_button.click()
 
   @qtc.pyqtSlot()
@@ -64,13 +63,13 @@ class Placing_Meat_UI(qtw.QWidget):
   def paintEvent(self, event):
     print("In Paint event (x,y,w.h): ", self.box_x, self.box_y, self.box_w, self.box_h )
     box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
-    path = qtg.QPainterPath() ;
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
-    box_painter.setPen(pen);
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
-    box_painter.drawPath(path);
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
+    path = qtg.QPainterPath()
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
+    box_painter.setPen(pen)
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
+    box_painter.drawPath(path)
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
@@ -124,10 +123,8 @@ class Entry_Step_1_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -163,10 +160,8 @@ class Entry_Step_2_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -203,10 +198,8 @@ class Entry_Step_3_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_no.click()
   
   @qtc.pyqtSlot()
@@ -243,10 +236,8 @@ class Entry_Step_4_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -314,39 +305,31 @@ class Step_1_UI(qtw.QWidget):
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
-    path = qtg.QPainterPath() ;
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
-    box_painter.setPen(pen);
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
-    box_painter.drawPath(path);
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
+    path = qtg.QPainterPath()
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
+    box_painter.setPen(pen)
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
+    box_painter.drawPath(path)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_next.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step2.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step4.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_video_controller.click()
 
   @qtc.pyqtSlot()
@@ -469,13 +452,13 @@ class Step_2_UI(qtw.QWidget):
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
-    path = qtg.QPainterPath() ;
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
-    box_painter.setPen(pen);
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
-    box_painter.drawPath(path);
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
+    path = qtg.QPainterPath()
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
+    box_painter.setPen(pen)
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
+    box_painter.drawPath(path)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
@@ -486,22 +469,16 @@ class Step_2_UI(qtw.QWidget):
       self.obj.deactivate()
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step2.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step2.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step4.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_video_controller.click()
 
   @qtc.pyqtSlot()
@@ -621,39 +598,31 @@ class Step_3_UI(qtw.QWidget):
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
-    path = qtg.QPainterPath() ;
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
-    box_painter.setPen(pen);
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
-    box_painter.drawPath(path);
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
+    path = qtg.QPainterPath()
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
+    box_painter.setPen(pen)
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
+    box_painter.drawPath(path)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_next.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step2.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step4.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_video_controller.click()
 
   @qtc.pyqtSlot()
@@ -767,30 +736,25 @@ class Step_4_UI(qtw.QWidget):
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
     box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing);
-    path = qtg.QPainterPath() ;
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5);
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5);
-    box_painter.setPen(pen);
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent);
-    box_painter.drawPath(path);
+    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
+    path = qtg.QPainterPath()
+    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
+    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
+    box_painter.setPen(pen)
+    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
+    box_painter.drawPath(path)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_next.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step4.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_sub_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_video_controller.click()
 
   @qtc.pyqtSlot()
@@ -880,13 +844,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_view.click()
 
   def onEvaluationResult(self, success_flag):
@@ -960,19 +921,14 @@ class Menu_Default_UI(qtw.QWidget):
   # check if the button is touched
   def onIntReady(self, x, y, z, counter):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_1) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_2) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step2.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_3) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_step4.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
       self.button_restart.click()
 
   @qtc.pyqtSlot()
@@ -1068,10 +1024,8 @@ def create_worker_evaluator(self):
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
-  print('Class name: ', ui_class)
-  screen_resolution = qtw.QApplication.desktop().screenGeometry(1);
-  ui_class.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()));
-  # ui_class.resize(screen_resolution.width(), screen_resolution.height());
+  screen_resolution = qtw.QApplication.desktop().screenGeometry(1)
+  ui_class.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()))
   ui_class.showFullScreen()
 
 def main():
@@ -1081,13 +1035,6 @@ def main():
   food_assist = FoodAssist(my_initializer)
   select_screen_and_show(food_assist)
 
-  # # move the app to the secod screen (projector screen)
-  # screen_resolution = qtw.QApplication.desktop().screenGeometry(1);
-  # food_assist.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()));
-  # food_assist.resize(screen_resolution.width(), screen_resolution.height());
-  # # food_assist.show()
-  # food_assist.showFullScreen()
-  
   # run the app
   sys.exit(app.exec_())
 if __name__ == '__main__':
