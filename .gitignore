@@ -255,3 +255,4 @@ compile_commands.json
 *.csv
 *.mp4
 *.weights
+*.png
