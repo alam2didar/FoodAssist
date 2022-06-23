@@ -282,39 +282,13 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QLabel" name="label_new_plot_1">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>220</y>
-     <width>640</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_new_plot_2">
-   <property name="geometry">
-    <rect>
-     <x>990</x>
-     <y>220</y>
-     <width>640</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_new_plot_3">
    <property name="geometry">
     <rect>
      <x>40</x>
      <y>40</y>
-     <width>1600</width>
-     <height>160</height>
+     <width>1840</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="font">
@@ -326,7 +300,7 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:48pt; color:#ffffff;&quot;&gt;Area to display result&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Analyzing your performance...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -341,8 +315,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>750</x>
-     <y>470</y>
+     <x>770</x>
+     <y>550</y>
      <width>150</width>
      <height>150</height>
     </rect>
@@ -397,6 +371,70 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_new_plot_1">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>40</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_new_plot_1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_new_plot_2">
+   <property name="geometry">
+    <rect>
+     <x>920</x>
+     <y>40</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_new_plot_2</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>start_label</zorder>
+  <zorder>label</zorder>
+  <zorder>widget</zorder>
+  <zorder>button_view</zorder>
+  <zorder>label_new_plot_3</zorder>
+  <zorder>label_new_plot_1</zorder>
+  <zorder>label_new_plot_2</zorder>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>
