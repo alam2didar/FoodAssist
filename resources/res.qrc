@@ -6,6 +6,10 @@
     <file>Partying Face.png</file>
   </qresource>
   <qresource prefix="detected steps">
+    <file>Detected Step4 Button.png</file>
+    <file>Detected Step3 Button.png</file>
+    <file>Detected Step2 Button.png</file>
+    <file>Detected Step1_Button.png</file>
     <file>Detected Step1.png</file>
     <file>Detected Step2.png</file>
     <file>Detected Step3.png</file>

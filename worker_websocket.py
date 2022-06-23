@@ -74,7 +74,7 @@ class WorkerWebsocket(QObject):
         
         # comment out to ignore server execution
         
-        # self.start_server = websockets.serve(server, "10.88.35.198", 5000)
+        # self.start_server = websockets.serve(server, "192.168.170.55", 5000)
         # # IP address of the PC: 192.168.192.2
         # loop.run_until_complete(self.start_server)
 
