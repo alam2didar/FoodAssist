@@ -36,7 +36,8 @@ class FoodAssist(qtw.QWidget):
     self.obj.deactivate()
     self.placeing_meat_ui = Placing_Meat_UI(self.my_initializer)
     # self.placeing_meat_ui.show()
-    self.placeing_meat_ui.showFullScreen()
+    # self.placeing_meat_ui.showFullScreen()
+    select_screen_and_show(self.placeing_meat_ui)
     # self.placeing_meat_ui.get_current_step()
     self.close()
 
@@ -82,7 +83,8 @@ class Placing_Meat_UI(qtw.QWidget):
     self.obj.deactivate()
     self.entry_step_1_ui = Entry_Step_1_UI(self.my_initializer)
     # self.entry_step_1_ui.show()
-    self.entry_step_1_ui.showFullScreen()
+    # self.entry_step_1_ui.showFullScreen()
+    select_screen_and_show(self.entry_step_1_ui)
     self.close()
   
   @qtc.pyqtSlot()
@@ -93,7 +95,8 @@ class Placing_Meat_UI(qtw.QWidget):
       self.obj.deactivate()
       self.entry_step_1_ui = Entry_Step_1_UI(self.my_initializer)
       # self.entry_step_1_ui.show()
-      self.entry_step_1_ui.showFullScreen()
+      # self.entry_step_1_ui.showFullScreen()
+      select_screen_and_show(self.entry_step_1_ui)
       self.close()
 
   def drawDetectionBox(self, x, y, width, height, step):
@@ -132,7 +135,8 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_1_ui = Step_1_UI(self.my_initializer)
     # self.step_1_ui.show()
-    self.step_1_ui.showFullScreen()
+    # self.step_1_ui.showFullScreen()
+    select_screen_and_show(self.step_1_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -140,7 +144,8 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.close()
 
 class Entry_Step_2_UI(qtw.QWidget):
@@ -169,7 +174,8 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_2_ui = Step_2_UI(self.my_initializer)
     # self.step_2_ui.show()
-    self.step_2_ui.showFullScreen()
+    # self.step_2_ui.showFullScreen()
+    select_screen_and_show(self.step_2_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -177,7 +183,8 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.close()
 
 class Entry_Step_3_UI(qtw.QWidget):
@@ -207,7 +214,8 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_3_ui = Step_3_UI(self.my_initializer)
     # self.step_3_ui.show()
-    self.step_3_ui.showFullScreen()
+    # self.step_3_ui.showFullScreen()
+    select_screen_and_show(self.step_3_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -215,7 +223,8 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.close()
 
 class Entry_Step_4_UI(qtw.QWidget):
@@ -245,7 +254,8 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_4_ui = Step_4_UI(self.my_initializer)
     # self.step_4_ui.show()
-    self.step_4_ui.showFullScreen()
+    # self.step_4_ui.showFullScreen()
+    select_screen_and_show(self.step_4_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -253,7 +263,8 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.close()
 
 ########## Step 1 UI class ##########
@@ -285,7 +296,7 @@ class Step_1_UI(qtw.QWidget):
     
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    self.player.setVideoOutput(self.ui.VideoWidget)
+    # self.player.setVideoOutput(self.ui.VideoWidget)
     self.player.setPlaylist(self.playlist)
     self.player.setMuted(True)
     self.player.positionChanged.connect(self.on_position_changed)
@@ -297,7 +308,7 @@ class Step_1_UI(qtw.QWidget):
     self.button_sub_step2.clicked.connect(self.sub_step2)
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
-    self.player.pause()
+    # self.player.pause()
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -347,7 +358,8 @@ class Step_1_UI(qtw.QWidget):
     # for manual navgation, call directly respective entry step
     self.entry_step_2_ui = Entry_Step_2_UI(self.my_initializer)
     # self.entry_step_2_ui.show()
-    self.entry_step_2_ui.showFullScreen()
+    # self.entry_step_2_ui.showFullScreen()
+    select_screen_and_show(self.entry_step_2_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
@@ -356,7 +368,8 @@ class Step_1_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -369,26 +382,31 @@ class Step_1_UI(qtw.QWidget):
   
   @qtc.pyqtSlot()
   def step1(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(0)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step2(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step3(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(3)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step4(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(4)
     self.player.setPosition(0)
     self.player.play()
@@ -433,7 +451,7 @@ class Step_2_UI(qtw.QWidget):
 
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    self.player.setVideoOutput(self.ui.VideoWidget)
+    # self.player.setVideoOutput(self.ui.VideoWidget)
     self.player.setPlaylist(self.playlist)
     self.player.setMuted(True)
     self.player.positionChanged.connect(self.on_position_changed)
@@ -445,7 +463,7 @@ class Step_2_UI(qtw.QWidget):
     self.button_sub_step2.clicked.connect(self.sub_step2)
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
-    self.player.pause()
+    # self.player.pause()
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -491,7 +509,8 @@ class Step_2_UI(qtw.QWidget):
     self.obj.deactivate()
     self.entry_step_3_ui = Entry_Step_3_UI(self.my_initializer)
     # self.entry_step_3_ui.show()
-    self.entry_step_3_ui.showFullScreen()
+    # self.entry_step_3_ui.showFullScreen()
+    select_screen_and_show(self.entry_step_3_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
@@ -500,7 +519,8 @@ class Step_2_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -513,26 +533,31 @@ class Step_2_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def step2(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(0)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step2(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step3(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step4(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
@@ -578,7 +603,7 @@ class Step_3_UI(qtw.QWidget):
 
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    self.player.setVideoOutput(self.ui.VideoWidget)
+    # self.player.setVideoOutput(self.ui.VideoWidget)
     self.player.setPlaylist(self.playlist)
     self.player.setMuted(True)
     self.player.positionChanged.connect(self.on_position_changed)
@@ -636,7 +661,8 @@ class Step_3_UI(qtw.QWidget):
     self.obj.deactivate()
     self.entry_step_4_ui = Entry_Step_4_UI(self.my_initializer)
     # self.entry_step_4_ui.show()
-    self.entry_step_4_ui.showFullScreen()
+    # self.entry_step_4_ui.showFullScreen()
+    select_screen_and_show(self.entry_step_4_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
@@ -645,7 +671,8 @@ class Step_3_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -658,26 +685,31 @@ class Step_3_UI(qtw.QWidget):
   
   @qtc.pyqtSlot()
   def step3(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(0)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step2(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step3(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(3)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step4(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(3)
     self.player.setPosition(0)
     self.player.play()
@@ -720,7 +752,7 @@ class Step_4_UI(qtw.QWidget):
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
     self.playlist.setCurrentIndex(1)
     self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    self.player.setVideoOutput(self.ui.VideoWidget)
+    # self.player.setVideoOutput(self.ui.VideoWidget)
     self.player.setPlaylist(self.playlist)
     self.player.setMuted(True)
     self.player.positionChanged.connect(self.on_position_changed)
@@ -766,7 +798,8 @@ class Step_4_UI(qtw.QWidget):
     self.obj.deactivate()
     self.tutorial_ends_ui = Tutorial_Ends_UI(self.my_initializer)
     # self.tutorial_ends_ui.show()
-    self.tutorial_ends_ui.showFullScreen()
+    # self.tutorial_ends_ui.showFullScreen()
+    select_screen_and_show(self.tutorial_ends_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
@@ -775,7 +808,8 @@ class Step_4_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -788,11 +822,13 @@ class Step_4_UI(qtw.QWidget):
   
   @qtc.pyqtSlot()
   def step4(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(0)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
@@ -875,9 +911,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # set image and text to show result
     self.label_new_plot_1.setHidden(False)
     self.label_new_plot_2.setHidden(False)
-    new_pixmap_1 = qtg.QPixmap(self.obj_evaluator.current_fig_1_name)
+    new_pixmap_1 = qtg.QPixmap(self.obj_evaluator.fig_1_name)
     self.label_new_plot_1.setPixmap(new_pixmap_1)
-    new_pixmap_2 = qtg.QPixmap(self.obj_evaluator.current_fig_2_name)
+    new_pixmap_2 = qtg.QPixmap(self.obj_evaluator.fig_2_name)
     self.label_new_plot_2.setPixmap(new_pixmap_2)
     self.label_new_plot_3.setHidden(True)
     self.button_view.setHidden(True)
@@ -889,7 +925,8 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.obj.deactivate()
     self.food_assist = FoodAssist(self.my_initializer)
     # self.food_assist.show()
-    self.food_assist.showFullScreen()
+    # self.food_assist.showFullScreen()
+    select_screen_and_show(self.food_assist)
     self.close()
   
   @qtc.pyqtSlot()
@@ -898,7 +935,8 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.obj.deactivate()
     self.menu_default_ui = Menu_Default_UI(self.my_initializer)
     # self.menu_default_ui.show()
-    self.menu_default_ui.showFullScreen()
+    # self.menu_default_ui.showFullScreen()
+    select_screen_and_show(self.menu_default_ui)
     self.close()
 
 
@@ -943,7 +981,8 @@ class Menu_Default_UI(qtw.QWidget):
     self.obj.deactivate()
     self.food_assist = FoodAssist(self.my_initializer)
     # self.food_assist.show()
-    self.food_assist.showFullScreen()
+    # self.food_assist.showFullScreen()
+    select_screen_and_show(self.food_assist)
     self.close()
 
   @qtc.pyqtSlot()
@@ -951,7 +990,8 @@ class Menu_Default_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_1_ui = Step_1_UI(self.my_initializer)
     # self.step_1_ui.show()
-    self.step_1_ui.showFullScreen()
+    # self.step_1_ui.showFullScreen()
+    select_screen_and_show(self.step_1_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -959,7 +999,8 @@ class Menu_Default_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_2_ui = Step_2_UI(self.my_initializer)
     # self.step_2_ui.show()
-    self.step_2_ui.showFullScreen()
+    # self.step_2_ui.showFullScreen()
+    select_screen_and_show(self.step_2_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -967,7 +1008,8 @@ class Menu_Default_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_3_ui = Step_3_UI(self.my_initializer)
     # self.step_3_ui.show()
-    self.step_3_ui.showFullScreen()
+    # self.step_3_ui.showFullScreen()
+    select_screen_and_show(self.step_3_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -975,7 +1017,8 @@ class Menu_Default_UI(qtw.QWidget):
     self.obj.deactivate()
     self.step_4_ui = Step_4_UI(self.my_initializer)
     # self.step_4_ui.show()
-    self.step_4_ui.showFullScreen()
+    # self.step_4_ui.showFullScreen()
+    select_screen_and_show(self.step_4_ui)
     self.close()
 
 # Helper Functions
@@ -1023,13 +1066,28 @@ def create_worker_evaluator(self):
   # 6 - Start the thread
   self.thread_evaluator.start()
 
+# move the app to the secod screen (projector screen)
+def select_screen_and_show(ui_class):
+  print('Class name: ', ui_class)
+  screen_resolution = qtw.QApplication.desktop().screenGeometry(1);
+  ui_class.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()));
+  # ui_class.resize(screen_resolution.width(), screen_resolution.height());
+  ui_class.showFullScreen()
+
 def main():
   # initiate app
   app = qtw.QApplication([])
   my_initializer = initializer.Initializer()
   food_assist = FoodAssist(my_initializer)
-  # food_assist.show()
-  food_assist.showFullScreen()
+  select_screen_and_show(food_assist)
+
+  # # move the app to the secod screen (projector screen)
+  # screen_resolution = qtw.QApplication.desktop().screenGeometry(1);
+  # food_assist.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()));
+  # food_assist.resize(screen_resolution.width(), screen_resolution.height());
+  # # food_assist.show()
+  # food_assist.showFullScreen()
+  
   # run the app
   sys.exit(app.exec_())
 if __name__ == '__main__':
