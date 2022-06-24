@@ -3,6 +3,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 import asyncio
 import websockets
 import json
+import socket
 
 # Creates a Websocket (Open for the entire duration when app is running)
 # Smart watch communicates through this websocket
@@ -69,13 +70,13 @@ class WorkerWebsocket(QObject):
         # create new event loop
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        # 192.168.169.74 at computer lab
-        # 192.168.178.22 at home
         
         # comment out to ignore server execution
+        hostname=socket.gethostname()   
+        ip_address=socket.gethostbyname(hostname)   
+        print(f'IP Address: {ip_address}') 
         
-        self.start_server = websockets.serve(server, "10.88.42.74", 5000)
-        # IP address of the PC: 192.168.192.2
+        self.start_server = websockets.serve(server, ip_address, 5000)
         loop.run_until_complete(self.start_server)
 
         # comment out
