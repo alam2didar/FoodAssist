@@ -10,7 +10,7 @@ import ButtonPositionModule as bpm
 class WorkerHandPos(QObject):
     # hand_position = {'x': 0, 'y': 0, 'z':0}
     finished = pyqtSignal()
-    intReady = pyqtSignal(int, int, int, int)
+    intReady = pyqtSignal(int, int, int, int, int, int)
 
     def __init__(self, my_depth_camera):
         super().__init__()
@@ -56,7 +56,7 @@ class WorkerHandPos(QObject):
                         distance = int(distance*1000)
                         print("Hand position (x, y, z): ", (point[0], point[1], distance))
                         # only emit message with valid values
-                        self.intReady.emit(point[0], point[1], distance, counter)
+                        self.intReady.emit(point[0], point[1], distance, counter, int(1.65*(point[0]-405)-20), int(1.65*(point[1]-220)-20))
 # debug no camera
 
         # finish upon breaking out of loop
