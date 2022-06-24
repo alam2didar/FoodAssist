@@ -19,13 +19,29 @@ class FoodAssist(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
 
     self.start_button.clicked.connect(self.button_pressed)
-
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
+  
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
     print("In Food Assist: ", counter)
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.large) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.start_button.click()
 
@@ -57,6 +73,16 @@ class Placing_Meat_UI(qtw.QWidget):
     self.box_h = 0
 
     self.button_skip.clicked.connect(self.skip_step_detection)
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -70,9 +96,14 @@ class Placing_Meat_UI(qtw.QWidget):
     box_painter.setPen(pen)
     box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
     box_painter.drawPath(path)
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.large) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_skip.click()
