@@ -27,6 +27,10 @@ class FoodAssist(qtw.QWidget):
     self.cursor_label = qtw.QLabel()
     self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
     self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    ### FIX me @ Didar
+    # QCssParser::parseColorValue: Specified color without alpha value but alpha given: 'rgb 0, 0, 0, 0'
+    # https://stackoverflow.com/questions/7667552/qt-widget-with-transparent-background
+    ###
     cursor_layout.addWidget(self.cursor_label)
     self.cursor_widget.raise_()
     # Hand tracking thread
@@ -37,7 +41,6 @@ class FoodAssist(qtw.QWidget):
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
-    print("In Food Assist: ", counter)
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -149,10 +152,27 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -186,10 +206,27 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -224,10 +261,27 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
   
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+  
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -262,10 +316,27 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
   
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+  
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -331,6 +402,17 @@ class Step_1_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     # self.player.pause()
+
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -343,9 +425,14 @@ class Step_1_UI(qtw.QWidget):
     box_painter.setPen(pen)
     box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
     box_painter.drawPath(path)
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_next.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -478,6 +565,17 @@ class Step_2_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     # self.player.pause()
+
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -490,9 +588,14 @@ class Step_2_UI(qtw.QWidget):
     box_painter.setPen(pen)
     box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
     box_painter.drawPath(path)
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_next.click()
@@ -624,6 +727,17 @@ class Step_3_UI(qtw.QWidget):
     self.button_sub_step3.clicked.connect(self.sub_step3)
     self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
+
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -636,9 +750,14 @@ class Step_3_UI(qtw.QWidget):
     box_painter.setPen(pen)
     box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
     box_painter.drawPath(path)
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_next.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -762,6 +881,16 @@ class Step_4_UI(qtw.QWidget):
     self.button_step4.clicked.connect(self.step4)
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.player.pause()
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
   
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -774,9 +903,14 @@ class Step_4_UI(qtw.QWidget):
     box_painter.setPen(pen)
     box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
     box_painter.drawPath(path)
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_next.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -863,6 +997,16 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     # create worker evaluator
     create_worker_evaluator(self)
     create_worker_handpos(self, self.my_initializer)
@@ -872,8 +1016,15 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.label_new_plot_3.setHidden(False)
     self.obj_evaluator.evaluate(self.archive_csv_name, True)
 
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -947,10 +1098,27 @@ class Menu_Default_UI(qtw.QWidget):
     self.button_step3.clicked.connect(self.step3_button_pressed)
     self.button_step4.clicked.connect(self.step4_button_pressed)
     self.button_restart.clicked.connect(self.restart_button_pressed)
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
   
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+  
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter):
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_1) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_2) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -1070,5 +1238,3 @@ def main():
   sys.exit(app.exec_())
 if __name__ == '__main__':
   main()
-
-
