@@ -9,10 +9,7 @@ sns.set(style='whitegrid', palette='muted', font_scale=1)
 
 class WorkerEvaluator(QObject):
     first_delay_reached = pyqtSignal()
-    evaluation_result = pyqtSignal(bool)
-    fig_1_name = None
-    fig_2_name = None
-    result_text = None
+    evaluation_result = pyqtSignal(bool, bool)
 
     @pyqtSlot()
     def first_delay(self):
@@ -23,6 +20,8 @@ class WorkerEvaluator(QObject):
     @pyqtSlot()
     def evaluate(self, archive_file_name, evaluation_flag):
         success_flag = False
+        qualitative_result = False
+        # True to be good match, False for not as good
         if evaluation_flag:
             if archive_file_name:
                 try:
@@ -48,8 +47,7 @@ class WorkerEvaluator(QObject):
                     # create pie chart
                     plt.title("Feature Distribution")
                     plt.pie(data, labels = labels, colors = colors, autopct='%.0f%%')
-                    self.fig_1_name = "records/myfig_1.png"
-                    plt.savefig(self.fig_1_name)
+                    plt.savefig("records/myfig_1.png")
                     # percentage
                     sum = df_position_feature_1.shape[0] + df_position_feature_2.shape[0] + df_position_feature_3.shape[0]
                     if sum != 0:
@@ -60,15 +58,13 @@ class WorkerEvaluator(QObject):
                         df_position_feature_3_ratio = df_position_feature_3.shape[0] / sum
                         print("df_position_feature_3_ratio:", df_position_feature_3_ratio)
                         if 0.2 < df_position_feature_1_ratio < 0.33 and 0.33 < df_position_feature_2_ratio < 0.6 and 0.2< df_position_feature_2_ratio < 0.33:
-                            self.result_text = "Congratualation! Your performance are as good as the expert. Click the view button to see the details."
+                            qualitative_result = True
                         else:
-                            self.result_text = "Your performance are quite different from the expert. Click the view button to see the details."
+                            qualitative_result = False
                         success_flag = True
-                        print("reaching point - evaluation successful")
                     else:
                         success_flag = False
-                        self.result_text = "Zero records found."
-                    # creating image, label_new_plot_2
+                    # creating image, label_plot_2
                     plt.figure()
                     df_motion_dynamic = df_motion[df_motion['result_feature'] >= 1]
                     df_motion_static = df_motion[df_motion['result_feature'] < 1]
@@ -80,8 +76,7 @@ class WorkerEvaluator(QObject):
                     # create pie chart
                     plt.title("Activity Percentage")
                     plt.pie(data, labels = labels, colors = colors, autopct='%.0f%%')
-                    self.fig_2_name = "records/myfig_2.png"
-                    plt.savefig(self.fig_2_name)
+                    plt.savefig("records/myfig_2.png")
                     # percentage
                     sum = df_motion_dynamic.shape[0] + df_motion_static.shape[0]
                     if sum != 0:
@@ -93,7 +88,6 @@ class WorkerEvaluator(QObject):
                         print("reaching point - evaluation successful")
                     else:
                         success_flag = False
-                        self.result_text = "Zero records found."
                 except ValueError:
                     print(ValueError)
                     print("reaching point - error encountered")
@@ -101,4 +95,4 @@ class WorkerEvaluator(QObject):
             else:
                 print("archive_file_name is none")
                 success_flag = False
-        self.evaluation_result.emit(success_flag)
+        self.evaluation_result.emit(success_flag, qualitative_result)
