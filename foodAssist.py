@@ -984,9 +984,14 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_view.clicked.connect(self.button_view_clicked)
-    self.label_new_plot_1.setHidden(True)
-    self.label_new_plot_2.setHidden(True)
-    self.label_new_plot_3.setHidden(True)
+    self.label_plot_1.setHidden(True)
+    self.label_plot_2.setHidden(True)
+    self.label_plot_3.setHidden(True)
+    self.label_plot_4.setHidden(True)
+    self.label_text_1.setHidden(False)
+    self.label_text_2.setHidden(False)
+    self.label_text_1.setText("Congratulation, you have completed all the steps!")
+    self.label_text_2.setText("Analyzing your performance...")
     self.button_view.setHidden(True)
     # pass on my_initializer
     self.my_initializer = my_initializer
@@ -1012,8 +1017,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
     create_worker_handpos(self, self.my_initializer)
 
   def onFirstDelayReached(self):
+    # hide labels upon delay reached
+    self.label_party.setHidden(True)
     # debug - setting evaluation_flag to True
-    self.label_new_plot_3.setHidden(False)
     self.obj_evaluator.evaluate(self.archive_csv_name, True)
 
   def paintEvent(self, event):
@@ -1032,35 +1038,44 @@ class Tutorial_Ends_UI(qtw.QWidget):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_view.click()
 
-  def onEvaluationResult(self, success_flag):
-    # hide labels upon clicking
-    self.start_label.setHidden(True)
-    self.label.setHidden(True)
+  def onEvaluationResult(self, success_flag, qualitative_result):
     # show result
     if success_flag:
-      self.label_new_plot_3.setText(self.obj_evaluator.result_text)
+      print("reaching point - evaluation successful")
       self.button_view.setHidden(False)
+      if qualitative_result:
+        self.label_text_1.setText("Congratualation! Your performance are as good as the expert. Click the view button to see the details.")
+      else:
+        self.label_text_1.setText("Your performance are quite different from the expert. Click the view button to see the details.")
+      self.label_text_1.setHidden(False)
+      self.label_text_2.setHidden(True)
     else:
       print("reaching point - evaluation not successful")
-      self.label_new_plot_3.setHidden(False)
-      self.label_new_plot_3.setText("Sorry, we weren't able to process your data, would you like to connect mobile app and start again?")
-      # to do - show template result?
-      self.button_view.setHidden(False)
+      self.button_view.setHidden(True)
+      self.label_text_1.setText("Sorry, we weren't able to process your data, would you like to connect mobile app and start again?")
+      self.label_text_1.setHidden(False)
+      self.label_text_2.setHidden(True)
 
   # check if button clicked
   def button_view_clicked(self):
     # view results
     print("reaching point - displaying result")
     # set image and text to show result
-    self.label_new_plot_1.setHidden(False)
-    self.label_new_plot_2.setHidden(False)
-    new_pixmap_1 = qtg.QPixmap(self.obj_evaluator.fig_1_name)
-    self.label_new_plot_1.setPixmap(new_pixmap_1)
-    new_pixmap_2 = qtg.QPixmap(self.obj_evaluator.fig_2_name)
-    self.label_new_plot_2.setPixmap(new_pixmap_2)
-    self.label_new_plot_3.setHidden(True)
+    new_pixmap_1 = qtg.QPixmap("records/expertfig_1.png")
+    self.label_plot_1.setPixmap(new_pixmap_1)
+    new_pixmap_2 = qtg.QPixmap("records/expertfig_2.png")
+    self.label_plot_2.setPixmap(new_pixmap_2)
+    new_pixmap_3 = qtg.QPixmap("records/myfig_1.png")
+    self.label_plot_3.setPixmap(new_pixmap_3)
+    new_pixmap_4 = qtg.QPixmap("records/myfig_2.png")
+    self.label_plot_4.setPixmap(new_pixmap_4)
     self.button_view.setHidden(True)
-    # to do - show template result
+    self.label_plot_1.setHidden(False)
+    self.label_plot_2.setHidden(False)
+    self.label_plot_3.setHidden(False)
+    self.label_plot_4.setHidden(False)
+    self.label_text_1.setHidden(True)
+    self.label_text_2.setHidden(True)
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
