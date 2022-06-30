@@ -43,75 +43,13 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 0, 0);</string>
   </property>
-  <widget class="QLabel" name="start_label">
+  <widget class="QLabel" name="label_party">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>80</y>
-     <width>1000</width>
-     <height>310</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>510</width>
-     <height>310</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>1000</width>
-     <height>1000</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <stylestrategy>PreferDefault</stylestrategy>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <property name="lineWidth">
-    <number>0</number>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Contragulation, you have completed all the steps!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="textFormat">
-    <enum>Qt::MarkdownText</enum>
-   </property>
-   <property name="scaledContents">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>1200</x>
-     <y>100</y>
-     <width>311</width>
-     <height>291</height>
+     <x>810</x>
+     <y>220</y>
+     <width>300</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="text">
@@ -124,13 +62,13 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_new_plot_3">
+  <widget class="QLabel" name="label_text_2">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>40</y>
+     <y>750</y>
      <width>1840</width>
-     <height>300</height>
+     <height>250</height>
     </rect>
    </property>
    <property name="font">
@@ -142,7 +80,7 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Analyzing your performance...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;label_text_2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -157,8 +95,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>770</x>
-     <y>550</y>
+     <x>760</x>
+     <y>560</y>
      <width>150</width>
      <height>150</height>
     </rect>
@@ -213,11 +151,11 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_new_plot_1">
+  <widget class="QLabel" name="label_plot_1">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>40</y>
+     <x>40</x>
+     <y>20</y>
      <width>640</width>
      <height>480</height>
     </rect>
@@ -237,14 +175,14 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>label_new_plot_1</string>
+    <string>label_plot_1</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_new_plot_2">
+  <widget class="QLabel" name="label_plot_2">
    <property name="geometry">
     <rect>
-     <x>920</x>
-     <y>40</y>
+     <x>1240</x>
+     <y>20</y>
      <width>640</width>
      <height>480</height>
     </rect>
@@ -264,7 +202,7 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>label_new_plot_2</string>
+    <string>label_plot_2</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -413,13 +351,96 @@
     </widget>
    </widget>
   </widget>
-  <zorder>start_label</zorder>
-  <zorder>label</zorder>
+  <widget class="QLabel" name="label_plot_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>520</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_plot_3</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_plot_4">
+   <property name="geometry">
+    <rect>
+     <x>1240</x>
+     <y>520</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_plot_4</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_text_1">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>1840</width>
+     <height>250</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;label_text_1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>label_text_1</zorder>
+  <zorder>label_party</zorder>
   <zorder>button_view</zorder>
-  <zorder>label_new_plot_3</zorder>
-  <zorder>label_new_plot_1</zorder>
-  <zorder>label_new_plot_2</zorder>
+  <zorder>label_text_2</zorder>
+  <zorder>label_plot_1</zorder>
+  <zorder>label_plot_2</zorder>
   <zorder>widget_2</zorder>
+  <zorder>label_plot_3</zorder>
+  <zorder>label_plot_4</zorder>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>
