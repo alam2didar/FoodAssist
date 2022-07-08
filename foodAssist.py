@@ -1059,23 +1059,31 @@ class Tutorial_Ends_UI(qtw.QWidget):
   # check if button clicked
   def button_view_clicked(self):
     # view results
-    print("reaching point - displaying result")
+    # print("reaching point - displaying result")
     # set image and text to show result
-    new_pixmap_1 = qtg.QPixmap("records/expertfig_1.png")
-    self.label_plot_1.setPixmap(new_pixmap_1)
-    new_pixmap_2 = qtg.QPixmap("records/expertfig_2.png")
-    self.label_plot_2.setPixmap(new_pixmap_2)
-    new_pixmap_3 = qtg.QPixmap("records/myfig_1.png")
-    self.label_plot_3.setPixmap(new_pixmap_3)
-    new_pixmap_4 = qtg.QPixmap("records/myfig_2.png")
-    self.label_plot_4.setPixmap(new_pixmap_4)
-    self.button_view.setHidden(True)
-    self.label_plot_1.setHidden(False)
-    self.label_plot_2.setHidden(False)
-    self.label_plot_3.setHidden(False)
-    self.label_plot_4.setHidden(False)
-    self.label_text_1.setHidden(True)
-    self.label_text_2.setHidden(True)
+    # new_pixmap_1 = qtg.QPixmap("records/expertfig_1.png")
+    # self.label_plot_1.setPixmap(new_pixmap_1)
+    # new_pixmap_2 = qtg.QPixmap("records/expertfig_2.png")
+    # self.label_plot_2.setPixmap(new_pixmap_2)
+    # new_pixmap_3 = qtg.QPixmap("records/myfig_1.png")
+    # self.label_plot_3.setPixmap(new_pixmap_3)
+    # new_pixmap_4 = qtg.QPixmap("records/myfig_2.png")
+    # self.label_plot_4.setPixmap(new_pixmap_4)
+    # self.button_view.setHidden(True)
+    # self.label_plot_1.setHidden(False)
+    # self.label_plot_2.setHidden(False)
+    # self.label_plot_3.setHidden(False)
+    # self.label_plot_4.setHidden(False)
+    # self.label_text_1.setHidden(True)
+    # self.label_text_2.setHidden(True)
+
+    # redirects to Result_0_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_0 = Result_0_UI(self.my_initializer)
+    select_screen_and_show(self.result_0)
+    self.close()
+
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
