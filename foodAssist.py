@@ -1038,15 +1038,15 @@ class Tutorial_Ends_UI(qtw.QWidget):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_view.click()
 
-  def onEvaluationResult(self, success_flag, qualitative_result):
+  def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps):
     # show result
     if success_flag:
       print("reaching point - evaluation successful")
       self.button_view.setHidden(False)
       if qualitative_result:
-        self.label_text_1.setText("Congratualation! Your performance are as good as the expert. Click the view button to see the details.")
+        self.label_text_1.setText("Congratualation! You performed almost like an expert. Click the view button to see more details.")
       else:
-        self.label_text_1.setText("Your performance are quite different from the expert. Click the view button to see the details.")
+        self.label_text_1.setText(f"Your seemed to have trouble in the following {troubled_steps}. Click the view button to see more details.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
     else:
@@ -1104,6 +1104,38 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # self.menu_default_ui.showFullScreen()
     select_screen_and_show(self.menu_default_ui)
     self.close()
+
+
+########## Result 0 UI class ##########
+class Result_0_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result0.ui', self)
+    self.button_restart.clicked.connect(self.restart_button_pressed)
+    self.button_exit.clicked.connect(self.exit_button_pressed)
+    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
+    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
+    self.label_plot_1.setHidden(True)
+    self.label_plot_2.setHidden(True)
+    self.label_plot_3.setHidden(True)
+    self.label_plot_4.setHidden(True)
+    self.label_text_1.setHidden(True)
+    self.label_text_2.setHidden(True)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
+    create_worker_handpos(self, self.my_initializer)
 
 
 ########## Menu Default UI class ##########
