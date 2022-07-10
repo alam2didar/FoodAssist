@@ -177,6 +177,9 @@
    <property name="text">
     <string>label_plot_1</string>
    </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLabel" name="label_plot_2">
    <property name="geometry">
@@ -377,6 +380,9 @@
    <property name="text">
     <string>label_plot_3</string>
    </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLabel" name="label_plot_4">
    <property name="geometry">
@@ -403,6 +409,9 @@
    </property>
    <property name="text">
     <string>label_plot_4</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_text_1">

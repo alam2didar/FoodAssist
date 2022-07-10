@@ -83,7 +83,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>930</y>
+     <y>750</y>
      <width>1840</width>
      <height>250</height>
     </rect>
@@ -103,68 +103,6 @@
     <set>Qt::AlignCenter</set>
    </property>
    <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_nav_left">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>760</x>
-     <y>560</y>
-     <width>150</width>
-     <height>150</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>81</width>
-     <height>81</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>150</width>
-     <height>150</height>
-    </size>
-   </property>
-   <property name="cursor">
-    <cursorShape>OpenHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::WheelFocus</enum>
-   </property>
-   <property name="contextMenuPolicy">
-    <enum>Qt::DefaultContextMenu</enum>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>resources/Button Left.svg</normaloff>resources/Button Left.svg</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>144</width>
-     <height>144</height>
-    </size>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-   <property name="default">
-    <bool>false</bool>
-   </property>
-   <property name="flat">
     <bool>true</bool>
    </property>
   </widget>
@@ -249,6 +187,211 @@
     <string>label_plot_4</string>
    </property>
   </widget>
+  <widget class="QWidget" name="widget_bottom_right" native="true">
+   <property name="geometry">
+    <rect>
+     <x>1559</x>
+     <y>1030</y>
+     <width>361</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0,0,0);</string>
+   </property>
+   <widget class="QSplitter" name="splitter_3">
+    <property name="geometry">
+     <rect>
+      <x>6</x>
+      <y>6</y>
+      <width>351</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="opaqueResize">
+     <bool>false</bool>
+    </property>
+    <property name="handleWidth">
+     <number>53</number>
+    </property>
+    <property name="childrenCollapsible">
+     <bool>false</bool>
+    </property>
+    <widget class="QPushButton" name="button_restart">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>81</width>
+       <height>81</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>resources/Button Restart.svg</normaloff>resources/Button Restart.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>144</width>
+       <height>144</height>
+      </size>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_exit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>81</width>
+       <height>81</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="icon">
+      <iconset resource="resources/res.qrc">
+       <normaloff>:/buttons/Button Exit.svg</normaloff>:/buttons/Button Exit.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>144</width>
+       <height>144</height>
+      </size>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="button_nav_left">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>560</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>81</width>
+     <height>81</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>150</width>
+     <height>150</height>
+    </size>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::WheelFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="icon">
+    <iconset resource="resources/res.qrc">
+     <normaloff>:/buttons/Button Left.svg</normaloff>:/buttons/Button Left.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>144</width>
+     <height>144</height>
+    </size>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QPushButton" name="button_nav_right">
    <property name="enabled">
     <bool>true</bool>
@@ -292,8 +435,8 @@
     <string notr="true"/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>resources/Button Right.svg</normaloff>resources/Button Right.svg</iconset>
+    <iconset resource="resources/res.qrc">
+     <normaloff>:/buttons/Button Right.svg</normaloff>:/buttons/Button Right.svg</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -315,9 +458,10 @@
   <zorder>label_text_1</zorder>
   <zorder>label_plot_3</zorder>
   <zorder>label_plot_2</zorder>
-  <zorder>button_nav_left</zorder>
   <zorder>label_plot_1</zorder>
   <zorder>label_plot_4</zorder>
+  <zorder>widget_bottom_right</zorder>
+  <zorder>button_nav_left</zorder>
   <zorder>button_nav_right</zorder>
  </widget>
  <resources>
