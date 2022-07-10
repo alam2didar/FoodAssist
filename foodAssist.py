@@ -173,9 +173,9 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -227,9 +227,9 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -282,9 +282,9 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_no.click()
   
   @qtc.pyqtSlot()
@@ -337,9 +337,9 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_no.click()
 
   @qtc.pyqtSlot()
@@ -433,9 +433,9 @@ class Step_1_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step1.click()
@@ -596,10 +596,10 @@ class Step_2_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.obj.deactivate()
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -758,9 +758,9 @@ class Step_3_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step3.click()
@@ -911,9 +911,9 @@ class Step_4_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step4.click()
@@ -1031,11 +1031,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.left) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_restart.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.right) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_view.click()
 
   def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps):
@@ -1182,7 +1182,7 @@ class Menu_Default_UI(qtw.QWidget):
       self.button_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_restart.click()
 
   @qtc.pyqtSlot()

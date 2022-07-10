@@ -4,13 +4,14 @@ class ButtonPositioner:
         self.last_button_clicked = None
         self.counter = 0
         self.large = type('large', (ButtonPositioner,), {'left': 1288, 'right': 1404, 'top': 725, 'bottom': 833, 'short': 1200, 'long': 1400})
-        self.left = type('left', (ButtonPositioner,), {'left': 1365, 'right': 1446, 'top': 858, 'bottom': 937, 'short': 1200, 'long': 1400})
-        self.right = type('right', (ButtonPositioner,), {'left': 1482, 'right': 1560, 'top': 851, 'bottom': 939, 'short': 1200, 'long': 1400})
+        self.button_a = type('button_a', (ButtonPositioner,), {'left': 1365, 'right': 1446, 'top': 858, 'bottom': 937, 'short': 1200, 'long': 1400})
+        self.button_b = type('button_b', (ButtonPositioner,), {'left': 1482, 'right': 1560, 'top': 851, 'bottom': 939, 'short': 1200, 'long': 1400})
+        self.button_c = type('button_c', (ButtonPositioner,), {'left': 870, 'right': 945, 'top': 548, 'bottom': 620, 'short': 1200, 'long': 1400})
+        self.button_d = type('button_d', (ButtonPositioner,), {'left': 1012, 'right': 1094, 'top': 548, 'bottom': 620, 'short': 1200, 'long': 1400})
         self.step_1 = type('step_1', (ButtonPositioner,), {'left': 672, 'right': 757, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
         self.step_2 = type('step_2', (ButtonPositioner,), {'left': 807, 'right': 887, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
         self.step_3 = type('step_3', (ButtonPositioner,), {'left': 924, 'right': 1007, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
         self.step_4 = type('step_4', (ButtonPositioner,), {'left': 1064, 'right': 1137, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
-        self.restart = type('restart', (ButtonPositioner,), {'left': 870, 'right': 945, 'top': 548, 'bottom': 620, 'short': 1200, 'long': 1400})
         self.nav_img = type('nav_img', (ButtonPositioner,), {'left': 1472, 'right': 1559, 'top': 627, 'bottom': 713, 'short': 1200, 'long': 1400})
         self.nav_a = type('nav_a', (ButtonPositioner,), {'left': 1175, 'right': 1255, 'top': 732, 'bottom': 818, 'short': 1200, 'long': 1400})
         self.nav_b = type('nav_b', (ButtonPositioner,), {'left': 1275, 'right': 1356, 'top': 733, 'bottom': 813, 'short': 1200, 'long': 1400})
