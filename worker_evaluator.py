@@ -27,36 +27,31 @@ class WorkerEvaluator(QObject):
         # True to be good match, False for not as good
         if evaluation_flag:
             if archive_file_name:
-                try:
-                    print("archive_file_name is: ", archive_file_name)
-                    # load data to process
-                    column_names = ['timestamp', 'step', 'sensor_type', 'result_feature']
-                    df = pd.read_csv(archive_file_name, header=None, names=column_names)
-                    df = df.dropna()
-                    # filter data frame for each step
-                    df_step_1 = df[df['step'] == 'step_1']
-                    df_step_2 = df[df['step'] == 'step_2']
-                    df_step_3 = df[df['step'] == 'step_3']
-                    df_step_4 = df[df['step'] == 'step_4']
-                    # perform the same data processing on each step dataset
-                    success_flag_dict['step_1'], qualitative_result_dict['step_1'] = self.process_data_frame(df_step_1, 1)
-                    success_flag_dict['step_2'], qualitative_result_dict['step_2'] = self.process_data_frame(df_step_2, 2)
-                    success_flag_dict['step_3'], qualitative_result_dict['step_3'] = self.process_data_frame(df_step_3, 3)
-                    success_flag_dict['step_4'], qualitative_result_dict['step_4'] = self.process_data_frame(df_step_4, 4)
-                    # aggregate success_flag from each step
-                    success_flag = success_flag_dict['step_1'] and success_flag_dict['step_2'] and success_flag_dict['step_3'] and success_flag_dict['step_4']
-                    # use qualitative_result to find out troubled_steps
-                    qualitative_result = qualitative_result_dict['step_1'] and qualitative_result_dict['step_2'] and qualitative_result_dict['step_3'] and qualitative_result_dict['step_4']
-                    if not qualitative_result:
-                        false_keys = [key for key, value in qualitative_result_dict.items() if not value]
-                        if len(false_keys) == 1:
-                            troubled_steps = f"step: {false_keys[0]}"
-                        elif len(false_keys) > 1:
-                            troubled_steps = f"steps: {', '.join(false_keys[:-1])} and {false_keys[-1]}"
-                except ValueError:
-                    print(ValueError)
-                    print("reaching point - error encountered")
-                    success_flag = False
+                print("archive_file_name is: ", archive_file_name)
+                # load data to process
+                column_names = ['timestamp', 'step', 'sensor_type', 'result_feature']
+                df = pd.read_csv(archive_file_name, header=None, names=column_names)
+                df = df.dropna()
+                # filter data frame for each step
+                df_step_1 = df[df['step'] == 'step_1']
+                df_step_2 = df[df['step'] == 'step_2']
+                df_step_3 = df[df['step'] == 'step_3']
+                df_step_4 = df[df['step'] == 'step_4']
+                # perform the same data processing on each step dataset
+                success_flag_dict['step_1'], qualitative_result_dict['step_1'] = self.process_data_frame(df_step_1, 1)
+                success_flag_dict['step_2'], qualitative_result_dict['step_2'] = self.process_data_frame(df_step_2, 2)
+                success_flag_dict['step_3'], qualitative_result_dict['step_3'] = self.process_data_frame(df_step_3, 3)
+                success_flag_dict['step_4'], qualitative_result_dict['step_4'] = self.process_data_frame(df_step_4, 4)
+                # aggregate success_flag from each step
+                success_flag = success_flag_dict['step_1'] or success_flag_dict['step_2'] or success_flag_dict['step_3'] or success_flag_dict['step_4']
+                # use qualitative_result to find out troubled_steps
+                qualitative_result = qualitative_result_dict['step_1'] and qualitative_result_dict['step_2'] and qualitative_result_dict['step_3'] and qualitative_result_dict['step_4']
+                if not qualitative_result:
+                    false_keys = [key for key, value in qualitative_result_dict.items() if not value]
+                    if len(false_keys) == 1:
+                        troubled_steps = f"{false_keys[0]}"
+                    elif len(false_keys) > 1:
+                        troubled_steps = f"{', '.join(false_keys[:-1])} and {false_keys[-1]}"
             else:
                 print("archive_file_name is none")
                 success_flag = False
