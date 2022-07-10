@@ -1044,11 +1044,12 @@ class Tutorial_Ends_UI(qtw.QWidget):
       print("reaching point - evaluation successful")
       self.button_view.setHidden(False)
       if qualitative_result:
-        self.label_text_1.setText("Congratualation! You performed almost like an expert. Click the view button to see more details.")
+        self.label_text_1.setText("Congratualation! You performed almost like an expert.")
       else:
-        self.label_text_1.setText(f"Your seemed to have trouble in the following {troubled_steps}. Click the view button to see more details.")
+        self.label_text_1.setText(f"Your seemed to have trouble in the following steps:\n {troubled_steps}")
+      self.label_text_2.setText("Click the view button to see more details.")
       self.label_text_1.setHidden(False)
-      self.label_text_2.setHidden(True)
+      self.label_text_2.setHidden(False)
     else:
       print("reaching point - evaluation not successful")
       self.button_view.setHidden(True)
@@ -1077,11 +1078,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # self.label_text_1.setHidden(True)
     # self.label_text_2.setHidden(True)
 
-    # redirects to Result_0_UI
+    # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_0 = Result_0_UI(self.my_initializer)
-    select_screen_and_show(self.result_0)
+    self.result_step1 = Result_Step1_UI(self.my_initializer)
+    select_screen_and_show(self.result_step1)
     self.close()
 
 
@@ -1106,16 +1107,16 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.close()
 
 
-########## Result 0 UI class ##########
-class Result_0_UI(qtw.QWidget):
+########## Result Step 1 UI class ##########
+class Result_Step1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi('food_assist_gui_result0.ui', self)
+    self.ui = uic.loadUi('food_assist_gui_result_step1.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
     self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-    self.label_plot_1.setHidden(True)
+    self.label_plot_1.setHidden(False)
     self.label_plot_2.setHidden(True)
     self.label_plot_3.setHidden(True)
     self.label_plot_4.setHidden(True)
@@ -1136,6 +1137,310 @@ class Result_0_UI(qtw.QWidget):
     cursor_layout.addWidget(self.cursor_label)
     self.cursor_widget.raise_()
     create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step4 = Result_Step4_UI(self.my_initializer)
+    select_screen_and_show(self.result_step4)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step2 = Result_Step2_UI(self.my_initializer)
+    select_screen_and_show(self.result_step2)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.food_assist = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.food_assist)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.menu_default_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+
+
+########## Result Step 2 UI class ##########
+class Result_Step2_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result_step2.ui', self)
+    self.button_restart.clicked.connect(self.restart_button_pressed)
+    self.button_exit.clicked.connect(self.exit_button_pressed)
+    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
+    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
+    self.label_plot_1.setHidden(True)
+    self.label_plot_2.setHidden(False)
+    self.label_plot_3.setHidden(True)
+    self.label_plot_4.setHidden(True)
+    self.label_text_1.setHidden(True)
+    self.label_text_2.setHidden(True)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step1 = Result_Step1_UI(self.my_initializer)
+    select_screen_and_show(self.result_step1)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step3 = Result_Step3_UI(self.my_initializer)
+    select_screen_and_show(self.result_step3)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.food_assist = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.food_assist)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.menu_default_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+
+
+########## Result Step 3 UI class ##########
+class Result_Step3_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result_step3.ui', self)
+    self.button_restart.clicked.connect(self.restart_button_pressed)
+    self.button_exit.clicked.connect(self.exit_button_pressed)
+    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
+    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
+    self.label_plot_1.setHidden(True)
+    self.label_plot_2.setHidden(True)
+    self.label_plot_3.setHidden(False)
+    self.label_plot_4.setHidden(True)
+    self.label_text_1.setHidden(True)
+    self.label_text_2.setHidden(True)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step2 = Result_Step2_UI(self.my_initializer)
+    select_screen_and_show(self.result_step2)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step4 = Result_Step4_UI(self.my_initializer)
+    select_screen_and_show(self.result_step4)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.food_assist = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.food_assist)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.menu_default_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+
+
+########## Result Step 4 UI class ##########
+class Result_Step4_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result_step4.ui', self)
+    self.button_restart.clicked.connect(self.restart_button_pressed)
+    self.button_exit.clicked.connect(self.exit_button_pressed)
+    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
+    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
+    self.label_plot_1.setHidden(True)
+    self.label_plot_2.setHidden(True)
+    self.label_plot_3.setHidden(True)
+    self.label_plot_4.setHidden(False)
+    self.label_text_1.setHidden(True)
+    self.label_text_2.setHidden(True)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # draw finger-tip cursor
+    self.finger_tip_x = 0
+    self.finger_tip_y = 0
+    self.cursor_widget = qtw.QWidget(self)
+    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+    self.cursor_label = qtw.QLabel()
+    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+    cursor_layout.addWidget(self.cursor_label)
+    self.cursor_widget.raise_()
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step2 = Result_Step2_UI(self.my_initializer)
+    select_screen_and_show(self.result_step2)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.result_step1 = Result_Step1_UI(self.my_initializer)
+    select_screen_and_show(self.result_step1)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.food_assist = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.food_assist)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.menu_default_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
 
 
 ########## Menu Default UI class ##########
