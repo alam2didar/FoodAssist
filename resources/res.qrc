@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="img">
+    <file>SCORE Bar.svg</file>
+    <file>XP Bolt.svg</file>
+    <file>Phone Off.svg</file>
+    <file>Phone On.svg</file>
+    <file>Watch Off.svg</file>
+    <file>Watch On.svg</file>
     <file>Icon Detected.svg</file>
     <file>Arrow Rright Short.svg</file>
     <file>Arrow Bar Right.svg</file>
