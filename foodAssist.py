@@ -984,10 +984,8 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_view.clicked.connect(self.button_view_clicked)
-    self.label_plot_1.setHidden(True)
-    self.label_plot_2.setHidden(True)
-    self.label_plot_3.setHidden(True)
-    self.label_plot_4.setHidden(True)
+    self.widget_xp.setHidden(True)
+    self.widget_score.setHidden(True)
     self.label_text_1.setHidden(False)
     self.label_text_2.setHidden(False)
     self.label_text_1.setText("Congratulation, you have completed all the steps!")
@@ -1050,6 +1048,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.label_text_2.setText("Click the view button to see more details.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
+      self.widget_xp.setHidden(False)
+      self.widget_score.setHidden(False)
+      # to do - show score percentage
+      # self.label_text_4.setText("80%")
     else:
       print("reaching point - evaluation not successful")
       self.button_view.setHidden(True)
@@ -1059,25 +1061,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
 
   # check if button clicked
   def button_view_clicked(self):
-    # view results
-    # print("reaching point - displaying result")
-    # set image and text to show result
-    # new_pixmap_1 = qtg.QPixmap("records/expertfig_1.png")
-    # self.label_plot_1.setPixmap(new_pixmap_1)
-    # new_pixmap_2 = qtg.QPixmap("records/expertfig_2.png")
-    # self.label_plot_2.setPixmap(new_pixmap_2)
-    # new_pixmap_3 = qtg.QPixmap("records/myfig_1.png")
-    # self.label_plot_3.setPixmap(new_pixmap_3)
-    # new_pixmap_4 = qtg.QPixmap("records/myfig_2.png")
-    # self.label_plot_4.setPixmap(new_pixmap_4)
-    # self.button_view.setHidden(True)
-    # self.label_plot_1.setHidden(False)
-    # self.label_plot_2.setHidden(False)
-    # self.label_plot_3.setHidden(False)
-    # self.label_plot_4.setHidden(False)
-    # self.label_text_1.setHidden(True)
-    # self.label_text_2.setHidden(True)
-
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
