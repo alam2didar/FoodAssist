@@ -1631,7 +1631,7 @@ def draw_finger_tip_cursor(self):
   cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
   self.cursor_label = qtw.QLabel()
   self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-  self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+  self.cursor_widget.setStyleSheet('background: transparent;')
   ### FIX me @ Didar
   # QCssParser::parseColorValue: Specified color without alpha value but alpha given: 'rgb 0, 0, 0, 0'
   # https://stackoverflow.com/questions/7667552/qt-widget-with-transparent-background
