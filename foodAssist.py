@@ -13,6 +13,11 @@ class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_start.ui', self)
+
+    # hide icons temporarily
+    self.status_phone.setHidden(True)
+    self.status_watch.setHidden(True)
+
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
