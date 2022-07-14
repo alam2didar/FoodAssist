@@ -12,10 +12,10 @@ class WorkerEvaluator(QObject):
     evaluation_result = pyqtSignal(bool, bool, str, int)
 
     expert_amount_dict = {
-    'step_1_feature_1': 6, 'step_1_feature_2': 12, 'step_1_feature_3': 2,
-    'step_2_feature_1': 6, 'step_2_feature_2': 2, 'step_2_feature_3': 12,
-    'step_3_feature_1': 6, 'step_3_feature_2': 14, 'step_3_feature_3': 0,
-    'step_4_feature_1': 4, 'step_4_feature_2': 16, 'step_4_feature_3': 0
+        'step_1_feature_1': 6, 'step_1_feature_2': 12, 'step_1_feature_3': 2,
+        'step_2_feature_1': 6, 'step_2_feature_2': 2, 'step_2_feature_3': 12,
+        'step_3_feature_1': 6, 'step_3_feature_2': 14, 'step_3_feature_3': 0,
+        'step_4_feature_1': 4, 'step_4_feature_2': 16, 'step_4_feature_3': 0
     }
 
     expert_ratio_dict = {
@@ -23,7 +23,7 @@ class WorkerEvaluator(QObject):
         'step_2_feature_1': 0.3, 'step_2_feature_2': 0.1, 'step_2_feature_3': 0.6,
         'step_3_feature_1': 0.3, 'step_3_feature_2': 0.7, 'step_3_feature_3': 0,
         'step_4_feature_1': 0.2, 'step_4_feature_2': 0.8, 'step_4_feature_3': 0
-        }
+    }
 
     @pyqtSlot()
     def first_delay(self):
@@ -80,11 +80,12 @@ class WorkerEvaluator(QObject):
         qualitative_result = False
         score_value = 0
         df_position = None
-        df_motion = None
+        # df_motion = None
         df_position_amount = [0, 0, 0]
-        feature_ratio = [0, 0, 0]
-        ratio_difference = [0, 0, 0]
-        df_motion_amount = [0, 0]
+        amount_difference = [0, 0, 0]
+        # feature_ratio = [0, 0, 0]
+        # ratio_difference = [0, 0, 0]
+        # df_motion_amount = [0, 0]
         try:
             # filter position and motion
             df_position = data_frame_step[data_frame_step['sensor_type'] == 'position']
@@ -95,18 +96,13 @@ class WorkerEvaluator(QObject):
             success_flag = False
         # check df_position
         if not df_position.empty:
+            # creating image, count plot
             plt.figure()
             sns.set(style='whitegrid', palette='muted', font_scale=1.5)
-            # sns_count_plot = sns.countplot(x = 'step', 
-            #     hue = 'result_feature',
-            #     data = df_position,
-            #     order = df_position.step.value_counts().index)
-            # sns_count_plot.figure.savefig(f'myfig_0_step_{step_number}.png')
-
-            sns_count_plot = sns.countplot(x='result_feature',
+            sns_count_plot = sns.countplot(x='recognized gestures',
                                     data=df_position,
                                     order=df_position.result_feature.value_counts().index)
-            sns_count_plot.figure.savefig(f'myfig_0_step_{step_number}.png')
+            sns_count_plot.figure.savefig(f'records/myfig_2_step_{step_number}.png')
             # feature 1, 2, 3
             for index in range(3):
                 try:
@@ -129,38 +125,36 @@ class WorkerEvaluator(QObject):
             sum = df_position_amount[0] + df_position_amount[1] + df_position_amount[2]
             if sum != 0:
                 for index in range(3):
-                    feature_ratio[index] = df_position_amount[index] / sum
-                    print(f'df_position_ratio, feature {index+1}: {feature_ratio[index]}')
-                    ratio_difference[index] = abs(self.expert_ratio_dict[f'step_{step_number}_feature_{index+1}'] - feature_ratio[index])
+                    amount_difference[index] = df_position_amount[index] - self.expert_amount_dict[f'step_{step_number}_feature_{index+1}']
                 # calculation of score_value
-                if ratio_difference[0] > 0.3 or ratio_difference[1] > 0.3 or ratio_difference[2] > 0.3:
+                if abs(amount_difference[0]) > 4 or abs(amount_difference[1]) > 4 or abs(amount_difference[2]) > 4:
                     qualitative_result = False
                     score_value = 0.6
-                elif ratio_difference[0] > 0.2 or ratio_difference[1] > 0.2 or ratio_difference[2] > 0.2:
+                elif abs(amount_difference[0]) > 3 or abs(amount_difference[1]) > 3 or abs(amount_difference[2]) > 3:
                     qualitative_result = False
                     score_value = 0.7
-                elif ratio_difference[0] > 0.1 or ratio_difference[1] > 0.1 or ratio_difference[2] > 0.1:
-                    qualitative_result = False
+                elif abs(amount_difference[0]) > 2 or abs(amount_difference[1]) > 2 or abs(amount_difference[2]) > 2:
+                    qualitative_result = True
                     score_value = 0.8
-                elif ratio_difference[0] <= 0.1 and ratio_difference[1] <= 0.1 and ratio_difference[2] <= 0.1:
+                else:
                     qualitative_result = True
                     score_value = 0.9
                 success_flag = True
             else:
                 success_flag = False
         # check df_motion
-        if not df_motion.empty:
-            df_motion_amount[0] = df_motion[df_motion['result_feature'] >= 1].shape[0]
-            df_motion_amount[1] = df_motion[df_motion['result_feature'] < 1].shape[0]
-            # define data
-            # data = [df_motion_dynamic.shape[0], df_motion_static.shape[0]]
-            labels = ['cutting', 'not cutting']
-            # define Seaborn color palette to use
-            colors = sns.color_palette('pastel')[0:5]
-            # creating image, label_plot_2
-            plt.figure()
-            # create pie chart
-            plt.title('How much percent of the time were you cutting?')
-            plt.pie(df_motion_amount, labels = labels, colors = colors, autopct='%.0f%%')
-            plt.savefig(f'records/myfig_2_step_{step_number}.png')
+        # if not df_motion.empty:
+        #     df_motion_amount[0] = df_motion[df_motion['result_feature'] >= 1].shape[0]
+        #     df_motion_amount[1] = df_motion[df_motion['result_feature'] < 1].shape[0]
+        #     # define data
+        #     # data = [df_motion_dynamic.shape[0], df_motion_static.shape[0]]
+        #     labels = ['cutting', 'not cutting']
+        #     # define Seaborn color palette to use
+        #     colors = sns.color_palette('pastel')[0:5]
+        #     # creating image, label_plot_2
+        #     plt.figure()
+        #     # create pie chart
+        #     plt.title('How much percent of the time were you cutting?')
+        #     plt.pie(df_motion_amount, labels = labels, colors = colors, autopct='%.0f%%')
+        #     plt.savefig(f'records/myfig_0_step_{step_number}.png')
         return success_flag, qualitative_result, score_value
