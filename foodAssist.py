@@ -64,6 +64,11 @@ class FoodAssist(qtw.QWidget):
     # self.placeing_meat_ui.get_current_step()
     self.close()
 
+  # check if phone and watch are connected
+  def onMobileConnected(self):
+    self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone On.svg'))
+    self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch On.svg'))
+    
 
 class Placing_Meat_UI(qtw.QWidget):
   def __init__(self, my_initializer):
