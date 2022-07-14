@@ -9,8 +9,6 @@ class WorkerRecorder(QObject):
     permission_to_write = False
 
     current_csv_name = "records/record_current.csv"
-    # current_fig_1_name = "records/myfig_1.png"
-    # current_fig_2_name = "records/myfig_2.png"
     file_writer = None
 
     @pyqtSlot()
@@ -35,8 +33,6 @@ class WorkerRecorder(QObject):
     @pyqtSlot()
     def archive_old(self):
         archive_csv_name = None
-        # archive_fig_1_name = None
-        # archive_fig_2_name = None
         self.disable_writing()
         # close file writer before archiving
         self.close_file()
@@ -53,19 +49,6 @@ class WorkerRecorder(QObject):
             archive_csv_name = None
             # send signal to create new
             self.archive_finished.emit()
-        # try:
-        #     # archive - renaming file
-        #     archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
-        #     archive_fig_1_name = "records/myfig_1_{}.png".format(archive_time)
-        #     archive_fig_2_name = "records/myfig_2_{}.png".format(archive_time)
-        #     os.rename(self.current_fig_1_name, archive_fig_1_name)
-        #     os.rename(self.current_fig_2_name, archive_fig_2_name)
-        #     print("archived png successfully")
-        # except FileNotFoundError:
-        #     print("warning - png file not found")
-        #     archive_fig_1_name = None
-        #     archive_fig_2_name = None
-        # csv name required
         return archive_csv_name
 
     @pyqtSlot()
