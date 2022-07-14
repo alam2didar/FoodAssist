@@ -1023,16 +1023,7 @@ class Result_Step1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step1.ui', self)
-    self.button_restart.clicked.connect(self.restart_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
-    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-    self.label_plot_1.setHidden(False)
-    self.label_plot_2.setHidden(True)
-    self.label_plot_3.setHidden(True)
-    self.label_plot_4.setHidden(True)
-    self.label_text_1.setHidden(True)
-    self.label_text_2.setHidden(True)
+    show_evaluation_result(self, 1)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1100,16 +1091,7 @@ class Result_Step2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step2.ui', self)
-    self.button_restart.clicked.connect(self.restart_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
-    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-    self.label_plot_1.setHidden(True)
-    self.label_plot_2.setHidden(False)
-    self.label_plot_3.setHidden(True)
-    self.label_plot_4.setHidden(True)
-    self.label_text_1.setHidden(True)
-    self.label_text_2.setHidden(True)
+    show_evaluation_result(self, 2)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1177,16 +1159,7 @@ class Result_Step3_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step3.ui', self)
-    self.button_restart.clicked.connect(self.restart_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
-    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-    self.label_plot_1.setHidden(True)
-    self.label_plot_2.setHidden(True)
-    self.label_plot_3.setHidden(False)
-    self.label_plot_4.setHidden(True)
-    self.label_text_1.setHidden(True)
-    self.label_text_2.setHidden(True)
+    show_evaluation_result(self, 3)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1254,16 +1227,7 @@ class Result_Step4_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step4.ui', self)
-    self.button_restart.clicked.connect(self.restart_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
-    self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-    self.label_plot_1.setHidden(True)
-    self.label_plot_2.setHidden(True)
-    self.label_plot_3.setHidden(True)
-    self.label_plot_4.setHidden(False)
-    self.label_text_1.setHidden(True)
-    self.label_text_2.setHidden(True)
+    show_evaluation_result(self, 4)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1278,8 +1242,8 @@ class Result_Step4_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step2 = Result_Step2_UI(self.my_initializer)
-    select_screen_and_show(self.result_step2)
+    self.result_step3 = Result_Step3_UI(self.my_initializer)
+    select_screen_and_show(self.result_step3)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1324,7 +1288,6 @@ class Result_Step4_UI(qtw.QWidget):
       self.button_nav_left.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_nav_right.click()
-
 
 ########## Menu Default UI class ##########
 class Menu_Default_UI(qtw.QWidget):
@@ -1471,6 +1434,19 @@ def create_worker_evaluator(self):
 
   # 6 - Start the thread
   self.thread_evaluator.start()
+
+# move the app to the secod screen (projector screen)
+def show_evaluation_result(self, step_number):
+  self.button_restart.clicked.connect(self.restart_button_pressed)
+  self.button_exit.clicked.connect(self.exit_button_pressed)
+  self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
+  self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
+  self.label_plot_1.setPixmap(qtg.QPixmap(f'records/expertfig_1_step_{step_number}.png'))
+  self.label_plot_2.setPixmap(qtg.QPixmap(f'records/expertfig_2_step_{step_number}.png'))
+  self.label_plot_3.setPixmap(qtg.QPixmap(f'records/myfig_1_step_{step_number}.png'))
+  self.label_plot_4.setPixmap(qtg.QPixmap(f'records/myfig_2_step_{step_number}.png'))
+  self.label_text_1.setText(f"Step {step_number}")
+  self.label_text_2.setHidden(True)
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
