@@ -25,22 +25,10 @@ class FoodAssist(qtw.QWidget):
 
     self.start_button.clicked.connect(self.button_pressed)
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    ### FIX me @ Didar
-    # QCssParser::parseColorValue: Specified color without alpha value but alpha given: 'rgb 0, 0, 0, 0'
-    # https://stackoverflow.com/questions/7667552/qt-widget-with-transparent-background
-    ###
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
     # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
-  
+
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
@@ -87,15 +75,8 @@ class Placing_Meat_UI(qtw.QWidget):
 
     self.button_skip.clicked.connect(self.skip_step_detection)
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -163,15 +144,8 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   def paintEvent(self, event):
@@ -217,15 +191,8 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   def paintEvent(self, event):
@@ -272,15 +239,8 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
   
   def paintEvent(self, event):
@@ -327,15 +287,8 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
   
   def paintEvent(self, event):
@@ -414,15 +367,8 @@ class Step_1_UI(qtw.QWidget):
     # self.player.pause()
 
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -577,15 +523,8 @@ class Step_2_UI(qtw.QWidget):
     # self.player.pause()
 
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -739,15 +678,8 @@ class Step_3_UI(qtw.QWidget):
     self.player.pause()
 
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -892,15 +824,8 @@ class Step_4_UI(qtw.QWidget):
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.player.pause()
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
   
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
@@ -1005,24 +930,17 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-
     # close file
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
     # create worker evaluator
     create_worker_evaluator(self)
-    create_worker_handpos(self, self.my_initializer)
+
 
   def onFirstDelayReached(self):
     # hide labels upon delay reached
@@ -1120,15 +1038,8 @@ class Result_Step1_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   @qtc.pyqtSlot()
@@ -1204,15 +1115,8 @@ class Result_Step2_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   @qtc.pyqtSlot()
@@ -1288,15 +1192,8 @@ class Result_Step3_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   @qtc.pyqtSlot()
@@ -1372,15 +1269,8 @@ class Result_Step4_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
 
   @qtc.pyqtSlot()
@@ -1452,15 +1342,8 @@ class Menu_Default_UI(qtw.QWidget):
     self.button_step4.clicked.connect(self.step4_button_pressed)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     # draw finger-tip cursor
-    self.finger_tip_x = 0
-    self.finger_tip_y = 0
-    self.cursor_widget = qtw.QWidget(self)
-    cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
-    self.cursor_label = qtw.QLabel()
-    self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
-    self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
-    cursor_layout.addWidget(self.cursor_label)
-    self.cursor_widget.raise_()
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
   
   def paintEvent(self, event):
@@ -1530,6 +1413,21 @@ class Menu_Default_UI(qtw.QWidget):
     self.close()
 
 # Helper Functions
+def draw_finger_tip_cursor(self):
+  self.finger_tip_x = 0
+  self.finger_tip_y = 0
+  self.cursor_widget = qtw.QWidget(self)
+  cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
+  self.cursor_label = qtw.QLabel()
+  self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+  self.cursor_widget.setStyleSheet('background-color: rgb(0, 0, 0, 0)')
+  ### FIX me @ Didar
+  # QCssParser::parseColorValue: Specified color without alpha value but alpha given: 'rgb 0, 0, 0, 0'
+  # https://stackoverflow.com/questions/7667552/qt-widget-with-transparent-background
+  ###
+  cursor_layout.addWidget(self.cursor_label)
+  self.cursor_widget.raise_()
+
 def create_worker_handpos(self, my_initializer):
   # 1 - create Worker and Thread inside the Form # no parent
   self.obj = worker_handpos.WorkerHandPos(my_initializer.my_depth_camera)
