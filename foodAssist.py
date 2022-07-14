@@ -964,7 +964,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_view.click()
 
-  def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps):
+  def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps, score_percent):
     # show result
     if success_flag:
       print("reaching point - evaluation successful")
@@ -976,10 +976,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.label_text_2.setText("Click the view button to see more details.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
+      # to do - show score percentage
+      self.label_text_4.setText(f"{score_percent}%")
       self.widget_xp.setHidden(False)
       self.widget_score.setHidden(False)
-      # to do - show score percentage
-      # self.label_text_4.setText("80%")
     else:
       print("reaching point - evaluation not successful")
       self.button_view.setHidden(True)
