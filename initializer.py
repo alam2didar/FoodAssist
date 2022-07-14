@@ -9,7 +9,7 @@ class Initializer(qtc.QObject):
   # flag to start/block workers
   # start_worker = False
   start_worker = True
-  interval_between_uis = 15
+  interval_between_uis = 20
 
   def __init__(self):
     super().__init__()

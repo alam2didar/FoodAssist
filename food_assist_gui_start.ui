@@ -170,6 +170,38 @@
     </item>
    </layout>
   </widget>
+  <widget class="QLabel" name="status_watch">
+   <property name="geometry">
+    <rect>
+     <x>1760</x>
+     <y>10</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/res.qrc">:/img/Watch Off.svg</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="status_phone">
+   <property name="geometry">
+    <rect>
+     <x>1600</x>
+     <y>10</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/res.qrc">:/img/Phone Off.svg</pixmap>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>
