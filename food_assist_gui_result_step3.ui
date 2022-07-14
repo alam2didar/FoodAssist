@@ -22,63 +22,6 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 0, 0);</string>
   </property>
-  <widget class="QLabel" name="label_plot_3">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>520</y>
-     <width>640</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>640</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>label_plot_3</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_plot_2">
-   <property name="geometry">
-    <rect>
-     <x>1240</x>
-     <y>20</y>
-     <width>640</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>640</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>label_plot_2</string>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_text_2">
    <property name="geometry">
     <rect>
@@ -131,60 +74,6 @@
    </property>
    <property name="wordWrap">
     <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_plot_1">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>20</y>
-     <width>640</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>640</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>label_plot_1</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_plot_4">
-   <property name="geometry">
-    <rect>
-     <x>1240</x>
-     <y>520</y>
-     <width>640</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>640</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>label_plot_4</string>
    </property>
   </widget>
   <widget class="QWidget" name="widget_bottom_right" native="true">
@@ -454,15 +343,117 @@
     <bool>true</bool>
    </property>
   </widget>
-  <zorder>label_text_2</zorder>
-  <zorder>label_text_1</zorder>
-  <zorder>label_plot_3</zorder>
-  <zorder>label_plot_2</zorder>
-  <zorder>label_plot_1</zorder>
-  <zorder>label_plot_4</zorder>
-  <zorder>widget_bottom_right</zorder>
-  <zorder>button_nav_left</zorder>
-  <zorder>button_nav_right</zorder>
+  <widget class="QLabel" name="label_plot_1_expert">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_plot_1_expert</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_plot_2_user">
+   <property name="geometry">
+    <rect>
+     <x>1240</x>
+     <y>520</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_plot_2_user</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_plot_1_user">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>520</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_plot_1_user</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_plot_2_expert">
+   <property name="geometry">
+    <rect>
+     <x>1240</x>
+     <y>20</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>label_plot_2_expert</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>
