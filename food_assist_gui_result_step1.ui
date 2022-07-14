@@ -22,7 +22,7 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 0, 0);</string>
   </property>
-  <widget class="QLabel" name="label_plot_3">
+  <widget class="QLabel" name="label_plot_1_user">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -46,10 +46,10 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>label_plot_3</string>
+    <string>label_plot_1_user</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_plot_2">
+  <widget class="QLabel" name="label_plot_2_expert">
    <property name="geometry">
     <rect>
      <x>1240</x>
@@ -73,7 +73,7 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>label_plot_2</string>
+    <string>label_plot_2_expert</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -133,7 +133,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_plot_1">
+  <widget class="QLabel" name="label_plot_1_expert">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -157,10 +157,10 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>label_plot_1</string>
+    <string>label_plot_1_expert</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_plot_4">
+  <widget class="QLabel" name="label_plot_2_user">
    <property name="geometry">
     <rect>
      <x>1240</x>
@@ -184,7 +184,7 @@
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>label_plot_4</string>
+    <string>label_plot_2_user</string>
    </property>
   </widget>
   <widget class="QWidget" name="widget_bottom_right" native="true">
@@ -456,10 +456,10 @@
   </widget>
   <zorder>label_text_2</zorder>
   <zorder>label_text_1</zorder>
-  <zorder>label_plot_3</zorder>
-  <zorder>label_plot_2</zorder>
-  <zorder>label_plot_1</zorder>
-  <zorder>label_plot_4</zorder>
+  <zorder>label_plot_1_user</zorder>
+  <zorder>label_plot_2_expert</zorder>
+  <zorder>label_plot_1_expert</zorder>
+  <zorder>label_plot_2_user</zorder>
   <zorder>widget_bottom_right</zorder>
   <zorder>button_nav_left</zorder>
   <zorder>button_nav_right</zorder>
