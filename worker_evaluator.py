@@ -11,6 +11,13 @@ class WorkerEvaluator(QObject):
     first_delay_reached = pyqtSignal()
     evaluation_result = pyqtSignal(bool, bool, str, int)
 
+    expert_amount_dict = {
+    'step_1_feature_1': 6, 'step_1_feature_2': 12, 'step_1_feature_3': 2,
+    'step_2_feature_1': 6, 'step_2_feature_2': 2, 'step_2_feature_3': 12,
+    'step_3_feature_1': 6, 'step_3_feature_2': 14, 'step_3_feature_3': 0,
+    'step_4_feature_1': 4, 'step_4_feature_2': 16, 'step_4_feature_3': 0
+    }
+
     expert_ratio_dict = {
         'step_1_feature_1': 0.3, 'step_1_feature_2': 0.6, 'step_1_feature_3': 0.1,
         'step_2_feature_1': 0.3, 'step_2_feature_2': 0.1, 'step_2_feature_3': 0.6,
