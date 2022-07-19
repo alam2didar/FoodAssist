@@ -9,6 +9,7 @@ class WorkerRecorder(QObject):
     permission_to_write = False
 
     current_csv_name = "records/record_current.csv"
+    archive_csv_name = "records/record_archived.csv"
     file_writer = None
 
     @pyqtSlot()
@@ -38,20 +39,16 @@ class WorkerRecorder(QObject):
         self.close_file()
         if os.path.exists(self.current_csv_name):
             # archive - renaming csv file
-            archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
-            archive_csv_name = "records/record_{}.csv".format(archive_time)
-            os.rename(self.current_csv_name, archive_csv_name)
+            # archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
+            # archive_csv_name = "records/record_{}.csv".format(archive_time)
+            if os.path.exists(self.archive_csv_name):
+                os.remove(self.archive_csv_name)
+            else:
+                print("archived csv file does not exist")
+            os.rename(self.current_csv_name, self.archive_csv_name)
             print("archived successfully")
         else:
             print("csv file does not exist")
-        for step_number in range(1, 5):
-            for fig_number in range(1, 3):
-                fig_name = f'records/myfig_{fig_number}_step_{step_number}.png'
-                # removing png file
-                if os.path.exists(fig_name):
-                    os.remove(fig_name)
-                else:
-                    print("png file does not exist")
         # send signal archive_finished
         self.archive_finished.emit()
         return archive_csv_name

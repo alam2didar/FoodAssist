@@ -23,6 +23,9 @@ class FoodAssist(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
+    # remove png files
+    self.remove_png_files()
+
     self.start_button.clicked.connect(self.button_pressed)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
@@ -42,14 +45,25 @@ class FoodAssist(qtw.QWidget):
       self.start_button.click()
 
   @qtc.pyqtSlot()
+  def remove_png_files(self):
+      for step_number in range(1, 5):
+          for fig_number in range(1, 3):
+              fig_name = f'records/myfig_{fig_number}_step_{step_number}.png'
+              # removing png file
+              if os.path.exists(fig_name):
+                  os.remove(fig_name)
+              else:
+                  print("png file does not exist")
+
+  @qtc.pyqtSlot()
   def button_pressed(self):
     # duplicated but required when interacting with physical mouse
     self.obj.deactivate()
-    self.placeing_meat_ui = Placing_Meat_UI(self.my_initializer)
-    # self.placeing_meat_ui.show()
-    # self.placeing_meat_ui.showFullScreen()
-    select_screen_and_show(self.placeing_meat_ui)
-    # self.placeing_meat_ui.get_current_step()
+    self.placing_meat_ui = Placing_Meat_UI(self.my_initializer)
+    # self.placing_meat_ui.show()
+    # self.placing_meat_ui.showFullScreen()
+    select_screen_and_show(self.placing_meat_ui)
+    # self.placing_meat_ui.get_current_step()
     self.close()
 
   # check if phone and watch are connected
