@@ -60,13 +60,13 @@ class WorkerRecorder(QObject):
             print("open file writer successfully")
 
     @pyqtSlot()
-    def write_record(self, current_step, sensor_type, result_feature):
+    def write_record(self, current_step, sensor_type, result_gesture):
         if self.permission_to_write and self.file_writer:
             # get current time
             current_time = datetime.datetime.now()
             current_time_s = current_time.strftime("%y%m%d%H%M%S")
             current_time_ms = "{:06d}".format(current_time.microsecond)
             # write into csv file
-            self.file_writer.write("{}{},step_{},{},{}\n".format(current_time_s, current_time_ms, current_step, sensor_type, result_feature))
+            self.file_writer.write("{}{},step_{},{},{}\n".format(current_time_s, current_time_ms, current_step, sensor_type, result_gesture))
         else:
             print("no permission to write")

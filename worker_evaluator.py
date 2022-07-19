@@ -1,7 +1,5 @@
 # worker_evaluator.py
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
-from cv2 import fastNlMeansDenoising
-from numpy import average
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -12,17 +10,17 @@ class WorkerEvaluator(QObject):
     evaluation_result = pyqtSignal(bool, bool, str, int)
 
     expert_amount_dict = {
-        'step_1_feature_1': 6, 'step_1_feature_2': 12, 'step_1_feature_3': 2,
-        'step_2_feature_1': 6, 'step_2_feature_2': 2, 'step_2_feature_3': 12,
-        'step_3_feature_1': 6, 'step_3_feature_2': 14, 'step_3_feature_3': 0,
-        'step_4_feature_1': 4, 'step_4_feature_2': 16, 'step_4_feature_3': 0
+        'step_1_gesture_1': 6, 'step_1_gesture_2': 12, 'step_1_gesture_3': 2,
+        'step_2_gesture_1': 6, 'step_2_gesture_2': 2, 'step_2_gesture_3': 12,
+        'step_3_gesture_1': 6, 'step_3_gesture_2': 14, 'step_3_gesture_3': 0,
+        'step_4_gesture_1': 4, 'step_4_gesture_2': 16, 'step_4_gesture_3': 0
     }
 
     expert_ratio_dict = {
-        'step_1_feature_1': 0.3, 'step_1_feature_2': 0.6, 'step_1_feature_3': 0.1,
-        'step_2_feature_1': 0.3, 'step_2_feature_2': 0.1, 'step_2_feature_3': 0.6,
-        'step_3_feature_1': 0.3, 'step_3_feature_2': 0.7, 'step_3_feature_3': 0,
-        'step_4_feature_1': 0.2, 'step_4_feature_2': 0.8, 'step_4_feature_3': 0
+        'step_1_gesture_1': 0.3, 'step_1_gesture_2': 0.6, 'step_1_gesture_3': 0.1,
+        'step_2_gesture_1': 0.3, 'step_2_gesture_2': 0.1, 'step_2_gesture_3': 0.6,
+        'step_3_gesture_1': 0.3, 'step_3_gesture_2': 0.7, 'step_3_gesture_3': 0,
+        'step_4_gesture_1': 0.2, 'step_4_gesture_2': 0.8, 'step_4_gesture_3': 0
     }
 
     @pyqtSlot()
@@ -45,7 +43,7 @@ class WorkerEvaluator(QObject):
             if archive_file_name:
                 print('archive_file_name is: ', archive_file_name)
                 # load data to process
-                column_names = ['timestamp', 'step', 'sensor_type', 'result_feature']
+                column_names = ['timestamp', 'step', 'sensor_type', 'recognized_gesture']
                 df = pd.read_csv(archive_file_name, header=None, names=column_names)
                 df = df.dropna()
                 # filter data frame for each step
@@ -83,7 +81,7 @@ class WorkerEvaluator(QObject):
         # df_motion = None
         df_position_amount = [0, 0, 0]
         amount_difference = [0, 0, 0]
-        # feature_ratio = [0, 0, 0]
+        # gesture_ratio = [0, 0, 0]
         # ratio_difference = [0, 0, 0]
         # df_motion_amount = [0, 0]
         try:
@@ -99,15 +97,16 @@ class WorkerEvaluator(QObject):
             # creating image, count plot
             plt.figure()
             sns.set(style='whitegrid', palette='muted', font_scale=1.5)
-            sns_count_plot = sns.countplot(x='recognized gestures',
-                                    data=df_position,
-                                    order=df_position.result_feature.value_counts().index)
+            sns_count_plot = sns.countplot(data=df_position)
+            # sns_count_plot = sns.countplot(x='recognized_gesture',
+            #                         data=df_position,
+            #                         order=df_position.recognized_gesture.value_counts().index)
             sns_count_plot.figure.savefig(f'records/myfig_2_step_{step_number}.png')
-            # feature 1, 2, 3
+            # gesture 1, 2, 3
             for index in range(3):
                 try:
                     # define data
-                    df_position_amount[index] = df_position[df_position['result_feature'] == index].shape[0]
+                    df_position_amount[index] = df_position[df_position['recognized_gesture'] == index].shape[0]
                 except ValueError:
                     print(ValueError)
                     print(f'reaching point - error encountered finding position amount: {index}')
@@ -125,7 +124,7 @@ class WorkerEvaluator(QObject):
             sum = df_position_amount[0] + df_position_amount[1] + df_position_amount[2]
             if sum != 0:
                 for index in range(3):
-                    amount_difference[index] = df_position_amount[index] - self.expert_amount_dict[f'step_{step_number}_feature_{index+1}']
+                    amount_difference[index] = df_position_amount[index] - self.expert_amount_dict[f'step_{step_number}_gesture_{index+1}']
                 # calculation of score_value
                 if abs(amount_difference[0]) > 4 or abs(amount_difference[1]) > 4 or abs(amount_difference[2]) > 4:
                     qualitative_result = False
@@ -144,8 +143,8 @@ class WorkerEvaluator(QObject):
                 success_flag = False
         # check df_motion
         # if not df_motion.empty:
-        #     df_motion_amount[0] = df_motion[df_motion['result_feature'] >= 1].shape[0]
-        #     df_motion_amount[1] = df_motion[df_motion['result_feature'] < 1].shape[0]
+        #     df_motion_amount[0] = df_motion[df_motion['result_gesture'] >= 1].shape[0]
+        #     df_motion_amount[1] = df_motion[df_motion['result_gesture'] < 1].shape[0]
         #     # define data
         #     # data = [df_motion_dynamic.shape[0], df_motion_static.shape[0]]
         #     labels = ['cutting', 'not cutting']
