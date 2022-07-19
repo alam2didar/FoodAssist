@@ -36,19 +36,24 @@ class WorkerRecorder(QObject):
         self.disable_writing()
         # close file writer before archiving
         self.close_file()
-        try:
-            # archive - renaming file
+        if os.path.exists(self.current_csv_name):
+            # archive - renaming csv file
             archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
             archive_csv_name = "records/record_{}.csv".format(archive_time)
             os.rename(self.current_csv_name, archive_csv_name)
             print("archived successfully")
-            # send signal to create new
-            self.archive_finished.emit()
-        except FileNotFoundError:
-            print("warning - csv file not found")
-            archive_csv_name = None
-            # send signal to create new
-            self.archive_finished.emit()
+        else:
+            print("csv file does not exist")
+        for step_number in range(1, 5):
+            for fig_number in range(1, 3):
+                fig_name = f'records/myfig_{fig_number}_step_{step_number}.png'
+                # removing png file
+                if os.path.exists(fig_name):
+                    os.remove(fig_name)
+                else:
+                    print("png file does not exist")
+        # send signal archive_finished
+        self.archive_finished.emit()
         return archive_csv_name
 
     @pyqtSlot()
