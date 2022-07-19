@@ -1,4 +1,4 @@
-import datetime
+# import datetime
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 import cv2
 import numpy as np
@@ -38,8 +38,8 @@ class WorkerDetection(QObject):
             
             font = cv2.FONT_HERSHEY_PLAIN
             colors = np.random.uniform(0, 255, size=(100, 3))
-            record_timestamp = datetime.datetime.now().strftime("%y%m%d%H%M%S")
-            record_camera_view = cv2.VideoWriter(f'camera_view_{record_timestamp}.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 4, (1920, 1080))
+            # record_timestamp = datetime.datetime.now().strftime("%y%m%d%H%M%S")
+            # record_camera_view = cv2.VideoWriter(f'camera_view_{record_timestamp}.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 4, (1920, 1080))
             while True:
                 print('Capturing camera..')
                 # get frames from depth camera and crop
@@ -108,13 +108,13 @@ class WorkerDetection(QObject):
                     self.detectionParams.emit(0, 0, 0, 0, 0)
                 
                 # record camera view
-                record_camera_view.write(img_original)
-                cv2.imshow('Detection Window', img_original)
-                key = cv2.waitKey(1)
-                if key==27:
-                    break
+            #     record_camera_view.write(img_original)
+            #     cv2.imshow('Detection Window', img_original)
+            #     key = cv2.waitKey(1)
+            #     if key==27:
+            #         break
 
-            cv2.destroyAllWindows()
+            # cv2.destroyAllWindows()
 
 
         # finish upon breaking out of loop
