@@ -1,5 +1,6 @@
 # worker_evaluator.py
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
+import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -27,7 +28,19 @@ class WorkerEvaluator(QObject):
     def first_delay(self):
         # slow down to adapt to UI
         time.sleep(0.2)
+        self.remove_png_files()
         self.first_delay_reached.emit()
+
+    @pyqtSlot()
+    def remove_png_files(self):
+        for step_number in range(1, 5):
+            for fig_number in range(1, 3):
+                fig_name = f'records/myfig_{fig_number}_step_{step_number}.png'
+                # removing png file
+                if os.path.exists(fig_name):
+                    os.remove(fig_name)
+                else:
+                    print("png file does not exist")
 
     @pyqtSlot()
     def evaluate(self, archive_file_name, evaluation_flag):
