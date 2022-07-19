@@ -919,13 +919,17 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_view.clicked.connect(self.button_view_clicked)
+    # disable buttons
+    self.button_restart.setEnabled(False)
+    self.button_exit.setEnabled(False)
+    self.button_view.setEnabled(False)
+    self.button_view.setHidden(True)
     self.widget_xp.setHidden(True)
     self.widget_score.setHidden(True)
     self.label_text_1.setHidden(False)
     self.label_text_2.setHidden(False)
     self.label_text_1.setText("Congratulation, you have completed all the steps!")
     self.label_text_2.setText("Analyzing your performance...")
-    self.button_view.setHidden(True)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -965,10 +969,14 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.button_view.click()
 
   def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps, score_percent):
+    # enable buttons
+    self.button_restart.setEnabled(True)
+    self.button_exit.setEnabled(True)
     # show result
     if success_flag:
       print("reaching point - evaluation successful")
       self.button_view.setHidden(False)
+      self.button_view.setEnabled(True)
       if qualitative_result:
         self.label_text_1.setText("Congratualation! You performed almost like an expert.")
       else:
