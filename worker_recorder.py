@@ -33,7 +33,6 @@ class WorkerRecorder(QObject):
 
     @pyqtSlot()
     def archive_old(self):
-        archive_csv_name = None
         self.disable_writing()
         # close file writer before archiving
         self.close_file()
@@ -51,7 +50,7 @@ class WorkerRecorder(QObject):
             print("csv file does not exist")
         # send signal archive_finished
         self.archive_finished.emit()
-        return archive_csv_name
+        return self.archive_csv_name
 
     @pyqtSlot()
     def create_new(self):
