@@ -991,7 +991,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     else:
       print("reaching point - evaluation not successful")
       self.button_view.setHidden(True)
-      self.label_text_1.setText("Sorry, we weren't able to process your data, would you like to connect mobile app and start again?")
+      self.label_text_1.setText("Sorry, we weren't able to process your data, please connect mobile app and restart.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
 
