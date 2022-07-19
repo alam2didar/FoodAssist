@@ -96,8 +96,9 @@ class WorkerEvaluator(QObject):
         if not df_position.empty:
             # creating image, count plot
             plt.figure()
+            plt.title('How many times did you perform each gesture?')
             sns.set(style='whitegrid', palette='muted', font_scale=1.5)
-            sns_count_plot = sns.countplot(data=df_position)
+            sns_count_plot = sns.countplot(x='recognized_gesture', data=df_position)
             # sns_count_plot = sns.countplot(x='recognized_gesture',
             #                         data=df_position,
             #                         order=df_position.recognized_gesture.value_counts().index)
