@@ -44,6 +44,14 @@ class WorkerEvaluator(QObject):
                     print("png file does not exist")
 
     @pyqtSlot()
+    def remove_csv_file(self, csv_name):
+        # removing png file
+        if os.path.exists(csv_name):
+            os.remove(csv_name)
+        else:
+            print("csv file does not exist")
+
+    @pyqtSlot()
     def evaluate(self, archive_file_name, evaluation_flag):
         success_flag = False
         success_flag_dict = {'step_1': False, 'step_2': False, 'step_3': False, 'step_4': False}

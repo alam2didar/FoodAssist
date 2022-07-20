@@ -1006,13 +1006,14 @@ class Tutorial_Ends_UI(qtw.QWidget):
 
   # check if button clicked
   def button_view_clicked(self):
+    # clean up trash
+    self.obj_evaluator.remove_csv_file(self.archive_csv_name)
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
     self.result_step1 = Result_Step1_UI(self.my_initializer)
     select_screen_and_show(self.result_step1)
     self.close()
-
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
