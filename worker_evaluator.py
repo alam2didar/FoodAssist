@@ -165,7 +165,7 @@ class WorkerEvaluator(QObject):
                 elif abs(amount_difference[0]) > 2 or abs(amount_difference[1]) > 2 or abs(amount_difference[2]) > 2:
                     # qualitative_result = True
                     score_value = 0.8
-                elif amount_difference[0] is not '' or amount_difference[1] is not '' or amount_difference[2] is not '':
+                elif amount_difference[0] != '' or amount_difference[1] != '' or amount_difference[2] != '':
                     # qualitative_result = True
                     score_value = 0.9
                 success_flag = True
