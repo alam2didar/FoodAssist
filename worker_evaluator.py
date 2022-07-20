@@ -12,17 +12,17 @@ class WorkerEvaluator(QObject):
     evaluation_result = pyqtSignal(bool, dict, list, int)
 
     expert_amount_dict = {
-        'step 1 gesture 1': 6, 'step 1 gesture 2': 12, 'step 1 gesture 3': 2,
-        'step 2 gesture 1': 6, 'step 2 gesture 2': 2, 'step 2 gesture 3': 12,
-        'step 3 gesture 1': 6, 'step 3 gesture 2': 14, 'step 3 gesture 3': 0,
-        'step 4 gesture 1': 4, 'step 4 gesture 2': 16, 'step 4 gesture 3': 0
+        'step_1_gesture_1': 6, 'step_1_gesture_2': 12, 'step_1_gesture_3': 2,
+        'step_2_gesture_1': 6, 'step_2_gesture_2': 2, 'step_2_gesture_3': 12,
+        'step_3_gesture_1': 6, 'step_3_gesture_2': 14, 'step_3_gesture_3': 0,
+        'step_4_gesture_1': 4, 'step_4_gesture_2': 16, 'step_4_gesture_3': 0
     }
 
     expert_ratio_dict = {
-        'step 1 gesture 1': 0.3, 'step 1 gesture 2': 0.6, 'step 1 gesture 3': 0.1,
-        'step 2 gesture 1': 0.3, 'step 2 gesture 2': 0.1, 'step 2 gesture 3': 0.6,
-        'step 3 gesture 1': 0.3, 'step 3 gesture 2': 0.7, 'step 3 gesture 3': 0,
-        'step 4 gesture 1': 0.2, 'step 4 gesture 2': 0.8, 'step 4 gesture 3': 0
+        'step_1_gesture_1': 0.3, 'step_1_gesture_2': 0.6, 'step_1_gesture_3': 0.1,
+        'step_2_gesture_1': 0.3, 'step_2_gesture_2': 0.1, 'step_2_gesture_3': 0.6,
+        'step_3_gesture_1': 0.3, 'step_3_gesture_2': 0.7, 'step_3_gesture_3': 0,
+        'step_4_gesture_1': 0.2, 'step_4_gesture_2': 0.8, 'step_4_gesture_3': 0
     }
 
     @pyqtSlot()
@@ -46,12 +46,12 @@ class WorkerEvaluator(QObject):
     @pyqtSlot()
     def evaluate(self, archive_file_name, evaluation_flag):
         success_flag = False
-        success_flag_dict = {'step 1': False, 'step 2': False, 'step 3': False, 'step 4': False}
-        difference_dict ={'step 1': [-1, -1, -1], 'step 2': [-1, -1, -1], 'step 3': [-1, -1, -1], 'step 4': [-1, -1, -1]}
+        success_flag_dict = {'step_1': False, 'step_2': False, 'step_3': False, 'step_4': False}
+        difference_dict ={'step_1': [-1, -1, -1], 'step_2': [-1, -1, -1], 'step_3': [-1, -1, -1], 'step_4': [-1, -1, -1]}
         # qualitative_result = False
         # qualitative_result_dict = {'step 1': False, 'step 2': False, 'step 3': False, 'step 4': False}
         # troubled_steps = [-1, -1, -1]
-        score_dict = {'step 1': 0, 'step 2': 0, 'step 3': 0, 'step 4': 0}
+        score_dict = {'step_1': 0, 'step_2': 0, 'step_3': 0, 'step_4': 0}
         score_sorted_list = None
         score_percent = 0
         # True to be good match, False for not as good
@@ -63,22 +63,17 @@ class WorkerEvaluator(QObject):
                 df = pd.read_csv(archive_file_name, header=None, names=column_names)
                 df = df.dropna()
                 # filter data frame for each step
-                df_step = None
-                for index_no in range(1,5):
-                    df_step[index_no] = df[df['step'] == f'step {index_no}']
-                # df_step_1 = df[df['step'] == 'step 1']
-                # df_step_2 = df[df['step'] == 'step 2']
-                # df_step_3 = df[df['step'] == 'step 3']
-                # df_step_4 = df[df['step'] == 'step 4']
+                df_step_1 = df[df['step'] == 'step_1']
+                df_step_2 = df[df['step'] == 'step_2']
+                df_step_3 = df[df['step'] == 'step_3']
+                df_step_4 = df[df['step'] == 'step_4']
                 # perform the same data processing on each step dataset
-                for index_no in range(1,5):
-                    success_flag_dict[f'step {index_no}'], difference_dict[f'step {index_no}'], score_dict[f'step {index_no}'] = self.process_data_frame(df_step[index_no], index_no)
-                # success_flag_dict['step 1'], qualitative_result_dict['step 1'], score_dict['step 1'] = self.process_data_frame(df_step_1, 1)
-                # success_flag_dict['step 2'], qualitative_result_dict['step 2'], score_dict['step 2'] = self.process_data_frame(df_step_2, 2)
-                # success_flag_dict['step 3'], qualitative_result_dict['step 3'], score_dict['step 3'] = self.process_data_frame(df_step_3, 3)
-                # success_flag_dict['step 4'], qualitative_result_dict['step 4'], score_dict['step 4'] = self.process_data_frame(df_step_4, 4)
+                success_flag_dict['step_1'], difference_dict['step_1'], score_dict['step_1'] = self.process_data_frame(df_step_1, 1)
+                success_flag_dict['step_2'], difference_dict['step_2'], score_dict['step_2'] = self.process_data_frame(df_step_2, 2)
+                success_flag_dict['step_3'], difference_dict['step_3'], score_dict['step_3'] = self.process_data_frame(df_step_3, 3)
+                success_flag_dict['step_4'], difference_dict['step_4'], score_dict['step_4'] = self.process_data_frame(df_step_4, 4)
                 # aggregate success_flag from each step
-                success_flag = success_flag_dict['step 1'] or success_flag_dict['step 2'] or success_flag_dict['step 3'] or success_flag_dict['step 4']
+                success_flag = success_flag_dict['step_1'] or success_flag_dict['step_2'] or success_flag_dict['step_3'] or success_flag_dict['step_4']
                 # use score_value to find out the ranking - to do
                 # name = sorted_score_dict[0][0]
                 # score = sorted_score_dict[0][1]
@@ -91,7 +86,7 @@ class WorkerEvaluator(QObject):
                 #         troubled_steps = f'{false_keys[0]}'
                 #     elif len(false_keys) > 1:
                 #         troubled_steps = f'{", ".join(false_keys[:-1])} and {false_keys[-1]}'
-                score_percent = int(100*(score_dict['step 1'] + score_dict['step 2'] + score_dict['step 3'] + score_dict['step 4'])/4)
+                score_percent = int(100*(score_dict['step_1'] + score_dict['step_2'] + score_dict['step_3'] + score_dict['step_4'])/4)
             else:
                 print('archive_file_name is none')
                 success_flag = False
@@ -151,7 +146,7 @@ class WorkerEvaluator(QObject):
             sum = df_position_amount[0] + df_position_amount[1] + df_position_amount[2]
             if sum != 0:
                 for index in range(3):
-                    amount_difference[index] = df_position_amount[index] - self.expert_amount_dict[f'step {step_number} gesture {index+1}']
+                    amount_difference[index] = df_position_amount[index] - self.expert_amount_dict[f'step_{step_number}_gesture_{index+1}']
                 # calculation of score_value
                 if abs(amount_difference[0]) > 4 or abs(amount_difference[1]) > 4 or abs(amount_difference[2]) > 4:
                     # qualitative_result = False
