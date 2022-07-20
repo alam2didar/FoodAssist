@@ -49,13 +49,13 @@ class WorkerWebsocket(QObject):
                             if temp_max > 0.5:
                                 # pick out result_feature
                                 if prob_0 == temp_max:
-                                    result_feature = 0
+                                    recognized_gesture = 1
                                 elif prob_1 == temp_max:
-                                    result_feature = 1
+                                    recognized_gesture = 2
                                 elif prob_2 == temp_max:
-                                    result_feature = 2
-                                # emit result_type, result_feature (emitting gesture recognition from smart watch)
-                                self.websocket_message.emit(sensor_type, result_feature)
+                                    recognized_gesture = 3
+                                # emit result_type, recognized_gesture (emitting gesture recognition from smart watch)
+                                self.websocket_message.emit(sensor_type, recognized_gesture)
                             else:
                                 # no matching probability over 0.5 found
                                 print("max value below 0.5: ", temp_max)
