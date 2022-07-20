@@ -937,7 +937,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # close file
     self.my_initializer.obj_recorder.close_file()
     # archive file
-    self.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
+    self.my_initializer.obj_recorder.archive_old()
+    # reset score_dict, score_sorted_list, score_percent
+    self.my_initializer.score_dict = None
+    self.my_initializer.score_sorted_list = None
+    self.my_initializer.score_percent = None
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -945,12 +949,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # create worker evaluator
     create_worker_evaluator(self)
 
-
   def onFirstDelayReached(self):
     # hide labels upon delay reached
     self.label_party.setHidden(True)
     # debug - setting evaluation_flag to True
-    self.obj_evaluator.evaluate(self.archive_csv_name, True)
+    self.obj_evaluator.evaluate(self.my_initializer.obj_recorder.archive_csv_name, True)
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -968,7 +971,12 @@ class Tutorial_Ends_UI(qtw.QWidget):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_view.click()
 
-  def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps, score_percent):
+  # def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps, score_percent):
+  def onEvaluationResult(self, success_flag, score_dict, score_sorted_list, score_percent):
+    # save evaluation result in my_initializer
+    self.my_initializer.score_dict = score_dict
+    self.my_initializer.score_sorted_list = score_sorted_list
+    self.my_initializer.score_percent = score_percent
     # enable buttons
     self.button_restart.setEnabled(True)
     self.button_exit.setEnabled(True)
@@ -977,10 +985,15 @@ class Tutorial_Ends_UI(qtw.QWidget):
       print("reaching point - evaluation successful")
       self.button_view.setHidden(False)
       self.button_view.setEnabled(True)
-      if qualitative_result:
-        self.label_text_1.setText("Congratualation! You performed almost like an expert.")
+      # if qualitative_result:
+      #   self.label_text_1.setText("Congratualation! You performed almost like an expert.")
+      # else:
+      #   self.label_text_1.setText(f"Your seemed to have most trouble in the following steps:\n {troubled_steps}")
+      if score_percent >= 80:
+        self.label_text_1.setText("Congratulation! You performed almost like an expert.")
       else:
-        self.label_text_1.setText(f"Your seemed to have trouble in the following steps:\n {troubled_steps}")
+        # name of the step for the lowest score
+        self.label_text_1.setText(f"Your seem to need more practice in {score_sorted_list[3][0]}.")
       self.label_text_2.setText("Click the view button to see more details.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
@@ -991,7 +1004,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     else:
       print("reaching point - evaluation not successful")
       self.button_view.setHidden(True)
-      self.label_text_1.setText("Sorry, we weren't able to process your data, please connect mobile app and restart.")
+      self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
 
