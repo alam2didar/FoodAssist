@@ -127,7 +127,7 @@ class WorkerEvaluator(QObject):
             plt.figure()
             # count plot
             plt.title('How many times did you perform each gesture?')
-            sns.set(style='whitegrid', palette='muted', font_scale=1.5)
+            sns.set(style='whitegrid', palette='muted', font_scale=1)
             sns_count_plot = sns.countplot(x='recognized_gesture', data=df_position)
             # sns_count_plot = sns.countplot(x='recognized_gesture',
             #                         data=df_position,
@@ -149,7 +149,7 @@ class WorkerEvaluator(QObject):
             plt.figure()
             # pie chart
             plt.title('How much percent did you perform each gesture?')
-            sns.set(style='whitegrid', palette='muted', font_scale=1.5)
+            sns.set(style='whitegrid', palette='muted', font_scale=1)
             plt.pie(df_position_amount, labels = labels, colors = colors, autopct='%.0f%%')
             plt.savefig(f'records/myfig_1_step_{step_number}.png')
             # percentage
