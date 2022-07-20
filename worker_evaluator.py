@@ -94,7 +94,7 @@ class WorkerEvaluator(QObject):
                 #         troubled_steps = f'{false_keys[0]}'
                 #     elif len(false_keys) > 1:
                 #         troubled_steps = f'{", ".join(false_keys[:-1])} and {false_keys[-1]}'
-                score_percent = int(100*(score_dict['step_1'] + score_dict['step_2'] + score_dict['step_3'] + score_dict['step_4'])/4)
+                score_percent = int((score_dict['step_1'] + score_dict['step_2'] + score_dict['step_3'] + score_dict['step_4'])/4)
             else:
                 print('archive_file_name is none')
                 success_flag = False
@@ -123,8 +123,9 @@ class WorkerEvaluator(QObject):
             success_flag = False
         # check df_position
         if not df_position.empty:
-            # creating image, count plot
+            # creating image
             plt.figure()
+            # count plot
             plt.title('How many times did you perform each gesture?')
             sns.set(style='whitegrid', palette='muted', font_scale=1.5)
             sns_count_plot = sns.countplot(x='recognized_gesture', data=df_position)
@@ -144,10 +145,11 @@ class WorkerEvaluator(QObject):
             labels = ['gesture 1', 'gesture 2', 'gesture 3']
             # define Seaborn color palette to use
             colors = sns.color_palette('pastel')[0:5]
-            # creating image, label_new_plot_1
+            # creating image
             plt.figure()
-            # create pie chart
+            # pie chart
             plt.title('How much percent did you perform each gesture?')
+            sns.set(style='whitegrid', palette='muted', font_scale=1.5)
             plt.pie(df_position_amount, labels = labels, colors = colors, autopct='%.0f%%')
             plt.savefig(f'records/myfig_1_step_{step_number}.png')
             # percentage
@@ -158,16 +160,16 @@ class WorkerEvaluator(QObject):
                 # calculation of score_value
                 if abs(amount_difference[0]) > 4 or abs(amount_difference[1]) > 4 or abs(amount_difference[2]) > 4:
                     # qualitative_result = False
-                    score_value = 0.6
+                    score_value = 60
                 elif abs(amount_difference[0]) > 3 or abs(amount_difference[1]) > 3 or abs(amount_difference[2]) > 3:
                     # qualitative_result = False
-                    score_value = 0.7
+                    score_value = 70
                 elif abs(amount_difference[0]) > 2 or abs(amount_difference[1]) > 2 or abs(amount_difference[2]) > 2:
                     # qualitative_result = True
-                    score_value = 0.8
+                    score_value = 80
                 elif amount_difference[0] != '' or amount_difference[1] != '' or amount_difference[2] != '':
                     # qualitative_result = True
-                    score_value = 0.9
+                    score_value = 90
                 success_flag = True
             else:
                 success_flag = False
