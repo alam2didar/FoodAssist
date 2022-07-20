@@ -933,8 +933,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.button_view.click()
 
   # def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps, score_percent):
-  def onEvaluationResult(self, success_flag, score_dict, score_sorted_list, score_percent):
+  def onEvaluationResult(self, success_flag, difference_dict, score_dict, score_sorted_list, score_percent):
     # save evaluation result in my_initializer
+    self.my_initializer.difference_dict = difference_dict
     self.my_initializer.score_dict = score_dict
     self.my_initializer.score_sorted_list = score_sorted_list
     self.my_initializer.score_percent = score_percent
@@ -1060,6 +1061,31 @@ class Result_Step1_UI(qtw.QWidget):
       self.button_nav_left.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_nav_right.click()
+
+
+########## Result Step 1 Percent UI class ##########
+class Result_Step1_Percent_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result_step1_percent.ui', self)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_percent_result after my_initializer is passed
+    show_evaluation_percent_result(self, 1)
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1173,6 +1199,31 @@ class Result_Step2_UI(qtw.QWidget):
       self.button_nav_left.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_nav_right.click()
+
+
+########## Result Step 2 Percent UI class ##########
+class Result_Step2_Percent_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result_step2_percent.ui', self)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_percent_result after my_initializer is passed
+    show_evaluation_percent_result(self, 2)
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step2_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1286,6 +1337,32 @@ class Result_Step3_UI(qtw.QWidget):
       self.button_nav_left.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_nav_right.click()
+
+
+
+########## Result Step 3 Percent UI class ##########
+class Result_Step3_Percent_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result_step3_percent.ui', self)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_percent_result after my_initializer is passed
+    show_evaluation_percent_result(self, 3)
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step3_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1399,6 +1476,31 @@ class Result_Step4_UI(qtw.QWidget):
       self.button_nav_left.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_nav_right.click()
+
+
+########## Result Step 4 Percent UI class ##########
+class Result_Step4_Percent_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi('food_assist_gui_result_step4_percent.ui', self)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_percent_result after my_initializer is passed
+    show_evaluation_percent_result(self, 4)
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1443,6 +1545,7 @@ class Result_Step4_UI(qtw.QWidget):
       self.button_nav_left.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_nav_right.click()
+
 
 ########## Menu Default UI class ##########
 class Menu_Default_UI(qtw.QWidget):
@@ -1580,19 +1683,69 @@ def create_worker_evaluator(self):
   # 6 - Start the thread
   self.thread_evaluator.start()
 
-# move the app to the secod screen (projector screen)
 def show_evaluation_result(self, step_number):
   self.button_restart.clicked.connect(self.restart_button_pressed)
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-  self.label_plot_1_expert.setPixmap(qtg.QPixmap(f'records/expertfig_1_step_{step_number}.png'))
-  self.label_plot_2_expert.setPixmap(qtg.QPixmap(f'records/expertfig_2_step_{step_number}.png'))
-  self.label_plot_1_user.setPixmap(qtg.QPixmap(f'records/myfig_1_step_{step_number}.png'))
-  self.label_plot_2_user.setPixmap(qtg.QPixmap(f'records/myfig_2_step_{step_number}.png'))
-  self.label_text_1.setText(f"Step {step_number}")
-  self.label_text_2.setHidden(True)
   self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
+  self.label_plot_1_expert.setPixmap(qtg.QPixmap(f'records/plot_1_expert_step_{step_number}.png'))
+  self.label_plot_1_user.setPixmap(qtg.QPixmap(f'records/plot_1_user_step_{step_number}.png'))
+  text_more_less = [None, None, None]
+  difference = [None, None, None]
+  for index in range(3):
+    difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
+  if difference[0] is None or difference[1] is None or difference[2] is None:
+    self.label_trouble.setText(f"You didn't perform any gesture in this step.")
+    self.label_analysis_1.setHidden(True)
+    self.label_analysis_2.setHidden(True)
+    self.label_analysis_3.setHidden(True)
+  else:
+    for index in range(3):
+      if difference[index] > 0:
+        text_more_less[index] = 'more'
+      else:
+        text_more_less[index] = 'less'
+        difference[index] = -difference[index]
+    # find out worst gesture
+    gesture_no = 1
+    if difference[1] > difference[0]:
+      gesture_no = 2
+    if difference[2] > difference[1]:
+      gesture_no = 3
+    self.label_trouble.setText(f"most troubled: gesture {gesture_no}")
+    self.label_analysis_1.setText(f"gesture 1: {difference[0]} time(s) {text_more_less[0]} than the expert")
+    self.label_analysis_2.setText(f"gesture 2: {difference[1]} time(s) {text_more_less[1]} than the expert")
+    self.label_analysis_3.setText(f"gesture 3: {difference[2]} time(s) {text_more_less[2]} than the expert")
+
+
+def show_evaluation_percent_result(self, step_number):
+  self.button_restart.clicked.connect(self.restart_button_pressed)
+  self.button_exit.clicked.connect(self.exit_button_pressed)
+  self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
+  self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
+  self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
+  self.label_plot_2_expert.setPixmap(qtg.QPixmap(f'records/plot_2_expert_step_{step_number}.png'))
+  self.label_plot_2_user.setPixmap(qtg.QPixmap(f'records/plot_2_user_step_{step_number}.png'))
+  difference = [None, None, None]
+  for index in range(3):
+    if self.my_initializer.difference_dict[f'step_{step_number}'][index] is not None:
+      difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
+  if difference[0] is None or difference[1] is None or difference[2] is None:
+    self.label_analysis_1.setHidden(True)
+    self.label_trouble.setText(f"You didn't perform any gesture in this step.")
+  else:
+    for index in range(3):
+      difference[index] = abs(difference[index])
+    # find out worst gesture
+    gesture_no = 1
+    if difference[1] > difference[0]:
+      gesture_no = 2
+    if difference[2] > difference[1]:
+      gesture_no = 3
+    self.label_trouble.setHidden(True)
+    self.label_analysis_1.setText(f"You need to give more practice gesture {gesture_no} in this step.")
+
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
