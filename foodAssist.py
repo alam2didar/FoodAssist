@@ -994,7 +994,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
       # to do - show score percentage
-      self.label_text_4.setText(f"{score_percent}%")
+      self.label_text_score.setText(f"{score_percent}%")
       self.widget_xp.setHidden(False)
       self.widget_score.setHidden(False)
     else:
@@ -1041,11 +1041,12 @@ class Result_Step1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step1.ui', self)
-    show_evaluation_result(self, 1)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 1)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -1109,11 +1110,12 @@ class Result_Step2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step2.ui', self)
-    show_evaluation_result(self, 2)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 2)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -1177,11 +1179,12 @@ class Result_Step3_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step3.ui', self)
-    show_evaluation_result(self, 3)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 3)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -1245,11 +1248,12 @@ class Result_Step4_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_result_step4.ui', self)
-    show_evaluation_result(self, 4)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 4)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -1465,6 +1469,7 @@ def show_evaluation_result(self, step_number):
   self.label_plot_2_user.setPixmap(qtg.QPixmap(f'records/myfig_2_step_{step_number}.png'))
   self.label_text_1.setText(f"Step {step_number}")
   self.label_text_2.setHidden(True)
+  self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):

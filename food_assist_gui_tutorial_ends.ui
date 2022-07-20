@@ -357,7 +357,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_text_3">
+      <widget class="QLabel" name="label_text_xp">
        <property name="font">
         <font>
          <pointsize>48</pointsize>
@@ -425,7 +425,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_text_4">
+      <widget class="QLabel" name="label_text_score">
        <property name="font">
         <font>
          <pointsize>48</pointsize>
