@@ -45,11 +45,8 @@ class FoodAssist(qtw.QWidget):
   def button_pressed(self):
     # duplicated but required when interacting with physical mouse
     self.obj.deactivate()
-    self.placing_meat_ui = Placing_Meat_UI(self.my_initializer)
-    # self.placing_meat_ui.show()
-    # self.placing_meat_ui.showFullScreen()
-    select_screen_and_show(self.placing_meat_ui)
-    # self.placing_meat_ui.get_current_step()
+    self.target_ui = Placing_Meat_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   # check if phone and watch are connected
@@ -105,10 +102,8 @@ class Placing_Meat_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def skip_step_detection(self):
     self.obj.deactivate()
-    self.entry_step_1_ui = Entry_Step_1_UI(self.my_initializer)
-    # self.entry_step_1_ui.show()
-    # self.entry_step_1_ui.showFullScreen()
-    select_screen_and_show(self.entry_step_1_ui)
+    self.target_ui = Entry_Step_1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
   
   @qtc.pyqtSlot()
@@ -117,10 +112,8 @@ class Placing_Meat_UI(qtw.QWidget):
     detected_step = 1
     if detected_step == 1:
       self.obj.deactivate()
-      self.entry_step_1_ui = Entry_Step_1_UI(self.my_initializer)
-      # self.entry_step_1_ui.show()
-      # self.entry_step_1_ui.showFullScreen()
-      select_screen_and_show(self.entry_step_1_ui)
+      self.target_ui = Entry_Step_1_UI(self.my_initializer)
+      select_screen_and_show(self.target_ui)
       self.close()
 
   def drawDetectionBox(self, x, y, width, height, step):
@@ -165,19 +158,15 @@ class Entry_Step_1_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.step_1_ui = Step_1_UI(self.my_initializer)
-    # self.step_1_ui.show()
-    # self.step_1_ui.showFullScreen()
-    select_screen_and_show(self.step_1_ui)
+    self.target_ui = Step_1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
 class Entry_Step_2_UI(qtw.QWidget):
@@ -212,19 +201,15 @@ class Entry_Step_2_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.step_2_ui = Step_2_UI(self.my_initializer)
-    # self.step_2_ui.show()
-    # self.step_2_ui.showFullScreen()
-    select_screen_and_show(self.step_2_ui)
+    self.target_ui = Step_2_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
 class Entry_Step_3_UI(qtw.QWidget):
@@ -260,19 +245,15 @@ class Entry_Step_3_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.step_3_ui = Step_3_UI(self.my_initializer)
-    # self.step_3_ui.show()
-    # self.step_3_ui.showFullScreen()
-    select_screen_and_show(self.step_3_ui)
+    self.target_ui = Step_3_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
 class Entry_Step_4_UI(qtw.QWidget):
@@ -308,19 +289,15 @@ class Entry_Step_4_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.step_4_ui = Step_4_UI(self.my_initializer)
-    # self.step_4_ui.show()
-    # self.step_4_ui.showFullScreen()
-    select_screen_and_show(self.step_4_ui)
+    self.target_ui = Step_4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
 ########## Step 1 UI class ##########
@@ -413,20 +390,16 @@ class Step_1_UI(qtw.QWidget):
     # show the appropriate entry step based on the current step
 
     # for manual navgation, call directly respective entry step
-    self.entry_step_2_ui = Entry_Step_2_UI(self.my_initializer)
-    # self.entry_step_2_ui.show()
-    # self.entry_step_2_ui.showFullScreen()
-    select_screen_and_show(self.entry_step_2_ui)
+    self.target_ui = Entry_Step_2_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -567,20 +540,16 @@ class Step_2_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def next_button_pressed(self):
     self.obj.deactivate()
-    self.entry_step_3_ui = Entry_Step_3_UI(self.my_initializer)
-    # self.entry_step_3_ui.show()
-    # self.entry_step_3_ui.showFullScreen()
-    select_screen_and_show(self.entry_step_3_ui)
+    self.target_ui = Entry_Step_3_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -720,20 +689,16 @@ class Step_3_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def next_button_pressed(self):
     self.obj.deactivate()
-    self.entry_step_4_ui = Entry_Step_4_UI(self.my_initializer)
-    # self.entry_step_4_ui.show()
-    # self.entry_step_4_ui.showFullScreen()
-    select_screen_and_show(self.entry_step_4_ui)
+    self.target_ui = Entry_Step_4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -860,20 +825,16 @@ class Step_4_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def next_button_pressed(self):
     self.obj.deactivate()
-    self.tutorial_ends_ui = Tutorial_Ends_UI(self.my_initializer)
-    # self.tutorial_ends_ui.show()
-    # self.tutorial_ends_ui.showFullScreen()
-    select_screen_and_show(self.tutorial_ends_ui)
+    self.target_ui = Tutorial_Ends_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
@@ -1011,28 +972,24 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step1 = Result_Step1_UI(self.my_initializer)
-    select_screen_and_show(self.result_step1)
+    self.target_ui = Result_Step1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.food_assist = FoodAssist(self.my_initializer)
-    # self.food_assist.show()
-    # self.food_assist.showFullScreen()
-    select_screen_and_show(self.food_assist)
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    # self.menu_default_ui.show()
-    # self.menu_default_ui.showFullScreen()
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
 
@@ -1057,8 +1014,8 @@ class Result_Step1_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step4 = Result_Step4_UI(self.my_initializer)
-    select_screen_and_show(self.result_step4)
+    self.target_ui = Result_Step4_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1066,24 +1023,68 @@ class Result_Step1_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step2 = Result_Step2_UI(self.my_initializer)
-    select_screen_and_show(self.result_step2)
+    self.target_ui = Result_Step1_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.food_assist = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.food_assist)
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step2_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   def paintEvent(self, event):
@@ -1126,8 +1127,8 @@ class Result_Step2_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step1 = Result_Step1_UI(self.my_initializer)
-    select_screen_and_show(self.result_step1)
+    self.target_ui = Result_Step1_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1135,24 +1136,68 @@ class Result_Step2_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step3 = Result_Step3_UI(self.my_initializer)
-    select_screen_and_show(self.result_step3)
+    self.target_ui = Result_Step2_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.food_assist = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.food_assist)
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step3_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   def paintEvent(self, event):
@@ -1195,8 +1240,8 @@ class Result_Step3_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step2 = Result_Step2_UI(self.my_initializer)
-    select_screen_and_show(self.result_step2)
+    self.target_ui = Result_Step2_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1204,24 +1249,68 @@ class Result_Step3_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step4 = Result_Step4_UI(self.my_initializer)
-    select_screen_and_show(self.result_step4)
+    self.target_ui = Result_Step3_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.food_assist = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.food_assist)
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   def paintEvent(self, event):
@@ -1264,8 +1353,8 @@ class Result_Step4_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step3 = Result_Step3_UI(self.my_initializer)
-    select_screen_and_show(self.result_step3)
+    self.target_ui = Result_Step3_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
@@ -1273,24 +1362,68 @@ class Result_Step4_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.result_step1 = Result_Step1_UI(self.my_initializer)
-    select_screen_and_show(self.result_step1)
+    self.target_ui = Result_Step4_Percent_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.food_assist = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.food_assist)
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.menu_default_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.menu_default_ui)
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def restart_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   def paintEvent(self, event):
@@ -1355,46 +1488,36 @@ class Menu_Default_UI(qtw.QWidget):
   def restart_button_pressed(self):
     self.my_initializer.obj_recorder.archive_old()
     self.obj.deactivate()
-    self.food_assist = FoodAssist(self.my_initializer)
-    # self.food_assist.show()
-    # self.food_assist.showFullScreen()
-    select_screen_and_show(self.food_assist)
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step1_button_pressed(self):
     self.obj.deactivate()
-    self.step_1_ui = Step_1_UI(self.my_initializer)
-    # self.step_1_ui.show()
-    # self.step_1_ui.showFullScreen()
-    select_screen_and_show(self.step_1_ui)
+    self.target_ui = Step_1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step2_button_pressed(self):
     self.obj.deactivate()
-    self.step_2_ui = Step_2_UI(self.my_initializer)
-    # self.step_2_ui.show()
-    # self.step_2_ui.showFullScreen()
-    select_screen_and_show(self.step_2_ui)
+    self.target_ui = Step_2_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step3_button_pressed(self):
     self.obj.deactivate()
-    self.step_3_ui = Step_3_UI(self.my_initializer)
-    # self.step_3_ui.show()
-    # self.step_3_ui.showFullScreen()
-    select_screen_and_show(self.step_3_ui)
+    self.target_ui = Step_3_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step4_button_pressed(self):
     self.obj.deactivate()
-    self.step_4_ui = Step_4_UI(self.my_initializer)
-    # self.step_4_ui.show()
-    # self.step_4_ui.showFullScreen()
-    select_screen_and_show(self.step_4_ui)
+    self.target_ui = Step_4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
     self.close()
 
 # Helper Functions
@@ -1481,8 +1604,8 @@ def main():
   # initiate app
   app = qtw.QApplication([])
   my_initializer = initializer.Initializer()
-  food_assist = FoodAssist(my_initializer)
-  select_screen_and_show(food_assist)
+  target_ui = FoodAssist(my_initializer)
+  select_screen_and_show(target_ui)
 
   # run the app
   sys.exit(app.exec_())
