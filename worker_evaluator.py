@@ -148,8 +148,8 @@ class WorkerEvaluator(QObject):
             # creating image
             plt.figure()
             # pie chart
-            plt.title('How much percent did you perform each gesture?')
-            # plt.title('How much percent does an expert perform each gesture?')
+            plt.title('Ratio of each gesture performed by you:')
+            # plt.title('Ratio of each gesture performed by an expert:')
             # define Seaborn color palette to use
             colors = sns.color_palette('pastel')[0:5]
             sns.set(style='whitegrid', palette='muted', font_scale=1)

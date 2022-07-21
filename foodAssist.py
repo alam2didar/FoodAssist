@@ -1744,7 +1744,7 @@ def show_evaluation_percent_result(self, step_number):
     if difference[2] > difference[1]:
       gesture_no = 3
     self.label_trouble.setHidden(True)
-    self.label_analysis_1.setText(f"You need to give more practice gesture {gesture_no} in this step.")
+    self.label_analysis_1.setText(f"You need to practice gesture {gesture_no} more in this step.")
 
 
 # move the app to the secod screen (projector screen)
