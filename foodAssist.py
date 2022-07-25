@@ -962,6 +962,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     else:
       print("reaching point - evaluation not successful")
       self.button_view.setHidden(True)
+      self.button_view.setEnabled(False)
       self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
