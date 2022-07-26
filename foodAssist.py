@@ -974,8 +974,8 @@ class Tutorial_Ends_UI(qtw.QWidget):
 
   # check if button clicked
   def button_view_clicked(self):
-    # clean up trash
-    self.obj_evaluator.remove_csv_file(self.archive_csv_name)
+    # keep history - not to clean up trash
+    # self.obj_evaluator.remove_csv_file(self.archive_csv_name)
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
