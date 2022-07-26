@@ -1011,6 +1011,9 @@ class Result_Step1_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 1)
+    # disable left button
+    self.button_nav_left.setHidden(True)
+    self.button_nav_left.setEnabled(False)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -1495,6 +1498,9 @@ class Result_Step4_Percent_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_percent_result after my_initializer is passed
     show_evaluation_percent_result(self, 4)
+    # disable right button
+    self.button_nav_right.setHidden(True)
+    self.button_nav_right.setEnabled(False)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
