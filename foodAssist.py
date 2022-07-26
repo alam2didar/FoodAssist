@@ -961,8 +961,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.widget_score.setHidden(False)
     else:
       print("reaching point - evaluation not successful")
-      self.button_view.setHidden(True)
-      self.button_view.setEnabled(False)
+      self.button_view.setHidden(False)
+      self.button_view.setEnabled(True)
+      # self.button_view.setHidden(True)
+      # self.button_view.setEnabled(False)
       self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
@@ -1585,7 +1587,7 @@ class Menu_Default_UI(qtw.QWidget):
       self.button_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart_0) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_restart.click()
 
   @qtc.pyqtSlot()
