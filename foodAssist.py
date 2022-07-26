@@ -136,6 +136,18 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+
+    # set qmovie as label
+    self.movie_1 = qtg.QMovie('step-gifs/step_1_gesture_1.gif')
+    self.label_required_1.setMovie(self.movie_1)
+    self.movie_1.start()
+    self.movie_2 = qtg.QMovie('step-gifs/step_1_gesture_2.gif')
+    self.label_required_2.setMovie(self.movie_2)
+    self.movie_2.start()
+    self.movie_3 = qtg.QMovie('step-gifs/step_1_gesture_3.gif')
+    self.label_required_3.setMovie(self.movie_3)
+    self.movie_3.start()
+
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -179,6 +191,15 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+
+    # set qmovie as label
+    self.movie_1 = qtg.QMovie('step-gifs/step_2_gesture_1.gif')
+    self.label_required_1.setMovie(self.movie_1)
+    self.movie_1.start()
+    self.movie_2 = qtg.QMovie('step-gifs/step_2_gesture_3.gif')
+    self.label_required_2.setMovie(self.movie_2)
+    self.movie_2.start()
+
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -223,6 +244,15 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+
+    # set qmovie as label
+    self.movie_1 = qtg.QMovie('step-gifs/step_3_gesture_1.gif')
+    self.label_required_1.setMovie(self.movie_1)
+    self.movie_1.start()
+    self.movie_2 = qtg.QMovie('step-gifs/step_3_gesture_2.gif')
+    self.label_required_2.setMovie(self.movie_2)
+    self.movie_2.start()
+
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -267,6 +297,15 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
+
+    # set qmovie as label
+    self.movie_1 = qtg.QMovie('step-gifs/step_4_gesture_1.gif')
+    self.label_required_1.setMovie(self.movie_1)
+    self.movie_1.start()
+    self.movie_2 = qtg.QMovie('step-gifs/step_4_gesture_2.gif')
+    self.label_required_2.setMovie(self.movie_2)
+    self.movie_2.start()
+
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -945,6 +984,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # show result
     if success_flag:
       print("reaching point - evaluation successful")
+      # enable button_view
       self.button_view.setHidden(False)
       self.button_view.setEnabled(True)
       if score_percent >= 80:
@@ -961,15 +1001,20 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.widget_score.setHidden(False)
     else:
       print("reaching point - evaluation not successful")
-      self.button_view.setHidden(True)
+      # disable button_view
+      self.button_view.setHidden(False)
+      self.button_view.setEnabled(True)
+      # debugging - enable button_view
+      # self.button_view.setHidden(True)
+      # self.button_view.setEnabled(False)
       self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
 
   # check if button clicked
   def button_view_clicked(self):
-    # clean up trash
-    self.obj_evaluator.remove_csv_file(self.archive_csv_name)
+    # keep history - not to clean up trash
+    # self.obj_evaluator.remove_csv_file(self.archive_csv_name)
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
@@ -1005,6 +1050,9 @@ class Result_Step1_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 1)
+    # disable left button
+    self.button_nav_left.setHidden(True)
+    self.button_nav_left.setEnabled(False)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -1489,6 +1537,9 @@ class Result_Step4_Percent_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_percent_result after my_initializer is passed
     show_evaluation_percent_result(self, 4)
+    # disable right button
+    self.button_nav_right.setHidden(True)
+    self.button_nav_right.setEnabled(False)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -1584,7 +1635,7 @@ class Menu_Default_UI(qtw.QWidget):
       self.button_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart_0) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_restart.click()
 
   @qtc.pyqtSlot()

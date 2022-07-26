@@ -95,7 +95,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>760</x>
+     <x>800</x>
      <y>560</y>
      <width>150</width>
      <height>150</height>
@@ -420,7 +420,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources/res.qrc">:/img/SCORE Bar.svg</pixmap>
+        <pixmap>:/img/SCORE Bar.svg</pixmap>
        </property>
       </widget>
      </item>
