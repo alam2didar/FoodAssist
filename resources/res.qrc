@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="img">
+    <file>Button Next Alternative.svg</file>
     <file>Icon Expert.png</file>
     <file>Icon User.png</file>
     <file>XP Bolt.svg</file>
@@ -24,6 +25,8 @@
     <file>Detected Step4.png</file>
   </qresource>
   <qresource prefix="buttons">
+    <file>Pause Circle.svg</file>
+    <file>Play Circle.svg</file>
     <file>Button Right.svg</file>
     <file>Button Left.svg</file>
     <file>Button View.svg</file>
