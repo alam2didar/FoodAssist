@@ -945,6 +945,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # show result
     if success_flag:
       print("reaching point - evaluation successful")
+      # enable button_view
       self.button_view.setHidden(False)
       self.button_view.setEnabled(True)
       if score_percent >= 80:
@@ -961,8 +962,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.widget_score.setHidden(False)
     else:
       print("reaching point - evaluation not successful")
+      # disable button_view
       self.button_view.setHidden(False)
       self.button_view.setEnabled(True)
+      # debugging - enable button_view
       # self.button_view.setHidden(True)
       # self.button_view.setEnabled(False)
       self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart.")
