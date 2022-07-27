@@ -390,16 +390,18 @@ class Step_1_UI(qtw.QWidget):
     
     # configure animate button 
     self.counter = 0
-    self.highlight_on_off_array = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+    self.highlight_on_off_array = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
     self.button = 1
     # start initial timer to animate
     self.timer = qtc.QTimer()
-    self.timer.start(250)
+    self.timer.start(350)
     self.timer.timeout.connect(self.animate_button)
 
+  # keep the order of the if statements 
   def animate_button(self):
         self.counter = self.counter + 1
-        if self.counter < 8 and self.highlight_on_off_array[self.counter]:
+        # set counter to stop the thread when button is clicked (100)
+        if self.counter < 12 and self.highlight_on_off_array[self.counter] or self.counter == 100:
           if self.button == 1:
              self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
           if self.button == 2:
@@ -410,7 +412,8 @@ class Step_1_UI(qtw.QWidget):
              self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
           if self.button == 5:
              self.button_next.setStyleSheet(open('./styles/activeButtonStyle.css').read())
-        else:
+        # set counter to stop the thread when button is clicked (100)
+        elif self.counter != 100:
           if self.button == 1:
             self.button_sub_step1.setStyleSheet('')
           if self.button == 2:
@@ -421,7 +424,8 @@ class Step_1_UI(qtw.QWidget):
             self.button_sub_step4.setStyleSheet('')
           if self.button == 5:
              self.button_next.setStyleSheet('')
-        if self.counter >= 8:
+        # this check must be at the end
+        if self.counter >= 12:
           self.counter = 0
           self.timer.stop()
           self.timer.deleteLater()
@@ -490,12 +494,15 @@ class Step_1_UI(qtw.QWidget):
   
   @qtc.pyqtSlot()
   def step1(self):
+    change_active_button_color(self, 'Step1')
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(0)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    # set counter to stop the thread when button is clicked
+    self.counter = 99
     change_active_button_color(self, 1)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
@@ -503,6 +510,8 @@ class Step_1_UI(qtw.QWidget):
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step2(self):
+    # set counter to stop the thread when button is clicked
+    self.counter = 99
     change_active_button_color(self, 2)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
@@ -510,6 +519,8 @@ class Step_1_UI(qtw.QWidget):
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step3(self):
+    # set counter to stop the thread when button is clicked
+    self.counter = 99
     change_active_button_color(self, 3)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(3)
@@ -517,6 +528,8 @@ class Step_1_UI(qtw.QWidget):
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step4(self):
+    # set counter to stop the thread when button is clicked
+    self.counter = 99
     change_active_button_color(self, 4)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(4)
@@ -533,10 +546,10 @@ class Step_1_UI(qtw.QWidget):
     if self.player.mediaStatus() == QtMultimedia.QMediaPlayer.EndOfMedia:
       current_video_index = self.playlist.currentIndex()
       self.button = current_video_index + 1
+      self.counter = 0
       self.timer = qtc.QTimer(self)
       self.timer.timeout.connect(self.animate_button)
-      self.timer.start(250)
-
+      self.timer.start(350)
 
   def drawDetectionBox(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
@@ -577,6 +590,7 @@ class Step_2_UI(qtw.QWidget):
     self.player.setPlaylist(self.playlist)
     self.player.setMuted(True)
     self.player.positionChanged.connect(self.on_position_changed)
+    self.player.mediaStatusChanged.connect(self.on_media_status_changed)
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
@@ -591,6 +605,46 @@ class Step_2_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
+
+    # configure animate button 
+    self.counter = 0
+    self.highlight_on_off_array = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+    self.button = 1
+    # start initial timer to animate
+    self.timer = qtc.QTimer()
+    self.timer.start(250)
+    self.timer.timeout.connect(self.animate_button)
+
+  # keep the order of the if statements 
+  def animate_button(self):
+        self.counter = self.counter + 1
+        if self.counter < 8 and self.highlight_on_off_array[self.counter]:
+          if self.button == 1:
+             self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 2:
+             self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 3:
+             self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 4:
+             self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 5:
+             self.button_next.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+        else:
+          if self.button == 1:
+            self.button_sub_step1.setStyleSheet('')
+          if self.button == 2:
+            self.button_sub_step2.setStyleSheet('')
+          if self.button == 3:
+            self.button_sub_step3.setStyleSheet('')
+          if self.button == 4:
+            self.button_sub_step4.setStyleSheet('')
+          if self.button == 5:
+             self.button_next.setStyleSheet('')
+        # this check must be at the end
+        if self.counter >= 8:
+          self.counter = 0
+          self.timer.stop()
+          self.timer.deleteLater()
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
@@ -660,24 +714,29 @@ class Step_2_UI(qtw.QWidget):
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    self.counter = 10
+    change_active_button_color(self, 1)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step2(self):
+    change_active_button_color(self, 2)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step3(self):
+    change_active_button_color(self, 3)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step4(self):
+    change_active_button_color(self, 4)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
@@ -687,6 +746,15 @@ class Step_2_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  @qtc.pyqtSlot()
+  def on_media_status_changed(self):
+    if self.player.mediaStatus() == QtMultimedia.QMediaPlayer.EndOfMedia:
+      current_video_index = self.playlist.currentIndex()
+      self.button = current_video_index + 1
+      self.timer = qtc.QTimer(self)
+      self.timer.timeout.connect(self.animate_button)
+      self.timer.start(250)
   
   def drawDetectionBox(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
@@ -728,6 +796,7 @@ class Step_3_UI(qtw.QWidget):
     self.player.setPlaylist(self.playlist)
     self.player.setMuted(True)
     self.player.positionChanged.connect(self.on_position_changed)
+    self.player.mediaStatusChanged.connect(self.on_media_status_changed)
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
@@ -742,6 +811,46 @@ class Step_3_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
+
+    # configure animate button 
+    self.counter = 0
+    self.highlight_on_off_array = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+    self.button = 1
+    # start initial timer to animate
+    self.timer = qtc.QTimer()
+    self.timer.start(250)
+    self.timer.timeout.connect(self.animate_button)
+
+  # keep the order of the if statements 
+  def animate_button(self):
+        self.counter = self.counter + 1
+        if self.counter < 8 and self.highlight_on_off_array[self.counter]:
+          if self.button == 1:
+             self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 2:
+             self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 3:
+             self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 4:
+             self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 5:
+             self.button_next.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+        else:
+          if self.button == 1:
+            self.button_sub_step1.setStyleSheet('')
+          if self.button == 2:
+            self.button_sub_step2.setStyleSheet('')
+          if self.button == 3:
+            self.button_sub_step3.setStyleSheet('')
+          if self.button == 4:
+            self.button_sub_step4.setStyleSheet('')
+          if self.button == 5:
+             self.button_next.setStyleSheet('')
+        # this check must be at the end
+        if self.counter >= 8:
+          self.counter = 0
+          self.timer.stop()
+          self.timer.deleteLater()
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
@@ -809,24 +918,28 @@ class Step_3_UI(qtw.QWidget):
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    change_active_button_color(self, 1)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step2(self):
+    change_active_button_color(self, 2)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(2)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step3(self):
+    change_active_button_color(self, 3)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(3)
     self.player.setPosition(0)
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step4(self):
+    change_active_button_color(self, 4)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(3)
     self.player.setPosition(0)
@@ -836,6 +949,15 @@ class Step_3_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  @qtc.pyqtSlot()
+  def on_media_status_changed(self):
+    if self.player.mediaStatus() == QtMultimedia.QMediaPlayer.EndOfMedia:
+      current_video_index = self.playlist.currentIndex()
+      self.button = current_video_index + 1
+      self.timer = qtc.QTimer(self)
+      self.timer.timeout.connect(self.animate_button)
+      self.timer.start(250)
   
   def drawDetectionBox(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
@@ -874,6 +996,7 @@ class Step_4_UI(qtw.QWidget):
     self.player.setPlaylist(self.playlist)
     self.player.setMuted(True)
     self.player.positionChanged.connect(self.on_position_changed)
+    self.player.mediaStatusChanged.connect(self.on_media_status_changed)
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_video_controller.clicked.connect(self.toggle_video)
@@ -884,6 +1007,46 @@ class Step_4_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     create_worker_handpos(self, self.my_initializer)
+
+    # configure animate button 
+    self.counter = 0
+    self.highlight_on_off_array = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+    self.button = 1
+    # start initial timer to animate
+    self.timer = qtc.QTimer()
+    self.timer.start(250)
+    self.timer.timeout.connect(self.animate_button)
+
+  # keep the order of the if statements 
+  def animate_button(self):
+        self.counter = self.counter + 1
+        if self.counter < 8 and self.highlight_on_off_array[self.counter]:
+          if self.button == 1:
+             self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 2:
+             self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 3:
+             self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 4:
+             self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          if self.button == 5:
+             self.button_next.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+        else:
+          if self.button == 1:
+            self.button_sub_step1.setStyleSheet('')
+          if self.button == 2:
+            self.button_sub_step2.setStyleSheet('')
+          if self.button == 3:
+            self.button_sub_step3.setStyleSheet('')
+          if self.button == 4:
+            self.button_sub_step4.setStyleSheet('')
+          if self.button == 5:
+             self.button_next.setStyleSheet('')
+        # this check must be at the end
+        if self.counter >= 8:
+          self.counter = 0
+          self.timer.stop()
+          self.timer.deleteLater()
   
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
@@ -945,6 +1108,7 @@ class Step_4_UI(qtw.QWidget):
     self.player.play()
   @qtc.pyqtSlot()
   def sub_step1(self):
+    change_active_button_color(self, 1, 1)
     self.player.setVideoOutput(self.ui.VideoWidget)
     self.playlist.setCurrentIndex(1)
     self.player.setPosition(0)
@@ -954,6 +1118,15 @@ class Step_4_UI(qtw.QWidget):
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
           self.player.setPosition(self.player.duration() - 10)
+  
+  @qtc.pyqtSlot()
+  def on_media_status_changed(self):
+    if self.player.mediaStatus() == QtMultimedia.QMediaPlayer.EndOfMedia:
+      current_video_index = self.playlist.currentIndex()
+      self.button = current_video_index + 1
+      self.timer = qtc.QTimer(self)
+      self.timer.timeout.connect(self.animate_button)
+      self.timer.start(250)
   
   def drawDetectionBox(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
@@ -1819,7 +1992,6 @@ def show_evaluation_result(self, step_number):
     self.label_analysis_2.setText(f"gesture 2: {difference[1]} time(s) {text_more_less[1]} than the expert")
     self.label_analysis_3.setText(f"gesture 3: {difference[2]} time(s) {text_more_less[2]} than the expert")
 
-
 def show_evaluation_percent_result(self, step_number):
   self.button_restart.clicked.connect(self.restart_button_pressed)
   self.button_exit.clicked.connect(self.exit_button_pressed)
@@ -1847,34 +2019,44 @@ def show_evaluation_percent_result(self, step_number):
     self.label_trouble.setHidden(True)
     self.label_analysis_1.setText(f"You need to practice gesture {gesture_no} more in this step.")
 
-
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
   screen_resolution = qtw.QApplication.desktop().screenGeometry(1)
   ui_class.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()))
   ui_class.showFullScreen()
 
-def change_active_button_color(self, button):
+def change_active_button_color(self, button, substeps=4):
   if button == 1:
-    self.button_sub_step2.setStyleSheet('')
-    self.button_sub_step3.setStyleSheet('')
-    self.button_sub_step4.setStyleSheet('')
+    if substeps == 4:
+      self.button_sub_step2.setStyleSheet('')
+      self.button_sub_step3.setStyleSheet('')
+      self.button_sub_step4.setStyleSheet('')
+      self.button_step1.setStyleSheet('')
     self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
   if button == 2:
     self.button_sub_step1.setStyleSheet('')
     self.button_sub_step3.setStyleSheet('')
     self.button_sub_step4.setStyleSheet('')
+    self.button_step1.setStyleSheet('')
     self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
   if button == 3:
     self.button_sub_step1.setStyleSheet('')
     self.button_sub_step2.setStyleSheet('')
     self.button_sub_step4.setStyleSheet('')
+    self.button_step1.setStyleSheet('')
     self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
   if button == 4:
     self.button_sub_step1.setStyleSheet('')
     self.button_sub_step2.setStyleSheet('')
     self.button_sub_step3.setStyleSheet('')
+    self.button_step1.setStyleSheet('')
     self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+  if button == 'Step1':
+    self.button_sub_step1.setStyleSheet('')
+    self.button_sub_step2.setStyleSheet('')
+    self.button_sub_step3.setStyleSheet('')
+    self.button_sub_step4.setStyleSheet('')
+    self.button_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
 
 def main():
   # initiate app
