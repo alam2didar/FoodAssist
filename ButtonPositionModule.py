@@ -30,8 +30,7 @@ class ButtonPositioner:
         # update last button clicked
         self.last_button_clicked = button_type
         # return true only after accumulated 10 times
-        # if self.counter >= 5 and button_type is not self.v_cont:
-        if self.counter >= 5:
+        if self.counter >= 5 and button_type is not self.v_cont:
             return True
 
     def check_in_area(self, x, y, z, button_type):
