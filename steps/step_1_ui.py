@@ -195,10 +195,10 @@ class Step_1_UI(qtw.QWidget):
       self.timer.start(250)
 
   def draw_detection_box(self, x, y, width, height, step):
-        # print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
-        print('Detected step: ', step)
-        self.box_x = x
-        self.box_y = y
-        self.box_w = width
-        self.box_h = height
-        self.update()
+    # print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+    print('Detected step: ', step)
+    self.box_x = x
+    self.box_y = y
+    self.box_w = width
+    self.box_h = height
+    self.update()
