@@ -414,7 +414,7 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="icon">
       <iconset resource="resources/res.qrc">
-       <normaloff>:/buttons/Button Next.svg</normaloff>:/buttons/Button Next.svg</iconset>
+       <normaloff>:/buttons/Button Right.svg</normaloff>:/buttons/Button Right.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
