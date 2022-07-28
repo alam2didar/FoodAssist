@@ -15,13 +15,19 @@ class Step_1_UI(qtw.QWidget):
     self.my_initializer.current_step = 1
     self.my_initializer.obj_recorder.enable_writing()
     self.my_initializer.detectionParams.connect(self.draw_detection_box)
-
     self.box_x = 0
     self.box_y = 0
     self.box_w = 0
     self.box_h = 0
 
     self.ui = uic.loadUi('food_assist_gui_step1.ui', self)
+    self.hide_video_controller_buttons(True)
+    self.play_button_opacity = qtw.QGraphicsOpacityEffect()
+    self.pause_button_opacity = qtw.QGraphicsOpacityEffect()
+    self.button_video_play.setGraphicsEffect(self.play_button_opacity)
+    self.button_video_pause.setGraphicsEffect(self.pause_button_opacity)
+    self.button_video_play.setAutoFillBackground(True)
+    self.button_video_pause.setAutoFillBackground(True)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
     file0 = os.path.join(os.path.dirname(__file__), "..\step-videos\step1.mp4")
@@ -42,7 +48,8 @@ class Step_1_UI(qtw.QWidget):
     self.player.mediaStatusChanged.connect(self.on_media_status_changed)
     self.button_next.clicked.connect(self.next_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_video_controller.clicked.connect(self.toggle_video)
+    self.button_video_play.clicked.connect(self.play_video_pressed)
+    self.button_video_pause.clicked.connect(self.pause_video_pressed)
     self.button_step1.clicked.connect(self.step1)
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.button_sub_step2.clicked.connect(self.sub_step2)
@@ -129,8 +136,12 @@ class Step_1_UI(qtw.QWidget):
       self.button_sub_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_sub_step4.click()
+    # @Yü Qiao TODO: add appropriate check for play button
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_video_controller.click()
+      self.button_video_play.click()
+    # @Yü Qiao TODO: add appropriate check for pause button
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_video_pause.click()
 
   @qtc.pyqtSlot()
   def next_button_pressed(self):
@@ -152,41 +163,67 @@ class Step_1_UI(qtw.QWidget):
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
+  # QMediaPlayer::StoppedState	0	
+  # QMediaPlayer::PlayingState	1	
+  # QMediaPlayer::PausedState	2
   @qtc.pyqtSlot()
-  def toggle_video(self):
+  def play_video_pressed(self):
+    if self.player.state() == QtMultimedia.QMediaPlayer.PausedState:
+      self.player.play()
+      self.alternate_play_pause_buttons(False)
+    if self.player.state() == QtMultimedia.QMediaPlayer.StoppedState:
+      self.player.setPosition(0)
+      self.player.play()
+      self.alternate_play_pause_buttons(False)
+  
+  @qtc.pyqtSlot()
+  def pause_video_pressed(self):
     if self.player.state() == QtMultimedia.QMediaPlayer.PlayingState:
       self.player.pause()
-    else:
-      self.player.play()
+      self.alternate_play_pause_buttons(True)
   
   @qtc.pyqtSlot()
   def step1(self):
     fa.on_substep_button_click(self, 0, True)
+    self.hide_video_controller_buttons(False)
+    self.alternate_play_pause_buttons(False)
 
   @qtc.pyqtSlot()
   def sub_step1(self):
     fa.on_substep_button_click(self, 1)
+    self.hide_video_controller_buttons(False)
+    self.alternate_play_pause_buttons(False)
 
   @qtc.pyqtSlot()
   def sub_step2(self):
     fa.on_substep_button_click(self, 2)
+    self.hide_video_controller_buttons(False)
+    self.alternate_play_pause_buttons(False)
 
   @qtc.pyqtSlot()
   def sub_step3(self):
     fa.on_substep_button_click(self, 3)
+    self.hide_video_controller_buttons(False)
+    self.alternate_play_pause_buttons(False)
 
   @qtc.pyqtSlot()
   def sub_step4(self):
     fa.on_substep_button_click(self, 4)
+    self.hide_video_controller_buttons(False)
+    self.alternate_play_pause_buttons(False)
 
   @qtc.pyqtSlot()
   def on_position_changed(self):
     if self.player.duration() - self.player.position() < 100:
-          self.player.setPosition(self.player.duration() - 10)
+      self.player.setPosition(self.player.duration() - 10)
 
+  # QMediaPlayer::EndOfMedia	7	
+  # Playback has reached the end of the current media. The player is in the StoppedState.
+  # ref: https://doc.qt.io/qt-5/qmediaplayer.html#mediaStatus-prop
   @qtc.pyqtSlot()
   def on_media_status_changed(self):
     if self.player.mediaStatus() == QtMultimedia.QMediaPlayer.EndOfMedia:
+      self.alternate_play_pause_buttons(True)
       current_video_index = self.playlist.currentIndex()
       self.button = current_video_index + 1
       self.counter = 0
@@ -202,3 +239,19 @@ class Step_1_UI(qtw.QWidget):
     self.box_w = width
     self.box_h = height
     self.update()
+  
+  def hide_video_controller_buttons(self, is_hide):
+    self.button_video_play.setHidden(is_hide)
+    self.button_video_pause.setHidden(is_hide)
+  
+  def alternate_play_pause_buttons(self, enable_play):
+    if enable_play:
+      self.button_video_play.setEnabled(True)
+      self.button_video_pause.setEnabled(False)
+      self.play_button_opacity.setOpacity(1.0)
+      self.pause_button_opacity.setOpacity(0.5)
+    else:
+      self.button_video_play.setEnabled(False)
+      self.button_video_pause.setEnabled(True)
+      self.play_button_opacity.setOpacity(0.5)
+      self.pause_button_opacity.setOpacity(1.0)
