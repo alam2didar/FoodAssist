@@ -66,7 +66,7 @@ class Placing_Meat_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.my_initializer.detectionParams.connect(self.draw_detection_box)
 
     self.box_x = 0
     self.box_y = 0
@@ -119,7 +119,7 @@ class Placing_Meat_UI(qtw.QWidget):
       select_screen_and_show(self.target_ui)
       self.close()
 
-  def drawDetectionBox(self, x, y, width, height, step):
+  def draw_detection_box(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
         print('Detected step: ', step)
         self.box_x = x
