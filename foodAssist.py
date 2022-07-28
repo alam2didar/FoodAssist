@@ -1,13 +1,16 @@
 import initializer
-import os
 import PyQt5.QtCore as qtc
 import PyQt5.QtGui as qtg
 import PyQt5.QtWidgets as qtw
-from PyQt5 import uic, QtMultimedia
+from PyQt5 import uic
 import res_rc
 import sys
 import worker_handpos
 import worker_evaluator
+import steps.step_1_ui as step1Ui
+import steps.step_2_ui as step2Ui
+import steps.step_3_ui as step3Ui
+import steps.step_4_ui as step4Ui
 
 class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
@@ -63,7 +66,7 @@ class Placing_Meat_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
+    self.my_initializer.detectionParams.connect(self.draw_detection_box)
 
     self.box_x = 0
     self.box_y = 0
@@ -116,7 +119,7 @@ class Placing_Meat_UI(qtw.QWidget):
       select_screen_and_show(self.target_ui)
       self.close()
 
-  def drawDetectionBox(self, x, y, width, height, step):
+  def draw_detection_box(self, x, y, width, height, step):
         print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
         print('Detected step: ', step)
         self.box_x = x
@@ -170,7 +173,7 @@ class Entry_Step_1_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_1_UI(self.my_initializer)
+    self.target_ui = step1Ui.Step_1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -222,7 +225,7 @@ class Entry_Step_2_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_2_UI(self.my_initializer)
+    self.target_ui = step2Ui.Step_2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -275,7 +278,7 @@ class Entry_Step_3_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_3_UI(self.my_initializer)
+    self.target_ui = step3Ui.Step_3_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -328,7 +331,7 @@ class Entry_Step_4_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_4_UI(self.my_initializer)
+    self.target_ui = step4Ui.Step_4_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -338,578 +341,6 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
-
-########## Step 1 UI class ##########
-class Step_1_UI(qtw.QWidget):
-  def __init__(self, my_initializer):
-    super().__init__()
-    # pass on my_initializer
-    self.my_initializer = my_initializer
-    self.my_initializer.current_step = 1
-    self.my_initializer.obj_recorder.enable_writing()
-    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
-
-    self.box_x = 0
-    self.box_y = 0
-    self.box_w = 0
-    self.box_h = 0
-
-    self.ui = uic.loadUi('food_assist_gui_step1.ui', self)
-    self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
-    self.playlist = QtMultimedia.QMediaPlaylist()
-    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step1.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep1.mp4")
-    file2 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep2.mp4")
-    file3 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep3.mp4")
-    file4 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step1-substep4.mp4")
-    self.video_files_list = [file0, file1, file2, file3, file4]
-    for f in self.video_files_list:
-      self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
-    
-    self.playlist.setCurrentIndex(1)
-    self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    # self.player.setVideoOutput(self.ui.VideoWidget)
-    self.player.setPlaylist(self.playlist)
-    self.player.setMuted(True)
-    self.player.positionChanged.connect(self.on_position_changed)
-    self.button_next.clicked.connect(self.next_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_video_controller.clicked.connect(self.toggle_video)
-    self.button_step1.clicked.connect(self.step1)
-    self.button_sub_step1.clicked.connect(self.sub_step1)
-    self.button_sub_step2.clicked.connect(self.sub_step2)
-    self.button_sub_step3.clicked.connect(self.sub_step3)
-    self.button_sub_step4.clicked.connect(self.sub_step4)
-    # self.player.pause()
-
-    # draw finger-tip cursor
-    draw_finger_tip_cursor(self)
-    # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
-
-  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintEvent(self, event):
-    box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
-    path = qtg.QPainterPath()
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
-    box_painter.setPen(pen)
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
-    box_painter.drawPath(path)
-    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
-  
-  # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
-    # draw cursor for finger tip
-    self.finger_tip_x = cursor_x
-    self.finger_tip_y = cursor_y
-    self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_exit.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step2.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step3.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_video_controller.click()
-
-  @qtc.pyqtSlot()
-  def next_button_pressed(self):
-    self.obj.deactivate()
-    # call placing meat UI's get_current_step() to 
-    # show the appropriate entry step based on the current step
-
-    # for manual navgation, call directly respective entry step
-    self.target_ui = Entry_Step_2_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-  
-  @qtc.pyqtSlot()
-  def exit_button_pressed(self):
-    self.obj.deactivate()
-    self.target_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-
-  @qtc.pyqtSlot()
-  def toggle_video(self):
-    if self.player.state() == QtMultimedia.QMediaPlayer.PlayingState:
-      self.player.pause()
-    else:
-      self.player.play()
-  
-  @qtc.pyqtSlot()
-  def step1(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(0)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step1(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step2(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(2)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step3(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(3)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step4(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(4)
-    self.player.setPosition(0)
-    self.player.play()
-
-  @qtc.pyqtSlot()
-  def on_position_changed(self):
-    if self.player.duration() - self.player.position() < 100:
-          self.player.setPosition(self.player.duration() - 10)
-  
-  def drawDetectionBox(self, x, y, width, height, step):
-        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
-        print('Detected step: ', step)
-        self.box_x = x
-        self.box_y = y
-        self.box_w = width
-        self.box_h = height
-        self.update()
- 
-########## Step 2 UI class ##########
-class Step_2_UI(qtw.QWidget):
-  def __init__(self, my_initializer):
-    super().__init__()
-    # pass on my_initializer
-    self.my_initializer = my_initializer
-    self.my_initializer.current_step = 2
-    self.my_initializer.obj_recorder.enable_writing()
-    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
-    self.box_x = 0
-    self.box_y = 0
-    self.box_w = 0
-    self.box_h = 0
-
-    self.ui = uic.loadUi('food_assist_gui_step2.ui', self)
-    self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
-    self.playlist = QtMultimedia.QMediaPlaylist()
-    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step2.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step2-substep1.mp4")
-    file2 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step2-substep2-4.mp4")
-    self.video_files_list = [file0, file1, file2]
-    for f in self.video_files_list:
-      self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
-
-    self.playlist.setCurrentIndex(1)
-    self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    # self.player.setVideoOutput(self.ui.VideoWidget)
-    self.player.setPlaylist(self.playlist)
-    self.player.setMuted(True)
-    self.player.positionChanged.connect(self.on_position_changed)
-    self.button_next.clicked.connect(self.next_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_video_controller.clicked.connect(self.toggle_video)
-    self.button_step2.clicked.connect(self.step2)
-    self.button_sub_step1.clicked.connect(self.sub_step1)
-    self.button_sub_step2.clicked.connect(self.sub_step2)
-    self.button_sub_step3.clicked.connect(self.sub_step3)
-    self.button_sub_step4.clicked.connect(self.sub_step4)
-    # self.player.pause()
-
-    # draw finger-tip cursor
-    draw_finger_tip_cursor(self)
-    # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
-
-  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintEvent(self, event):
-    box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
-    path = qtg.QPainterPath()
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
-    box_painter.setPen(pen)
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
-    box_painter.drawPath(path)
-    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
-  
-  # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
-    # draw cursor for finger tip
-    self.finger_tip_x = cursor_x
-    self.finger_tip_y = cursor_y
-    self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
-      self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.obj.deactivate()
-      self.button_exit.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_step2.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step2.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step3.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_video_controller.click()
-
-  @qtc.pyqtSlot()
-  def next_button_pressed(self):
-    self.obj.deactivate()
-    self.target_ui = Entry_Step_3_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-  
-  @qtc.pyqtSlot()
-  def exit_button_pressed(self):
-    self.obj.deactivate()
-    self.target_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-
-  @qtc.pyqtSlot()
-  def toggle_video(self):
-    if self.player.state() == QtMultimedia.QMediaPlayer.PlayingState:
-      self.player.pause()
-    else:
-      self.player.play()
-
-  @qtc.pyqtSlot()
-  def step2(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(0)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step1(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step2(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(2)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step3(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(2)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step4(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(2)
-    self.player.setPosition(0)
-    self.player.play()
-
-  @qtc.pyqtSlot()
-  def on_position_changed(self):
-    if self.player.duration() - self.player.position() < 100:
-          self.player.setPosition(self.player.duration() - 10)
-  
-  def drawDetectionBox(self, x, y, width, height, step):
-        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
-        print('Detected step: ', step)
-        self.box_x = x
-        self.box_y = y
-        self.box_w = width
-        self.box_h = height
-        self.update()
-        
-########## Step 3 UI class ##########
-class Step_3_UI(qtw.QWidget):
-  def __init__(self, my_initializer):
-    super().__init__()
-    # pass on my_initializer
-    self.my_initializer = my_initializer
-    self.my_initializer.current_step = 3
-    self.my_initializer.obj_recorder.enable_writing()
-    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
-    self.box_x = 0
-    self.box_y = 0
-    self.box_w = 0
-    self.box_h = 0
-
-    self.ui = uic.loadUi('food_assist_gui_step3.ui', self)
-    self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
-    self.playlist = QtMultimedia.QMediaPlaylist()
-    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step3.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep1.mp4")
-    file2 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep2.mp4")
-    file3 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step3-substep3-4.mp4")
-    self.video_files_list = [file0, file1, file2, file3]
-    for f in self.video_files_list:
-      self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
-
-    self.playlist.setCurrentIndex(1)
-    self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    # self.player.setVideoOutput(self.ui.VideoWidget)
-    self.player.setPlaylist(self.playlist)
-    self.player.setMuted(True)
-    self.player.positionChanged.connect(self.on_position_changed)
-    self.button_next.clicked.connect(self.next_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_video_controller.clicked.connect(self.toggle_video)
-    self.button_step3.clicked.connect(self.step3)
-    self.button_sub_step1.clicked.connect(self.sub_step1)
-    self.button_sub_step2.clicked.connect(self.sub_step2)
-    self.button_sub_step3.clicked.connect(self.sub_step3)
-    self.button_sub_step4.clicked.connect(self.sub_step4)
-    self.player.pause()
-
-    # draw finger-tip cursor
-    draw_finger_tip_cursor(self)
-    # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
-
-  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintEvent(self, event):
-    box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
-    path = qtg.QPainterPath()
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
-    box_painter.setPen(pen)
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
-    box_painter.drawPath(path)
-    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
-  
-  # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
-    # draw cursor for finger tip
-    self.finger_tip_x = cursor_x
-    self.finger_tip_y = cursor_y
-    self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_exit.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_step3.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step2.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step3.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_video_controller.click()
-
-  @qtc.pyqtSlot()
-  def next_button_pressed(self):
-    self.obj.deactivate()
-    self.target_ui = Entry_Step_4_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-  
-  @qtc.pyqtSlot()
-  def exit_button_pressed(self):
-    self.obj.deactivate()
-    self.target_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-
-  @qtc.pyqtSlot()
-  def toggle_video(self):
-    if self.player.state() == QtMultimedia.QMediaPlayer.PlayingState:
-      self.player.pause()
-    else:
-      self.player.play()
-  
-  @qtc.pyqtSlot()
-  def step3(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(0)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step1(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step2(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(2)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step3(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(3)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step4(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(3)
-    self.player.setPosition(0)
-    self.player.play()
-
-  @qtc.pyqtSlot()
-  def on_position_changed(self):
-    if self.player.duration() - self.player.position() < 100:
-          self.player.setPosition(self.player.duration() - 10)
-  
-  def drawDetectionBox(self, x, y, width, height, step):
-        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
-        print('Detected step: ', step)
-        self.box_x = x
-        self.box_y = y
-        self.box_w = width
-        self.box_h = height
-        self.update()
-
-########## Step 4 UI class ##########
-class Step_4_UI(qtw.QWidget):
-  def __init__(self, my_initializer):
-    super().__init__()
-    # pass on my_initializer
-    self.my_initializer = my_initializer
-    self.my_initializer.current_step = 4
-    self.my_initializer.obj_recorder.enable_writing()
-    self.my_initializer.detectionParams.connect(self.drawDetectionBox)
-    self.box_x = 0
-    self.box_y = 0
-    self.box_w = 0
-    self.box_h = 0
-  
-    self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
-    self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
-    self.playlist = QtMultimedia.QMediaPlaylist()
-    file0 = os.path.join(os.path.dirname(__file__), ".\step-videos\step4.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), ".\step-videos\Step4-Final step.mp4")
-    self.video_files_list = [file0, file1]
-    for f in self.video_files_list:
-      self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
-    self.playlist.setCurrentIndex(1)
-    self.playlist.setPlaybackMode(QtMultimedia.QMediaPlaylist.CurrentItemOnce)
-    # self.player.setVideoOutput(self.ui.VideoWidget)
-    self.player.setPlaylist(self.playlist)
-    self.player.setMuted(True)
-    self.player.positionChanged.connect(self.on_position_changed)
-    self.button_next.clicked.connect(self.next_button_pressed)
-    self.button_exit.clicked.connect(self.exit_button_pressed)
-    self.button_video_controller.clicked.connect(self.toggle_video)
-    self.button_step4.clicked.connect(self.step4)
-    self.button_sub_step1.clicked.connect(self.sub_step1)
-    self.player.pause()
-    # draw finger-tip cursor
-    draw_finger_tip_cursor(self)
-    # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
-  
-  # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
-  def paintEvent(self, event):
-    box_painter = qtg.QPainter(self)
-    box_painter.setRenderHint(qtg.QPainter.Antialiasing)
-    path = qtg.QPainterPath()
-    path.addRoundedRect(qtc.QRectF(self.box_x, self.box_y, self.box_w, self.box_h), 5, 5)
-    pen = qtg.QPen(qtc.Qt.GlobalColor.yellow, 5)
-    box_painter.setPen(pen)
-    box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
-    box_painter.drawPath(path)
-    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
-  
-  # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
-    # draw cursor for finger tip
-    self.finger_tip_x = cursor_x
-    self.finger_tip_y = cursor_y
-    self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_next.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_exit.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_video_controller.click()
-
-  @qtc.pyqtSlot()
-  def next_button_pressed(self):
-    self.obj.deactivate()
-    self.target_ui = Tutorial_Ends_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-  
-  @qtc.pyqtSlot()
-  def exit_button_pressed(self):
-    self.obj.deactivate()
-    self.target_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.player = QtMultimedia.QMediaPlayer()
-    self.close()
-
-  @qtc.pyqtSlot()
-  def toggle_video(self):
-    if self.player.state() == QtMultimedia.QMediaPlayer.PlayingState:
-      self.player.pause()
-    else:
-      self.player.play()
-  
-  @qtc.pyqtSlot()
-  def step4(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(0)
-    self.player.setPosition(0)
-    self.player.play()
-  @qtc.pyqtSlot()
-  def sub_step1(self):
-    self.player.setVideoOutput(self.ui.VideoWidget)
-    self.playlist.setCurrentIndex(1)
-    self.player.setPosition(0)
-    self.player.play()
-
-  @qtc.pyqtSlot()
-  def on_position_changed(self):
-    if self.player.duration() - self.player.position() < 100:
-          self.player.setPosition(self.player.duration() - 10)
-  
-  def drawDetectionBox(self, x, y, width, height, step):
-        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
-        print('Detected step: ', step)
-        self.box_x = x
-        self.box_y = y
-        self.box_w = width
-        self.box_h = height
-        self.update()
 
 ########## Tutorial Ends UI class ##########
 class Tutorial_Ends_UI(qtw.QWidget):
@@ -1646,28 +1077,28 @@ class Menu_Default_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def step1_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_1_UI(self.my_initializer)
+    self.target_ui = step1Ui.Step_1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step2_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_2_UI(self.my_initializer)
+    self.target_ui = step2Ui.Step_2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step3_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_3_UI(self.my_initializer)
+    self.target_ui = step3Ui.Step_3_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step4_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = Step_4_UI(self.my_initializer)
+    self.target_ui = step4Ui.Step_4_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -1766,7 +1197,6 @@ def show_evaluation_result(self, step_number):
     self.label_analysis_2.setText(f"gesture 2: {difference[1]} time(s) {text_more_less[1]} than the expert")
     self.label_analysis_3.setText(f"gesture 3: {difference[2]} time(s) {text_more_less[2]} than the expert")
 
-
 def show_evaluation_percent_result(self, step_number):
   self.button_restart.clicked.connect(self.restart_button_pressed)
   self.button_exit.clicked.connect(self.exit_button_pressed)
@@ -1794,12 +1224,97 @@ def show_evaluation_percent_result(self, step_number):
     self.label_trouble.setHidden(True)
     self.label_analysis_1.setText(f"You need to practice gesture {gesture_no} more in this step.")
 
-
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
   screen_resolution = qtw.QApplication.desktop().screenGeometry(1)
   ui_class.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()))
   ui_class.showFullScreen()
+
+def change_active_button_color(self, button):
+  if button == 1:
+    if self.findChild(qtw.QWidget, "button_sub_step2"):
+      self.button_sub_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step3"):
+      self.button_sub_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step4"):
+      self.button_sub_step4.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+      self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
+    self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+  if button == 2:
+    self.button_sub_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step3"):
+      self.button_sub_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step4"):
+      self.button_sub_step4.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+        self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
+    self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+  if button == 3:
+    self.button_sub_step1.setStyleSheet('')
+    self.button_sub_step2.setStyleSheet('')
+    self.button_sub_step4.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+        self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
+    self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+  if button == 4:
+    self.button_sub_step1.setStyleSheet('')
+    self.button_sub_step2.setStyleSheet('')
+    self.button_sub_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+        self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
+    self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+  if button == 0:
+    if self.findChild(qtw.QWidget, "button_sub_step1"):
+      self.button_sub_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step2"):
+      self.button_sub_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step3"):
+      self.button_sub_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step4"):
+      self.button_sub_step4.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+      self.button_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+
+def on_substep_button_click(self, substep_button, all_substep=False):
+  if not all_substep:
+    # set counter to stop the thread when button is clicked
+    self.counter = 99
+  change_active_button_color(self, substep_button)
+  self.player.setVideoOutput(self.ui.VideoWidget)
+  self.playlist.setCurrentIndex(substep_button)
+  self.player.setPosition(0)
+  self.player.play()
 
 def main():
   # initiate app
