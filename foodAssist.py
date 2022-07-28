@@ -2025,38 +2025,91 @@ def select_screen_and_show(ui_class):
   ui_class.move(qtc.QPoint(screen_resolution.x(), screen_resolution.y()))
   ui_class.showFullScreen()
 
-def change_active_button_color(self, button, substeps=4):
+def change_active_button_color(self, button):
   if button == 1:
-    if substeps == 4:
+    if self.findChild(qtw.QWidget, "button_sub_step2"):
       self.button_sub_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step3"):
       self.button_sub_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step4"):
       self.button_sub_step4.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
       self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
     self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
   if button == 2:
     self.button_sub_step1.setStyleSheet('')
-    self.button_sub_step3.setStyleSheet('')
-    self.button_sub_step4.setStyleSheet('')
-    self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step3"):
+      self.button_sub_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step4"):
+      self.button_sub_step4.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+        self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
     self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
   if button == 3:
     self.button_sub_step1.setStyleSheet('')
     self.button_sub_step2.setStyleSheet('')
     self.button_sub_step4.setStyleSheet('')
-    self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+        self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
     self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
   if button == 4:
     self.button_sub_step1.setStyleSheet('')
     self.button_sub_step2.setStyleSheet('')
     self.button_sub_step3.setStyleSheet('')
-    self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+        self.button_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet('')
     self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
-  if button == 'Step1':
-    self.button_sub_step1.setStyleSheet('')
-    self.button_sub_step2.setStyleSheet('')
-    self.button_sub_step3.setStyleSheet('')
-    self.button_sub_step4.setStyleSheet('')
-    self.button_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+  if button == 0:
+    if self.findChild(qtw.QWidget, "button_sub_step1"):
+      self.button_sub_step1.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step2"):
+      self.button_sub_step2.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step3"):
+      self.button_sub_step3.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_sub_step4"):
+      self.button_sub_step4.setStyleSheet('')
+    if self.findChild(qtw.QWidget, "button_step1"):
+      self.button_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+    if self.findChild(qtw.QWidget, "button_step2"):
+      self.button_step2.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+    if self.findChild(qtw.QWidget, "button_step3"):
+      self.button_step3.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+    if self.findChild(qtw.QWidget, "button_step4"):
+      self.button_step4.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+
+def on_substep_button_click(self, substep_button, all_substep=False):
+  if not all_substep:
+    # set counter to stop the thread when button is clicked
+    self.counter = 99
+  change_active_button_color(self, substep_button)
+  self.player.setVideoOutput(self.ui.VideoWidget)
+  self.playlist.setCurrentIndex(substep_button)
+  self.player.setPosition(0)
+  self.player.play()
 
 def main():
   # initiate app
