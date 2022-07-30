@@ -117,14 +117,10 @@ class Step_2_UI(qtw.QWidget):
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step2.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step1.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step2.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step3.click()
+      self.button_sub_step1.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step4.click()
+      self.button_sub_step2.click()
     # @Yü Qiao TODO: add appropriate check for play button
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_play.click()
