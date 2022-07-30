@@ -1159,9 +1159,9 @@ class Confirm_Restart_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart_0) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_yes.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_2) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_no.click()
     
   @qtc.pyqtSlot()
