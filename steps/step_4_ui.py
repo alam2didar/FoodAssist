@@ -69,9 +69,9 @@ class Step_4_UI(qtw.QWidget):
     # set counter (to 100) to stop the thread when button is clicked
     if self.counter < 12 and self.highlight_on_off_array[self.counter] or self.counter == 100:
       if self.button == 1:
-          self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
       if self.button == 2:
-          self.button_next.setStyleSheet(open('./styles/activeButtonStyle.css').read())
+          self.button_next.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
     # set counter to stop the thread when button is clicked (100)
     elif self.counter != 100:
       if self.button == 1:
