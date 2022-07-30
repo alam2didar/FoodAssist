@@ -95,7 +95,7 @@ color: rgb(255, 255, 255);</string>
     </property>
    </widget>
   </widget>
-  <widget class="QPushButton" name="button_restart">
+  <widget class="QPushButton" name="button_yes">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -151,7 +151,7 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_restart_2">
+  <widget class="QPushButton" name="button_no">
    <property name="enabled">
     <bool>true</bool>
    </property>
