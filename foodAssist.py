@@ -77,6 +77,7 @@ class Placing_Meat_UI(qtw.QWidget):
     self.detection_gif = qtg.QMovie('resources/Detecting Icon.gif')
     self.detecting_gif_label.setMovie(self.detection_gif)
     self.detection_gif.start()
+    self.step_consistency_counter = 0
 
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
@@ -95,6 +96,9 @@ class Placing_Meat_UI(qtw.QWidget):
     box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
     box_painter.drawPath(path)
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+    # navigate when 5 consistent detection has occured
+    if self.step_consistency_counter == 5:
+      self.navigate_to_detected_step()
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
@@ -122,18 +126,15 @@ class Placing_Meat_UI(qtw.QWidget):
       self.close()
 
   def draw_detection_box(self, x, y, width, height, step):
-        print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
-        print('Detected step: ', step)
-        self.box_x = x
-        self.box_y = y
-        self.box_w = width
-        self.box_h = height
-        self.update()
-        if step != 0:
-          self.timer = qtc.QTimer()
-          self.timer.setSingleShot(True)
-          self.timer.start(100)
-          self.timer.timeout.connect(self.navigate_to_detected_step)
+    print('Detection box parameters from model: (x, y, w, h)', x, y, width, height)
+    print('Detected step: ', step)
+    self.box_x = x
+    self.box_y = y
+    self.box_w = width
+    self.box_h = height
+    self.update()
+    if step != 0:
+      self.step_consistency_counter += 1
 
 class Entry_Step_1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
