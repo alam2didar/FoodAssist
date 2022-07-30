@@ -1078,9 +1078,16 @@ class Menu_Default_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def restart_button_pressed(self):
-    self.my_initializer.obj_recorder.archive_old()
     self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
+    self.target_ui = Confirm_Restart_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def back_button_pressed(self):
+    self.obj.deactivate()
+    # got to previuos UI
+    # self.target_ui = Confirm_Restart_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -1109,6 +1116,53 @@ class Menu_Default_UI(qtw.QWidget):
   def step4_button_pressed(self):
     self.obj.deactivate()
     self.target_ui = step4Ui.Step_4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+########## Confirm Restart UI class ##########
+class Confirm_Restart_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+
+    self.ui = uic.loadUi('food_assist_gui_confirm_restart.ui', self)
+    self.button_yes.clicked.connect(self.restart_yes_pressed)
+    self.button_no.clicked.connect(self.restart_no_pressed)
+    
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+  
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+  
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart_0) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_yes.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_2) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_no.click()
+    
+  @qtc.pyqtSlot()
+  def restart_yes_pressed(self):
+    self.my_initializer.obj_recorder.archive_old()
+    self.obj.deactivate()
+    self.target_ui = FoodAssist(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+  
+  @qtc.pyqtSlot()
+  def restart_no_pressed(self):
+    self.obj.deactivate()
+    self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
