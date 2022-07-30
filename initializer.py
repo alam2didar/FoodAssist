@@ -20,6 +20,10 @@ class Initializer(qtc.QObject):
     self.detected_step = 0
     # last class which has called the current class
     self.last_class = last_class
+    # users' language (default is English: en)
+    self.lang = 'en'
+    # users' knife hand (default is right)
+    self.knife_hand = 'right'
 
     # Initialize Depth Camera Intel Realsense
     #####
