@@ -135,6 +135,8 @@ class Placing_Meat_UI(qtw.QWidget):
     self.update()
     if step != 0:
       self.step_consistency_counter += 1
+    else:
+      self.step_consistency_counter = 0
 
 class Entry_Step_1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
