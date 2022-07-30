@@ -99,7 +99,8 @@ class Step_4_UI(qtw.QWidget):
     box_painter.setPen(pen)
     box_painter.fillPath(path, qtc.Qt.GlobalColor.transparent)
     box_painter.drawPath(path)
-    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+    if self.finger_tip_y >= 560:
+      self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
   def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
