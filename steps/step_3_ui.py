@@ -258,9 +258,9 @@ class Step_3_UI(qtw.QWidget):
       self.button_video_play.setEnabled(True)
       self.button_video_pause.setEnabled(False)
       self.play_button_opacity.setOpacity(1.0)
-      self.pause_button_opacity.setOpacity(0.5)
+      self.pause_button_opacity.setOpacity(0.3)
     else:
       self.button_video_play.setEnabled(False)
       self.button_video_pause.setEnabled(True)
-      self.play_button_opacity.setOpacity(0.5)
+      self.play_button_opacity.setOpacity(0.3)
       self.pause_button_opacity.setOpacity(1.0)
