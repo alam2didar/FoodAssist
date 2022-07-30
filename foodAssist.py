@@ -1063,6 +1063,7 @@ class Menu_Default_UI(qtw.QWidget):
     self.button_step2.clicked.connect(self.step2_button_pressed)
     self.button_step3.clicked.connect(self.step3_button_pressed)
     self.button_step4.clicked.connect(self.step4_button_pressed)
+    self.button_back.clicked.connect(self.back_button_pressed)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
@@ -1086,7 +1087,9 @@ class Menu_Default_UI(qtw.QWidget):
       self.button_step3.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.step_4) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step4.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.restart_0) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_back.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_restart.click()
 
   @qtc.pyqtSlot()
@@ -1099,8 +1102,7 @@ class Menu_Default_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def back_button_pressed(self):
     self.obj.deactivate()
-    # got to previuos UI
-    # self.target_ui = Confirm_Restart_UI(self.my_initializer)
+    self.target_ui = self.my_initializer.last_class(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
