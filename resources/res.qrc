@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="img">
+    <file>Confirm Restart.png</file>
     <file>Button Next Alternative.svg</file>
     <file>Icon Expert.png</file>
     <file>Icon User.png</file>

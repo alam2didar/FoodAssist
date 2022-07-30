@@ -167,6 +167,7 @@ class Step_3_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     self.obj.deactivate()
+    self.my_initializer.last_class = Step_3_UI
     self.target_ui = fa.Menu_Default_UI(self.my_initializer)
     fa.select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()

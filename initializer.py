@@ -11,13 +11,14 @@ class Initializer(qtc.QObject):
   start_worker = True
   interval_between_uis = 20
 
-  def __init__(self):
+  def __init__(self, last_class):
     super().__init__()
     # define current step
     self.current_step = None
-
-    # Following are the detection parameters
+    # detected step (by detection model)
     self.detected_step = 0
+    # last class which has called the current class
+    self.last_class = last_class
 
     # Initialize Depth Camera Intel Realsense
     #####
