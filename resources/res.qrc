@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="img">
+    <file>Knife Hand Right.png</file>
+    <file>Knife Hand Left.png</file>
+    <file>United-kingdom.png</file>
+    <file>Germany.png</file>
     <file>Confirm Restart.png</file>
     <file>Button Next Alternative.svg</file>
     <file>Icon Expert.png</file>
