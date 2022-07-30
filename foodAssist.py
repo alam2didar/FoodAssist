@@ -74,6 +74,10 @@ class Placing_Meat_UI(qtw.QWidget):
     self.box_h = 0
 
     self.button_skip.clicked.connect(self.skip_step_detection)
+    self.detection_gif = qtg.QMovie('resources/Detecting Icon.gif')
+    self.detecting_gif_label.setMovie(self.detection_gif)
+    self.detection_gif.start()
+
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -110,10 +114,8 @@ class Placing_Meat_UI(qtw.QWidget):
     self.close()
   
   @qtc.pyqtSlot()
-  def get_current_step(self):
-    # self.show()
-    detected_step = 1
-    if detected_step == 1:
+  def navigate_to_detected_step(self):
+    if self.my_initializer.detected_step == 1:
       self.obj.deactivate()
       self.target_ui = Entry_Step_1_UI(self.my_initializer)
       select_screen_and_show(self.target_ui)
@@ -127,6 +129,11 @@ class Placing_Meat_UI(qtw.QWidget):
         self.box_w = width
         self.box_h = height
         self.update()
+        if step != 0:
+          self.timer = qtc.QTimer()
+          self.timer.setSingleShot(True)
+          self.timer.start(100)
+          self.timer.timeout.connect(self.navigate_to_detected_step)
 
 class Entry_Step_1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
