@@ -190,6 +190,7 @@ class Entry_Step_1_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
+    self.my_initializer.last_class = Entry_Step_1_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -242,6 +243,7 @@ class Entry_Step_2_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
+    self.my_initializer.last_class = Entry_Step_2_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -295,6 +297,7 @@ class Entry_Step_3_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
+    self.my_initializer.last_class = Entry_Step_3_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -348,6 +351,7 @@ class Entry_Step_4_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def no_button_pressed(self):
     self.obj.deactivate()
+    self.my_initializer.last_class = Entry_Step_4_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -472,6 +476,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Tutorial_Ends_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -526,6 +531,7 @@ class Result_Step1_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step1_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -595,6 +601,7 @@ class Result_Step1_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step1_Percent_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -664,6 +671,7 @@ class Result_Step2_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step2_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -733,6 +741,7 @@ class Result_Step2_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step2_Percent_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -802,6 +811,7 @@ class Result_Step3_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step3_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -872,6 +882,7 @@ class Result_Step3_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step3_Percent_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -941,6 +952,7 @@ class Result_Step4_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step4_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -1013,6 +1025,7 @@ class Result_Step4_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step4_Percent_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
