@@ -72,35 +72,40 @@ class Step_3_UI(qtw.QWidget):
 
   # keep the order of the if statements 
   def animate_button(self):
-    self.counter = self.counter + 1
-    # set counter (to 100) to stop the thread when button is clicked
-    if self.counter < 12 and self.highlight_on_off_array[self.counter] or self.counter == 100:
-      if self.button == 1:
-          self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
-      if self.button == 2:
-          self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
-      if self.button == 3:
-          self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
-      if self.button == 4:
-          self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
-      if self.button == 5:
-          self.button_next.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
-    elif self.counter != 100:
-      if self.button == 1:
-        self.button_sub_step1.setStyleSheet('')
-      if self.button == 2:
-        self.button_sub_step2.setStyleSheet('')
-      if self.button == 3:
-        self.button_sub_step3.setStyleSheet('')
-      if self.button == 4:
-        self.button_sub_step4.setStyleSheet('')
-      if self.button == 5:
-          self.button_next.setStyleSheet('')
-    # this check must be at the end
-    if self.counter >= 12:
+    # Stop the thread when button is clicked (counter is 99)
+    if self.counter == 99:
       self.counter = 0
       self.timer.stop()
       self.timer.deleteLater()
+    else:
+      self.counter = self.counter + 1
+      if self.counter < 12 and self.highlight_on_off_array[self.counter]:
+        if self.button == 1:
+            self.button_sub_step1.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
+        if self.button == 2:
+            self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
+        if self.button == 3:
+            self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
+        if self.button == 4:
+            self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
+        if self.button == 5:
+            self.button_next.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
+      else:
+        if self.button == 1:
+          self.button_sub_step1.setStyleSheet('')
+        if self.button == 2:
+          self.button_sub_step2.setStyleSheet('')
+        if self.button == 3:
+          self.button_sub_step3.setStyleSheet('')
+        if self.button == 4:
+          self.button_sub_step4.setStyleSheet('')
+        if self.button == 5:
+            self.button_next.setStyleSheet('')
+      # this check must be at the end
+      if self.counter >= 12:
+        self.counter = 0
+        self.timer.stop()
+        self.timer.deleteLater()
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
