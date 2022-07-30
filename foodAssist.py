@@ -468,7 +468,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
   def restart_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
+    self.target_ui = Confirm_Restart_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
   
