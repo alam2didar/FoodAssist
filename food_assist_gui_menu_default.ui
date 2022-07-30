@@ -322,7 +322,7 @@ border-image: url(:/steps/4.1-What.jpg)  0 0 0 0 stretch stretch;
     </layout>
    </widget>
   </widget>
-  <widget class="QPushButton" name="button_restart_2">
+  <widget class="QPushButton" name="button_restart">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -378,7 +378,7 @@ border-image: url(:/steps/4.1-What.jpg)  0 0 0 0 stretch stretch;
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_restart">
+  <widget class="QPushButton" name="button_back">
    <property name="enabled">
     <bool>true</bool>
    </property>
