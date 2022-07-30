@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="200"
+   height="200"
+   viewBox="0 0 200 200"
+   fill="none"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="Button Next.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="4.385"
+     inkscape:cx="40.250855"
+     inkscape:cy="118.58609"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="2152"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <circle
+     cx="99.999992"
+     cy="100"
+     fill="none"
+     id="circle2"
+     style="stroke:#ffffff;stroke-width:7.81;stroke-dasharray:none;stroke-opacity:1;fill:none"
+     r="96.24176" />
+  <path
+     d="M148.375 64.1667C148.375 61.1982 145.968 58.7917 143 58.7917C140.031 58.7917 137.625 61.1982 137.625 64.1667V135.833C137.625 138.802 140.031 141.208 143 141.208C145.968 141.208 148.375 138.802 148.375 135.833V64.1667Z"
+     fill="white"
+     id="path4" />
+  <path
+     d="M117.586 92.4409C122.531 96.2672 122.531 103.733 117.586 107.559C102.263 119.416 85.1523 128.761 66.895 135.245L63.555 136.432C57.3226 138.645 50.7343 134.428 49.8899 127.989C47.4758 109.582 47.4758 90.4181 49.8899 72.0105C50.7343 65.5717 57.3226 61.3549 63.555 63.5684L66.895 64.7547C85.1523 71.239 102.263 80.5844 117.586 92.4409Z"
+     fill="white"
+     id="path6" />
+</svg>
