@@ -72,8 +72,9 @@ class Step_2_UI(qtw.QWidget):
     # Stop the thread when button is clicked (counter is 99)
     if self.counter == 99:
       self.counter = 0
-      self.timer.stop()
-      self.timer.deleteLater()
+      if self.timer:
+        self.timer.stop()
+        self.timer.deleteLater()
     else:
       self.counter = self.counter + 1
       if self.counter < 12 and self.highlight_on_off_array[self.counter]:
@@ -125,8 +126,12 @@ class Step_2_UI(qtw.QWidget):
       self.button_step2.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_sub_step1.click()
+      self.button_sub_step1.setEnabled(False)
+      qtc.QTimer.singleShot(5000, lambda: self.button_sub_step1.setDisabled(False))
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_sub_step2.click()
+      self.button_sub_step2.setEnabled(False)
+      qtc.QTimer.singleShot(5000, lambda: self.button_sub_step2.setDisabled(False))
     # @Yü Qiao TODO: add appropriate check for play button
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_play.click()
@@ -150,7 +155,7 @@ class Step_2_UI(qtw.QWidget):
     self.player = QtMultimedia.QMediaPlayer()
     self.close()
 
- # QMediaPlayer::StoppedState	0	
+  # QMediaPlayer::StoppedState	0	
   # QMediaPlayer::PlayingState	1	
   # QMediaPlayer::PausedState	2
   @qtc.pyqtSlot()
