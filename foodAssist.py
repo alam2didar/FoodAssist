@@ -75,8 +75,8 @@ class Language_and_Hand_UI(qtw.QWidget):
 
     self.button_de.clicked.connect(lambda: self.choose_lang('de'))
     self.button_en.clicked.connect(lambda: self.choose_lang('en'))
-    self.button_left_hand.clicked.connect(lambda: self.choose_hand('right'))
-    self.button_right_hand.clicked.connect(lambda: self.choose_hand('left'))
+    self.button_left_hand.clicked.connect(lambda: self.choose_hand('left'))
+    self.button_right_hand.clicked.connect(lambda: self.choose_hand('right'))
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -105,19 +105,18 @@ class Language_and_Hand_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def choose_lang(self, lang):
+    change_active_button_color(self, lang)
     self.lang = lang
   
   @qtc.pyqtSlot()
   def choose_hand(self, hand):
+    change_active_button_color(self, hand)
     self.hand = hand
   
   @qtc.pyqtSlot()
   def yes_button_pressed(self):
-    print('---Language:', self.lang)
-    print('---Hand:', self.hand)
     self.my_initializer.lang = self.lang
     self.my_initializer.hand = self.hand
-    # duplicated but required when interacting with physical mouse
     self.obj.deactivate()
     self.target_ui = Placing_Meat_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
@@ -127,7 +126,6 @@ class Language_and_Hand_UI(qtw.QWidget):
   def no_button_pressed(self):
     self.lang = None
     self.hand = None
-    # duplicated but required when interacting with physical mouse
     self.obj.deactivate()
     self.target_ui = FoodAssist(self.my_initializer)
     select_screen_and_show(self.target_ui)
@@ -1367,6 +1365,18 @@ def change_active_button_color(self, button):
       self.button_step3.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
     if self.findChild(qtw.QWidget, "button_step4"):
       self.button_step4.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+  if button == 'de':
+    self.button_de.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+    self.button_en.setStyleSheet('')
+  if button == 'en':
+    self.button_en.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+    self.button_de.setStyleSheet('')
+  if button == 'left':
+    self.button_left_hand.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+    self.button_right_hand.setStyleSheet('')
+  if button == 'right':
+    self.button_right_hand.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+    self.button_left_hand.setStyleSheet('')
 
 def on_substep_button_click(self, substep_button, all_substep=False):
   if not all_substep:

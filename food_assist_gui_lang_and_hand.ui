@@ -409,10 +409,9 @@ color: rgb(255, 255, 255);</string>
    <property name="contextMenuPolicy">
     <enum>Qt::DefaultContextMenu</enum>
    </property>
-   <property name="styleSheet">
-    <string notr="true">border-radius: 73px;
-border-width: 1px;
-border-image: url(:/img/Knife Hand Right.png);</string>
+   <property name="icon">
+    <iconset resource="resources/res.qrc">
+     <normaloff>:/img/Knife Hand Right.png</normaloff>:/img/Knife Hand Right.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -467,10 +466,11 @@ border-image: url(:/img/Knife Hand Right.png);</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-radius: 73px;
-border-width: 1px;
-border-image: url(:/img/Knife Hand Left.png);
-</string>
+    <string notr="true"/>
+   </property>
+   <property name="icon">
+    <iconset resource="resources/res.qrc">
+     <normaloff>:/img/Knife Hand Left.png</normaloff>:/img/Knife Hand Left.png</iconset>
    </property>
    <property name="iconSize">
     <size>
