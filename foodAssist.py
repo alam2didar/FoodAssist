@@ -520,14 +520,6 @@ class Result_Step1_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -545,8 +537,6 @@ class Result_Step1_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -590,14 +580,6 @@ class Result_Step1_Percent_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -615,8 +597,6 @@ class Result_Step1_Percent_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -660,14 +640,6 @@ class Result_Step2_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -685,8 +657,6 @@ class Result_Step2_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -730,14 +700,6 @@ class Result_Step2_Percent_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -755,8 +717,6 @@ class Result_Step2_Percent_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -800,14 +760,6 @@ class Result_Step3_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -825,8 +777,6 @@ class Result_Step3_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -871,14 +821,6 @@ class Result_Step3_Percent_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -896,8 +838,6 @@ class Result_Step3_Percent_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -941,14 +881,6 @@ class Result_Step4_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -966,8 +898,6 @@ class Result_Step4_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -1014,14 +944,6 @@ class Result_Step4_Percent_UI(qtw.QWidget):
     self.close()
 
   @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = FoodAssist(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
-  @qtc.pyqtSlot()
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
@@ -1039,8 +961,6 @@ class Result_Step4_Percent_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -1277,7 +1197,6 @@ def show_evaluation_result(self, step_number):
     self.label_analysis_3.setText(f"gesture 3: {difference[2]} time(s) {text_more_less[2]} than the expert")
 
 def show_evaluation_percent_result(self, step_number):
-  self.button_restart.clicked.connect(self.restart_button_pressed)
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
