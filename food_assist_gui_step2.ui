@@ -554,7 +554,7 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="icon">
      <iconset resource="resources/res.qrc">
-      <normaloff>:/buttons/Sub Step 3.svg</normaloff>:/buttons/Sub Step 3.svg</iconset>
+      <normaloff>:/buttons/Sub Step 2.svg</normaloff>:/buttons/Sub Step 2.svg</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -607,7 +607,7 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="icon">
      <iconset resource="resources/res.qrc">
-      <normaloff>:/buttons/Sub Step 4.svg</normaloff>:/buttons/Sub Step 4.svg</iconset>
+      <normaloff>:/buttons/Sub Step 2.svg</normaloff>:/buttons/Sub Step 2.svg</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -653,7 +653,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/steps/2.2-Where.jpg</pixmap>
+     <pixmap resource="resources/res.qrc">:/steps/2.1-What.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -693,7 +693,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/steps/2.1-What.jpg</pixmap>
+     <pixmap resource="resources/res.qrc">:/steps/2.2-Where.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -779,6 +779,14 @@ color: rgb(255, 255, 255);</string>
      <number>0</number>
     </property>
    </widget>
+   <zorder>label_7</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_5</zorder>
+   <zorder>label_6</zorder>
+   <zorder>button_sub_step1_5</zorder>
+   <zorder>button_sub_step1_4</zorder>
+   <zorder>button_sub_step1_3</zorder>
+   <zorder>button_sub_step1_2</zorder>
   </widget>
   <widget class="QPushButton" name="button_step2">
    <property name="enabled">

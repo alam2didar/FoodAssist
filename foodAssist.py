@@ -1398,7 +1398,7 @@ def on_substep_button_click(self, substep_button, all_substep=False):
 def main():
   # initiate app
   app = qtw.QApplication([])
-  my_initializer = initializer.Initializer(qtw.QWidget)
+  my_initializer = initializer.Initializer()
   target_ui = FoodAssist(my_initializer)
   select_screen_and_show(target_ui)
 
