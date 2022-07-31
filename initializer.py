@@ -1,5 +1,6 @@
 import PyQt5.QtCore as qtc
 import DepthCameraModule as dcm
+from foodAssist import Placing_Meat_UI
 import worker_websocket
 import worker_recorder
 import worker_detection
@@ -11,7 +12,7 @@ class Initializer(qtc.QObject):
   start_worker = True
   interval_between_uis = 20
 
-  def __init__(self, last_class):
+  def __init__(self, last_class=Placing_Meat_UI):
     super().__init__()
     # define current step
     self.current_step = None
