@@ -1127,7 +1127,6 @@ def create_worker_evaluator(self):
   self.thread_evaluator.start()
 
 def show_evaluation_result(self, step_number):
-  self.button_restart.clicked.connect(self.restart_button_pressed)
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
@@ -1140,9 +1139,6 @@ def show_evaluation_result(self, step_number):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
   if difference[0] is None or difference[1] is None or difference[2] is None:
     self.label_trouble.setText(f"You didn't perform any gesture in this step.")
-    self.label_analysis_1.setHidden(True)
-    self.label_analysis_2.setHidden(True)
-    self.label_analysis_3.setHidden(True)
   else:
     for index in range(3):
       if difference[index] > 0:
@@ -1157,9 +1153,6 @@ def show_evaluation_result(self, step_number):
     if difference[2] > difference[1]:
       gesture_no = 3
     self.label_trouble.setText(f"most troubled: gesture {gesture_no}")
-    self.label_analysis_1.setText(f"gesture 1: {difference[0]} time(s) {text_more_less[0]} than the expert")
-    self.label_analysis_2.setText(f"gesture 2: {difference[1]} time(s) {text_more_less[1]} than the expert")
-    self.label_analysis_3.setText(f"gesture 3: {difference[2]} time(s) {text_more_less[2]} than the expert")
 
 def show_evaluation_percent_result(self, step_number):
   self.button_exit.clicked.connect(self.exit_button_pressed)
