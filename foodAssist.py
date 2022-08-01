@@ -70,8 +70,11 @@ class Language_and_Hand_UI(qtw.QWidget):
     self.hand = None
 
     self.button_yes.setHidden(True)
+    self.button_yes.setEnabled(False)
     self.button_no.setHidden(True)
+    self.button_no.setEnabled(False)
     self.button_heading.setHidden(True)
+    self.button_heading.setEnabled(False)
 
     self.button_de.clicked.connect(lambda: self.choose_lang('de'))
     self.button_en.clicked.connect(lambda: self.choose_lang('en'))
@@ -89,8 +92,11 @@ class Language_and_Hand_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
     if self.lang and self.hand:
       self.button_yes.setHidden(False)
+      self.button_yes.setEnabled(True)
       self.button_no.setHidden(False)
+      self.button_no.setEnabled(True)
       self.button_heading.setHidden(False)
+      self.button_heading.setEnabled(True)
 
   # check if the button is touched
   def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
