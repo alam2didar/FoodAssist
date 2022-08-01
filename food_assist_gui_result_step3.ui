@@ -49,33 +49,6 @@
     <string>label_plot_1_user</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_analysis_1">
-   <property name="geometry">
-    <rect>
-     <x>1180</x>
-     <y>390</y>
-     <width>730</width>
-     <height>200</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;gesture 1: 1 time(s) more than the expert&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_text_step">
    <property name="geometry">
     <rect>
@@ -322,60 +295,6 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QLabel" name="label_analysis_2">
-   <property name="geometry">
-    <rect>
-     <x>1180</x>
-     <y>600</y>
-     <width>720</width>
-     <height>200</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;gesture 2: 1 time(s) more than the expert&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_analysis_3">
-   <property name="geometry">
-    <rect>
-     <x>1180</x>
-     <y>810</y>
-     <width>720</width>
-     <height>200</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;gesture 3: 1 time(s) more than the expert&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_trouble">
    <property name="geometry">
     <rect>
@@ -394,7 +313,7 @@
     <string notr="true">color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;most troubled: gesture 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;most troubled: gesture x&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -524,15 +443,12 @@
     <bool>true</bool>
    </property>
   </widget>
-  <zorder>label_analysis_1</zorder>
   <zorder>label_text_step</zorder>
   <zorder>label_plot_1_user</zorder>
   <zorder>label_plot_1_expert</zorder>
   <zorder>button_nav_left</zorder>
   <zorder>button_nav_right</zorder>
   <zorder>widget_score</zorder>
-  <zorder>label_analysis_2</zorder>
-  <zorder>label_analysis_3</zorder>
   <zorder>label_trouble</zorder>
   <zorder>icon_user</zorder>
   <zorder>icon_expert</zorder>
