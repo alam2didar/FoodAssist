@@ -67,7 +67,7 @@ class WorkerEvaluator(QObject):
             if archive_file_name:
                 print('archive_file_name is: ', archive_file_name)
                 # load data to process
-                column_names = ['timestamp', 'step', 'sensor_type', 'recognized_gesture']
+                column_names = ['user', 'timestamp', 'step', 'sensor_type', 'recognized_gesture']
                 df = pd.read_csv(archive_file_name, header=None, names=column_names)
                 # df = pd.read_csv('records/record_expert.csv', header=None, names=column_names)
                 df = df.dropna()

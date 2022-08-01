@@ -63,7 +63,7 @@ class WorkerRecorder(QObject):
             current_time = datetime.datetime.now()
             current_time_s = current_time.strftime("%y%m%d%H%M%S")
             current_time_ms = "{:06d}".format(current_time.microsecond)
-            # write into csv file
-            self.file_writer.write("{}{},step_{},{},{}\n".format(current_time_s, current_time_ms, current_step, sensor_type, result_gesture))
+            # write into csv file - for newbie
+            self.file_writer.write("newbie,{}{},step_{},{},{}\n".format(current_time_s, current_time_ms, current_step, sensor_type, result_gesture))
         else:
             print("no permission to write")
