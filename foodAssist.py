@@ -150,17 +150,6 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
-    # set qmovie as label
-    self.movie_1 = qtg.QMovie('step-gifs/step_1_gesture_1.gif')
-    self.label_required_1.setMovie(self.movie_1)
-    self.movie_1.start()
-    self.movie_2 = qtg.QMovie('step-gifs/step_1_gesture_2.gif')
-    self.label_required_2.setMovie(self.movie_2)
-    self.movie_2.start()
-    self.movie_3 = qtg.QMovie('step-gifs/step_1_gesture_3.gif')
-    self.label_required_3.setMovie(self.movie_3)
-    self.movie_3.start()
-
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -205,14 +194,6 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-
-    # set qmovie as label
-    self.movie_1 = qtg.QMovie('step-gifs/step_2_gesture_1.gif')
-    self.label_required_1.setMovie(self.movie_1)
-    self.movie_1.start()
-    self.movie_2 = qtg.QMovie('step-gifs/step_2_gesture_3.gif')
-    self.label_required_2.setMovie(self.movie_2)
-    self.movie_2.start()
 
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
@@ -260,14 +241,6 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
-    # set qmovie as label
-    self.movie_1 = qtg.QMovie('step-gifs/step_3_gesture_1.gif')
-    self.label_required_1.setMovie(self.movie_1)
-    self.movie_1.start()
-    self.movie_2 = qtg.QMovie('step-gifs/step_3_gesture_2.gif')
-    self.label_required_2.setMovie(self.movie_2)
-    self.movie_2.start()
-
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -313,14 +286,6 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.ui = uic.loadUi('food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
-
-    # set qmovie as label
-    self.movie_1 = qtg.QMovie('step-gifs/step_4_gesture_1.gif')
-    self.label_required_1.setMovie(self.movie_1)
-    self.movie_1.start()
-    self.movie_2 = qtg.QMovie('step-gifs/step_4_gesture_2.gif')
-    self.label_required_2.setMovie(self.movie_2)
-    self.movie_2.start()
 
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
@@ -1317,6 +1282,7 @@ def on_substep_button_click(self, substep_button, all_substep=False):
 def main():
   # initiate app
   app = qtw.QApplication([])
+  # created initializer globally
   my_initializer = initializer.Initializer()
   target_ui = FoodAssist(my_initializer)
   select_screen_and_show(target_ui)
