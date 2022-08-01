@@ -102,6 +102,14 @@ class Language_and_Hand_UI(qtw.QWidget):
       self.button_yes.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_no.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_de) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_de.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_en) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_en.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_left_hand) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_left_hand.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_right_hand) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_right_hand.click()
 
   @qtc.pyqtSlot()
   def choose_lang(self, lang):
