@@ -460,8 +460,8 @@ class Result_Step1_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result after my_initializer is passed
-    show_evaluation_result(self, 1)
+    # show_evaluation_result_1 after my_initializer is passed
+    show_evaluation_result_1(self, 1)
     # disable left button
     self.button_nav_left.setHidden(True)
     self.button_nav_left.setEnabled(False)
@@ -523,8 +523,8 @@ class Result_Step1_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_percent_result after my_initializer is passed
-    show_evaluation_percent_result(self, 1)
+    # show_evaluation_result_2 after my_initializer is passed
+    show_evaluation_result_2(self, 1)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -583,8 +583,8 @@ class Result_Step2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result after my_initializer is passed
-    show_evaluation_result(self, 2)
+    # show_evaluation_result_1 after my_initializer is passed
+    show_evaluation_result_1(self, 2)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -643,8 +643,8 @@ class Result_Step2_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_percent_result after my_initializer is passed
-    show_evaluation_percent_result(self, 2)
+    # show_evaluation_result_2 after my_initializer is passed
+    show_evaluation_result_2(self, 2)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -703,8 +703,8 @@ class Result_Step3_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result after my_initializer is passed
-    show_evaluation_result(self, 3)
+    # show_evaluation_result_1 after my_initializer is passed
+    show_evaluation_result_1(self, 3)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -764,8 +764,8 @@ class Result_Step3_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_percent_result after my_initializer is passed
-    show_evaluation_percent_result(self, 3)
+    # show_evaluation_result_2 after my_initializer is passed
+    show_evaluation_result_2(self, 3)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -824,8 +824,8 @@ class Result_Step4_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result after my_initializer is passed
-    show_evaluation_result(self, 4)
+    # show_evaluation_result_1 after my_initializer is passed
+    show_evaluation_result_1(self, 4)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -884,8 +884,8 @@ class Result_Step4_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_percent_result after my_initializer is passed
-    show_evaluation_percent_result(self, 4)
+    # show_evaluation_result_2 after my_initializer is passed
+    show_evaluation_result_2(self, 4)
     # disable right button
     self.button_nav_right.setHidden(True)
     self.button_nav_right.setEnabled(False)
@@ -1130,13 +1130,15 @@ def create_worker_evaluator(self):
   # 6 - Start the thread
   self.thread_evaluator.start()
 
-def show_evaluation_result(self, step_number):
+def show_evaluation_result_1(self, step_number):
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
   self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
   self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_1.png'))
   self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_2.png'))
+  self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
+  self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
   difference = [None, None, None]
   for index in range(3):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
@@ -1153,13 +1155,15 @@ def show_evaluation_result(self, step_number):
       gesture_no = 3
     self.label_trouble.setText(f"most troubled: gesture {gesture_no}")
 
-def show_evaluation_percent_result(self, step_number):
+def show_evaluation_result_2(self, step_number):
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
   self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
   self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_3.png'))
   self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_4.png'))
+  self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
+  self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
   difference = [None, None, None]
   for index in range(3):
     if self.my_initializer.difference_dict[f'step_{step_number}'][index] is not None:
