@@ -112,6 +112,7 @@ class WorkerEvaluator(QObject):
         score_value = 0
         df_position = None
         # df_motion = None
+        df_expert_position_amount = [0, 0, 0]
         df_newbie_position_amount = [0, 0, 0]
         amount_difference = [None, None, None]
         # gesture_ratio = [0, 0, 0]
@@ -131,10 +132,13 @@ class WorkerEvaluator(QObject):
         # if not df_newbie_position.empty:
         for gesture_index in range(1, 4):
             # filter gesture x
+            df_newbie_gesture_x = df_newbie_position[df_newbie_position['recognized_gesture'] == gesture_index]
+            df_expert_gesture_x = df_expert_position[df_expert_position['recognized_gesture'] == gesture_index]
             df_position_gesture_x = df_position[df_position['recognized_gesture'] == gesture_index]
             try:
                 # define data
-                df_newbie_position_amount[gesture_index-1] = df_position_gesture_x.shape[0]
+                df_newbie_position_amount[gesture_index-1] = df_newbie_gesture_x.shape[0]
+                df_expert_position_amount[gesture_index-1] = df_expert_gesture_x.shape[0]
             except ValueError:
                 print(ValueError)
                 print(f'reaching point - error encountered finding position amount: {gesture_index}')
@@ -165,31 +169,31 @@ class WorkerEvaluator(QObject):
             # plt.pie(df_newbie_position_amount, labels = labels, colors = colors, autopct='%.0f%%')
             # plt.savefig(f'records/plot_2_user_step_{step_number}.png')
             # percentage
-            sum = df_newbie_position_amount[0] + df_newbie_position_amount[1] + df_newbie_position_amount[2]
-            if sum != 0:
-                for gesture_index in range(1, 4):
-                    amount_difference[gesture_index-1] = df_newbie_position_amount[gesture_index-1] - self.expert_amount_dict[f'step_{step_number}_gesture_{gesture_index}']
-                # calculation of score_value
-                if abs(amount_difference[0]) > 4 or abs(amount_difference[1]) > 4 or abs(amount_difference[2]) > 4:
-                    # qualitative_result = False
-                    score_value = 60
-                elif abs(amount_difference[0]) > 3 or abs(amount_difference[1]) > 3 or abs(amount_difference[2]) > 3:
-                    # qualitative_result = False
-                    score_value = 70
-                elif abs(amount_difference[0]) > 2 or abs(amount_difference[1]) > 2 or abs(amount_difference[2]) > 2:
-                    # qualitative_result = True
-                    score_value = 80
-                elif abs(amount_difference[0]) > 1 or abs(amount_difference[1]) > 1 or abs(amount_difference[2]) > 1:
-                    # qualitative_result = True
-                    score_value = 90
-                # elif amount_difference == [0, 0, 0]:
-                #     # qualitative_result = True
-                #     score_value = 100
-                elif amount_difference == [None, None, None]:
-                    score_value = 0
-                success_flag = True
-            else:
-                success_flag = False
+        sum = df_newbie_position_amount[0] + df_newbie_position_amount[1] + df_newbie_position_amount[2]
+        if sum != 0:
+            for gesture_index in range(1, 4):
+                amount_difference[gesture_index-1] = df_newbie_position_amount[gesture_index-1] - self.expert_amount_dict[f'step_{step_number}_gesture_{gesture_index}']
+            # calculation of score_value
+            if abs(amount_difference[0]) > 4 or abs(amount_difference[1]) > 4 or abs(amount_difference[2]) > 4:
+                # qualitative_result = False
+                score_value = 60
+            elif abs(amount_difference[0]) > 3 or abs(amount_difference[1]) > 3 or abs(amount_difference[2]) > 3:
+                # qualitative_result = False
+                score_value = 70
+            elif abs(amount_difference[0]) > 2 or abs(amount_difference[1]) > 2 or abs(amount_difference[2]) > 2:
+                # qualitative_result = True
+                score_value = 80
+            elif abs(amount_difference[0]) > 1 or abs(amount_difference[1]) > 1 or abs(amount_difference[2]) > 1:
+                # qualitative_result = True
+                score_value = 90
+            # elif amount_difference == [0, 0, 0]:
+            #     # qualitative_result = True
+            #     score_value = 100
+            elif amount_difference == [None, None, None]:
+                score_value = 0
+            success_flag = True
+        else:
+            success_flag = False
         # check df_motion
         # if not df_motion.empty:
         #     df_motion_amount[0] = df_motion[df_motion['result_gesture'] >= 1].shape[0]
