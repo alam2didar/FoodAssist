@@ -1131,9 +1131,8 @@ def show_evaluation_result(self, step_number):
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
   self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
-  self.label_plot_1_expert.setPixmap(qtg.QPixmap(f'records/plot_1_expert_step_{step_number}.png'))
-  self.label_plot_1_user.setPixmap(qtg.QPixmap(f'records/plot_1_user_step_{step_number}.png'))
-  text_more_less = [None, None, None]
+  self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_1.png'))
+  self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_2.png'))
   difference = [None, None, None]
   for index in range(3):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
@@ -1141,11 +1140,7 @@ def show_evaluation_result(self, step_number):
     self.label_trouble.setText(f"You didn't perform any gesture in this step.")
   else:
     for index in range(3):
-      if difference[index] > 0:
-        text_more_less[index] = 'more'
-      else:
-        text_more_less[index] = 'less'
-        difference[index] = -difference[index]
+      difference[index] = abs(difference[index])
     # find out worst gesture
     gesture_no = 1
     if difference[1] > difference[0]:
@@ -1159,14 +1154,13 @@ def show_evaluation_percent_result(self, step_number):
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
   self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
-  self.label_plot_2_expert.setPixmap(qtg.QPixmap(f'records/plot_2_expert_step_{step_number}.png'))
-  self.label_plot_2_user.setPixmap(qtg.QPixmap(f'records/plot_2_user_step_{step_number}.png'))
+  self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_3.png'))
+  self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_4.png'))
   difference = [None, None, None]
   for index in range(3):
     if self.my_initializer.difference_dict[f'step_{step_number}'][index] is not None:
       difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
   if difference[0] is None or difference[1] is None or difference[2] is None:
-    self.label_analysis_1.setHidden(True)
     self.label_trouble.setText(f"You didn't perform any gesture in this step.")
   else:
     for index in range(3):
@@ -1177,8 +1171,7 @@ def show_evaluation_percent_result(self, step_number):
       gesture_no = 2
     if difference[2] > difference[1]:
       gesture_no = 3
-    self.label_trouble.setHidden(True)
-    self.label_analysis_1.setText(f"You need to practice gesture {gesture_no} more in this step.")
+    self.label_trouble.setText(f"most troubled: gesture {gesture_no}")
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
