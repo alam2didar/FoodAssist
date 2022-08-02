@@ -331,7 +331,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.button_view.clicked.connect(self.button_view_clicked)
     # disable buttons
     self.button_restart.setEnabled(False)
+    self.button_restart.setHidden(True)
     self.button_exit.setEnabled(False)
+    self.button_exit.setHidden(True)
     self.button_view.setEnabled(False)
     self.button_view.setHidden(True)
     self.widget_xp.setHidden(True)
@@ -390,7 +392,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer.score_percent = score_percent
     # enable buttons
     self.button_restart.setEnabled(True)
+    self.button_restart.setHidden(False)
     self.button_exit.setEnabled(True)
+    self.button_exit.setHidden(False)
     # show result
     if success_flag:
       print("reaching point - evaluation successful")
