@@ -35,8 +35,8 @@ class WorkerEvaluator(QObject):
     @pyqtSlot()
     def remove_png_files(self):
         for step_number in range(1, 5):
-            for fig_number in range(1, 3):
-                fig_name = f'records/plot_{fig_number}_user_step_{step_number}.png'
+            for gesture_index in range(1, 4):
+                fig_name = f'records/count_plot_step_{step_number}_gesture_{gesture_index}.png'
                 # removing png file
                 if os.path.exists(fig_name):
                     os.remove(fig_name)
@@ -67,20 +67,25 @@ class WorkerEvaluator(QObject):
             if archive_file_name:
                 print('archive_file_name is: ', archive_file_name)
                 # load data to process
-                column_names = ['user', 'timestamp', 'step', 'sensor_type', 'recognized_gesture']
-                df = pd.read_csv(archive_file_name, header=None, names=column_names)
-                # df = pd.read_csv('records/record_expert.csv', header=None, names=column_names)
-                df = df.dropna()
+                column_names = ['role', 'timestamp', 'step', 'sensor_type', 'recognized_gesture']
+                df_newbie = pd.read_csv(archive_file_name, header=None, names=column_names)
+                df_newbie = df_newbie.dropna()
+                df_expert = pd.read_csv('records/record_expert.csv', header=None, names=column_names)
+                df_expert = df_expert.dropna()
                 # filter data frame for each step
-                df_step_1 = df[df['step'] == 'step_1']
-                df_step_2 = df[df['step'] == 'step_2']
-                df_step_3 = df[df['step'] == 'step_3']
-                df_step_4 = df[df['step'] == 'step_4']
+                df_expert_step_1 = df_expert[df_expert['step'] == 'step_1']
+                df_expert_step_2 = df_expert[df_expert['step'] == 'step_2']
+                df_expert_step_3 = df_expert[df_expert['step'] == 'step_3']
+                df_expert_step_4 = df_expert[df_expert['step'] == 'step_4']
+                df_newbie_step_1 = df_newbie[df_newbie['step'] == 'step_1']
+                df_newbie_step_2 = df_newbie[df_newbie['step'] == 'step_2']
+                df_newbie_step_3 = df_newbie[df_newbie['step'] == 'step_3']
+                df_newbie_step_4 = df_newbie[df_newbie['step'] == 'step_4']
                 # perform the same data processing on each step dataset
-                success_flag_dict['step_1'], difference_dict['step_1'], score_dict['step_1'] = self.process_data_frame(df_step_1, 1)
-                success_flag_dict['step_2'], difference_dict['step_2'], score_dict['step_2'] = self.process_data_frame(df_step_2, 2)
-                success_flag_dict['step_3'], difference_dict['step_3'], score_dict['step_3'] = self.process_data_frame(df_step_3, 3)
-                success_flag_dict['step_4'], difference_dict['step_4'], score_dict['step_4'] = self.process_data_frame(df_step_4, 4)
+                success_flag_dict['step_1'], difference_dict['step_1'], score_dict['step_1'] = self.process_data_frame(df_expert_step_1, df_newbie_step_1, 1)
+                success_flag_dict['step_2'], difference_dict['step_2'], score_dict['step_2'] = self.process_data_frame(df_expert_step_2, df_newbie_step_2, 2)
+                success_flag_dict['step_3'], difference_dict['step_3'], score_dict['step_3'] = self.process_data_frame(df_expert_step_3, df_newbie_step_3, 3)
+                success_flag_dict['step_4'], difference_dict['step_4'], score_dict['step_4'] = self.process_data_frame(df_expert_step_4, df_newbie_step_4, 4)
                 # aggregate success_flag from each step
                 success_flag = success_flag_dict['step_1'] or success_flag_dict['step_2'] or success_flag_dict['step_3'] or success_flag_dict['step_4']
                 # use score_value to find out the ranking - to do
@@ -101,65 +106,69 @@ class WorkerEvaluator(QObject):
         self.evaluation_result.emit(success_flag, difference_dict, score_dict, score_sorted_list, score_percent)
 
     @pyqtSlot()
-    def process_data_frame(self, data_frame_step, step_number):
+    def process_data_frame(self, data_frame_expert_step, data_frame_newbie_step, step_number):
         success_flag = False
         # qualitative_result = False
         score_value = 0
         df_position = None
         # df_motion = None
-        df_position_amount = [0, 0, 0]
+        df_newbie_position_amount = [0, 0, 0]
         amount_difference = [None, None, None]
         # gesture_ratio = [0, 0, 0]
         # ratio_difference = [0, 0, 0]
         # df_motion_amount = [0, 0]
         try:
             # filter position and motion
-            df_position = data_frame_step[data_frame_step['sensor_type'] == 'position']
-            # df_motion = data_frame_step[data_frame_step['sensor_type'] == 'motion']
+            df_expert_position = data_frame_expert_step[data_frame_expert_step['sensor_type'] == 'position']
+            df_newbie_position = data_frame_newbie_step[data_frame_newbie_step['sensor_type'] == 'position']
+            df_position = df_expert_position.append(df_newbie_position)
+            # df_newbie_motion = data_frame_newbie_step[data_frame_newbie_step['sensor_type'] == 'motion']
         except ValueError:
             print(ValueError)
             print('reaching point - error encountered filtering position and motion')
             success_flag = False
         # check df_position
-        if not df_position.empty:
-            # creating image
-            plt.figure()
+        # if not df_newbie_position.empty:
+        for gesture_index in range(1, 4):
+            # filter gesture x
+            df_position_gesture_x = df_position[df_position['recognized_gesture'] == gesture_index]
+            try:
+                # define data
+                df_newbie_position_amount[gesture_index-1] = df_position_gesture_x.shape[0]
+            except ValueError:
+                print(ValueError)
+                print(f'reaching point - error encountered finding position amount: {gesture_index}')
+                success_flag = False
+            # define Seaborn color palette to use
+            sns.set(style='whitegrid', palette='muted', font_scale=1)
+            # creating image - gesture x - change plot size
+            # plt.figure(figsize=(12, 4.8)).gca().yaxis.get_major_locator().set_params(integer=True)
+            plt.figure(figsize=(12, 4.8))
             # count plot
-            plt.title('How many times did you perform each gesture?')
+            # plt.title('How many times did you perform each gesture?')
             # plt.title('How many times does an expert perform each gesture?')
-            # define Seaborn color palette to use
-            colors = sns.color_palette('pastel')[0:5]
-            sns.set(style='whitegrid', palette='muted', font_scale=1)
-            sns_count_plot = sns.countplot(x='recognized_gesture', data=df_position)
-            # sns_count_plot = sns.countplot(x='recognized_gesture',
-            #                         data=df_position,
-            #                         order=df_position.recognized_gesture.value_counts().index)
-            sns_count_plot.figure.savefig(f'records/plot_1_user_step_{step_number}.png')
-            # gesture 1, 2, 3
-            for index in range(3):
-                try:
-                    # define data
-                    df_position_amount[index] = df_position[df_position['recognized_gesture'] == index+1].shape[0]
-                except ValueError:
-                    print(ValueError)
-                    print(f'reaching point - error encountered finding position amount: {index}')
-                    success_flag = False
-            labels = ['gesture 1', 'gesture 2', 'gesture 3']
-            # creating image
-            plt.figure()
-            # pie chart
-            plt.title('Ratio of each gesture performed by you:')
-            # plt.title('Ratio of each gesture performed by an expert:')
-            # define Seaborn color palette to use
-            colors = sns.color_palette('pastel')[0:5]
-            sns.set(style='whitegrid', palette='muted', font_scale=1)
-            plt.pie(df_position_amount, labels = labels, colors = colors, autopct='%.0f%%')
-            plt.savefig(f'records/plot_2_user_step_{step_number}.png')
+            sns_count_plot = sns.countplot(y='role', data=df_position_gesture_x, order=['expert', 'newbie'])
+            strFile = f'records/count_plot_step_{step_number}_gesture_{gesture_index}.png'
+            if os.path.isfile(strFile):
+                os.remove(strFile)
+            sns_count_plot.figure.savefig(strFile)
+
+            # labels = ['gesture 1', 'gesture 2', 'gesture 3']
+            # # creating percentage image
+            # plt.figure()
+            # # pie chart
+            # plt.title('Ratio of each gesture performed by you:')
+            # # plt.title('Ratio of each gesture performed by an expert:')
+            # # define Seaborn color palette to use
+            # colors = sns.color_palette('pastel')[0:5]
+            # sns.set(style='whitegrid', palette='muted', font_scale=1)
+            # plt.pie(df_newbie_position_amount, labels = labels, colors = colors, autopct='%.0f%%')
+            # plt.savefig(f'records/plot_2_user_step_{step_number}.png')
             # percentage
-            sum = df_position_amount[0] + df_position_amount[1] + df_position_amount[2]
+            sum = df_newbie_position_amount[0] + df_newbie_position_amount[1] + df_newbie_position_amount[2]
             if sum != 0:
-                for index in range(3):
-                    amount_difference[index] = df_position_amount[index] - self.expert_amount_dict[f'step_{step_number}_gesture_{index+1}']
+                for gesture_index in range(1, 4):
+                    amount_difference[gesture_index-1] = df_newbie_position_amount[gesture_index-1] - self.expert_amount_dict[f'step_{step_number}_gesture_{gesture_index}']
                 # calculation of score_value
                 if abs(amount_difference[0]) > 4 or abs(amount_difference[1]) > 4 or abs(amount_difference[2]) > 4:
                     # qualitative_result = False
@@ -173,9 +182,11 @@ class WorkerEvaluator(QObject):
                 elif abs(amount_difference[0]) > 1 or abs(amount_difference[1]) > 1 or abs(amount_difference[2]) > 1:
                     # qualitative_result = True
                     score_value = 90
-                else:
-                    # qualitative_result = True
-                    score_value = 100
+                # elif amount_difference == [0, 0, 0]:
+                #     # qualitative_result = True
+                #     score_value = 100
+                elif amount_difference == [None, None, None]:
+                    score_value = 0
                 success_flag = True
             else:
                 success_flag = False
