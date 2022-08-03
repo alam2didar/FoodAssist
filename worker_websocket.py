@@ -44,8 +44,9 @@ class WorkerWebsocket(QObject):
                             prob_0 = float(json_dict["prob_0"])
                             prob_1 = float(json_dict["prob_1"])
                             prob_2 = float(json_dict["prob_2"])
+                            prob_3 = float(json_dict["prob_3"])
                             # pick out the highest probability
-                            temp_max = max(prob_0, prob_1, prob_2)
+                            temp_max = max(prob_0, prob_1, prob_2, prob_3)
                             if temp_max > 0.5:
                                 # pick out result_feature
                                 if prob_0 == temp_max:
@@ -54,6 +55,8 @@ class WorkerWebsocket(QObject):
                                     recognized_gesture = 2
                                 elif prob_2 == temp_max:
                                     recognized_gesture = 3
+                                elif prob_3 == temp_max:
+                                    recognized_gesture = 4
                                 # emit result_type, recognized_gesture (emitting gesture recognition from smart watch)
                                 self.websocket_message.emit(sensor_type, recognized_gesture)
                             else:
