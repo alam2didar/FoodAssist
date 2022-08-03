@@ -132,11 +132,9 @@ class Step_2_UI(qtw.QWidget):
       self.button_sub_step2.click()
       self.button_sub_step2.setEnabled(False)
       qtc.QTimer.singleShot(5000, lambda: self.button_sub_step2.setDisabled(False))
-    # @Yü Qiao TODO: add appropriate check for play button
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_play) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_play.click()
-    # @Yü Qiao TODO: add appropriate check for pause button
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_pause) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_pause.click()
 
   @qtc.pyqtSlot()

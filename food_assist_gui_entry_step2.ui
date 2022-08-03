@@ -316,69 +316,107 @@ background-color: rgb(0, 0, 0, 0);</string>
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_required_2">
+  <widget class="QLabel" name="text_required_1">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>160</y>
-     <width>240</width>
-     <height>240</height>
+     <x>40</x>
+     <y>400</y>
+     <width>320</width>
+     <height>100</height>
     </rect>
    </property>
-   <property name="maximumSize">
-    <size>
-     <width>240</width>
-     <height>240</height>
-    </size>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>bear</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Gesture 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
-   <property name="scaledContents">
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_required_1">
+  <widget class="QLabel" name="image_required_1">
    <property name="geometry">
     <rect>
      <x>40</x>
      <y>160</y>
-     <width>240</width>
+     <width>320</width>
      <height>240</height>
     </rect>
    </property>
    <property name="maximumSize">
     <size>
-     <width>240</width>
+     <width>320</width>
      <height>240</height>
     </size>
    </property>
    <property name="text">
-    <string>bear</string>
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>gesture-images/step2_gesture1_1.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_required_3">
+  <widget class="QLabel" name="image_required_2">
    <property name="geometry">
     <rect>
-     <x>780</x>
+     <x>410</x>
      <y>160</y>
-     <width>240</width>
+     <width>320</width>
      <height>240</height>
     </rect>
    </property>
    <property name="maximumSize">
     <size>
-     <width>240</width>
+     <width>320</width>
      <height>240</height>
     </size>
    </property>
    <property name="text">
-    <string>bear</string>
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>gesture-images/step2_gesture1_2.png</pixmap>
    </property>
    <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="text_required_2">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>400</y>
+     <width>320</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Gesture 1'&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
     <bool>true</bool>
    </property>
   </widget>

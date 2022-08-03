@@ -119,16 +119,16 @@ class Step_4_UI(qtw.QWidget):
       self.button_sub_step1.click()
       self.button_sub_step1.setEnabled(False)
       qtc.QTimer.singleShot(5000, lambda: self.button_sub_step1.setDisabled(False))
-    # @Yü Qiao TODO: add appropriate check for play button
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_play) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_play.click()
-    # @Yü Qiao TODO: add appropriate check for pause button
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_pause) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_pause.click()
 
   @qtc.pyqtSlot()
   def next_button_pressed(self):
     self.obj.deactivate()
+    # meant for Tutorial_Ends_UI
+    self.my_initializer.last_class = Step_4_UI
     self.target_ui = fa.Tutorial_Ends_UI(self.my_initializer)
     fa.select_screen_and_show(self.target_ui)
     self.player = QtMultimedia.QMediaPlayer()

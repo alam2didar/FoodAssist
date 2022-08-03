@@ -53,7 +53,6 @@ class Step_3_UI(qtw.QWidget):
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.button_sub_step2.clicked.connect(self.sub_step2)
     self.button_sub_step3.clicked.connect(self.sub_step3)
-    self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
 
     # draw finger-tip cursor
@@ -88,8 +87,6 @@ class Step_3_UI(qtw.QWidget):
         if self.button == 3:
             self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
         if self.button == 4:
-            self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
-        if self.button == 5:
             self.button_next.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
       else:
         if self.button == 1:
@@ -99,8 +96,6 @@ class Step_3_UI(qtw.QWidget):
         if self.button == 3:
           self.button_sub_step3.setStyleSheet('')
         if self.button == 4:
-          self.button_sub_step4.setStyleSheet('')
-        if self.button == 5:
             self.button_next.setStyleSheet('')
       # this check must be at the end
       if self.counter >= 12:
@@ -133,27 +128,21 @@ class Step_3_UI(qtw.QWidget):
       self.button_exit.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_img) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_step3.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_sub_step1.click()
       self.button_sub_step1.setEnabled(False)
       qtc.QTimer.singleShot(5000, lambda: self.button_sub_step1.setDisabled(False))
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_sub_step2.click()
       self.button_sub_step2.setEnabled(False)
       qtc.QTimer.singleShot(5000, lambda: self.button_sub_step2.setDisabled(False))
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_sub_step3.click()
       self.button_sub_step3.setEnabled(False)
       qtc.QTimer.singleShot(5000, lambda: self.button_sub_step3.setDisabled(False))
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.nav_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_sub_step4.click()
-      self.button_sub_step4.setEnabled(False)
-      qtc.QTimer.singleShot(5000, lambda: self.button_sub_step4.setDisabled(False))
-    # @Yü Qiao TODO: add appropriate check for play button
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_play) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_play.click()
-    # @Yü Qiao TODO: add appropriate check for pause button
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_cont) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.v_pause) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_video_pause.click()
 
   @qtc.pyqtSlot()
@@ -213,12 +202,6 @@ class Step_3_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def sub_step3(self):
     fa.on_substep_button_click(self, 3)
-    self.hide_video_controller_buttons(False)
-    self.alternate_play_pause_buttons(False)
-
-  @qtc.pyqtSlot()
-  def sub_step4(self):
-    fa.on_substep_button_click(self, 4)
     self.hide_video_controller_buttons(False)
     self.alternate_play_pause_buttons(False)
 
