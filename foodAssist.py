@@ -1179,7 +1179,7 @@ def show_evaluation_result_2(self, step_number):
       gesture_no = 2
     if difference[2] > difference[1]:
       gesture_no = 3
-    self.label_trouble.setText(f"most troubled: gesture {gesture_no}")
+    self.label_trouble.setText(f"Most troubled: gesture {gesture_no}")
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
