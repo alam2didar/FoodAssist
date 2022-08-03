@@ -53,7 +53,6 @@ class Step_3_UI(qtw.QWidget):
     self.button_sub_step1.clicked.connect(self.sub_step1)
     self.button_sub_step2.clicked.connect(self.sub_step2)
     self.button_sub_step3.clicked.connect(self.sub_step3)
-    self.button_sub_step4.clicked.connect(self.sub_step4)
     self.player.pause()
 
     # draw finger-tip cursor
@@ -88,8 +87,6 @@ class Step_3_UI(qtw.QWidget):
         if self.button == 3:
             self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
         if self.button == 4:
-            self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
-        if self.button == 5:
             self.button_next.setStyleSheet(open('./styles/activeButtonStyleYellow.css').read())
       else:
         if self.button == 1:
@@ -99,8 +96,6 @@ class Step_3_UI(qtw.QWidget):
         if self.button == 3:
           self.button_sub_step3.setStyleSheet('')
         if self.button == 4:
-          self.button_sub_step4.setStyleSheet('')
-        if self.button == 5:
             self.button_next.setStyleSheet('')
       # this check must be at the end
       if self.counter >= 12:
