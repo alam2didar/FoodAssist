@@ -1222,7 +1222,6 @@ def change_active_button_color(self, button):
   if button == 3:
     self.button_sub_step1.setStyleSheet('')
     self.button_sub_step2.setStyleSheet('')
-    self.button_sub_step4.setStyleSheet('')
     if self.findChild(qtw.QWidget, "button_step1"):
         self.button_step1.setStyleSheet('')
     if self.findChild(qtw.QWidget, "button_step2"):
