@@ -350,10 +350,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.close_file()
     # archive file
     self.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
-    # reset score_dict, score_sorted_list, score_percent
-    self.my_initializer.score_dict = None
-    self.my_initializer.score_sorted_list = None
-    self.my_initializer.score_percent = None
+    # reset score_dict, score_sorted_list, overall_score_percentage
+    # if self.my_initializer.last_class != Tutorial_Ends_UI:
+    #   self.my_initializer.score_dict = None
+    #   self.my_initializer.score_sorted_list = None
+    #   self.my_initializer.overall_score_percentage = None
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -386,13 +387,14 @@ class Tutorial_Ends_UI(qtw.QWidget):
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_view.click()
 
-  # def onEvaluationResult(self, success_flag, qualitative_result, troubled_steps, score_percent):
-  def onEvaluationResult(self, success_flag, difference_dict, score_dict, score_sorted_list, score_percent):
+  def onEvaluationResult(self, success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage):
     # save evaluation result in my_initializer
+    self.my_initializer.success_flag = success_flag
     self.my_initializer.difference_dict = difference_dict
     self.my_initializer.score_dict = score_dict
-    self.my_initializer.score_sorted_list = score_sorted_list
-    self.my_initializer.score_percent = score_percent
+    self.my_initializer.step_score_dict = step_score_dict
+    self.my_initializer.step_score_sorted_list = step_score_sorted_list
+    self.my_initializer.overall_score_percentage = overall_score_percentage
     # enable buttons
     self.button_restart.setEnabled(True)
     self.button_restart.setHidden(False)
@@ -404,16 +406,16 @@ class Tutorial_Ends_UI(qtw.QWidget):
       # enable button_view
       self.button_view.setHidden(False)
       self.button_view.setEnabled(True)
-      if score_percent >= 80:
+      if overall_score_percentage >= 80:
         self.label_text_1.setText("Congratulation! You performed almost like an expert.")
       else:
         # name of the step for the lowest score
-        self.label_text_1.setText(f"You seem to need more practice in {score_sorted_list[3][0]}.")
+        self.label_text_1.setText(f"You seem to need more practice in {step_score_sorted_list[3][0]}.".replace('_', ' '))
       self.label_text_2.setText("Click the view button to see more details.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
       # to do - show score percentage
-      self.label_text_score.setText(f"{score_percent}%")
+      self.label_text_score.setText(f"{overall_score_percentage}%")
       self.widget_xp.setHidden(False)
       self.widget_score.setHidden(False)
     else:
@@ -1138,11 +1140,24 @@ def show_evaluation_result_1(self, step_number):
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-  self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
+  # calculate the average score
+  self.label_text_score.setText(f"{self.my_initializer.step_score_dict[f'step_{step_number}']}%")
   self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_1.png'))
   self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_2.png'))
-  self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
-  self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
+  # change icon_reaction_1 based on score for gesture 1
+  if self.my_initializer.score_dict[f'step_{step_number}'][0] > 80:
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
+  elif self.my_initializer.score_dict[f'step_{step_number}'][0] > 50:
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
+  else:
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
+  # change icon_reaction_2 based on score for gesture 2
+  if self.my_initializer.score_dict[f'step_{step_number}'][1] > 80:
+    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
+  elif self.my_initializer.score_dict[f'step_{step_number}'][1] > 50:
+    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
+  else:
+    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
   difference = [None, None, None]
   for index in range(3):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
@@ -1157,17 +1172,29 @@ def show_evaluation_result_1(self, step_number):
       gesture_no = 2
     if difference[2] > difference[1]:
       gesture_no = 3
-    self.label_trouble.setText(f"most troubled: gesture {gesture_no}")
+    self.label_trouble.setText(f"Most troubled: gesture {gesture_no}")
 
 def show_evaluation_result_2(self, step_number):
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-  self.label_text_score.setText(f"{self.my_initializer.score_dict[f'step_{step_number}']}%")
+  self.label_text_score.setText(f"{self.my_initializer.step_score_dict[f'step_{step_number}']}%")
   self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_3.png'))
   self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_4.png'))
-  self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
-  self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
+  # change icon_reaction_1 based on score for gesture 3
+  if self.my_initializer.score_dict[f'step_{step_number}'][2] > 80:
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
+  elif self.my_initializer.score_dict[f'step_{step_number}'][2] > 50:
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
+  else:
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
+  # change icon_reaction_2 based on score for gesture 4
+  if self.my_initializer.score_dict[f'step_{step_number}'][3] > 80:
+    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
+  elif self.my_initializer.score_dict[f'step_{step_number}'][3] > 50:
+    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
+  else:
+    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
   difference = [None, None, None]
   for index in range(3):
     if self.my_initializer.difference_dict[f'step_{step_number}'][index] is not None:
