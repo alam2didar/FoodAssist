@@ -18,9 +18,8 @@ class ButtonPositioner:
         self.nav_b = type('nav_b', (ButtonPositioner,), {'left': 1275, 'right': 1356, 'top': 733, 'bottom': 813, 'short': 1200, 'long': 1400})
         self.nav_c = type('nav_c', (ButtonPositioner,), {'left': 1375, 'right': 1457, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
         self.nav_d = type('nav_d', (ButtonPositioner,), {'left': 1475, 'right': 1559, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
-        # to do, Qiao - calibrate coordinates
-        self.v_play = type('v_play', (ButtonPositioner,), {'left': 0, 'right': 0, 'top': 0, 'bottom': 0, 'short': 1200, 'long': 1400})
-        self.v_pause = type('v_pause', (ButtonPositioner,), {'left': 0, 'right': 0, 'top': 0, 'bottom': 0, 'short': 1200, 'long': 1400})
+        self.v_play = type('v_play', (ButtonPositioner,), {'left': 1182, 'right': 1240, 'top': 565, 'bottom': 615, 'short': 1200, 'long': 1400})
+        self.v_pause = type('v_pause', (ButtonPositioner,), {'left': 1280, 'right': 1334, 'top': 565, 'bottom': 615, 'short': 1200, 'long': 1400})
 
     def update_last_button_and_counter(self, button_type):
         # if last button clicked is this button, then increase counter
