@@ -364,8 +364,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
   def onFirstDelayReached(self):
     # hide labels upon delay reached
     self.label_party.setHidden(True)
-    # debug - setting evaluation_flag to True
-    self.obj_evaluator.evaluate(self.archive_csv_name, True)
+    if self.my_initializer.last_class == Tutorial_Ends_UI:
+      self.obj_evaluator.evaluation_result.emit(self.my_initializer.success_flag, self.my_initializer.difference_dict, self.my_initializer.score_dict, self.my_initializer.step_score_dict, self.my_initializer.step_score_sorted_list, self.my_initializer.overall_score_percentage)
+    else:
+      # debug - setting evaluation_flag to True
+      self.obj_evaluator.evaluate(self.archive_csv_name, True)
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
