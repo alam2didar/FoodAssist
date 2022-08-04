@@ -1,5 +1,21 @@
 <RCC>
   <qresource prefix="img">
+    <file>Knife Hand Left.png</file>
+    <file>Knife Hand Right.png</file>
+    <file>Germany.png</file>
+    <file>United-kingdom.png</file>
+    <file>step1_gesture1.png</file>
+    <file>step1_gesture2.png</file>
+    <file>step1_gesture3.png</file>
+    <file>step2_gesture1_1.png</file>
+    <file>step2_gesture1_2.png</file>
+    <file>step3_gesture1.png</file>
+    <file>step3_gesture2_1.png</file>
+    <file>step3_gesture2_2.png</file>
+    <file>step3_gesture3.png</file>
+    <file>step3_gesture4.png</file>
+    <file>step4_gesture1.png</file>
+    <file>step4_gesture2.png</file>
     <file>Confirm Restart.png</file>
     <file>Button Next Alternative.svg</file>
     <file>Icon Expert.png</file>
@@ -44,6 +60,8 @@
     <file>Button Next.svg</file>
   </qresource>
   <qresource prefix="steps">
+    <file>1.1-What2.jpg</file>
+    <file>3.1-What2.jpg</file>
     <file>1.1-What.jpg</file>
     <file>1.2-Where.jpg</file>
     <file>1.3-How.jpg</file>
