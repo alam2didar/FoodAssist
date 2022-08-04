@@ -6,6 +6,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import time
 
+import foodAssist as fa
+
 class WorkerEvaluator(QObject):
     first_delay_reached = pyqtSignal()
     # evaluation_result = pyqtSignal(bool, bool, str, int)
@@ -61,7 +63,7 @@ class WorkerEvaluator(QObject):
                 column_names = ['role', 'timestamp', 'step', 'sensor_type', 'recognized_gesture']
                 df_newbie = pd.read_csv(archive_file_name, header=None, names=column_names)
                 df_newbie = df_newbie.dropna()
-                df_expert = pd.read_csv('record_expert.csv', header=None, names=column_names)
+                df_expert = pd.read_csv('resources/record_expert.csv', header=None, names=column_names)
                 df_expert = df_expert.dropna()
                 # filter data frame for each step
                 df_expert_step_1 = df_expert[df_expert['step'] == 'step_1']

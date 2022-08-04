@@ -425,16 +425,20 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.button_view.setHidden(True)
     self.widget_xp.setHidden(True)
     self.widget_score.setHidden(True)
-    self.label_text_1.setHidden(False)
-    self.label_text_2.setHidden(False)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # close file
     self.my_initializer.obj_recorder.close_file()
-    # archive file
-    self.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
+    if self.my_initializer.last_class == Tutorial_Ends_UI:
+      # logic returned from menu UI
+      self.label_party.setHidden(True)
+      self.label_text_1.setHidden(True)
+      self.label_text_2.setHidden(True)
+    else:
+      # logic continued from step 4 UI
+      self.my_initializer.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
     # reset score_dict, score_sorted_list, overall_score_percentage
     # if self.my_initializer.last_class != Tutorial_Ends_UI:
     #   self.my_initializer.score_dict = None
@@ -454,7 +458,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.obj_evaluator.evaluation_result.emit(self.my_initializer.success_flag, self.my_initializer.difference_dict, self.my_initializer.score_dict, self.my_initializer.step_score_dict, self.my_initializer.step_score_sorted_list, self.my_initializer.overall_score_percentage)
     else:
       # debug - setting evaluation_flag to True
-      self.obj_evaluator.evaluate(self.archive_csv_name, True)
+      self.obj_evaluator.evaluate(self.my_initializer.archive_csv_name, True)
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -514,9 +518,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
 
   # check if button clicked
   def button_view_clicked(self):
-    # keep history - not to clean up trash
-    # self.obj_evaluator.remove_csv_file(self.archive_csv_name)
-    # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
     self.target_ui = Result_Step1_UI(self.my_initializer)
