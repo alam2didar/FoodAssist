@@ -1338,8 +1338,6 @@ def change_active_button_color(self, button):
       self.button_step4.setStyleSheet('')
     self.button_sub_step2.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
   if button == 3:
-    self.button_sub_step1.setStyleSheet('')
-    self.button_sub_step2.setStyleSheet('')
     if self.findChild(qtw.QWidget, "button_step1"):
         self.button_step1.setStyleSheet('')
     if self.findChild(qtw.QWidget, "button_step2"):
@@ -1350,9 +1348,6 @@ def change_active_button_color(self, button):
       self.button_step4.setStyleSheet('')
     self.button_sub_step3.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
   if button == 4:
-    self.button_sub_step1.setStyleSheet('')
-    self.button_sub_step2.setStyleSheet('')
-    self.button_sub_step3.setStyleSheet('')
     if self.findChild(qtw.QWidget, "button_step1"):
         self.button_step1.setStyleSheet('')
     if self.findChild(qtw.QWidget, "button_step2"):
@@ -1362,6 +1357,7 @@ def change_active_button_color(self, button):
     if self.findChild(qtw.QWidget, "button_step4"):
       self.button_step4.setStyleSheet('')
     self.button_sub_step4.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+  # All sub step button
   if button == 0:
     if self.findChild(qtw.QWidget, "button_sub_step1"):
       self.button_sub_step1.setStyleSheet('')
