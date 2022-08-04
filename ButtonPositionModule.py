@@ -19,7 +19,7 @@ class ButtonPositioner:
         self.nav_c = type('nav_c', (ButtonPositioner,), {'left': 1375, 'right': 1457, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
         self.nav_d = type('nav_d', (ButtonPositioner,), {'left': 1475, 'right': 1559, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
         self.button_de = type('button_de', (ButtonPositioner,), {'left': 600, 'right': 678, 'top': 509, 'bottom': 591, 'short': 1200, 'long': 1400})
-        self.button_en = type('button_b', (ButtonPositioner,), {'left': 717, 'right': 808, 'top': 509, 'bottom': 591, 'short': 1200, 'long': 1400})
+        self.button_en = type('button_en', (ButtonPositioner,), {'left': 717, 'right': 808, 'top': 509, 'bottom': 591, 'short': 1200, 'long': 1400})
         self.button_left_hand = type('button_left_hand', (ButtonPositioner,), {'left': 1085, 'right': 1161, 'top': 515, 'bottom': 593, 'short': 1200, 'long': 1400})
         self.button_right_hand = type('button_right_hand', (ButtonPositioner,), {'left': 1234, 'right': 1312, 'top': 515, 'bottom': 593, 'short': 1200, 'long': 1400})
         self.v_play = type('v_play', (ButtonPositioner,), {'left': 1182, 'right': 1240, 'top': 565, 'bottom': 615, 'short': 1200, 'long': 1400})
