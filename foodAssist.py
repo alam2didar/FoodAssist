@@ -552,8 +552,8 @@ class Result_Step1_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_1 after my_initializer is passed
-    show_evaluation_result_1(self, 1)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 1, 1)
     # disable left button
     self.button_nav_left.setHidden(True)
     self.button_nav_left.setEnabled(False)
@@ -615,8 +615,8 @@ class Result_Step1_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_2 after my_initializer is passed
-    show_evaluation_result_2(self, 1)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 1, 2)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -675,8 +675,8 @@ class Result_Step2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_1 after my_initializer is passed
-    show_evaluation_result_1(self, 2)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 2, 1)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -735,8 +735,8 @@ class Result_Step2_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_2 after my_initializer is passed
-    show_evaluation_result_2(self, 2)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 2, 2)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -795,8 +795,8 @@ class Result_Step3_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_1 after my_initializer is passed
-    show_evaluation_result_1(self, 3)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 3, 1)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -856,8 +856,8 @@ class Result_Step3_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_2 after my_initializer is passed
-    show_evaluation_result_2(self, 3)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 3, 2)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -916,8 +916,8 @@ class Result_Step4_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_1 after my_initializer is passed
-    show_evaluation_result_1(self, 4)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 4, 1)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -976,8 +976,8 @@ class Result_Step4_Percent_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result_2 after my_initializer is passed
-    show_evaluation_result_2(self, 4)
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 4, 2)
     # disable right button
     self.button_nav_right.setHidden(True)
     self.button_nav_right.setEnabled(False)
@@ -1222,35 +1222,38 @@ def create_worker_evaluator(self):
   # 6 - Start the thread
   self.thread_evaluator.start()
 
-def show_evaluation_result_1(self, step_number):
+def show_evaluation_result(self, step_number, page_number):
   self.button_exit.clicked.connect(self.exit_button_pressed)
   self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
   self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
   # calculate the average score
   self.label_text_score.setText(f"{self.my_initializer.step_score_dict[f'step_{step_number}']}%")
-  self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_1.png'))
-  self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_2.png'))
-  # change icon_reaction_1 based on score for gesture 1
-  if self.my_initializer.score_dict[f'step_{step_number}'][0] > 80:
+  self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_{page_number}.png'))
+  self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_{page_number+1}.png'))
+  # change icon_reaction_1 based on score for gesture 1 / 3
+  if self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-2] > 80:
     self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
-  elif self.my_initializer.score_dict[f'step_{step_number}'][0] > 50:
+  elif self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-2] > 50:
     self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
   else:
     self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
-  # change icon_reaction_2 based on score for gesture 2
-  if self.my_initializer.score_dict[f'step_{step_number}'][1] > 80:
+  # change icon_reaction_2 based on score for gesture 2 / 4
+  if self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-1] > 80:
     self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
-  elif self.my_initializer.score_dict[f'step_{step_number}'][1] > 50:
+  elif self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-1] > 50:
     self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
   else:
     self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
   difference = [None, None, None]
-  for index in range(3):
+  for index in range(4):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
-  if difference[0] is None or difference[1] is None or difference[2] is None:
-    self.label_trouble.setText(f"You didn't perform any gesture in this step.")
+  if difference[0] is None or difference[1] is None or difference[2] is None or difference[3] is None:
+    if self.my_initializer.lang == 'en':
+      self.label_trouble.setText(f"You didn't perform any gesture in this step.")
+    else:
+      self.label_trouble.setText(f"Sie haben in diesem Schritt keine Geste ausgeführt.")
   else:
-    for index in range(3):
+    for index in range(4):
       difference[index] = abs(difference[index])
     # find out worst gesture
     gesture_no = 1
@@ -1258,45 +1261,10 @@ def show_evaluation_result_1(self, step_number):
       gesture_no = 2
     if difference[2] > difference[1]:
       gesture_no = 3
-    self.label_trouble.setText(f"Most troubled: gesture {gesture_no}")
-
-def show_evaluation_result_2(self, step_number):
-  self.button_exit.clicked.connect(self.exit_button_pressed)
-  self.button_nav_left.clicked.connect(self.button_nav_left_clicked)
-  self.button_nav_right.clicked.connect(self.button_nav_right_clicked)
-  self.label_text_score.setText(f"{self.my_initializer.step_score_dict[f'step_{step_number}']}%")
-  self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_3.png'))
-  self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_4.png'))
-  # change icon_reaction_1 based on score for gesture 3
-  if self.my_initializer.score_dict[f'step_{step_number}'][2] > 80:
-    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
-  elif self.my_initializer.score_dict[f'step_{step_number}'][2] > 50:
-    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
-  else:
-    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
-  # change icon_reaction_2 based on score for gesture 4
-  if self.my_initializer.score_dict[f'step_{step_number}'][3] > 80:
-    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
-  elif self.my_initializer.score_dict[f'step_{step_number}'][3] > 50:
-    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
-  else:
-    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
-  difference = [None, None, None]
-  for index in range(3):
-    if self.my_initializer.difference_dict[f'step_{step_number}'][index] is not None:
-      difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
-  if difference[0] is None or difference[1] is None or difference[2] is None:
-    self.label_trouble.setText(f"You didn't perform any gesture in this step.")
-  else:
-    for index in range(3):
-      difference[index] = abs(difference[index])
-    # find out worst gesture
-    gesture_no = 1
-    if difference[1] > difference[0]:
-      gesture_no = 2
-    if difference[2] > difference[1]:
+    if difference[3] > difference[2]:
       gesture_no = 3
-    self.label_trouble.setText(f"Most troubled: gesture {gesture_no}")
+    # self.label_trouble.setText(f"Most troubled: gesture {gesture_no}")
+    self.label_trouble.append(gesture_no)
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
