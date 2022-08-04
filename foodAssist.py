@@ -427,8 +427,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.widget_score.setHidden(True)
     self.label_text_1.setHidden(False)
     self.label_text_2.setHidden(False)
-    self.label_text_1.setText("Congratulation, you have completed all the steps!")
-    self.label_text_2.setText("Analyzing your performance...")
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
