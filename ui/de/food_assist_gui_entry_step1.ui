@@ -300,14 +300,22 @@ background-color: rgb(0, 0, 0, 0);</string>
    </property>
    <property name="font">
     <font>
+     <family>Arial</family>
      <pointsize>48</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">font: 75 48pt &quot;Arial&quot;;
+color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Required Hand and Knife grip and motion in Step 1:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>Erforderlicher Hand-Messer-Griff und Bewegung in Schritt 1</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::RichText</enum>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -360,7 +368,7 @@ background-color: rgb(0, 0, 0, 0);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 2</string>
+     <string>Geste 2</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -417,7 +425,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 3</string>
+     <string>Geste 3</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -474,7 +482,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 1</string>
+     <string>Geste 1</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>

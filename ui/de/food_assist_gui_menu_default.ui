@@ -91,7 +91,7 @@
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Please select:</string>
+     <string>Bitte auswählen:</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>

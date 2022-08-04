@@ -58,9 +58,9 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>318</x>
       <y>170</y>
-      <width>591</width>
+      <width>451</width>
       <height>151</height>
      </rect>
     </property>
@@ -69,7 +69,7 @@
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Do you want to start again?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>Wollen Sie neu anfangen?</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
