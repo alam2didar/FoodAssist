@@ -135,7 +135,7 @@
     <rect>
      <x>1260</x>
      <y>720</y>
-     <width>311</width>
+     <width>321</width>
      <height>101</height>
     </rect>
    </property>
@@ -144,7 +144,7 @@
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>311</width>
+      <width>314</width>
       <height>81</height>
      </rect>
     </property>
@@ -166,7 +166,7 @@
 color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>Current: Step 4</string>
+        <string>Aktuell: Schritt 4</string>
        </property>
        <property name="textFormat">
         <enum>Qt::RichText</enum>
@@ -914,11 +914,13 @@ background-color: rgb(0, 0, 0, 0);</string>
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <zorder>line_3</zorder>
+  <zorder>line</zorder>
+  <zorder>line_2</zorder>
   <zorder>label_7</zorder>
   <zorder>label_4</zorder>
   <zorder>label_6</zorder>
   <zorder>label_5</zorder>
-  <zorder>layoutWidget</zorder>
   <zorder>verticalLayoutWidget</zorder>
   <zorder>widget_4</zorder>
   <zorder>widget_2</zorder>
