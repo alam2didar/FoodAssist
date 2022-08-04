@@ -893,7 +893,7 @@ background-color: rgb(0, 0, 0, 0);</string>
     <rect>
      <x>1260</x>
      <y>720</y>
-     <width>311</width>
+     <width>321</width>
      <height>101</height>
     </rect>
    </property>
@@ -902,7 +902,7 @@ background-color: rgb(0, 0, 0, 0);</string>
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>311</width>
+      <width>314</width>
       <height>81</height>
      </rect>
     </property>
@@ -924,7 +924,7 @@ background-color: rgb(0, 0, 0, 0);</string>
 color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>Current: Step 1</string>
+        <string>Aktuell: Schritt 1</string>
        </property>
        <property name="textFormat">
         <enum>Qt::RichText</enum>
