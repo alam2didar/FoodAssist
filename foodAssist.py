@@ -1244,7 +1244,7 @@ def show_evaluation_result(self, step_number, page_number):
     self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
   else:
     self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
-  difference = [None, None, None]
+  difference = [None, None, None, None]
   for index in range(4):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
   if difference[0] is None or difference[1] is None or difference[2] is None or difference[3] is None:
