@@ -342,58 +342,63 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>230</x>
      <y>330</y>
-     <width>450</width>
+     <width>500</width>
      <height>150</height>
     </rect>
    </property>
-   <widget class="QWidget" name="horizontalLayoutWidget">
+   <widget class="QSplitter" name="splitter">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>451</width>
-      <height>152</height>
+      <width>500</width>
+      <height>150</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="xp_bolt">
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
-         <height>150</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="resources/res.qrc">:/img/XP Bolt.svg</pixmap>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_text_xp">
-       <property name="font">
-        <font>
-         <pointsize>48</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 0);</string>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffff00;&quot;&gt;XP earned&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <widget class="QLabel" name="xp_bolt">
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="resources/res.qrc">:/img/XP Bolt.svg</pixmap>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_text_xp">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>48</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 48pt &quot;Arial&quot;;
+color: rgb(255, 255, 0);</string>
+     </property>
+     <property name="text">
+      <string>Erfahrung erworben</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QWidget" name="widget_score" native="true">
@@ -401,67 +406,72 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>230</x>
      <y>560</y>
-     <width>450</width>
+     <width>500</width>
      <height>150</height>
     </rect>
    </property>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <widget class="QSplitter" name="splitter_3">
     <property name="geometry">
      <rect>
-      <x>-1</x>
-      <y>-1</y>
-      <width>451</width>
-      <height>152</height>
+      <x>0</x>
+      <y>0</y>
+      <width>500</width>
+      <height>150</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="score_flag">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
-         <height>150</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="resources/res.qrc">:/img/Score Flag.svg</pixmap>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_text_score">
-       <property name="font">
-        <font>
-         <pointsize>48</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(0, 255, 0);</string>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00ff00;&quot;&gt;0%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <widget class="QLabel" name="score_flag">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="resources/res.qrc">:/img/Score Flag.svg</pixmap>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_text_score">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>48</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 48pt &quot;Arial&quot;;
+color: rgb(0, 255, 0);</string>
+     </property>
+     <property name="text">
+      <string>0%</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
   <zorder>label_text_1</zorder>
@@ -471,6 +481,12 @@ color: rgb(255, 255, 255);</string>
   <zorder>widget_2</zorder>
   <zorder>widget_xp</zorder>
   <zorder>widget_score</zorder>
+  <zorder>splitter</zorder>
+  <zorder>splitter</zorder>
+  <zorder>label_text_xp</zorder>
+  <zorder>xp_bolt</zorder>
+  <zorder>label_text_score</zorder>
+  <zorder>score_flag</zorder>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>

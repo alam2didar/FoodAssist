@@ -450,7 +450,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 0);</string>
    </property>
    <property name="text">
-    <string>Schwierigkeiten in: Geste </string>
+    <string>Most troubled: Gesture </string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
@@ -669,7 +669,7 @@ color: rgb(255, 255, 0);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Geste 4 (Handgriff)</string>
+     <string>Gesture 4 (handle grip)</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -726,7 +726,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Geste 3 (Daumengriff)</string>
+     <string>Gesture 3 (thumb grip)</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
