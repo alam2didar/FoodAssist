@@ -8,6 +8,8 @@ import socket
 # Creates a Websocket (Open for the entire duration when app is running)
 # Smart watch communicates through this websocket
 class WorkerWebsocket(QObject):
+    phone_and_watch_start = pyqtSignal()
+    phone_and_watch_stop = pyqtSignal()
     websocket_finished = pyqtSignal()
     websocket_message = pyqtSignal(str, int)
     worker_activated = True
@@ -30,10 +32,14 @@ class WorkerWebsocket(QObject):
                     # start transfer signal
                     self.wearable_transferring = True
                     print("start transfer")
+                    # emit signal to set icons
+                    self.phone_and_watch_start.emit()
                 elif message == "stop":
                     # stop transfer signal
                     self.wearable_transferring = False
                     print("stop transfer")
+                    # emit signal to set icons
+                    self.phone_and_watch_stop.emit()
                 else:
                     # json data transfer
                     try:

@@ -7,6 +7,8 @@ import worker_detection
 
 class Initializer(qtc.QObject):
   detectionParams = qtc.pyqtSignal(int, int, int, int, int)
+  devices_connected = qtc.pyqtSignal()
+  devices_disconnected = qtc.pyqtSignal()
   # flag to start/block workers
   # start_worker = False
   start_worker = True
@@ -38,6 +40,8 @@ class Initializer(qtc.QObject):
     self.thread_websocket = qtc.QThread()
     # 2 - Connect Worker`s Signals to Form method slots to post data.
     self.obj_websocket.websocket_message.connect(self.onWebsocketMessage)
+    self.obj_websocket.phone_and_watch_start.connect(self.onDeviceStart)
+    self.obj_websocket.phone_and_watch_stop.connect(self.onDeviceStop)
     # 3 - Move the Worker object to the Thread object
     self.obj_websocket.moveToThread(self.thread_websocket)
     # 4 - Connect Worker Signals to the Thread slots
@@ -84,4 +88,9 @@ class Initializer(qtc.QObject):
         self.detectionParams.emit(0,0,0,0,0)
       else:
         self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
-        
+
+  def onDeviceStart(self):
+    self.devices_connected.emit()
+
+  def onDeviceStop(self):
+    self.devices_disconnected.emit()
