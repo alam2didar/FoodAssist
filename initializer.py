@@ -16,6 +16,8 @@ class Initializer(qtc.QObject):
 
   def __init__(self, last_class=Placing_Meat_UI):
     super().__init__()
+    # initial status of devices
+    self.devices_running = False
     # define current step
     self.current_step = None
     # detected step (by detection model)

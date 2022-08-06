@@ -17,16 +17,21 @@ class FoodAssist(qtw.QWidget):
     super().__init__()
     self.ui = uic.loadUi('food_assist_gui_start.ui', self)
 
-    # hide icons temporarily
-    # self.status_phone.setHidden(True)
-    # self.status_watch.setHidden(True)
-
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     self.my_initializer.devices_connected.connect(self.onMobileConnected)
     self.my_initializer.devices_disconnected.connect(self.onMobileDisconnected)
+
+    # set icons upon loading
+    if self.my_initializer.devices_running:
+      self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone On.svg'))
+      self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch On.svg'))
+    else:
+      self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone Off.svg'))
+      self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch Off.svg'))
+
     self.start_button.clicked.connect(self.button_pressed)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
@@ -55,11 +60,13 @@ class FoodAssist(qtw.QWidget):
 
   # check if phone and watch are connected
   def onMobileConnected(self):
+    self.my_initializer.devices_running = True
     self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone On.svg'))
     self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch On.svg'))
 
   # check if phone and watch are connected
   def onMobileDisconnected(self):
+    self.my_initializer.devices_running = False
     self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone Off.svg'))
     self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch Off.svg'))
 
