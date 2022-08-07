@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MenuDefault</class>
+ <widget class="QWidget" name="MenuDefault">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1920</width>
+    <height>1200</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1920</width>
+    <height>1200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Food Assist</string>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(0, 0, 0);</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>421</x>
+     <y>230</y>
+     <width>911</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
+   </property>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>318</x>
+      <y>170</y>
+      <width>451</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 28pt &quot;Arial&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Wollen Sie neu anfangen?</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>46</x>
+      <y>150</y>
+      <width>171</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources/res.qrc">:/img/Confirm Restart.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="button_yes">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>560</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>81</width>
+     <height>81</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>150</width>
+     <height>150</height>
+    </size>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::WheelFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="icon">
+    <iconset resource="resources/res.qrc">
+     <normaloff>:/buttons/Button Yes.svg</normaloff>:/buttons/Button Yes.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>144</width>
+     <height>144</height>
+    </size>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_no">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>560</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>81</width>
+     <height>81</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>150</width>
+     <height>150</height>
+    </size>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::WheelFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="icon">
+    <iconset resource="resources/res.qrc">
+     <normaloff>:/buttons/Button No.svg</normaloff>:/buttons/Button No.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>144</width>
+     <height>144</height>
+    </size>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resources/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>

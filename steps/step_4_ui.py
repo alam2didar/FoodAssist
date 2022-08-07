@@ -20,7 +20,7 @@ class Step_4_UI(qtw.QWidget):
     self.box_w = 0
     self.box_h = 0
   
-    self.ui = uic.loadUi('food_assist_gui_step4.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_step4.ui', self)
     self.hide_video_controller_buttons(True)
     self.play_button_opacity = qtw.QGraphicsOpacityEffect()
     self.pause_button_opacity = qtw.QGraphicsOpacityEffect()
@@ -30,8 +30,8 @@ class Step_4_UI(qtw.QWidget):
     self.button_video_pause.setAutoFillBackground(True)
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
-    file0 = os.path.join(os.path.dirname(__file__), "..\step-videos\step4.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), "..\step-videos\Step4-Final step.mp4")
+    file0 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\step4.mp4")
+    file1 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step4-Final step.mp4")
     self.video_files_list = [file0, file1]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))

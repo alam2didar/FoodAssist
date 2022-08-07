@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="244"
+   height="244"
+   fill="#000"
+   class="bi bi-skip-end-circle"
+   viewBox="0 0 244 244"
+   version="1.1"
+   id="svg13"
+   sodipodi:docname="Button Skip.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs17" />
+  <sodipodi:namedview
+     id="namedview15"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.7377049"
+     inkscape:cx="82.004718"
+     inkscape:cy="132.35849"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="2152"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg13"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
+  <path
+     d="m 122.23113,229.18337 a 106.95224,106.95224 0 1 1 0,-213.904478 106.95224,106.95224 0 0 1 0,213.904478 z m 0,15.27889 a 122.23113,122.23113 0 1 0 0,-244.46226 122.23113,122.23113 0 0 0 0,244.46226 z"
+     id="path9"
+     style="stroke-width:7.81;fill:#ffffff;stroke-dasharray:none" />
+  <path
+     d="m 95.813929,77.234797 a 7.6394458,7.6394458 0 0 1 7.945021,0.580597 l 41.39052,29.564656 V 84.033903 a 7.6394458,7.6394458 0 0 1 15.27889,0 v 76.394457 a 7.6394458,7.6394458 0 0 1 -15.27889,0 v -23.34615 l -41.4058,29.56466 A 7.6394458,7.6394458 0 0 1 91.673349,160.42836 V 84.033903 a 7.6394458,7.6394458 0 0 1 4.14058,-6.799106 z"
+     id="path11"
+     style="stroke-width:7.81;fill:#ffffff" />
+</svg>

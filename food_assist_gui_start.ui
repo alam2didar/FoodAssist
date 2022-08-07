@@ -102,74 +102,6 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>220</y>
-     <width>1021</width>
-     <height>361</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetNoConstraint</enum>
-    </property>
-    <item>
-     <widget class="QLabel" name="start_label">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>510</width>
-        <height>310</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>1000</width>
-        <height>1000</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>48</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <stylestrategy>PreferDefault</stylestrategy>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <property name="lineWidth">
-       <number>0</number>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Welcome to Food Assist.&lt;br/&gt;Please touch to start......&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="scaledContents">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QLabel" name="status_watch">
    <property name="geometry">
     <rect>
@@ -200,6 +132,124 @@
    </property>
    <property name="pixmap">
     <pixmap resource="resources/res.qrc">:/img/Phone Off.svg</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="start_label_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>499</y>
+     <width>891</width>
+     <height>310</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>510</width>
+     <height>310</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1000</width>
+     <height>1000</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <stylestrategy>PreferDefault</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Welcome to Food Assist.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Please touch to start......&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="start_label">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>180</y>
+     <width>891</width>
+     <height>310</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>510</width>
+     <height>310</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1000</width>
+     <height>1000</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <stylestrategy>PreferDefault</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Willkommen bei Food Assist.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Zum Starten bitte berühren......&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
