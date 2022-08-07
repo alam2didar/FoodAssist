@@ -31,7 +31,7 @@ class Step_4_UI(qtw.QWidget):
     self.player = QtMultimedia.QMediaPlayer(None, QtMultimedia.QMediaPlayer.VideoSurface)
     self.playlist = QtMultimedia.QMediaPlaylist()
     file0 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\step4.mp4")
-    file1 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step4-Final step.mp4")
+    file1 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step4-Finalstep.mp4")
     self.video_files_list = [file0, file1]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))

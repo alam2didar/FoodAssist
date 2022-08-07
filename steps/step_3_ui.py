@@ -33,8 +33,9 @@ class Step_3_UI(qtw.QWidget):
     file0 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\step3.mp4")
     file1 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step3-substep1.mp4")
     file2 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step3-substep2.mp4")
-    file3 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step3-substep3-4.mp4")
-    self.video_files_list = [file0, file1, file2, file3]
+    file3 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step3-substep3.mp4")
+    file4 = os.path.join(os.path.dirname(__file__), f"..\step-videos\{my_initializer.lang}\{my_initializer.hand}\Step3-substep4.mp4")
+    self.video_files_list = [file0, file1, file2, file3, file4]
     for f in self.video_files_list:
       self.playlist.addMedia(QtMultimedia.QMediaContent(qtc.QUrl.fromLocalFile(f)))
 
