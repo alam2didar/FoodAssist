@@ -9,11 +9,10 @@ class DepthCamera:
         self.pipeline = rs.pipeline()
         self.config = rs.config()
 
-        # resolution has to 640 x 480, otherwise RuntimeError: Couldn't resolve requests
-        self.depth_width = 640
-        self.depth_height = 480
-        self.color_width = 640
-        self.color_height = 480
+        self.depth_width = 1280
+        self.depth_height = 720
+        self.color_width = 1920
+        self.color_height = 1080
 
         self.config.enable_stream(rs.stream.depth, self.depth_width, self.depth_height, rs.format.z16, 30)
         self.config.enable_stream(rs.stream.color, self.color_width, self.color_height, rs.format.bgr8, 30)
@@ -61,8 +60,6 @@ class DepthCamera:
 
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
-        # print("depth shape:", depth_image.shape)
-        # print("color shape:", color_image.shape)
 
         # remove background - Set pixels further than clipping_distance to grey
         grey_color = 153
@@ -74,7 +71,7 @@ class DepthCamera:
         # the greater alpha is, the shorter the focus is
         # depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
         # depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.0262), cv2.COLORMAP_HSV)
-        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.0226), cv2.COLORMAP_HSV)
+        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.0236), cv2.COLORMAP_HSV)
         # calibrated alpha after distance change
 
         return True, depth_image, depth_colormap, color_image, bg_removed

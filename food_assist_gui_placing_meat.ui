@@ -12,8 +12,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1680</width>
-    <height>1050</height>
+    <width>1920</width>
+    <height>1200</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,8 +30,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1680</width>
-    <height>1050</height>
+    <width>1920</width>
+    <height>1200</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -43,22 +43,6 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 0, 0);</string>
   </property>
-  <widget class="QLabel" name="label_8">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>730</y>
-     <width>381</width>
-     <height>281</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: qradialgradient(spread:pad, cx:0.511, cy:0.511364, radius:1.199, fx:0.511, fy:0.511409, stop:0 rgba(255, 255, 112, 255), stop:0.176136 rgba(228, 255, 188, 80), stop:0.494318 rgba(252, 128, 128, 80), stop:0.505682 rgba(255, 231, 130, 179), stop:0.698864 rgba(225, 255, 162, 80), stop:1 rgba(255, 255, 255, 0));</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
   <widget class="QLabel" name="start_label">
    <property name="geometry">
     <rect>
@@ -180,6 +164,178 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>710</y>
+     <width>801</width>
+     <height>471</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border :3px solid white;
+border-style : dashed;
+background-color: rgb(0, 0, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="detecting_gif_label">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>440</y>
+     <width>181</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="detecting_text_label">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>590</y>
+     <width>181</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1000</width>
+     <height>1000</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <stylestrategy>PreferDefault</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="text">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:48pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt; color:#ffffff;&quot;&gt;Detecting...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::MarkdownText</enum>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="detecting_text_label_2">
+   <property name="geometry">
+    <rect>
+     <x>1460</x>
+     <y>1050</y>
+     <width>181</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1000</width>
+     <height>1000</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <stylestrategy>PreferDefault</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="text">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:48pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt; color:#ffffff;&quot;&gt;Skip&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::MarkdownText</enum>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>label_8</zorder>
+  <zorder>start_label</zorder>
+  <zorder>button_skip</zorder>
+  <zorder>detecting_gif_label</zorder>
+  <zorder>detecting_text_label</zorder>
+  <zorder>detecting_text_label_2</zorder>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>

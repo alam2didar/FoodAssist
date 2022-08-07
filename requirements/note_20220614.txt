@@ -1,0 +1,19 @@
+-updated DepthExtractionModule.py
+calibrated alpha after distance change
+
+-updated worker.py
+commented out in order to test without camera
+
+-added worker_recorder.py
+background task for recording gesture detection result
+
+-added worker_websocket.py
+background task transferring data from phone to pc via websocket
+
+-updated foodAssist.py
+add class Initializer() to create websocket thread and recorder thread
+pass on my_initializer to UI objects
+set current_step at each UI class
+enable_writing / disable_writing at none step UIs
+add evaluation at Tutorial_Ends_UI
+

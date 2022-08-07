@@ -12,8 +12,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1905</width>
-    <height>1050</height>
+    <width>1920</width>
+    <height>1200</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,8 +30,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>2000</width>
-    <height>2000</height>
+    <width>1920</width>
+    <height>1200</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -169,6 +169,38 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="status_watch">
+   <property name="geometry">
+    <rect>
+     <x>1760</x>
+     <y>10</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/res.qrc">:/img/Watch Off.svg</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="status_phone">
+   <property name="geometry">
+    <rect>
+     <x>1600</x>
+     <y>10</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/res.qrc">:/img/Phone Off.svg</pixmap>
+   </property>
   </widget>
  </widget>
  <resources>

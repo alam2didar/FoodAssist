@@ -1,89 +1,43 @@
 class ButtonPositioner:
     def __init__(self):
-        # left_button area
-        self.left_button_left = 320
-        self.left_button_right = 450
-        self.left_button_top = 400
-        self.left_button_bottom = 455
-        self.left_button_short = 1200
-        self.left_button_long = 1250
-        # right_button area
-        self.right_button_left = 480
-        self.right_button_right = 600
-        self.right_button_top = 400
-        self.right_button_bottom = 455
-        self.right_button_short = 1200
-        self.right_button_long = 1250
-        # step_1_button area
-        self.step_1_button_left = 215
-        self.step_1_button_right = 255
-        self.step_1_button_top = 395
-        self.step_1_button_bottom = 455
-        self.step_1_button_short = 1200
-        self.step_1_button_long = 1250
-        # step_2_button area
-        self.step_2_button_left = 280
-        self.step_2_button_right = 320
-        self.step_2_button_top = 395
-        self.step_2_button_bottom = 455
-        self.step_2_button_short = 1200
-        self.step_2_button_long = 1250
-        # step_3_button area
-        self.step_3_button_left = 340
-        self.step_3_button_right = 370
-        self.step_3_button_top = 395
-        self.step_3_button_bottom = 455
-        self.step_3_button_short = 1200
-        self.step_3_button_long = 1250
-        # step_4_button area
-        self.step_4_button_left = 385
-        self.step_4_button_right = 425
-        self.step_4_button_top = 395
-        self.step_4_button_bottom = 455
-        self.step_4_button_short = 1200
-        self.step_4_button_long = 1250
-        # restart_button area
-        self.restart_button_left = 300
-        self.restart_button_right = 350
-        self.restart_button_top = 435
-        self.restart_button_bottom = 460
-        self.restart_button_short = 1200
-        self.restart_button_long = 1250
+        # add attributes
+        self.last_button_clicked = None
+        self.counter = 0
+        self.large = type('large', (ButtonPositioner,), {'left': 1288, 'right': 1404, 'top': 725, 'bottom': 833, 'short': 1200, 'long': 1400})
+        self.button_a = type('button_a', (ButtonPositioner,), {'left': 1365, 'right': 1446, 'top': 858, 'bottom': 937, 'short': 1200, 'long': 1400})
+        self.button_b = type('button_b', (ButtonPositioner,), {'left': 1482, 'right': 1560, 'top': 851, 'bottom': 939, 'short': 1200, 'long': 1400})
+        self.button_c = type('button_c', (ButtonPositioner,), {'left': 885, 'right': 975, 'top': 548, 'bottom': 620, 'short': 1200, 'long': 1400})
+        self.button_d = type('button_d', (ButtonPositioner,), {'left': 980, 'right': 1070, 'top': 548, 'bottom': 620, 'short': 1200, 'long': 1400})
+        self.restart_0 = type('restart_0', (ButtonPositioner,), {'left': 870, 'right': 945, 'top': 548, 'bottom': 620, 'short': 1200, 'long': 1400})
+        self.step_1 = type('step_1', (ButtonPositioner,), {'left': 672, 'right': 757, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
+        self.step_2 = type('step_2', (ButtonPositioner,), {'left': 807, 'right': 887, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
+        self.step_3 = type('step_3', (ButtonPositioner,), {'left': 924, 'right': 1007, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
+        self.step_4 = type('step_4', (ButtonPositioner,), {'left': 1064, 'right': 1137, 'top': 407, 'bottom': 499, 'short': 1200, 'long': 1400})
+        self.nav_img = type('nav_img', (ButtonPositioner,), {'left': 1472, 'right': 1559, 'top': 627, 'bottom': 713, 'short': 1200, 'long': 1400})
+        self.nav_a = type('nav_a', (ButtonPositioner,), {'left': 1175, 'right': 1255, 'top': 732, 'bottom': 818, 'short': 1200, 'long': 1400})
+        self.nav_b = type('nav_b', (ButtonPositioner,), {'left': 1275, 'right': 1356, 'top': 733, 'bottom': 813, 'short': 1200, 'long': 1400})
+        self.nav_c = type('nav_c', (ButtonPositioner,), {'left': 1375, 'right': 1457, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
+        self.nav_d = type('nav_d', (ButtonPositioner,), {'left': 1475, 'right': 1559, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
+        self.v_play = type('v_play', (ButtonPositioner,), {'left': 1182, 'right': 1240, 'top': 565, 'bottom': 615, 'short': 1200, 'long': 1400})
+        self.v_pause = type('v_pause', (ButtonPositioner,), {'left': 1280, 'right': 1334, 'top': 565, 'bottom': 615, 'short': 1200, 'long': 1400})
 
-    def check_in_area(self, x, y, z, type):
-        if type == "left":
-            if x >= self.left_button_left and x <= self.left_button_right and \
-            y>= self.left_button_top and y<= self.left_button_bottom and \
-            z>= self.left_button_short and z <= self.left_button_long:
-                return True
-        if type == "right":
-            if x >= self.right_button_left and x <= self.right_button_right and \
-            y>= self.right_button_top and y<= self.right_button_bottom and \
-            z>= self.right_button_short and z <= self.right_button_long:
-                return True
-        if type == "step_1":
-            if x >= self.step_1_button_left and x <= self.step_1_button_right and \
-            y>= self.step_1_button_top and y<= self.step_1_button_bottom and \
-            z>= self.step_1_button_short and z <= self.step_1_button_long:
-                return True
-        if type == "step_2":
-            if x >= self.step_2_button_left and x <= self.step_2_button_right and \
-            y>= self.step_2_button_top and y<= self.step_2_button_bottom and \
-            z>= self.step_2_button_short and z <= self.step_2_button_long:
-                return True
-        if type == "step_3":
-            if x >= self.step_3_button_left and x <= self.step_3_button_right and \
-            y>= self.step_3_button_top and y<= self.step_3_button_bottom and \
-            z>= self.step_3_button_short and z <= self.step_3_button_long:
-                return True
-        if type == "step_4":
-            if x >= self.step_4_button_left and x <= self.step_4_button_right and \
-            y>= self.step_4_button_top and y<= self.step_4_button_bottom and \
-            z>= self.step_4_button_short and z <= self.step_4_button_long:
-                return True
-        if type == "restart":
-            if x >= self.restart_button_left and x <= self.restart_button_right and \
-            y>= self.restart_button_top and y<= self.restart_button_bottom and \
-            z>= self.restart_button_short and z <= self.restart_button_long:
-                return True
-        return False
+    def update_last_button_and_counter(self, button_type):
+        # if last button clicked is this button, then increase counter
+        if self.last_button_clicked is button_type:
+            self.counter = self.counter + 1
+        # otherwise reset counter
+        else:
+            self.counter = 0
+        # update last button clicked
+        self.last_button_clicked = button_type
+        # return true only after accumulated 5 times
+        if self.counter > 4:
+            self.counter = 0
+            return True
+
+    def check_in_area(self, x, y, z, button_type):
+        # redo to make it simpler
+        if x > button_type.left and x < button_type.right and y> button_type.top and y< button_type.bottom and z> button_type.short and z < button_type.long:
+            # invoke function to increase counter if needed
+            print("checked in area")
+            return self.update_last_button_and_counter(button_type)
