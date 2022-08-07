@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="img">
+    <file>No Sign.svg</file>
     <file>Knife Hand Left.png</file>
     <file>Knife Hand Right.png</file>
     <file>Germany.png</file>
