@@ -682,7 +682,7 @@ color: rgb(255, 255, 255);</string>
     </property>
    </widget>
   </widget>
-  <widget class="QSplitter" name="splitter_4">
+  <widget class="QSplitter" name="splitter_hide">
    <property name="geometry">
     <rect>
      <x>60</x>

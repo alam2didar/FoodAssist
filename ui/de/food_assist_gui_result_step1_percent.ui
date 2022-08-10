@@ -682,7 +682,7 @@ color: rgb(255, 255, 255);</string>
     </property>
    </widget>
   </widget>
-  <widget class="QSplitter" name="splitter_6">
+  <widget class="QSplitter" name="splitter_hide">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -777,7 +777,7 @@ color: rgb(255, 255, 255);</string>
   <zorder>label_trouble</zorder>
   <zorder>label_text_step</zorder>
   <zorder>splitter_4</zorder>
-  <zorder>splitter_6</zorder>
+  <zorder>splitter_hide</zorder>
   <zorder>no_sign_1</zorder>
  </widget>
  <resources>
