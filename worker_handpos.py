@@ -56,7 +56,7 @@ class WorkerHandPos(QObject):
                         distance = int(distance*1000)
                         print("Hand position (x, y, z): ", (point[0], point[1], distance))
                         # only emit message with valid values
-                        self.intReady.emit(point[0], point[1], distance, counter, int(1.65*(point[0]-405)-20), int(1.65*(point[1]-220)-20))
+                        self.intReady.emit(point[0], point[1], distance, counter, int(1.67*(point[0]-395)-5), int(1.63*(point[1]-206)-5))
 # debug no camera
 
         # finish upon breaking out of loop
