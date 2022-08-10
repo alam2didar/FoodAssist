@@ -580,7 +580,7 @@ class Result_Step1_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step4_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step4_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -630,6 +630,12 @@ class Result_Step1_Percent_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 1, 2)
+    self.no_sign_1.setHidden(True)
+    self.splitter_hide.setHidden(True)
+    self.label_plot_2.setHidden(True)
+    self.icon_expert_2.setHidden(True)
+    self.icon_newbie_2.setHidden(True)
+    self.icon_reaction_2.setHidden(True)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -690,6 +696,12 @@ class Result_Step2_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 2, 1)
+    self.no_sign_1.setHidden(True)
+    self.splitter_hide.setHidden(True)
+    self.label_plot_2.setHidden(True)
+    self.icon_expert_2.setHidden(True)
+    self.icon_newbie_2.setHidden(True)
+    self.icon_reaction_2.setHidden(True)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -709,7 +721,7 @@ class Result_Step2_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step2_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step3_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -820,7 +832,7 @@ class Result_Step3_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step2_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -931,6 +943,9 @@ class Result_Step4_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 4, 1)
+    # disable right button
+    self.button_nav_right.setHidden(True)
+    self.button_nav_right.setEnabled(False)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -950,7 +965,7 @@ class Result_Step4_UI(qtw.QWidget):
     # redirects to Result_Step1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step4_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -1261,10 +1276,16 @@ def show_evaluation_result(self, step_number, page_number):
   for index in range(4):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
   if difference[0] is None or difference[1] is None or difference[2] is None or difference[3] is None:
-    if self.my_initializer.lang == 'en':
-      self.label_trouble.setText(f"You didn't perform any gesture in this step.")
+    if step_number == 2 and difference[0] is None:
+      if self.my_initializer.lang == 'en':
+        self.label_trouble.setText(f"You didn't perform any gestures in this step.")
+      else:
+        self.label_trouble.setText(f"Sie haben in diesem Schritt keine Geste ausgeführt.")
     else:
-      self.label_trouble.setText(f"Sie haben in diesem Schritt keine Geste ausgeführt.")
+      if self.my_initializer.lang == 'en':
+        self.label_trouble.setText(f"You didn't perform all gestures in this step.")
+      else:
+        self.label_trouble.setText(f"Sie haben in diesem Schritt nicht alle Gesten ausgeführt.")
   else:
     for index in range(4):
       difference[index] = abs(difference[index])
