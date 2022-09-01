@@ -509,11 +509,22 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.button_view.setHidden(False)
       self.button_view.setEnabled(True)
       if overall_score_percentage >= 80:
-        self.label_text_1.setText("Congratulation! You performed almost like an expert.")
+        # display texts upon high score
+        if self.my_initializer.lang == 'en':
+          self.label_text_1.setText("Congratulation! You performed almost like an expert.")
+        else:
+          self.label_text_1.setText("Glückwunsch! Sie sind fast wie ein Experte aufgetreten.")
       else:
-        # name of the step for the lowest score
-        self.label_text_1.setText(f"You seem to need more practice in {step_score_sorted_list[3][0]}.".replace('_', ' '))
-      self.label_text_2.setText("Click the view button to see more details.")
+        # step name with the lowest score
+        if self.my_initializer.lang == 'en':
+          self.label_text_1.setText(f"You seem to need more practice in {step_score_sorted_list[3][0]}.".replace('_', ' '))
+        else:
+          self.label_text_1.setText(f"Sie scheinen in {step_score_sorted_list[3][0]} mehr Übung zu brauchen.".replace('_', ' ').replace('step', 'Schritt'))
+      # hints to touch the button
+      if self.my_initializer.lang == 'en':
+        self.label_text_2.setText("Touch the view button to see more details.")
+      else:
+        self.label_text_2.setText("Berühren Sie die Ansichtsschaltfläche, um weitere Details anzuzeigen.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
       # to do - show score percentage
@@ -525,7 +536,10 @@ class Tutorial_Ends_UI(qtw.QWidget):
       # disable button_view
       self.button_view.setHidden(True)
       self.button_view.setEnabled(False)
-      self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart.")
+      if self.my_initializer.lang == 'en':
+        self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart here.")
+      else:
+        self.label_text_1.setText("Entschuldigung, wir konnten Ihre Gestendaten nicht verarbeiten, bitte verbinden Sie die mobile App und hier neustarten.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
 
