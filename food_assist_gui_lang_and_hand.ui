@@ -302,7 +302,7 @@ border-color: rgb(255, 255, 255);</string>
      <x>325</x>
      <y>340</y>
      <width>321</width>
-     <height>79</height>
+     <height>101</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -310,10 +310,16 @@ border-color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Sprache/Language</string>
+    <string>Sprache/ Language</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_11">
@@ -359,10 +365,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_13">
    <property name="geometry">
     <rect>
-     <x>1120</x>
+     <x>1050</x>
      <y>340</y>
-     <width>401</width>
-     <height>79</height>
+     <width>521</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -370,10 +376,16 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Messerhand/Knife Hand</string>
+    <string>bevorzugte Handverwendung/ perferred hand</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="button_right_hand">
@@ -491,10 +503,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_14">
    <property name="geometry">
     <rect>
-     <x>1340</x>
+     <x>1320</x>
      <y>640</y>
-     <width>201</width>
-     <height>79</height>
+     <width>241</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -502,19 +514,25 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Recht/Right</string>
+    <string>rechtshändig/ right-handed</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_15">
    <property name="geometry">
     <rect>
-     <x>1110</x>
+     <x>1090</x>
      <y>640</y>
-     <width>160</width>
-     <height>79</height>
+     <width>201</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -522,10 +540,16 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Links/Left</string>
+    <string>linkshändig/ left-handed</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QWidget" name="widget_2" native="true">
