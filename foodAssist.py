@@ -533,9 +533,12 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.widget_score.setHidden(False)
     else:
       print("reaching point - evaluation not successful")
-      # disable button_view
+      # default - disable button_view
       self.button_view.setHidden(True)
       self.button_view.setEnabled(False)
+      # debugging - enable button_view
+      # self.button_view.setHidden(False)
+      # self.button_view.setEnabled(True)
       if self.my_initializer.lang == 'en':
         self.label_text_1.setText("Sorry, we weren't able to process your gesture data, please connect mobile app and restart here.")
       else:
@@ -547,7 +550,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
   def button_view_clicked(self):
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step1_UI(self.my_initializer)
+    self.target_ui = Result_Step1_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -570,11 +573,11 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.close()
 
 
-########## Result Step 1 UI class ##########
-class Result_Step1_UI(qtw.QWidget):
+########## Result Step 1 Page 1 UI class ##########
+class Result_Step1_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step1_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -591,19 +594,19 @@ class Result_Step1_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step4_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step4_UI(self.my_initializer)
+    self.target_ui = Result_Step4_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step1_Page2_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step1_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step1_Page2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -611,7 +614,7 @@ class Result_Step1_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step1_UI
+    self.my_initializer.last_class = Result_Step1_Page1_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -633,11 +636,11 @@ class Result_Step1_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 1 Percent UI class ##########
-class Result_Step1_Percent_UI(qtw.QWidget):
+########## Result Step 1 Page 2 UI class ##########
+class Result_Step1_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step1_percent.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step1_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -657,19 +660,19 @@ class Result_Step1_Percent_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step1_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step1_UI(self.my_initializer)
+    self.target_ui = Result_Step1_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step2_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step2_UI(self.my_initializer)
+    self.target_ui = Result_Step2_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -677,7 +680,7 @@ class Result_Step1_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step1_Percent_UI
+    self.my_initializer.last_class = Result_Step1_Page2_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -699,11 +702,11 @@ class Result_Step1_Percent_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 2 UI class ##########
-class Result_Step2_UI(qtw.QWidget):
+########## Result Step 2 Page 1 UI class ##########
+class Result_Step2_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step2_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -723,19 +726,19 @@ class Result_Step2_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step1_Page2_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step1_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step1_Page2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step3_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step3_UI(self.my_initializer)
+    self.target_ui = Result_Step3_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -743,7 +746,7 @@ class Result_Step2_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step2_UI
+    self.my_initializer.last_class = Result_Step2_Page1_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -765,11 +768,11 @@ class Result_Step2_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 2 Percent UI class ##########
-class Result_Step2_Percent_UI(qtw.QWidget):
+########## Result Step 2 Page 2 UI class ##########
+class Result_Step2_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step2_percent.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step2_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -783,19 +786,19 @@ class Result_Step2_Percent_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step2_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step2_UI(self.my_initializer)
+    self.target_ui = Result_Step2_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step3_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step3_UI(self.my_initializer)
+    self.target_ui = Result_Step3_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -803,7 +806,7 @@ class Result_Step2_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step2_Percent_UI
+    self.my_initializer.last_class = Result_Step2_Page2_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -825,11 +828,11 @@ class Result_Step2_Percent_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 3 UI class ##########
-class Result_Step3_UI(qtw.QWidget):
+########## Result Step 3 Page 1 UI class ##########
+class Result_Step3_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step3.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step3_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -843,19 +846,19 @@ class Result_Step3_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step2_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step2_UI(self.my_initializer)
+    self.target_ui = Result_Step2_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step3_Page2_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step3_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step3_Page2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -863,7 +866,7 @@ class Result_Step3_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step3_UI
+    self.my_initializer.last_class = Result_Step3_Page1_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -886,11 +889,11 @@ class Result_Step3_UI(qtw.QWidget):
 
 
 
-########## Result Step 3 Percent UI class ##########
-class Result_Step3_Percent_UI(qtw.QWidget):
+########## Result Step 3 Page 2 UI class ##########
+class Result_Step3_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step3_percent.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step3_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -904,19 +907,19 @@ class Result_Step3_Percent_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step3_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step3_UI(self.my_initializer)
+    self.target_ui = Result_Step3_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step4_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step4_UI(self.my_initializer)
+    self.target_ui = Result_Step4_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -924,7 +927,7 @@ class Result_Step3_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step3_Percent_UI
+    self.my_initializer.last_class = Result_Step3_Page2_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -946,11 +949,11 @@ class Result_Step3_Percent_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 4 UI class ##########
-class Result_Step4_UI(qtw.QWidget):
+########## Result Step 4 Page 1 UI class ##########
+class Result_Step4_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step4.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step4_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -967,19 +970,19 @@ class Result_Step4_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step3_Page2_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step3_Percent_UI(self.my_initializer)
+    self.target_ui = Result_Step3_Page2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step1_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step1_UI(self.my_initializer)
+    self.target_ui = Result_Step1_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -987,7 +990,7 @@ class Result_Step4_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step4_UI
+    self.my_initializer.last_class = Result_Step4_Page1_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
@@ -1009,11 +1012,11 @@ class Result_Step4_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 4 Percent UI class ##########
-class Result_Step4_Percent_UI(qtw.QWidget):
+########## Result Step 4 Page 2 Percent UI class ##########
+class Result_Step4_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step4_percent.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step4_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1030,19 +1033,19 @@ class Result_Step4_Percent_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step4_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step4_UI(self.my_initializer)
+    self.target_ui = Result_Step4_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_UI
+    # redirects to Result_Step1_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step1_UI(self.my_initializer)
+    self.target_ui = Result_Step1_Page1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -1050,7 +1053,7 @@ class Result_Step4_Percent_UI(qtw.QWidget):
   def exit_button_pressed(self):
     # deactivate worker
     self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step4_Percent_UI
+    self.my_initializer.last_class = Result_Step4_Page2_UI
     self.target_ui = Menu_Default_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
