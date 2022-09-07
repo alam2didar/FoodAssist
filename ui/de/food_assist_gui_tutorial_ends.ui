@@ -85,7 +85,7 @@
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Ihre Leistung analysieren...</string>
+    <string>analysiert Ihre Leistung ...</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
@@ -387,7 +387,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 0);</string>
      </property>
      <property name="text">
-      <string>Erfahrung erworben</string>
+      <string>Erfahrung gesammelt</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
@@ -481,12 +481,6 @@ color: rgb(0, 255, 0);</string>
   <zorder>widget_2</zorder>
   <zorder>widget_xp</zorder>
   <zorder>widget_score</zorder>
-  <zorder>splitter</zorder>
-  <zorder>splitter</zorder>
-  <zorder>label_text_xp</zorder>
-  <zorder>xp_bolt</zorder>
-  <zorder>label_text_score</zorder>
-  <zorder>score_flag</zorder>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>

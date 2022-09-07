@@ -739,28 +739,6 @@ color: rgb(255, 255, 255);</string>
     </property>
    </widget>
   </widget>
-  <widget class="QLabel" name="no_sign_1">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>780</y>
-     <width>80</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>80</width>
-     <height>80</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources/res.qrc">:/img/No Sign.svg</pixmap>
-   </property>
-  </widget>
   <zorder>label_plot_2</zorder>
   <zorder>button_nav_left</zorder>
   <zorder>button_nav_right</zorder>
@@ -778,7 +756,6 @@ color: rgb(255, 255, 255);</string>
   <zorder>label_text_step</zorder>
   <zorder>splitter_4</zorder>
   <zorder>splitter_hide</zorder>
-  <zorder>no_sign_1</zorder>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>

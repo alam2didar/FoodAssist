@@ -613,7 +613,7 @@ color: rgb(255, 255, 0);</string>
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Schritt 2</string>
+    <string>Step 2</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
@@ -738,28 +738,6 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
-  </widget>
-  <widget class="QLabel" name="no_sign_1">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>780</y>
-     <width>80</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>80</width>
-     <height>80</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources/res.qrc">:/img/No Sign.svg</pixmap>
-   </property>
   </widget>
  </widget>
  <resources>

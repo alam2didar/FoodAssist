@@ -613,7 +613,7 @@ color: rgb(255, 255, 0);</string>
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Schritt 3</string>
+    <string>Step 3</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>

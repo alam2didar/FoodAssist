@@ -460,7 +460,7 @@ color: rgb(0, 255, 0);</string>
 color: rgb(255, 255, 0);</string>
      </property>
      <property name="text">
-      <string>Experience earned</string>
+      <string>Experience gained</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
