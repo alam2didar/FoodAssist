@@ -1293,7 +1293,7 @@ def show_evaluation_result(self, step_number, page_number):
   for index in range(4):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
   if difference[0] is None or difference[1] is None or difference[2] is None or difference[3] is None:
-    if step_number == 2 and difference[0] is None:
+    if (step_number == 2 and difference[0] is None) or (difference[0] is None and difference[1] is None and difference[2] is None and difference[3] is None):
       if self.my_initializer.lang == 'en':
         self.label_trouble.setText(f"You didn't perform any gestures in this step.")
       else:
