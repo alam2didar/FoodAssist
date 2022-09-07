@@ -647,7 +647,6 @@ class Result_Step1_Page2_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 1, 2)
-    self.no_sign_1.setHidden(True)
     self.splitter_hide.setHidden(True)
     self.label_plot_2.setHidden(True)
     self.icon_expert_2.setHidden(True)
@@ -713,7 +712,6 @@ class Result_Step2_Page1_UI(qtw.QWidget):
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 2, 1)
-    self.no_sign_1.setHidden(True)
     self.splitter_hide.setHidden(True)
     self.label_plot_2.setHidden(True)
     self.icon_expert_2.setHidden(True)
