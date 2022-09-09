@@ -423,7 +423,7 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="icon">
     <iconset resource="resources/res.qrc">
-     <normaloff>:/img/Knife Hand Right.png</normaloff>:/img/Knife Hand Right.png</iconset>
+     <normaloff>:/img/Right Hand.svg</normaloff>:/img/Right Hand.svg</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -482,7 +482,7 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="icon">
     <iconset resource="resources/res.qrc">
-     <normaloff>:/img/Knife Hand Left.png</normaloff>:/img/Knife Hand Left.png</iconset>
+     <normaloff>:/img/Left Hand.svg</normaloff>:/img/Left Hand.svg</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -670,7 +670,6 @@ color: rgb(255, 255, 255)</string>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>
-  <include location="ui/de/resources/res.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -161,7 +161,7 @@ class Language_and_Hand_UI(qtw.QWidget):
 class Placing_Meat_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_placing_meat.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_placing_meat.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -246,7 +246,7 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_entry_step1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -291,7 +291,7 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_entry_step2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -337,7 +337,7 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_entry_step3.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -383,7 +383,7 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_entry_step4.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -425,7 +425,7 @@ class Entry_Step_4_UI(qtw.QWidget):
 class Tutorial_Ends_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_tutorial_ends.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_view.clicked.connect(self.button_view_clicked)
@@ -577,7 +577,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
 class Result_Step1_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step1_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step1_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -640,18 +640,13 @@ class Result_Step1_Page1_UI(qtw.QWidget):
 class Result_Step1_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step1_page2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step1_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 1, 2)
-    self.splitter_hide.setHidden(True)
-    self.label_plot_2.setHidden(True)
-    self.icon_expert_2.setHidden(True)
-    self.icon_newbie_2.setHidden(True)
-    self.icon_reaction_2.setHidden(True)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -671,7 +666,7 @@ class Result_Step1_Page2_UI(qtw.QWidget):
     # redirects to Result_Step2_Page1_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step2_Page1_UI(self.my_initializer)
+    self.target_ui = Result_Step1_Page3_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -701,22 +696,76 @@ class Result_Step1_Page2_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
+########## Result Step 1 Page 3 UI class ##########
+class Result_Step1_Page3_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step1_page3.ui', self)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 1, 3)
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step1_Page1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step1_Page2_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step2_Page1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step2_Page1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step1_Page3_UI
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+
 ########## Result Step 2 Page 1 UI class ##########
 class Result_Step2_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step2_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step2_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
     show_evaluation_result(self, 2, 1)
-    self.splitter_hide.setHidden(True)
-    self.label_plot_2.setHidden(True)
-    self.icon_expert_2.setHidden(True)
-    self.icon_newbie_2.setHidden(True)
-    self.icon_reaction_2.setHidden(True)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -766,71 +815,11 @@ class Result_Step2_Page1_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 2 Page 2 UI class ##########
-class Result_Step2_Page2_UI(qtw.QWidget):
-  def __init__(self, my_initializer):
-    super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step2_page2.ui', self)
-    # pass on my_initializer
-    self.my_initializer = my_initializer
-    self.my_initializer.current_step = None
-    self.my_initializer.obj_recorder.disable_writing()
-    # show_evaluation_result after my_initializer is passed
-    show_evaluation_result(self, 2, 2)
-    # draw finger-tip cursor
-    draw_finger_tip_cursor(self)
-    # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
-
-  @qtc.pyqtSlot()
-  def button_nav_left_clicked(self):
-    # redirects to Result_Step2_Page1_UI
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = Result_Step2_Page1_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-
-  @qtc.pyqtSlot()
-  def button_nav_right_clicked(self):
-    # redirects to Result_Step3_Page1_UI
-    # deactivate worker
-    self.obj.deactivate()
-    self.target_ui = Result_Step3_Page1_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-
-  @qtc.pyqtSlot()
-  def exit_button_pressed(self):
-    # deactivate worker
-    self.obj.deactivate()
-    self.my_initializer.last_class = Result_Step2_Page2_UI
-    self.target_ui = Menu_Default_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-
-  def paintEvent(self, event):
-    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
-
-  # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
-    # draw cursor for finger tip
-    self.finger_tip_x = cursor_x
-    self.finger_tip_y = cursor_y
-    self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_exit.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_nav_left.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_nav_right.click()
-
-
 ########## Result Step 3 Page 1 UI class ##########
 class Result_Step3_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step3_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -891,7 +880,7 @@ class Result_Step3_Page1_UI(qtw.QWidget):
 class Result_Step3_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step3_page2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -914,10 +903,10 @@ class Result_Step3_Page2_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step4_Page1_UI
+    # redirects to Result_Step3_Page3_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step4_Page1_UI(self.my_initializer)
+    self.target_ui = Result_Step3_Page3_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -947,20 +936,17 @@ class Result_Step3_Page2_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 4 Page 1 UI class ##########
-class Result_Step4_Page1_UI(qtw.QWidget):
+########## Result Step 3 Page 3 UI class ##########
+class Result_Step3_Page3_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step4_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page3.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
     # show_evaluation_result after my_initializer is passed
-    show_evaluation_result(self, 4, 1)
-    # disable right button
-    self.button_nav_right.setHidden(True)
-    self.button_nav_right.setEnabled(False)
+    show_evaluation_result(self, 3, 3)
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
@@ -977,10 +963,130 @@ class Result_Step4_Page1_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def button_nav_right_clicked(self):
-    # redirects to Result_Step1_Page1_UI
+    # redirects to Result_Step3_Page4_UI
     # deactivate worker
     self.obj.deactivate()
-    self.target_ui = Result_Step1_Page1_UI(self.my_initializer)
+    self.target_ui = Result_Step3_Page4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step3_Page3_UI
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+
+
+########## Result Step 3 Page 4 UI class ##########
+class Result_Step3_Page4_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page4.ui', self)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 3, 4)
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step3_Page3_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step3_Page3_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step4_Page1_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step4_Page1_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def exit_button_pressed(self):
+    # deactivate worker
+    self.obj.deactivate()
+    self.my_initializer.last_class = Result_Step3_Page4_UI
+    self.target_ui = Menu_Default_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_left.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_d) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_nav_right.click()
+
+
+########## Result Step 4 Page 1 UI class ##########
+class Result_Step4_Page1_UI(qtw.QWidget):
+  def __init__(self, my_initializer):
+    super().__init__()
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step4_page1.ui', self)
+    # pass on my_initializer
+    self.my_initializer = my_initializer
+    self.my_initializer.current_step = None
+    self.my_initializer.obj_recorder.disable_writing()
+    # show_evaluation_result after my_initializer is passed
+    show_evaluation_result(self, 4, 1)
+    # draw finger-tip cursor
+    draw_finger_tip_cursor(self)
+    # Hand tracking thread
+    create_worker_handpos(self, self.my_initializer)
+
+  @qtc.pyqtSlot()
+  def button_nav_left_clicked(self):
+    # redirects to Result_Step3_Page4_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step3_Page4_UI(self.my_initializer)
+    select_screen_and_show(self.target_ui)
+    self.close()
+
+  @qtc.pyqtSlot()
+  def button_nav_right_clicked(self):
+    # redirects to Result_Step4_Page2_UI
+    # deactivate worker
+    self.obj.deactivate()
+    self.target_ui = Result_Step4_Page2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
@@ -1010,11 +1116,11 @@ class Result_Step4_Page1_UI(qtw.QWidget):
       self.button_nav_right.click()
 
 
-########## Result Step 4 Page 2 Percent UI class ##########
+########## Result Step 4 Page 2 UI class ##########
 class Result_Step4_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_result_step4_page2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step4_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1082,7 +1188,7 @@ class Menu_Default_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_menu_default.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_menu_default.ui', self)
     self.button_step1.clicked.connect(self.step1_button_pressed)
     self.button_step2.clicked.connect(self.step2_button_pressed)
     self.button_step3.clicked.connect(self.step3_button_pressed)
@@ -1167,7 +1273,7 @@ class Confirm_Restart_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_confirm_restart.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_confirm_restart.ui', self)
     self.button_yes.clicked.connect(self.restart_yes_pressed)
     self.button_no.clicked.connect(self.restart_no_pressed)
     
@@ -1272,24 +1378,17 @@ def show_evaluation_result(self, step_number, page_number):
   # calculate the average score
   self.label_text_score.setText(f"{self.my_initializer.step_score_dict[f'step_{step_number}']}%")
   self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_{page_number}.png'))
-  self.label_plot_2.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_{page_number+1}.png'))
-  # change icon_reaction_1 based on score for gesture 1 / 3
-  if self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-2] > 80:
+  # change icon_reaction_1 based on score for gesture (page_number)
+  if self.my_initializer.score_dict[f'step_{step_number}'][page_number-1] > 80:
     self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
-  elif self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-2] > 50:
+  elif self.my_initializer.score_dict[f'step_{step_number}'][page_number-1] > 50:
     self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
   else:
     self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
-  # change icon_reaction_2 based on score for gesture 2 / 4
-  if self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-1] > 80:
-    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
-  elif self.my_initializer.score_dict[f'step_{step_number}'][2*page_number-1] > 50:
-    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
-  else:
-    self.icon_reaction_2.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
   difference = [None, None, None, None]
   for index in range(4):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
+  # to do - improve logic later
   if difference[0] is None or difference[1] is None or difference[2] is None or difference[3] is None:
     if (step_number == 2 and difference[0] is None) or (difference[0] is None and difference[1] is None and difference[2] is None and difference[3] is None):
       if self.my_initializer.lang == 'en':
