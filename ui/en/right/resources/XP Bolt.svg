@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="150"
+   width="150"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="XP Bolt.svg"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     width="150px"
+     inkscape:zoom="2.2682292"
+     inkscape:cx="56.652124"
+     inkscape:cy="23.366246"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="m 66.458929,129 q -1.65,0 -2.55,-1.05 -0.9,-1.05 -0.6,-2.7 l 5.55,-38.55 h -21.9 q -1.65,0 -2.4,-1.5 -0.75,-1.5 0,-2.85 l 35.55,-59.4 q 0.45,-0.75 1.5,-1.35 1.05,-0.6 2.1,-0.6 1.65,0 2.55,1.05 0.9,1.05 0.6,2.7 l -5.55,38.4 h 21.600001 q 1.65,0 2.475,1.5 0.825,1.5 0.075,2.85 l -35.400001,59.55 q -0.45,0.75 -1.5,1.35 -1.05,0.6 -2.1,0.6 z"
+     id="path2"
+     style="stroke-width:3;fill:#ffff00" />
+</svg>

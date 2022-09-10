@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="150"
+   width="150"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="SCORE flag.svg"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="193.3937"
+     inkscape:cy="144.24978"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="M 55.953804,19.977654 H 68.651268 V 7.28019 H 55.953804 Z m 25.394929,0 V 7.28019 H 94.046197 V 19.977654 Z M 55.953804,70.767512 V 58.070048 H 68.651268 V 70.767512 Z M 106.74366,45.372583 V 32.675119 h 12.69747 v 12.697464 z m 0,25.394929 V 58.070048 h 12.69747 v 12.697464 z m -25.394927,0 V 58.070048 H 94.046197 V 70.767512 Z M 106.74366,19.977654 V 7.28019 h 12.69747 V 19.977654 Z M 68.651268,32.675119 V 19.977654 H 81.348733 V 32.675119 Z M 36.907607,142.71981 q -2.751117,0 -4.549925,-1.79881 -1.798807,-1.7988 -1.798807,-4.54992 V 13.628922 q 0,-2.751117 1.798807,-4.5499245 Q 34.15649,7.28019 36.907607,7.28019 q 2.751118,0 4.549925,1.7988075 1.798807,1.7988075 1.798807,4.5499245 v 6.348732 H 55.953804 V 32.675119 H 43.256339 V 45.372583 H 55.953804 V 58.070048 H 43.256339 v 78.301032 q 0,2.75112 -1.798807,4.54992 -1.798807,1.79881 -4.549925,1.79881 z M 94.046197,58.070048 V 45.372583 h 12.697463 v 12.697465 z m -25.394929,0 V 45.372583 H 81.348733 V 58.070048 Z M 55.953804,45.372583 V 32.675119 h 12.697464 v 12.697464 z m 25.394929,0 V 32.675119 H 94.046197 V 45.372583 Z M 94.046197,32.675119 V 19.977654 h 12.697463 v 12.697465 z"
+     id="path2"
+     style="fill:#00ff00;stroke-width:4.23249" />
+</svg>

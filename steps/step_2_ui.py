@@ -20,7 +20,7 @@ class Step_2_UI(qtw.QWidget):
     self.box_w = 0
     self.box_h = 0
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/food_assist_gui_step2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_step2.ui', self)
     self.hide_video_controller_buttons(True)
     self.play_button_opacity = qtw.QGraphicsOpacityEffect()
     self.pause_button_opacity = qtw.QGraphicsOpacityEffect()

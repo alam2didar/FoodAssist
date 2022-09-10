@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="250"
+   height="250"
+   viewBox="0 0 66.145832 66.145835"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="Sub Step 4.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     units="px"
+     inkscape:snap-center="false"
+     inkscape:snap-text-baseline="false"
+     inkscape:snap-to-guides="true"
+     inkscape:zoom="1.5518659"
+     inkscape:cx="40.274098"
+     inkscape:cy="117.27817"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
+  <defs
+     id="defs2">
+    <rect
+       x="-133.38781"
+       y="114.05625"
+       width="15.465254"
+       height="57.994702"
+       id="rect1061" />
+    <rect
+       x="-156.58569"
+       y="105.67923"
+       width="144.98675"
+       height="191.38252"
+       id="rect987" />
+    <rect
+       x="82.159162"
+       y="77.004077"
+       width="170.43999"
+       height="187.8384"
+       id="rect48878" />
+    <rect
+       x="105.71066"
+       y="100.24287"
+       width="145.6228"
+       height="219.33772"
+       id="rect6386" />
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path3357" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mstart"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path3360" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3336" />
+    </marker>
+    <rect
+       x="-156.58569"
+       y="105.67923"
+       width="144.98676"
+       height="191.38252"
+       id="rect987-9" />
+    <rect
+       x="-156.58569"
+       y="105.67923"
+       width="144.98676"
+       height="191.38252"
+       id="rect987-0" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <circle
+       style="display:inline;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2.06759;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="path263"
+       cx="33.072918"
+       cy="33.072918"
+       r="32.03912"
+       inkscape:label="path263" />
+    <g
+       aria-label="4"
+       transform="matrix(0.20541129,0,0,0.25358686,54.031568,-16.702614)"
+       id="text985-4"
+       style="font-size:162.667px;-inkscape-font-specification:'sans-serif, Normal';white-space:pre;shape-inside:url(#rect987-9);shape-padding:2.57754;display:inline;fill:#ffffff;stroke:#ffffff"
+       inkscape:label="Number 4">
+      <path
+         d="m -58.456831,223.38188 h -17.553422 v 33.28002 h -15.250032 v -33.28002 h -56.631625 v -18.26826 l 57.267043,-66.71889 h 14.614614 v 72.27879 h 17.553422 z m -32.803454,-12.70836 v -53.37511 l -45.829525,53.37511 z"
+         id="path381" />
+    </g>
+  </g>
+</svg>
