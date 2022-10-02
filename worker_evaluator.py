@@ -94,6 +94,7 @@ class WorkerEvaluator(QObject):
         self.evaluation_result.emit(success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage)
 
     @pyqtSlot()
+    # process data frame for each step
     def process_data_frame(self, data_frame_expert_step, data_frame_newbie_step, step_number):
         success_flag = False
         # qualitative_result = False
@@ -146,19 +147,24 @@ class WorkerEvaluator(QObject):
                 os.remove(strFile)
             sns_count_plot.figure.savefig(strFile)
 
-        if sum(df_newbie_position_amount) != 0:
-            for gesture_index in range(1, 4):
-                amount_difference[gesture_index-1] = df_newbie_position_amount[gesture_index-1] - self.expert_amount_dict[f'step_{step_number}_gesture_{gesture_index}']
-            # calculation of score_array
-            for index in range(3):
-                if abs(amount_difference[0]) is None:
-                    score_array[index] = 0
-                elif abs(amount_difference[index]) > 10:
+        if df_newbie_position_amount == [0, 0, 0, 0]:
+            # -1 represents no gesture performed
+            amount_difference = [-1, -1, -1, -1]
+            success_flag = False
+        else:
+            # calculation of differences in 4 gestures in one step
+            for index in range(4):
+                if df_newbie_position_amount[index] is None:
+                    df_newbie_position_amount[index] = 0
+                if df_expert_position_amount[index] is None:
+                    df_expert_position_amount[index] = 0
+                amount_difference[index] = abs(df_newbie_position_amount[index] - df_expert_position_amount[index])
+                # calculation of score_array for each gesture
+                if amount_difference[index] > 10:
                     score_array[index] = 50
                 else:
                     score_array[index] = 100 - 5 * abs(amount_difference[index])
-            step_score_dict = int(sum(score_array)/len(score_array))
+            # calculation of score in each step
+            step_score_dict = int(sum(score_array) / len(score_array))
             success_flag = True
-        else:
-            success_flag = False
         return success_flag, amount_difference, score_array, step_score_dict
