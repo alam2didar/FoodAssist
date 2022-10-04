@@ -51,7 +51,7 @@ class WorkerHandPos(QObject):
                 #     point = self.depth_contour_finder.findPosition(depth_colormap)
                 # after finding point - use knuckle coordinates to find distance
                 if point:
-                    distance = self.getDistance(point, depth_image, self.depth_camera)
+                    distance = self.getDistance(point, depth_image)
                     if distance:
                         distance = int(distance*1000)
                         print("Hand position (x, y, z): ", (point[0], point[1], distance))
@@ -62,11 +62,11 @@ class WorkerHandPos(QObject):
         # finish upon breaking out of loop
         self.finished.emit()
 
-    def getDistance(self, point, depth_image, depth_camera):
+    def getDistance(self, point, depth_image):
         distance = None
         if point:
             # print(point)
-            if (point[1] > 0) & (point[1] < depth_camera.color_height) & (point[0] < depth_camera.color_width) & (point[0] > 0):
+            if (point[1] > 0) & (point[1] < self.depth_camera.color_height) & (point[0] < self.depth_camera.color_width) & (point[0] > 0):
                 # find distance
-                distance = depth_image[point[1], point[0]] * depth_camera.depth_scale
+                distance = depth_image[point[1], point[0]] * self.depth_camera.depth_scale
         return distance
