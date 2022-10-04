@@ -9,7 +9,7 @@ class HandDetector:
         self.mpDraw = mp.solutions.drawing_utils
         # print("Initialized HandDetector.")
 
-    def findHands(self, img, draw=True):
+    def findHands(self, img, draw=False):
         if img is not None:
             imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             results = self.hands.process(imgRGB)
