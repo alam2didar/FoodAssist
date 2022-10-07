@@ -522,9 +522,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
           self.label_text_1.setText(f"Sie scheinen in {step_score_sorted_list[3][0]} mehr Übung zu brauchen.".replace('_', ' ').replace('step', 'Schritt'))
       # hints to touch the button
       if self.my_initializer.lang == 'en':
-        self.label_text_2.setText("Touch the view button to see more details.")
+        self.label_text_2.setText("Touch this button to view more details.")
       else:
-        self.label_text_2.setText("Berühren Sie die Ansichtsschaltfläche, um weitere Details anzuzeigen.")
+        self.label_text_2.setText("Berühren Sie diesen Knopf, um weitere Details anzuschauen.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
       # to do - show score percentage
@@ -1388,21 +1388,22 @@ def show_evaluation_result(self, step_number, page_number):
   difference = [None, None, None, None]
   for index in range(4):
     difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
-  # to do - improve logic later
-  if difference[0] is None or difference[1] is None or difference[2] is None or difference[3] is None:
-    if (step_number == 2 and difference[0] is None) or (difference[0] is None and difference[1] is None and difference[2] is None and difference[3] is None):
-      if self.my_initializer.lang == 'en':
-        self.label_trouble.setText(f"You didn't perform any gestures in this step.")
-      else:
-        self.label_trouble.setText(f"Sie haben in diesem Schritt keine Geste ausgeführt.")
+  # improved logic
+  # case 1: no gestures performed
+  if difference == [-1, -1, -1, -1]:
+    if self.my_initializer.lang == 'en':
+      self.label_trouble.setText(f"You didn't perform any gestures in this step.")
     else:
-      if self.my_initializer.lang == 'en':
-        self.label_trouble.setText(f"You didn't perform all gestures in this step.")
-      else:
-        self.label_trouble.setText(f"Sie haben in diesem Schritt nicht alle Gesten ausgeführt.")
+      self.label_trouble.setText(f"Sie haben in diesem Schritt keine Geste ausgeführt.")
+  # case 2: perfectly performed
+  elif difference == [0, 0, 0, 0]:
+    # display texts upon perfect performance
+    if self.my_initializer.lang == 'en':
+      self.label_trouble.setText("Congratulation! You performed exactly like the expert.")
+    else:
+      self.label_trouble.setText("Glückwunsch! Sie sind genauso wie ein Experte aufgetreten.")
+  # case 3: partly performed
   else:
-    for index in range(4):
-      difference[index] = abs(difference[index])
     # find out worst gesture
     gesture_no = 1
     if difference[1] > difference[0]:
@@ -1410,9 +1411,9 @@ def show_evaluation_result(self, step_number, page_number):
     if difference[2] > difference[1]:
       gesture_no = 3
     if difference[3] > difference[2]:
-      gesture_no = 3
+      gesture_no = 4
     # self.label_trouble.setText(f"Most troubled: gesture {gesture_no}")
-    self.label_trouble.append(gesture_no)
+    self.label_trouble.setText(self.label_trouble.text() + str(gesture_no))
 
 # move the app to the secod screen (projector screen)
 def select_screen_and_show(ui_class):
