@@ -46,7 +46,9 @@ class FoodAssist(qtw.QWidget):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
+    # UI update calling paintEvent()
     self.update()
+    # check whether hand position is in area
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.large) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.start_button.click()
 
