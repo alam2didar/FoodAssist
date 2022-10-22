@@ -1,12 +1,10 @@
 import PyQt5.QtCore as qtc
-import DepthCameraModule as dcm
-from foodAssist import Placing_Meat_UI
 import worker_websocket
 import worker_recorder
-import worker_detection
+import worker_udp
+import worker_evaluator
 
 class Initializer(qtc.QObject):
-  detectionParams = qtc.pyqtSignal(int, int, int, int, int)
   devices_connected = qtc.pyqtSignal()
   devices_disconnected = qtc.pyqtSignal()
   # flag to start/block workers
@@ -14,27 +12,33 @@ class Initializer(qtc.QObject):
   start_worker = True
   interval_between_uis = 20
 
-  def __init__(self, last_class=Placing_Meat_UI):
+  def __init__(self):
     super().__init__()
+    # define list of gestures
+    self.gesture_id_list = ["s1g1", "s1g2", "s1g3", "s2g1", "s3g1", "s3g2", "s3g3", "s3g4", "s4g1", "s4g2"]
+
     # initial status of devices
     self.devices_running = False
     # define current step
     self.current_step = None
-    # detected step (by detection model)
-    self.detected_step = 0
-    # last class which has called the current class
-    self.last_class = last_class
-    # users' language (default is English: en)
-    self.lang = 'en'
-    # users' knife hand (default is right)
-    self.knife_hand = 'right'
 
-    # Initialize Depth Camera Intel Realsense
-    #####
-    # comment for no camera device
-    self.my_depth_camera = dcm.DepthCamera()
-    # self.my_depth_camera = None
-    #####
+    # Create WorkerUdp thread
+    # 1 - create Worker and Thread inside the Form # no parent
+    self.obj_udp = worker_udp.WorkerUdp()
+    self.thread_udp = qtc.QThread()
+    # 2 - Connect Worker`s Signals to Form method slots to post data.
+    self.obj_udp.current_step_update.connect(self.set_current_step)
+    self.obj_udp.result_requested.connect(self.retrieve_result)
+    # 3 - Move the Worker object to the Thread object
+    self.obj_udp.moveToThread(self.thread_udp)
+    # 4 - Connect Worker Signals to the Thread slots
+    self.obj_udp.udp_finished.connect(self.thread_udp.quit)
+    # 5 - Connect Thread started signal to Worker operational slot method
+    self.thread_udp.started.connect(self.obj_udp.receive_message)
+    # 6 - Start the thread
+    if self.start_worker:
+      self.thread_udp.start()
+    print("worker udp is up")
 
     # Create WorkerWebsocket thread
     # 1 - create Worker and Thread inside the Form # no parent
@@ -53,6 +57,7 @@ class Initializer(qtc.QObject):
     # 6 - Start the thread
     if self.start_worker:
       self.thread_websocket.start()
+    print("worker websocket is up")
 
     # Create WorkerRecorder thread
     self.obj_recorder = worker_recorder.WorkerRecorder()
@@ -62,16 +67,85 @@ class Initializer(qtc.QObject):
     self.thread_recorder.started.connect(self.obj_recorder.archive_old)
     if self.start_worker:
       self.thread_recorder.start()
-    
-    # Create WorkerDetection thread
-    self.obj_detection = worker_detection.WorkerDetection(self.my_depth_camera)
-    self.thread_detection = qtc.QThread()
-    self.obj_detection.detectionParams.connect(self.onDetection)
-    self.obj_detection.moveToThread(self.thread_detection)
-    self.obj_detection.finished.connect(self.thread_detection.quit)
-    self.thread_detection.started.connect(self.obj_detection.detectStep)
-    if self.start_worker:
-      self.thread_detection.start()
+    print("worker recorder is up")
+
+    # Create WorkerEvaluator thread
+    # 1 - create Worker and Thread inside the Form # no parent
+    self.obj_evaluator = worker_evaluator.WorkerEvaluator()
+    self.thread_evaluator = qtc.QThread()
+    # 2 - Connect Worker`s Signals to Form method slots to post data.
+    self.obj_evaluator.first_delay_reached.connect(self.onFirstDelayReached)
+    self.obj_evaluator.evaluation_result.connect(self.onEvaluationResult)
+    # 3 - Move the Worker object to the Thread object
+    self.obj_evaluator.moveToThread(self.thread_evaluator)
+    # 5 - Connect Thread started signal to Worker operational slot method
+    # self.thread_evaluator.started.connect(self.obj_evaluator.first_delay)
+    # * - Thread finished signal will close the app (if needed!)
+    # self.thread.finished.connect(app.exit)
+    # 6 - Start the thread
+    self.thread_evaluator.start()
+    print("worker evaluator is up")
+
+  def set_current_step(self, stage):
+    if stage == -1:
+      self.current_step = None
+    elif stage == 0:
+      self.current_step = None
+      # stop recording
+      self.obj_recorder.disable_writing()
+      # close file
+      self.obj_recorder.close_file()
+      # archiving csv file - followed by creating new csv file
+      self.archive_csv_name = self.obj_recorder.archive_old()
+      # start recording
+      self.obj_recorder.enable_writing()
+      # prepare for evaluation
+      self.obj_evaluator.first_delay()
+      print("preparing for evaluation")
+    else:
+      # set current step
+      self.current_step = stage
+      print("reaching at stage " + self.current_step)
+
+  def retrieve_result(self, request_id):
+    if request_id in self.gesture_id_list:
+      print("request_id " + request_id + " in the list")
+      if self.success_flag == True:
+        print("evalution was successful")
+        response_id = request_id
+        gesture_score = self.get_gesture_score(request_id)
+        self.obj_udp.send_message(-1, response_id, gesture_score)
+        print("send back result")
+      else:
+        print("evalution wasn't successful")
+    else:
+      print("request_id " + request_id + " not in the list")
+
+  def get_gesture_score(self, request_id):
+    step_number = int(request_id[1])
+    gesture_number = int(request_id[3])
+    gesture_score = self.score_dict[f'step_{step_number}'][gesture_number-1]
+    print(f"looking up step {step_number} gesture {gesture_number}")
+    return gesture_score
+
+  def onFirstDelayReached(self):
+      # debug - setting evaluation_flag to True
+      self.obj_evaluator.evaluate(self.archive_csv_name, True)
+
+  def onEvaluationResult(self, success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage):
+    # save evaluation result in my_initializer
+    self.success_flag = success_flag
+    self.difference_dict = difference_dict
+    self.score_dict = score_dict
+    self.step_score_dict = step_score_dict
+    self.step_score_sorted_list = step_score_sorted_list
+    self.overall_score_percentage = overall_score_percentage
+    if self.success_flag:
+      # to do - send error code 0 to worker udp
+      self.obj_udp.send_message(self, 0, "-1", -1)
+    else:
+      # to do - send error code 1 to worker udp
+      self.obj_udp.send_message(self, 1, "-1", -1)
 
   # check if message received
   def onWebsocketMessage(self, sensor_type, message):
@@ -81,15 +155,6 @@ class Initializer(qtc.QObject):
       print("writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
     else:
       print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
-
-  # send detection box paramas to the respective UI  
-  def onDetection(self, x, y, width, height, step):
-      self.detected_step = step
-      # calibrate x,y,w,h for projection with k=1.65 and (x,y) = (405,220)
-      if x == 0 or y == 0:
-        self.detectionParams.emit(0,0,0,0,0)
-      else:
-        self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
 
   def onDeviceStart(self):
     self.devices_running = True
