@@ -14,16 +14,9 @@ import json
 
 # Create UDP socket to use for sending (and receiving)
 sock = U.UdpComms(udpIPServer="192.168.65.40", udpIPClient='192.168.71.170', portTX=8000, portRX=8001, enableRX=True, suppressWarnings=True)
-i = 0
-
-# sock.SendDataToClient("") # Send this string to other application
-# i += 1
-# print('Sent from Python: ' + str(i))
 
 while True:
-    sock.SendDataToClient(str(i)) # Send this string to other application
-    i += 1
-    print('Sent from Python: ' + str(i))
+    sock.SendDataToClient("Keep alive!")
     
     data = sock.ReadReceivedData() # read data
 
@@ -44,7 +37,7 @@ while True:
                 # parsing JSON string:
                 z = json.loads(x)
                 # python object to be appended
-                y = {"eval_error": -1,"response_id":"s1g1","gesture_score":20,"worst_gesture":-1}
+                y = {"eval_error": -1,"response_id":"s1g1","gesture_score":20}
                 # appending the data
                 z.update(y)
                 # the result is a JSON string:
@@ -54,5 +47,6 @@ while True:
                 print('Sent from Python: ' + json_string)
         except json.JSONDecodeError:
             print("invalid JSON")
+            sock.SendDataToClient("invalid JSON") # Send this string to other application
 
     time.sleep(1)
