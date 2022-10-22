@@ -60,13 +60,11 @@ class FoodAssist(qtw.QWidget):
 
   # check if phone and watch are connected
   def onMobileConnected(self):
-    self.my_initializer.devices_running = True
     self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone On.svg'))
     self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch On.svg'))
 
   # check if phone and watch are connected
   def onMobileDisconnected(self):
-    self.my_initializer.devices_running = False
     self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone Off.svg'))
     self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch Off.svg'))
 
