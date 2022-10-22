@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import time
+
 
 class WorkerEvaluator(QObject):
     first_delay_reached = pyqtSignal()
@@ -19,8 +19,6 @@ class WorkerEvaluator(QObject):
 
     @pyqtSlot()
     def first_delay(self):
-        # slow down to adapt to UI
-        time.sleep(0.2)
         self.remove_png_files()
         self.first_delay_reached.emit()
 
