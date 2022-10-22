@@ -30,13 +30,11 @@ class WorkerRecorder(QObject):
         if self.file_writer:
             self.file_writer.close()
             self.file_writer = None
+            print("closed file successfully")
 
     @pyqtSlot()
     def archive_old(self):
         archive_csv_name = None
-        self.disable_writing()
-        # close file writer before archiving
-        self.close_file()
         if os.path.exists(self.current_csv_name):
             # archive - renaming csv file
             archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
