@@ -24,6 +24,42 @@ class WorkerWebsocket(QObject):
         self.worker_activated = False
 
     @pyqtSlot()
+    def process_json_message(self, message):
+        try:
+            json_dict = json.loads(message)
+            # extract content from json
+            sensor_type = json_dict["type"]
+            if sensor_type == "position":
+                prob_0 = float(json_dict["prob_0"])
+                prob_1 = float(json_dict["prob_1"])
+                prob_2 = float(json_dict["prob_2"])
+                prob_3 = float(json_dict["prob_3"])
+                # pick out the highest probability
+                temp_max = max(prob_0, prob_1, prob_2, prob_3)
+                if temp_max > 0.5:
+                    # pick out result_feature
+                    if prob_0 == temp_max:
+                        recognized_gesture = 1
+                    elif prob_1 == temp_max:
+                        recognized_gesture = 2
+                    elif prob_2 == temp_max:
+                        recognized_gesture = 3
+                    elif prob_3 == temp_max:
+                        recognized_gesture = 4
+                    # emit result_type, recognized_gesture (emitting gesture recognition from smart watch)
+                    self.websocket_message.emit(sensor_type, recognized_gesture)
+                else:
+                    # no matching probability over 0.5 found
+                    print("max value below 0.5: ", temp_max)
+            elif sensor_type == "motion":
+                # standard deviation of linear acceleration 
+                fused_sd = float(json_dict["prob_0"])
+                # emit result_type, fused_sd (emitting motion standard deviation from smart watch)
+                self.websocket_message.emit(sensor_type, fused_sd)
+        except json.JSONDecodeError:
+            print("invalid JSON")
+
+    @pyqtSlot()
     def create_websocket(self): # A slot takes no params
         async def server(websocket, path):
             async for message in websocket:
@@ -41,45 +77,15 @@ class WorkerWebsocket(QObject):
                     # emit signal to set icons
                     self.phone_and_watch_stop.emit()
                 else:
-                    # json data transfer
-                    try:
-                        json_dict = json.loads(message)
-                        # extract content from json
-                        sensor_type = json_dict["type"]
-                        if sensor_type == "position":
-                            prob_0 = float(json_dict["prob_0"])
-                            prob_1 = float(json_dict["prob_1"])
-                            prob_2 = float(json_dict["prob_2"])
-                            prob_3 = float(json_dict["prob_3"])
-                            # pick out the highest probability
-                            temp_max = max(prob_0, prob_1, prob_2, prob_3)
-                            if temp_max > 0.5:
-                                # pick out result_feature
-                                if prob_0 == temp_max:
-                                    recognized_gesture = 1
-                                elif prob_1 == temp_max:
-                                    recognized_gesture = 2
-                                elif prob_2 == temp_max:
-                                    recognized_gesture = 3
-                                elif prob_3 == temp_max:
-                                    recognized_gesture = 4
-                                # emit result_type, recognized_gesture (emitting gesture recognition from smart watch)
-                                self.websocket_message.emit(sensor_type, recognized_gesture)
-                            else:
-                                # no matching probability over 0.5 found
-                                print("max value below 0.5: ", temp_max)
-                        elif sensor_type == "motion":
-                            # standard deviation of linear acceleration 
-                            fused_sd = float(json_dict["prob_0"])
-                            # emit result_type, fused_sd (emitting motion standard deviation from smart watch)
-                            self.websocket_message.emit(sensor_type, fused_sd)
-                    except json.JSONDecodeError:
-                        print("invalid JSON")
+                    # dealing with json format data
+                    self.process_json_message(message)
+
         print("Preparing server...")
         # create new event loop
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        
+
+
         # comment out to ignore server execution
         hostname=socket.gethostname()   
         ip_address=socket.gethostbyname(hostname)   
