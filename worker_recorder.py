@@ -8,8 +8,8 @@ class WorkerRecorder(QObject):
     archive_finished = pyqtSignal()
     permission_to_write = False
 
-    current_csv_name = "records/record_current.csv"
-    archive_csv_name = "records/record_archived.csv"
+    current_csv_name = "c:/xampp/htdocs/result/record_current.csv"
+    archive_csv_name = "c:/xampp/htdocs/result/record_archived.csv"
     file_writer = None
 
     @pyqtSlot()
@@ -38,7 +38,7 @@ class WorkerRecorder(QObject):
         if os.path.exists(self.current_csv_name):
             # archive - renaming csv file
             archive_time = datetime.datetime.now().strftime("%y%m%d%H%M%S")
-            archive_csv_name = "records/record_{}.csv".format(archive_time)
+            archive_csv_name = "c:/xampp/htdocs/result/record_{}.csv".format(archive_time)
             os.rename(self.current_csv_name, archive_csv_name)
             print("archived successfully")
         else:
