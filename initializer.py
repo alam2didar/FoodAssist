@@ -92,16 +92,16 @@ class Initializer(qtc.QObject):
     elif stage == 0:
       self.current_step = None
       # stop recording
-      self.obj_recorder.disable_writing()
+      # self.obj_recorder.disable_writing()
       # close file
       self.obj_recorder.close_file()
       # archiving csv file - followed by creating new csv file
       self.archive_csv_name = self.obj_recorder.archive_old()
       # start recording
-      self.obj_recorder.enable_writing()
+      # self.obj_recorder.enable_writing()
       # prepare for evaluation
-      self.obj_evaluator.first_delay()
       print("preparing for evaluation")
+      self.obj_evaluator.first_delay()
     else:
       # set current step
       self.current_step = stage
