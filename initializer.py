@@ -129,9 +129,9 @@ class Initializer(qtc.QObject):
     return gesture_score
 
   def onFirstDelayReached(self):
+      print("first delay reached")
       # debug - setting evaluation_flag to True
       self.obj_evaluator.evaluate(self.archive_csv_name, True)
-      print("first delay reached")
 
   def onEvaluationResult(self, success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage):
     # save evaluation result in my_initializer
