@@ -19,19 +19,28 @@ class WorkerEvaluator(QObject):
 
     @pyqtSlot()
     def first_delay(self):
-        self.remove_png_files()
-        self.first_delay_reached.emit()
-
-    @pyqtSlot()
-    def remove_png_files(self):
+        # self.remove_png_files()
         for step_number in range(1, 5):
             for gesture_index in range(1, 5):
                 fig_name = f'c:/xampp/htdocs/result/count_plot_step_{step_number}_gesture_{gesture_index}.png'
                 # removing png file
                 if os.path.exists(fig_name):
                     os.remove(fig_name)
+                    print(f"{fig_name} removed")
                 else:
                     print("png file does not exist")
+        self.first_delay_reached.emit()
+
+    # @pyqtSlot()
+    # def remove_png_files(self):
+    #     for step_number in range(1, 5):
+    #         for gesture_index in range(1, 5):
+    #             fig_name = f'c:/xampp/htdocs/result/count_plot_step_{step_number}_gesture_{gesture_index}.png'
+    #             # removing png file
+    #             if os.path.exists(fig_name):
+    #                 os.remove(fig_name)
+    #             else:
+    #                 print("png file does not exist")
 
     @pyqtSlot()
     def remove_csv_file(self, csv_name):
