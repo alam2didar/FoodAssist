@@ -22,6 +22,8 @@ class Initializer(qtc.QObject):
     # define current step
     self.current_step = None
 
+    self.archive_csv_name = None
+
     # Create WorkerUdp thread
     # 1 - create Worker and Thread inside the Form # no parent
     self.obj_udp = worker_udp.WorkerUdp()

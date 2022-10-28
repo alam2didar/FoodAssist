@@ -129,7 +129,8 @@ class WorkerEvaluator(QObject):
             # plt.title('How many times did you perform each gesture?')
             # plt.title('How many times does an expert perform each gesture?')
             sns_count_plot = sns.countplot(y='role', data=df_position_gesture_x, order=['expert', 'newbie'])
-            strFile = f'records/count_plot_step_{step_number}_gesture_{gesture_index}.png'
+            # strFile = f'records/count_plot_step_{step_number}_gesture_{gesture_index}.png'
+            strFile = f'c:/xampp/htdocs/result/count_plot_step_{step_number}_gesture_{gesture_index}.png'
             if os.path.isfile(strFile):
                 os.remove(strFile)
             sns_count_plot.figure.savefig(strFile)
