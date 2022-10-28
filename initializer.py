@@ -105,7 +105,7 @@ class Initializer(qtc.QObject):
     else:
       # set current step
       self.current_step = stage
-      print("reaching at stage " + self.current_step)
+      print(f"reaching at stage {self.current_step}")
 
   def retrieve_result(self, request_id):
     if request_id in self.gesture_id_list:
