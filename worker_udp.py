@@ -34,7 +34,7 @@ class WorkerUdp(QObject):
 
             if message_received != None: # if NEW data has been received since last ReadReceivedData function call
                 print(message_received)
-                self.process_received_message('Received by Python: ' + str(message_received))
+                self.process_received_message(message_received)
 
             time.sleep(1)
 
