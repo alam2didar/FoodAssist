@@ -144,10 +144,10 @@ class Initializer(qtc.QObject):
     print("retrived evaluation result")
     if self.success_flag:
       # to do - send error code 0 to worker udp
-      self.obj_udp.send_message(self, 0, "-1", -1)
+      self.obj_udp.send_message(0, "-1", -1)
     else:
       # to do - send error code 1 to worker udp
-      self.obj_udp.send_message(self, 1, "-1", -1)
+      self.obj_udp.send_message(1, "-1", -1)
 
   # check if message received
   def onWebsocketMessage(self, sensor_type, message):
