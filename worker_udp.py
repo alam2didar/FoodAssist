@@ -22,7 +22,7 @@ class WorkerUdp(QObject):
     def __init__(self):
         super().__init__()
         # Create UDP socket to use for sending (and receiving)
-        self.sock = U.UdpComms(udpIPServer="192.168.65.40", udpIPClient='192.168.71.170', portTX=8000, portRX=8001, enableRX=True, suppressWarnings=True)
+        self.sock = U.UdpComms(udpIPServer="127.0.0.1", udpIPClient='127.0.0.1', portTX=8000, portRX=8001, enableRX=True, suppressWarnings=True)
 
     @pyqtSlot()
     def receive_message(self): # A slot takes no params
