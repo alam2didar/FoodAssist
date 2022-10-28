@@ -131,6 +131,7 @@ class Initializer(qtc.QObject):
   def onFirstDelayReached(self):
       # debug - setting evaluation_flag to True
       self.obj_evaluator.evaluate(self.archive_csv_name, True)
+      print("first delay reached")
 
   def onEvaluationResult(self, success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage):
     # save evaluation result in my_initializer
@@ -140,6 +141,7 @@ class Initializer(qtc.QObject):
     self.step_score_dict = step_score_dict
     self.step_score_sorted_list = step_score_sorted_list
     self.overall_score_percentage = overall_score_percentage
+    print("retrived evaluation result")
     if self.success_flag:
       # to do - send error code 0 to worker udp
       self.obj_udp.send_message(self, 0, "-1", -1)
@@ -157,9 +159,11 @@ class Initializer(qtc.QObject):
       print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
 
   def onDeviceStart(self):
+    print("mobile devices are running")
     self.devices_running = True
     self.devices_connected.emit()
 
   def onDeviceStop(self):
+    print("mobile devices not running")
     self.devices_running = False
     self.devices_disconnected.emit()
