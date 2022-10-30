@@ -21,8 +21,10 @@ class Initializer(qtc.QObject):
     self.devices_running = False
     # define current step
     self.current_step = None
-
+    # initial value for archive_csv_name
     self.archive_csv_name = None
+    # initial value for success_flag
+    self.success_flag = False
 
     # Create WorkerUdp thread
     # 1 - create Worker and Thread inside the Form # no parent
