@@ -1,7 +1,7 @@
 # worker_handpos.py
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 import HandDetectionModule as hdm
-import DepthExtractionModule as dem
+# import DepthExtractionModule as dem
 import GestureRecognitionModule as grm
 # import DepthContourFinderModule as dcfm
 import ButtonPositionModule as bpm
@@ -16,7 +16,7 @@ class WorkerHandPos(QObject):
         super().__init__()
         # Initialize components
         self.hand_detector = hdm.HandDetector()
-        self.depth_extractor = dem.DepthExtractor()
+        # self.depth_extractor = dem.DepthExtractor()
         self.gesture_recognizer = grm.GestureRecognizer()
         # self.depth_contour_finder = dcfm.DepthContourFinder()
         self.button_positioner = bpm.ButtonPositioner()
@@ -51,7 +51,7 @@ class WorkerHandPos(QObject):
                 #     point = self.depth_contour_finder.findPosition(depth_colormap)
                 # after finding point - use knuckle coordinates to find distance
                 if point:
-                    distance = self.depth_extractor.getHandPosition(point, depth_image, self.depth_camera)
+                    distance = self.getDistance(point, depth_image)
                     if distance:
                         distance = int(distance*1000)
                         print("Hand position (x, y, z): ", (point[0], point[1], distance))
@@ -61,3 +61,12 @@ class WorkerHandPos(QObject):
 
         # finish upon breaking out of loop
         self.finished.emit()
+
+    def getDistance(self, point, depth_image):
+        distance = None
+        if point:
+            # print(point)
+            if (point[1] > 0) & (point[1] < self.depth_camera.color_height) & (point[0] < self.depth_camera.color_width) & (point[0] > 0):
+                # find distance
+                distance = depth_image[point[1], point[0]] * self.depth_camera.depth_scale
+        return distance

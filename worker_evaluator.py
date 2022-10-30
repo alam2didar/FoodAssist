@@ -6,11 +6,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import time
 
-import foodAssist as fa
-
 class WorkerEvaluator(QObject):
     first_delay_reached = pyqtSignal()
-    # evaluation_result = pyqtSignal(bool, bool, str, int)
     evaluation_result = pyqtSignal(bool, dict, dict, dict, list, int)
 
     expert_amount_dict = {
@@ -90,35 +87,28 @@ class WorkerEvaluator(QObject):
             else:
                 print('archive_file_name is none')
                 success_flag = False
-        # self.evaluation_result.emit(success_flag, qualitative_result, troubled_steps, score_percent)
         self.evaluation_result.emit(success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage)
 
     @pyqtSlot()
+    # process data frame for each step
     def process_data_frame(self, data_frame_expert_step, data_frame_newbie_step, step_number):
         success_flag = False
-        # qualitative_result = False
         score_array = [0, 0, 0, 0]
         step_score_dict = 0
         df_position = None
-        # df_motion = None
         df_expert_position_amount = [0, 0, 0, 0]
         df_newbie_position_amount = [0, 0, 0, 0]
         amount_difference = [None, None, None, None]
-        # gesture_ratio = [0, 0, 0, 0]
-        # ratio_difference = [0, 0, 0, 0]
-        # df_motion_amount = [0, 0]
         try:
             # filter position and motion
             df_expert_position = data_frame_expert_step[data_frame_expert_step['sensor_type'] == 'position']
             df_newbie_position = data_frame_newbie_step[data_frame_newbie_step['sensor_type'] == 'position']
             df_position = df_expert_position.append(df_newbie_position)
-            # df_newbie_motion = data_frame_newbie_step[data_frame_newbie_step['sensor_type'] == 'motion']
         except ValueError:
             print(ValueError)
             print('reaching point - error encountered filtering position and motion')
             success_flag = False
         # check df_position
-        # if not df_newbie_position.empty:
         for gesture_index in range(1, 5):
             # filter gesture x
             df_newbie_gesture_x = df_newbie_position[df_newbie_position['recognized_gesture'] == gesture_index]
@@ -146,19 +136,24 @@ class WorkerEvaluator(QObject):
                 os.remove(strFile)
             sns_count_plot.figure.savefig(strFile)
 
-        if sum(df_newbie_position_amount) != 0:
-            for gesture_index in range(1, 4):
-                amount_difference[gesture_index-1] = df_newbie_position_amount[gesture_index-1] - self.expert_amount_dict[f'step_{step_number}_gesture_{gesture_index}']
-            # calculation of score_array
-            for index in range(3):
-                if abs(amount_difference[0]) is None:
-                    score_array[index] = 0
-                elif abs(amount_difference[index]) > 10:
+        if df_newbie_position_amount == [0, 0, 0, 0]:
+            # -1 represents no gesture performed
+            amount_difference = [-1, -1, -1, -1]
+            success_flag = False
+        else:
+            # calculation of differences in 4 gestures in one step
+            for index in range(4):
+                if df_newbie_position_amount[index] is None:
+                    df_newbie_position_amount[index] = 0
+                if df_expert_position_amount[index] is None:
+                    df_expert_position_amount[index] = 0
+                amount_difference[index] = abs(df_newbie_position_amount[index] - df_expert_position_amount[index])
+                # calculation of score_array for each gesture
+                if amount_difference[index] > 10:
                     score_array[index] = 50
                 else:
                     score_array[index] = 100 - 5 * abs(amount_difference[index])
-            step_score_dict = int(sum(score_array)/len(score_array))
+            # calculation of score in each step
+            step_score_dict = int(sum(score_array) / len(score_array))
             success_flag = True
-        else:
-            success_flag = False
         return success_flag, amount_difference, score_array, step_score_dict
