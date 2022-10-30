@@ -116,12 +116,13 @@ class Initializer(qtc.QObject):
       print("request_id " + request_id + " in the list")
       if self.success_flag == True:
         print("evalution was successful")
-        response_id = request_id
         gesture_score = self.get_gesture_score(request_id)
-        self.obj_udp.send_message(-1, response_id, gesture_score)
-        print("send back result")
+        self.obj_udp.send_message(-1, request_id, gesture_score)
+        print("send back retrieved result")
       else:
         print("evalution wasn't successful")
+        self.obj_udp.send_message(-1, request_id, 0)
+        print("send back dummy result")
     else:
       print("request_id " + request_id + " not in the list")
 
