@@ -92,7 +92,9 @@ class Initializer(qtc.QObject):
         self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
 
   def onDeviceStart(self):
+    self.devices_running = True
     self.devices_connected.emit()
 
   def onDeviceStop(self):
+    self.devices_running = False
     self.devices_disconnected.emit()
