@@ -9,9 +9,8 @@ class Initializer(qtc.QObject):
   detectionParams = qtc.pyqtSignal(int, int, int, int, int)
   devices_connected = qtc.pyqtSignal()
   devices_disconnected = qtc.pyqtSignal()
-  # flag to start/block workers
-  # start_worker = False
-  start_worker = True
+  # debug_mode to start/block workers
+  debug_mode = False
   interval_between_uis = 20
 
   def __init__(self, last_class=Placing_Meat_UI):
@@ -32,8 +31,10 @@ class Initializer(qtc.QObject):
     # Initialize Depth Camera Intel Realsense
     #####
     # comment for no camera device
-    self.my_depth_camera = dcm.DepthCamera()
-    # self.my_depth_camera = None
+    if self.debug_mode:
+      self.my_depth_camera = None
+    else:
+      self.my_depth_camera = dcm.DepthCamera()
     #####
 
     # Create WorkerWebsocket thread
@@ -51,7 +52,7 @@ class Initializer(qtc.QObject):
     # 5 - Connect Thread started signal to Worker operational slot method
     self.thread_websocket.started.connect(self.obj_websocket.create_websocket)
     # 6 - Start the thread
-    if self.start_worker:
+    if not self.debug_mode:
       self.thread_websocket.start()
 
     # Create WorkerRecorder thread
@@ -60,8 +61,7 @@ class Initializer(qtc.QObject):
     self.obj_recorder.moveToThread(self.thread_recorder)
     self.obj_recorder.archive_finished.connect(self.obj_recorder.create_new)
     self.thread_recorder.started.connect(self.obj_recorder.archive_old)
-    if self.start_worker:
-      self.thread_recorder.start()
+    self.thread_recorder.start()
     
     # Create WorkerDetection thread
     self.obj_detection = worker_detection.WorkerDetection(self.my_depth_camera)
@@ -70,7 +70,7 @@ class Initializer(qtc.QObject):
     self.obj_detection.moveToThread(self.thread_detection)
     self.obj_detection.finished.connect(self.thread_detection.quit)
     self.thread_detection.started.connect(self.obj_detection.detectStep)
-    if self.start_worker:
+    if not self.debug_mode:
       self.thread_detection.start()
 
   # check if message received
