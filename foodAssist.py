@@ -15,7 +15,7 @@ import steps.step_4_ui as step4Ui
 class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi('food_assist_gui_start.ui', self)
+    self.ui = uic.loadUi('ui/xx_xx_start.ui', self)
 
     # pass on my_initializer
     self.my_initializer = my_initializer
@@ -26,11 +26,11 @@ class FoodAssist(qtw.QWidget):
 
     # set icons upon loading
     if self.my_initializer.devices_running:
-      self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone On.svg'))
-      self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch On.svg'))
+      self.status_phone.setPixmap(qtg.QPixmap('ui/resources/Phone On.svg'))
+      self.status_watch.setPixmap(qtg.QPixmap('ui/resources/Watch On.svg'))
     else:
-      self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone Off.svg'))
-      self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch Off.svg'))
+      self.status_phone.setPixmap(qtg.QPixmap('ui/resources/Phone Off.svg'))
+      self.status_watch.setPixmap(qtg.QPixmap('ui/resources/Watch Off.svg'))
 
     self.start_button.clicked.connect(self.button_pressed)
     # draw finger-tip cursor
@@ -62,18 +62,18 @@ class FoodAssist(qtw.QWidget):
 
   # check if phone and watch are connected
   def onMobileConnected(self):
-    self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone On.svg'))
-    self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch On.svg'))
+    self.status_phone.setPixmap(qtg.QPixmap('ui/resources/Phone On.svg'))
+    self.status_watch.setPixmap(qtg.QPixmap('ui/resources/Watch On.svg'))
 
   # check if phone and watch are connected
   def onMobileDisconnected(self):
-    self.status_phone.setPixmap(qtg.QPixmap('./resources/Phone Off.svg'))
-    self.status_watch.setPixmap(qtg.QPixmap('./resources/Watch Off.svg'))
+    self.status_phone.setPixmap(qtg.QPixmap('ui/resources/Phone Off.svg'))
+    self.status_watch.setPixmap(qtg.QPixmap('ui/resources/Watch Off.svg'))
 
 class Language_and_Hand_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'food_assist_gui_lang_and_hand.ui', self)
+    self.ui = uic.loadUi('ui/xx_xx_settings.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -161,7 +161,7 @@ class Language_and_Hand_UI(qtw.QWidget):
 class Placing_Meat_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_placing_meat.ui', self)
+    self.ui = uic.loadUi('ui/xx_xx_placing_meat.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -174,7 +174,7 @@ class Placing_Meat_UI(qtw.QWidget):
     self.box_h = 0
 
     self.button_skip.clicked.connect(self.skip_step_detection)
-    self.detection_gif = qtg.QMovie('resources/Detecting Icon.gif')
+    self.detection_gif = qtg.QMovie('ui/resources/Detecting Icon.gif')
     self.detecting_gif_label.setMovie(self.detection_gif)
     self.detection_gif.start()
     self.step_consistency_counter = 0
@@ -246,7 +246,7 @@ class Entry_Step_1_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_entry_step1.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -291,7 +291,7 @@ class Entry_Step_2_UI(qtw.QWidget):
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_entry_step2.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -337,7 +337,7 @@ class Entry_Step_3_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step3.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_entry_step3.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -383,7 +383,7 @@ class Entry_Step_4_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_entry_step4.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_entry_step4.ui', self)
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -425,7 +425,7 @@ class Entry_Step_4_UI(qtw.QWidget):
 class Tutorial_Ends_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_tutorial_ends.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_xx_tutorial_ends.ui', self)
     self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_view.clicked.connect(self.button_view_clicked)
@@ -577,7 +577,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
 class Result_Step1_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step1_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step1_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -640,7 +640,7 @@ class Result_Step1_Page1_UI(qtw.QWidget):
 class Result_Step1_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step1_page2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step1_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -700,7 +700,7 @@ class Result_Step1_Page2_UI(qtw.QWidget):
 class Result_Step1_Page3_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step1_page3.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step1_page3.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -759,7 +759,7 @@ class Result_Step1_Page3_UI(qtw.QWidget):
 class Result_Step2_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step2_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step2_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -819,7 +819,7 @@ class Result_Step2_Page1_UI(qtw.QWidget):
 class Result_Step3_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step3_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -880,7 +880,7 @@ class Result_Step3_Page1_UI(qtw.QWidget):
 class Result_Step3_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step3_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -940,7 +940,7 @@ class Result_Step3_Page2_UI(qtw.QWidget):
 class Result_Step3_Page3_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page3.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step3_page3.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1000,7 +1000,7 @@ class Result_Step3_Page3_UI(qtw.QWidget):
 class Result_Step3_Page4_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step3_page4.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step3_page4.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1060,7 +1060,7 @@ class Result_Step3_Page4_UI(qtw.QWidget):
 class Result_Step4_Page1_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step4_page1.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step4_page1.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1120,7 +1120,7 @@ class Result_Step4_Page1_UI(qtw.QWidget):
 class Result_Step4_Page2_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_result_step4_page2.ui', self)
+    self.ui = uic.loadUi(f'ui/{my_initializer.lang}_{my_initializer.hand}_result_step4_page2.ui', self)
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
@@ -1188,7 +1188,7 @@ class Menu_Default_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_menu_default.ui', self)
+    self.ui = uic.loadUi('ui/xx_xx_menu_default.ui', self)
     self.button_step1.clicked.connect(self.step1_button_pressed)
     self.button_step2.clicked.connect(self.step2_button_pressed)
     self.button_step3.clicked.connect(self.step3_button_pressed)
@@ -1273,7 +1273,7 @@ class Confirm_Restart_UI(qtw.QWidget):
     self.my_initializer.current_step = None
     self.my_initializer.obj_recorder.disable_writing()
 
-    self.ui = uic.loadUi(f'ui/{my_initializer.lang}/{my_initializer.hand}/food_assist_gui_confirm_restart.ui', self)
+    self.ui = uic.loadUi(f'ui/xx_xx_confirm_restart.ui', self)
     self.button_yes.clicked.connect(self.restart_yes_pressed)
     self.button_no.clicked.connect(self.restart_no_pressed)
     
@@ -1318,7 +1318,7 @@ def draw_finger_tip_cursor(self):
   self.cursor_widget = qtw.QWidget(self)
   cursor_layout = qtw.QHBoxLayout(self.cursor_widget)
   self.cursor_label = qtw.QLabel()
-  self.cursor_label.setPixmap(qtg.QPixmap('./resources/Cursor.svg'))
+  self.cursor_label.setPixmap(qtg.QPixmap('ui/resources/Cursor.svg'))
   self.cursor_widget.setStyleSheet('background: transparent;')
   ### FIX me @ Didar
   # QCssParser::parseColorValue: Specified color without alpha value but alpha given: 'rgb 0, 0, 0, 0'
@@ -1380,14 +1380,11 @@ def show_evaluation_result(self, step_number, page_number):
   self.label_plot_1.setPixmap(qtg.QPixmap(f'records/count_plot_step_{step_number}_gesture_{page_number}.png'))
   # change icon_reaction_1 based on score for gesture (page_number)
   if self.my_initializer.score_dict[f'step_{step_number}'][page_number-1] > 80:
-    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Happy Face.png'))
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'ui/resources/Happy Face.png'))
   elif self.my_initializer.score_dict[f'step_{step_number}'][page_number-1] > 50:
-    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Neutral Face.png'))
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'ui/resources/Neutral Face.png'))
   else:
-    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'resources/Unhappy Face.png'))
-  difference = [None, None, None, None]
-  for index in range(4):
-    difference[index] = self.my_initializer.difference_dict[f'step_{step_number}'][index]
+    self.icon_reaction_1.setPixmap(qtg.QPixmap(f'ui/resources/Unhappy Face.png'))
   # improved logic
   # case 1: no gestures performed
   if difference == [-1, -1, -1, -1]:
