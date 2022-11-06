@@ -2,11 +2,7 @@
   <qresource prefix="img">
     <file>left_shoulder.png</file>
     <file>right_shoulder.png</file>
-    <file>Left Hand.svg</file>
-    <file>Right Hand.svg</file>
     <file>No Sign.svg</file>
-    <file>Knife Hand Left.png</file>
-    <file>Knife Hand Right.png</file>
     <file>Germany.png</file>
     <file>United-kingdom.png</file>
     <file>left_step1_gesture1.png</file>
