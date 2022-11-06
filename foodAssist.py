@@ -91,8 +91,8 @@ class Language_and_Hand_UI(qtw.QWidget):
 
     self.button_de.clicked.connect(lambda: self.choose_lang('de'))
     self.button_en.clicked.connect(lambda: self.choose_lang('en'))
-    self.button_left_hand.clicked.connect(lambda: self.choose_hand('left'))
-    self.button_right_hand.clicked.connect(lambda: self.choose_hand('right'))
+    self.button_left_shoulder.clicked.connect(lambda: self.choose_hand('left'))
+    self.button_right_shoulder.clicked.connect(lambda: self.choose_hand('right'))
     self.button_yes.clicked.connect(self.yes_button_pressed)
     self.button_no.clicked.connect(self.no_button_pressed)
 
@@ -125,10 +125,10 @@ class Language_and_Hand_UI(qtw.QWidget):
       self.button_de.click()
     if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_en) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_en.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_left_hand) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_left_hand.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_right_hand) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_right_hand.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_left_shoulder) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_left_shoulder.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_right_shoulder) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_right_shoulder.click()
 
   @qtc.pyqtSlot()
   def choose_lang(self, lang):
@@ -1502,11 +1502,11 @@ def change_active_button_color(self, button):
     self.button_en.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
     self.button_de.setStyleSheet('')
   if button == 'left':
-    self.button_left_hand.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
-    self.button_right_hand.setStyleSheet('')
+    self.button_left_shoulder.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+    self.button_right_shoulder.setStyleSheet('')
   if button == 'right':
-    self.button_right_hand.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
-    self.button_left_hand.setStyleSheet('')
+    self.button_right_shoulder.setStyleSheet(open('./styles/activeButtonStyleGreen.css').read())
+    self.button_left_shoulder.setStyleSheet('')
 
 def on_substep_button_click(self, substep_button, all_substep=False):
   if not all_substep:
