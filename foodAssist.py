@@ -1239,28 +1239,28 @@ class Menu_Default_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def step1_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = step1Ui.Step_1_UI(self.my_initializer)
+    self.target_ui = Entry_Step_1_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step2_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = step2Ui.Step_2_UI(self.my_initializer)
+    self.target_ui = Entry_Step_2_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step3_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = step3Ui.Step_3_UI(self.my_initializer)
+    self.target_ui = Entry_Step_3_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
   @qtc.pyqtSlot()
   def step4_button_pressed(self):
     self.obj.deactivate()
-    self.target_ui = step4Ui.Step_4_UI(self.my_initializer)
+    self.target_ui = Entry_Step_4_UI(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
