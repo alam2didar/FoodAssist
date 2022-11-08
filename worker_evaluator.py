@@ -58,8 +58,8 @@ class WorkerEvaluator(QObject):
                 print('archive_file_name is: ', archive_file_name)
                 # load data to process
                 column_names = ['role', 'timestamp', 'step', 'sensor_type', 'recognized_gesture']
-                # df_newbie = pd.read_csv(archive_file_name, header=None, names=column_names)
-                df_newbie = pd.read_csv('ui/resources/record_newbie.csv', header=None, names=column_names)
+                df_newbie = pd.read_csv(archive_file_name, header=None, names=column_names)
+                # df_newbie = pd.read_csv('ui/resources/record_newbie.csv', header=None, names=column_names)
                 df_newbie = df_newbie.dropna()
                 if df_newbie.shape[0] == 0:
                     print('no data collected')
