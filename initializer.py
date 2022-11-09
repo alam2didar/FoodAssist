@@ -5,6 +5,7 @@ import worker_websocket
 import worker_recorder
 import worker_detection
 import worker_handpos
+import worker_evaluator
 
 class Initializer(qtc.QObject):
   detectionParams = qtc.pyqtSignal(int, int, int, int, int)
