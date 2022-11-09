@@ -8,8 +8,8 @@ import worker_handpos
 import worker_evaluator
 
 class Initializer(qtc.QObject):
-  detectionParams = qtc.pyqtSignal(int, int, int, int, int)
   hand_position = qtc.pyqtSignal(int, int, int, int, int, int)
+  detection_params = qtc.pyqtSignal(int, int, int, int, int)
   devices_connected = qtc.pyqtSignal()
   devices_disconnected = qtc.pyqtSignal()
   # debug_mode to start/block workers
@@ -85,10 +85,10 @@ class Initializer(qtc.QObject):
     # Create WorkerDetection thread
     self.obj_detection = worker_detection.WorkerDetection(self.my_depth_camera)
     self.thread_detection = qtc.QThread()
-    self.obj_detection.detectionParams.connect(self.onDetection)
+    self.obj_detection.detection_params.connect(self.onDetection)
     self.obj_detection.moveToThread(self.thread_detection)
     self.obj_detection.finished.connect(self.thread_detection.quit)
-    self.thread_detection.started.connect(self.obj_detection.detectStep)
+    self.thread_detection.started.connect(self.obj_detection.detect_step)
     if not self.debug_mode:
       self.thread_detection.start()
 
@@ -116,9 +116,9 @@ class Initializer(qtc.QObject):
       self.detected_step = step
       # calibrate x,y,w,h for projection with k=1.65 and (x,y) = (405,220)
       if x == 0 or y == 0:
-        self.detectionParams.emit(0,0,0,0,0)
+        self.detection_params.emit(0,0,0,0,0)
       else:
-        self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
+        self.detection_params.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
 
   def onDeviceStart(self):
     self.devices_running = True
