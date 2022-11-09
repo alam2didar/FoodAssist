@@ -37,6 +37,22 @@ class Initializer(qtc.QObject):
       self.my_depth_camera = dcm.DepthCamera()
     #####
 
+    # Create WorkerHandPos thread
+    # 1 - create Worker and Thread inside the Form # no parent
+    self.obj_handpos = worker_handpos.WorkerHandPos(self.my_depth_camera)
+    self.thread_handpos = qtc.QThread()
+    # 2 - Connect Worker`s Signals to Form method slots to post data.
+    self.obj_handpos.hand_position.connect(self.onHandPosition)
+    # 3 - Move the Worker object to the Thread object
+    self.obj_handpos.moveToThread(self.thread_handpos)
+    # 4 - Connect Worker Signals to the Thread slots
+    self.obj_handpos.finished.connect(self.thread.quit)
+    # 5 - Connect Thread started signal to Worker operational slot method
+    self.thread_handpos.started.connect(self.obj_handpos.get_hand_position)
+    # 6 - Start the thread
+    if not self.debug_mode:
+      self.thread_handpos.start()
+
     # Create WorkerWebsocket thread
     # 1 - create Worker and Thread inside the Form # no parent
     self.obj_websocket = worker_websocket.WorkerWebsocket()
