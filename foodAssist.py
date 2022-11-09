@@ -5,8 +5,6 @@ import PyQt5.QtWidgets as qtw
 from PyQt5 import uic
 import res_rc
 import sys
-import worker_handpos
-import worker_evaluator
 import steps.step_1_ui as step1Ui
 import steps.step_2_ui as step2Ui
 import steps.step_3_ui as step3Ui
@@ -36,13 +34,13 @@ class FoodAssist(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -99,7 +97,7 @@ class Language_and_Hand_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -112,7 +110,7 @@ class Language_and_Hand_UI(qtw.QWidget):
       self.button_heading.setEnabled(True)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -182,7 +180,7 @@ class Placing_Meat_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
@@ -201,7 +199,7 @@ class Placing_Meat_UI(qtw.QWidget):
       self.navigate_to_detected_step()
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -253,13 +251,13 @@ class Entry_Step_1_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -298,13 +296,13 @@ class Entry_Step_2_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -344,13 +342,13 @@ class Entry_Step_3_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -390,13 +388,13 @@ class Entry_Step_4_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -590,7 +588,7 @@ class Result_Step1_Page1_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -623,7 +621,7 @@ class Result_Step1_Page1_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -650,7 +648,7 @@ class Result_Step1_Page2_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -683,7 +681,7 @@ class Result_Step1_Page2_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -710,7 +708,7 @@ class Result_Step1_Page3_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -743,7 +741,7 @@ class Result_Step1_Page3_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -769,7 +767,7 @@ class Result_Step2_Page1_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -802,7 +800,7 @@ class Result_Step2_Page1_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -829,7 +827,7 @@ class Result_Step3_Page1_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -862,7 +860,7 @@ class Result_Step3_Page1_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -890,7 +888,7 @@ class Result_Step3_Page2_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -923,7 +921,7 @@ class Result_Step3_Page2_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -950,7 +948,7 @@ class Result_Step3_Page3_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -983,7 +981,7 @@ class Result_Step3_Page3_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -1010,7 +1008,7 @@ class Result_Step3_Page4_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -1043,7 +1041,7 @@ class Result_Step3_Page4_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -1070,7 +1068,7 @@ class Result_Step4_Page1_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -1103,7 +1101,7 @@ class Result_Step4_Page1_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -1133,7 +1131,7 @@ class Result_Step4_Page2_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -1166,7 +1164,7 @@ class Result_Step4_Page2_UI(qtw.QWidget):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
 
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -1198,13 +1196,13 @@ class Menu_Default_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -1280,13 +1278,13 @@ class Confirm_Restart_UI(qtw.QWidget):
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
   
   # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
@@ -1326,50 +1324,6 @@ def draw_finger_tip_cursor(self):
   ###
   cursor_layout.addWidget(self.cursor_label)
   self.cursor_widget.raise_()
-
-def create_worker_handpos(self, my_initializer):
-  # 1 - create Worker and Thread inside the Form # no parent
-  self.obj = worker_handpos.WorkerHandPos(my_initializer.my_depth_camera)
-  self.thread = qtc.QThread()
-
-  # 2 - Connect Worker`s Signals to Form method slots to post data.
-  self.obj.intReady.connect(self.onIntReady)
-
-  # 3 - Move the Worker object to the Thread object
-  self.obj.moveToThread(self.thread)
-
-  # 4 - Connect Worker Signals to the Thread slots
-  self.obj.finished.connect(self.thread.quit)
-
-  # 5 - Connect Thread started signal to Worker operational slot method
-  self.thread.started.connect(self.obj.handPos)
-
-  # * - Thread finished signal will close the app (if needed!)
-  # self.thread.finished.connect(app.exit)
-
-  # 6 - Start the thread
-  self.thread.start()
-
-def create_worker_evaluator(self):
-  # 1 - create Worker and Thread inside the Form # no parent
-  self.obj_evaluator = worker_evaluator.WorkerEvaluator()
-  self.thread_evaluator = qtc.QThread()
-
-  # 2 - Connect Worker`s Signals to Form method slots to post data.
-  self.obj_evaluator.first_delay_reached.connect(self.onFirstDelayReached)
-  self.obj_evaluator.evaluation_result.connect(self.onEvaluationResult)
-
-  # 3 - Move the Worker object to the Thread object
-  self.obj_evaluator.moveToThread(self.thread_evaluator)
-
-  # 5 - Connect Thread started signal to Worker operational slot method
-  self.thread_evaluator.started.connect(self.obj_evaluator.first_delay)
-
-  # * - Thread finished signal will close the app (if needed!)
-  # self.thread.finished.connect(app.exit)
-
-  # 6 - Start the thread
-  self.thread_evaluator.start()
 
 def show_evaluation_result(self, step_number, page_number):
   self.button_exit.clicked.connect(self.exit_button_pressed)
