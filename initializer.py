@@ -4,9 +4,11 @@ from foodAssist import Placing_Meat_UI
 import worker_websocket
 import worker_recorder
 import worker_detection
+import worker_handpos
 
 class Initializer(qtc.QObject):
   detectionParams = qtc.pyqtSignal(int, int, int, int, int)
+  hand_position = qtc.pyqtSignal(int, int, int, int, int, int)
   devices_connected = qtc.pyqtSignal()
   devices_disconnected = qtc.pyqtSignal()
   # debug_mode to start/block workers
@@ -103,6 +105,10 @@ class Initializer(qtc.QObject):
       print("writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
     else:
       print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
+
+  # send hand position paramas to the respective UI  
+  def onHandPosition(self, x, y, z, counter, cursor_x, cursor_y):
+    self.hand_position.emit(x, y, z, counter, cursor_x, cursor_y)
 
   # send detection box paramas to the respective UI  
   def onDetection(self, x, y, width, height, step):
