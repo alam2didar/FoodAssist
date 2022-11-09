@@ -73,6 +73,12 @@ class Initializer(qtc.QObject):
     if not self.debug_mode:
       self.thread_detection.start()
 
+    # Create WorkerEvaluator thread
+    self.obj_evaluator = worker_evaluator.WorkerEvaluator()
+    self.thread_evaluator = qtc.QThread()
+    self.obj_evaluator.moveToThread(self.thread_evaluator)
+    self.thread_evaluator.start()
+
   # check if message received
   def onWebsocketMessage(self, sensor_type, message):
     # get current step

@@ -439,53 +439,37 @@ class Tutorial_Ends_UI(qtw.QWidget):
     # pass on my_initializer
     self.my_initializer = my_initializer
     self.my_initializer.current_step = None
-    self.my_initializer.obj_recorder.disable_writing()
-    # close file
-    self.my_initializer.obj_recorder.close_file()
-    if self.my_initializer.last_class == Tutorial_Ends_UI:
-      # logic returned from menu UI
-      self.label_party.setHidden(True)
-      self.label_text_1.setHidden(True)
-      self.label_text_2.setHidden(True)
-    else:
-      # logic continued from step 4 UI
-      self.my_initializer.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
-    # reset score_dict, score_sorted_list, overall_score_percentage
-    # if self.my_initializer.last_class != Tutorial_Ends_UI:
-    #   self.my_initializer.score_dict = None
-    #   self.my_initializer.score_sorted_list = None
-    #   self.my_initializer.overall_score_percentage = None
     # draw finger-tip cursor
     draw_finger_tip_cursor(self)
     # Hand tracking thread
-    create_worker_handpos(self, self.my_initializer)
-    # create worker evaluator
-    create_worker_evaluator(self)
+    self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+
+    # connect signals with functions
+    self.my_initializer.obj_evaluator.first_delay_reached.connect(self.onFirstDelayReached)
+    self.my_initializer.obj_evaluator.evaluation_result.connect(self.onEvaluationResult)
+    if self.my_initializer.last_class == Tutorial_Ends_UI:
+      # 1 - logic returned from menu UI
+      self.label_party.setHidden(True)
+      self.label_text_1.setHidden(True)
+      self.label_text_2.setHidden(True)
+      self.my_initializer.obj_evaluator.evaluation_result.emit(self.my_initializer.success_flag, self.my_initializer.difference_dict, self.my_initializer.score_dict, self.my_initializer.step_score_dict, self.my_initializer.step_score_sorted_list, self.my_initializer.overall_score_percentage)
+    else:
+      # 2 - logic continued from step 4 UI
+      # close file
+      self.my_initializer.obj_recorder.close_file()
+      # archiving csv file - followed by creating new csv file
+      self.my_initializer.archive_csv_name = self.my_initializer.obj_recorder.archive_old()
+      # prepare for evaluation
+      self.my_initializer.obj_evaluator.first_delay()
 
   def onFirstDelayReached(self):
     # hide labels upon delay reached
     self.label_party.setHidden(True)
     if self.my_initializer.last_class == Tutorial_Ends_UI:
-      self.obj_evaluator.evaluation_result.emit(self.my_initializer.success_flag, self.my_initializer.difference_dict, self.my_initializer.score_dict, self.my_initializer.step_score_dict, self.my_initializer.step_score_sorted_list, self.my_initializer.overall_score_percentage)
+      self.my_initializer.obj_evaluator.evaluation_result.emit(self.my_initializer.success_flag, self.my_initializer.difference_dict, self.my_initializer.score_dict, self.my_initializer.step_score_dict, self.my_initializer.step_score_sorted_list, self.my_initializer.overall_score_percentage)
     else:
       # debug - setting evaluation_flag to True
-      self.obj_evaluator.evaluate(self.my_initializer.archive_csv_name, True)
-
-  def paintEvent(self, event):
-    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
-
-  # check if the button is touched
-  def onIntReady(self, x, y, z, counter, cursor_x, cursor_y):
-    # draw cursor for finger tip
-    self.finger_tip_x = cursor_x
-    self.finger_tip_y = cursor_y
-    self.update()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_exit.click()
-    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_view.click()
+      self.my_initializer.obj_evaluator.evaluate(self.my_initializer.archive_csv_name, True)
 
   def onEvaluationResult(self, success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage):
     # save evaluation result in my_initializer
@@ -543,6 +527,22 @@ class Tutorial_Ends_UI(qtw.QWidget):
         self.label_text_1.setText("Entschuldigung, wir konnten Ihre Gestendaten nicht verarbeiten, bitte verbinden Sie die mobile App und neustarten.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(True)
+
+  def paintEvent(self, event):
+    self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
+
+  # check if the button is touched
+  def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
+    # draw cursor for finger tip
+    self.finger_tip_x = cursor_x
+    self.finger_tip_y = cursor_y
+    self.update()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_a) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_restart.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_b) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_exit.click()
+    if self.obj.button_positioner.check_in_area(x, y, z, self.obj.button_positioner.button_c) and self.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+      self.button_view.click()
 
   # check if button clicked
   def button_view_clicked(self):
