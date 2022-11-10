@@ -34,6 +34,7 @@ class FoodAssist(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -95,6 +96,7 @@ class Language_and_Hand_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -177,6 +179,7 @@ class Placing_Meat_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   # paints detection box on UI based on parameter (x,y,w,h) and triggered by event (self.update())
   def paintEvent(self, event):
@@ -246,6 +249,7 @@ class Entry_Step_1_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -290,6 +294,7 @@ class Entry_Step_2_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -335,6 +340,7 @@ class Entry_Step_3_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -380,6 +386,7 @@ class Entry_Step_4_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -434,6 +441,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
     # connect signals with functions
     self.my_initializer.obj_evaluator.first_delay_reached.connect(self.onFirstDelayReached)
@@ -576,6 +584,7 @@ class Result_Step1_Page1_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -630,6 +639,7 @@ class Result_Step1_Page2_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -684,6 +694,7 @@ class Result_Step1_Page3_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -737,6 +748,7 @@ class Result_Step2_Page1_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -791,6 +803,7 @@ class Result_Step3_Page1_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -846,6 +859,7 @@ class Result_Step3_Page2_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -900,6 +914,7 @@ class Result_Step3_Page3_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -954,6 +969,7 @@ class Result_Step3_Page4_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -1008,6 +1024,7 @@ class Result_Step4_Page1_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -1065,6 +1082,7 @@ class Result_Step4_Page2_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
   @qtc.pyqtSlot()
   def button_nav_left_clicked(self):
@@ -1124,6 +1142,7 @@ class Menu_Default_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
@@ -1205,6 +1224,7 @@ class Confirm_Restart_UI(qtw.QWidget):
     draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
   
   def paintEvent(self, event):
     self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)

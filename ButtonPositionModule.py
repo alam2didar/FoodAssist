@@ -36,7 +36,7 @@ class ButtonPositioner:
         # update last button clicked
         self.last_button_clicked = button_type
         # return true only after accumulated 5 times
-        if self.counter > 4:
+        if self.counter > 2:
             self.counter = 0
             return True
 

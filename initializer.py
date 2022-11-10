@@ -14,7 +14,7 @@ class Initializer(qtc.QObject):
   devices_disconnected = qtc.pyqtSignal()
   # debug_mode to start/block workers
   debug_mode = False
-  interval_between_uis = 20
+  interval_between_uis = 15
 
   def __init__(self, last_class=Placing_Meat_UI):
     super().__init__()

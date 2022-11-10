@@ -17,6 +17,11 @@ class WorkerHandPos(QObject):
         self.button_positioner = bpm.ButtonPositioner()
         self.depth_camera = my_depth_camera
         self.worker_activated = True
+        self.counter = 0
+
+    @pyqtSlot()
+    def reset_counter(self):
+        self.counter = 0
 
     @pyqtSlot()
     def activate(self):
@@ -28,10 +33,9 @@ class WorkerHandPos(QObject):
 
     @pyqtSlot()
     def get_hand_position(self, use_mediapipe=True, use_depth_contour=False): # A slot takes no params
-        counter = 0
         # while loop
         while True:
-            counter = counter + 1
+            self.counter += 1
 # debug no camera
             if self.depth_camera:
                 # get images
@@ -51,7 +55,7 @@ class WorkerHandPos(QObject):
                         distance = int(distance*1000)
                         print("Hand position (x, y, z): ", (point[0], point[1], distance))
                         # only emit message with valid values
-                        self.hand_position.emit(point[0], point[1], distance, counter, int(1.65*(point[0]-405)-20), int(1.65*(point[1]-220)-20))
+                        self.hand_position.emit(point[0], point[1], distance, self.counter, int(1.65*(point[0]-405)-20), int(1.65*(point[1]-220)-20))
 # debug no camera
 
         # finish upon breaking out of loop

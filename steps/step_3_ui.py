@@ -59,6 +59,7 @@ class Step_3_UI(qtw.QWidget):
     fa.draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.obj.reset_counter()
 
     # configure animate button 
     self.counter = 0
