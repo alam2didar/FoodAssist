@@ -37,13 +37,13 @@ class HandDetector:
                     point = (cX, cY)
         return point
 
-    def getDistance(self, point, depth_image):
+    def getDistance(self, depth_camera, point, depth_image):
         distance = None
         if point:
             # print(point)
-            if (point[1] > 0) & (point[1] < self.depth_camera.color_height) & (point[0] < self.depth_camera.color_width) & (point[0] > 0):
+            if (point[1] > 0) & (point[1] < depth_camera.color_height) & (point[0] < depth_camera.color_width) & (point[0] > 0):
                 # find distance
-                distance = depth_image[point[1], point[0]] * self.depth_camera.depth_scale
+                distance = depth_image[point[1], point[0]] * depth_camera.depth_scale
         return distance
 
     def getRecognition(self, results, color_image):
