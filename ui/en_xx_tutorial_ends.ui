@@ -47,7 +47,7 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>390</y>
+     <y>380</y>
      <width>1000</width>
      <height>180</height>
     </rect>
@@ -85,7 +85,7 @@ color: rgb(255, 255, 255);</string>
    <property name="geometry">
     <rect>
      <x>880</x>
-     <y>210</y>
+     <y>560</y>
      <width>150</width>
      <height>150</height>
     </rect>
@@ -321,7 +321,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QWidget" name="widget_score" native="true">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>320</x>
      <y>220</y>
      <width>500</width>
      <height>150</height>
@@ -394,7 +394,7 @@ color: rgb(0, 255, 0);</string>
   <widget class="QWidget" name="widget_xp" native="true">
    <property name="geometry">
     <rect>
-     <x>1180</x>
+     <x>1100</x>
      <y>220</y>
      <width>500</width>
      <height>150</height>
