@@ -6,23 +6,11 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
 class WorkerRecorder(QObject):
     archive_finished = pyqtSignal()
-    permission_to_write = False
+    # permission_to_write = False
 
     current_csv_name = "records/record_current.csv"
     archive_csv_name = "records/record_archived.csv"
     file_writer = None
-
-    @pyqtSlot()
-    def enable_writing(self):
-        if not self.permission_to_write:
-            self.permission_to_write = True
-            print("enabled writing successfully")
-
-    @pyqtSlot()
-    def disable_writing(self):
-        if self.permission_to_write:
-            self.permission_to_write = False
-            print("disabled writing successfully")
 
     @pyqtSlot()
     def close_file(self):
@@ -50,7 +38,7 @@ class WorkerRecorder(QObject):
 
     @pyqtSlot()
     def create_new(self):
-        if not self.permission_to_write and not self.file_writer:
+        if not self.file_writer:
             os.makedirs("./records", exist_ok=True)
             # new file writer
             self.file_writer = open(self.current_csv_name, "w")
@@ -58,7 +46,7 @@ class WorkerRecorder(QObject):
 
     @pyqtSlot()
     def write_record(self, current_step, sensor_type, result_gesture):
-        if self.permission_to_write and self.file_writer:
+        if self.file_writer:
             # get current time
             current_time = datetime.datetime.now()
             current_time_s = current_time.strftime("%y%m%d%H%M%S")
