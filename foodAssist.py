@@ -462,13 +462,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.my_initializer.obj_evaluator.first_delay()
 
   def onFirstDelayReached(self):
-    # hide labels upon delay reached
+    print("reaching point - first delay reached")  
     self.label_party.setHidden(True)
-    if self.my_initializer.last_class == Tutorial_Ends_UI:
-      self.my_initializer.obj_evaluator.evaluation_result.emit(self.my_initializer.success_flag, self.my_initializer.difference_dict, self.my_initializer.score_dict, self.my_initializer.step_score_dict, self.my_initializer.step_score_sorted_list, self.my_initializer.overall_score_percentage)
-    else:
-      # debug - setting evaluation_flag to True
-      self.my_initializer.obj_evaluator.evaluate(self.my_initializer.archive_csv_name, True)
+    self.my_initializer.obj_evaluator.evaluate(self.my_initializer.archive_csv_name, True)
 
   def onEvaluationResult(self, success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage):
     # save evaluation result in my_initializer
