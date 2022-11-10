@@ -22,7 +22,6 @@ class WorkerRecorder(QObject):
     @pyqtSlot()
     def archive_old(self):
         archive_csv_name = None
-        self.disable_writing()
         # close file writer before archiving
         self.close_file()
         if os.path.exists(self.current_csv_name):
