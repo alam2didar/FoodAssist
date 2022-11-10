@@ -499,9 +499,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
           self.label_text_1.setText(f"Sie scheinen in {step_score_sorted_list[3][0]} mehr Übung zu brauchen.".replace('_', ' ').replace('step', 'Schritt'))
       # hints to touch the button
       if self.my_initializer.lang == 'en':
-        self.label_text_2.setText("Touch the button above to view more details.")
+        self.label_text_2.setText("Touch the button below to view more details.")
       else:
-        self.label_text_2.setText("Berühren Sie den oberen Knopf, um weitere Details anzusehen.")
+        self.label_text_2.setText("Berühren Sie den unteren Knopf, um weitere Details anzusehen.")
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
       # to do - show score percentage
