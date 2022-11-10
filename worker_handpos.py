@@ -46,7 +46,7 @@ class WorkerHandPos(QObject):
                 #     point = self.depth_contour_finder.findPosition(depth_colormap)
                 # after finding point - use knuckle coordinates to find distance
                 if point:
-                    distance = self.hand_detector.getDistance(point, depth_image)
+                    distance = self.hand_detector.getDistance(self.depth_camera, point, depth_image)
                     if distance:
                         distance = int(distance*1000)
                         print("Hand position (x, y, z): ", (point[0], point[1], distance))
