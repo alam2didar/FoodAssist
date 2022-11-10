@@ -536,7 +536,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.button_restart.click()
     if self.my_initializer.obj.button_positioner.check_in_area(x, y, z, self.my_initializer.obj.button_positioner.button_b) and self.my_initializer.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
-    if self.my_initializer.obj.button_positioner.check_in_area(x, y, z, self.my_initializer.obj.button_positioner.button_c) and self.my_initializer.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
+    if self.my_initializer.obj.button_positioner.check_in_area(x, y, z, self.my_initializer.obj.button_positioner.button_view) and self.my_initializer.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_view.click()
 
   # check if button clicked

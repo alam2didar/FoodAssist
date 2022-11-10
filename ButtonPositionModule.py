@@ -18,10 +18,13 @@ class ButtonPositioner:
         self.nav_b = type('nav_b', (ButtonPositioner,), {'left': 1275, 'right': 1356, 'top': 733, 'bottom': 813, 'short': 1200, 'long': 1400})
         self.nav_c = type('nav_c', (ButtonPositioner,), {'left': 1375, 'right': 1457, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
         self.nav_d = type('nav_d', (ButtonPositioner,), {'left': 1475, 'right': 1559, 'top': 733, 'bottom': 815, 'short': 1200, 'long': 1400})
+        # to calibrate
+        self.button_view = type('button_view', (ButtonPositioner,), {'left': 932, 'right': 1022, 'top': 548, 'bottom': 620, 'short': 1200, 'long': 1400})
         self.button_de = type('button_de', (ButtonPositioner,), {'left': 878, 'right': 960, 'top': 439, 'bottom': 526, 'short': 1200, 'long': 1400})
         self.button_en = type('button_en', (ButtonPositioner,), {'left': 1007, 'right': 1088, 'top': 439, 'bottom': 526, 'short': 1200, 'long': 1400})
         self.button_left_shoulder = type('button_left_shoulder', (ButtonPositioner,), {'left': 511, 'right': 735, 'top': 236, 'bottom': 534, 'short': 1200, 'long': 1400})
         self.button_right_shoulder = type('button_right_shoulder', (ButtonPositioner,), {'left': 1234, 'right': 1453, 'top': 236, 'bottom': 534, 'short': 1200, 'long': 1400})
+        # to calibrate
         self.v_play = type('v_play', (ButtonPositioner,), {'left': 1182, 'right': 1240, 'top': 565, 'bottom': 615, 'short': 1200, 'long': 1400})
         self.v_pause = type('v_pause', (ButtonPositioner,), {'left': 1280, 'right': 1334, 'top': 565, 'bottom': 615, 'short': 1200, 'long': 1400})
 
