@@ -125,7 +125,7 @@ class Step_4_UI(qtw.QWidget):
 
   @qtc.pyqtSlot()
   def next_button_pressed(self):
-    # meant for Tutorial_Ends_UI
+    self.my_initializer.hand_position.disconnect()
     self.my_initializer.last_class = Step_4_UI
     self.target_ui = fa.Tutorial_Ends_UI(self.my_initializer)
     fa.select_screen_and_show(self.target_ui)
@@ -134,6 +134,7 @@ class Step_4_UI(qtw.QWidget):
   
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
+    self.my_initializer.hand_position.disconnect()
     self.my_initializer.last_class = Step_4_UI
     self.target_ui = fa.Menu_Default_UI(self.my_initializer)
     fa.select_screen_and_show(self.target_ui)
