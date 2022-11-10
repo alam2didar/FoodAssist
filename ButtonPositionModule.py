@@ -18,10 +18,13 @@ class ButtonPositioner:
         self.nav_b = type('nav_b', (ButtonPositioner,), {'left': 1245, 'right': 1321, 'top': 712, 'bottom': 792, 'short': 1100, 'long': 1300})
         self.nav_c = type('nav_c', (ButtonPositioner,), {'left': 1348, 'right': 1421, 'top': 712, 'bottom': 792, 'short': 1100, 'long': 1300})
         self.nav_d = type('nav_d', (ButtonPositioner,), {'left': 1447, 'right': 1522, 'top': 712, 'bottom': 792, 'short': 1100, 'long': 1300})
-        self.button_de = type('button_de', (ButtonPositioner,), {'left': 575, 'right': 657, 'top': 480, 'bottom': 570, 'short': 1100, 'long': 1300})
-        self.button_en = type('button_en', (ButtonPositioner,), {'left': 695, 'right': 783, 'top': 483, 'bottom': 575, 'short': 1100, 'long': 1300})
-        self.button_left_hand = type('button_left_hand', (ButtonPositioner,), {'left': 1053, 'right': 1135, 'top': 495, 'bottom': 570, 'short': 1100, 'long': 1300})
-        self.button_right_hand = type('button_right_hand', (ButtonPositioner,), {'left': 1203, 'right': 1285, 'top': 492, 'bottom': 571, 'short': 1100, 'long': 1300})
+        # to calibrate
+        self.button_view = type('button_view', (ButtonPositioner,), {'left': 1155, 'right': 1232, 'top': 834, 'bottom': 912, 'short': 1100, 'long': 1300})
+        self.button_de = type('button_de', (ButtonPositioner,), {'left': 845, 'right': 925, 'top': 410, 'bottom': 485, 'short': 1100, 'long': 1300})
+        self.button_en = type('button_en', (ButtonPositioner,), {'left': 972, 'right': 1058, 'top': 410, 'bottom': 485, 'short': 1100, 'long': 1300})
+        self.button_left_shoulder = type('button_left_shoulder', (ButtonPositioner,), {'left': 511, 'right': 735, 'top': 236, 'bottom': 500, 'short': 1100, 'long': 1300})
+        self.button_right_shoulder = type('button_right_shoulder', (ButtonPositioner,), {'left': 1234, 'right': 1453, 'top': 236, 'bottom': 500, 'short': 1100, 'long': 1300})
+        # to calibrate
         self.v_play = type('v_play', (ButtonPositioner,), {'left': 1150, 'right': 1210, 'top': 541, 'bottom': 594, 'short': 1100, 'long': 1300})
         self.v_pause = type('v_pause', (ButtonPositioner,), {'left': 1255, 'right': 1310, 'top': 541, 'bottom': 594, 'short': 1100, 'long': 1300})
 
@@ -35,7 +38,7 @@ class ButtonPositioner:
         # update last button clicked
         self.last_button_clicked = button_type
         # return true only after accumulated 5 times
-        if self.counter > 4:
+        if self.counter > 2:
             self.counter = 0
             return True
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="200"
+   height="200"
+   viewBox="0 0 200 200"
+   fill="none"
+   version="1.1"
+   id="svg987"
+   sodipodi:docname="Button Restart.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs991" />
+  <sodipodi:namedview
+     id="namedview989"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.1006632"
+     inkscape:cx="44.02284"
+     inkscape:cy="100.94614"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="2152"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg987" />
+  <circle
+     cx="100"
+     cy="100"
+     fill="none"
+     id="circle983"
+     style="fill:none;stroke:#ffffff;stroke-width:7.51648;stroke-dasharray:none;stroke-opacity:1"
+     r="96.24176" />
+  <path
+     d="M75.0873 81.9C74.0605 81.6266 73.2071 80.907 72.7579 79.9358C72.3086 78.9646 72.31 77.8422 72.7616 76.8722L80.685 59.853C81.2754 58.5847 82.5395 57.7756 83.9279 57.7773C85.3163 57.7791 86.5784 58.5913 87.1658 59.861L90.6611 67.4174C90.7861 67.3678 90.9151 67.3249 91.0479 67.2889C111.789 61.6797 133.108 74.1028 138.666 95.0367C144.223 115.971 131.914 137.488 111.173 143.097C90.4325 148.706 69.1133 136.283 63.5558 115.349C61.7885 108.693 61.8283 101.966 63.3761 95.7123C63.8551 93.7772 65.7976 92.6004 67.7149 93.0838C69.6322 93.5672 70.7981 95.5278 70.3192 97.4629C69.0583 102.557 69.0235 108.038 70.4684 113.48C75.0029 130.561 92.398 140.697 109.321 136.12C126.245 131.544 136.288 113.987 131.753 96.9061C127.293 80.1048 110.389 70.0224 93.7305 74.0531L97.2572 81.6772C97.8445 82.9469 97.6511 84.445 96.7609 85.5204C95.8708 86.5958 94.4446 87.0544 93.1021 86.697L75.0873 81.9Z"
+     fill="white"
+     id="path985" />
+</svg>

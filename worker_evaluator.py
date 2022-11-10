@@ -50,7 +50,7 @@ class WorkerEvaluator(QObject):
         difference_dict = {'step_1': [None, None, None, None], 'step_2': [None, None, None, None], 'step_3': [None, None, None, None], 'step_4': [None, None, None, None]}
         step_score_dict = {'step_1': 0, 'step_2': 0, 'step_3': 0, 'step_4': 0}
         score_dict = {'step_1': [0, 0, 0, 0], 'step_2': [0, 0, 0, 0], 'step_3': [0, 0, 0, 0], 'step_4': [0, 0, 0, 0]}
-        step_score_sorted_list = None
+        step_score_sorted_list = [[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0]]
         overall_score_percentage = 0
         # True to be good match, False for not as good
         if evaluation_flag:
@@ -59,31 +59,36 @@ class WorkerEvaluator(QObject):
                 # load data to process
                 column_names = ['role', 'timestamp', 'step', 'sensor_type', 'recognized_gesture']
                 df_newbie = pd.read_csv(archive_file_name, header=None, names=column_names)
+                # df_newbie = pd.read_csv('ui/resources/record_newbie.csv', header=None, names=column_names)
                 df_newbie = df_newbie.dropna()
-                df_expert = pd.read_csv('resources/record_expert.csv', header=None, names=column_names)
-                df_expert = df_expert.dropna()
-                # filter data frame for each step
-                df_expert_step_1 = df_expert[df_expert['step'] == 'step_1']
-                df_expert_step_2 = df_expert[df_expert['step'] == 'step_2']
-                df_expert_step_3 = df_expert[df_expert['step'] == 'step_3']
-                df_expert_step_4 = df_expert[df_expert['step'] == 'step_4']
-                df_newbie_step_1 = df_newbie[df_newbie['step'] == 'step_1']
-                df_newbie_step_2 = df_newbie[df_newbie['step'] == 'step_2']
-                df_newbie_step_3 = df_newbie[df_newbie['step'] == 'step_3']
-                df_newbie_step_4 = df_newbie[df_newbie['step'] == 'step_4']
-                # perform the same data processing on each step dataset
-                success_flag_dict['step_1'], difference_dict['step_1'], score_dict['step_1'], step_score_dict['step_1'] = self.process_data_frame(df_expert_step_1, df_newbie_step_1, 1)
-                success_flag_dict['step_2'], difference_dict['step_2'], score_dict['step_2'], step_score_dict['step_2'] = self.process_data_frame(df_expert_step_2, df_newbie_step_2, 2)
-                success_flag_dict['step_3'], difference_dict['step_3'], score_dict['step_3'], step_score_dict['step_3'] = self.process_data_frame(df_expert_step_3, df_newbie_step_3, 3)
-                success_flag_dict['step_4'], difference_dict['step_4'], score_dict['step_4'], step_score_dict['step_4'] = self.process_data_frame(df_expert_step_4, df_newbie_step_4, 4)
-                # aggregate success_flag from each step
-                success_flag = success_flag_dict['step_1'] or success_flag_dict['step_2'] or success_flag_dict['step_3'] or success_flag_dict['step_4']
-                # use step_score_dict to find out the ranking
-                step_score_sorted_list = sorted(step_score_dict.items(), key=lambda x: x[1], reverse=True)
-                step_score_percentage = [0, 0, 0, 0]
-                for index in range(4):
-                    step_score_percentage[index] = int(sum(score_dict[f'step_{index+1}']) / 4)
-                overall_score_percentage = int(sum(step_score_percentage) / 4)
+                if df_newbie.shape[0] == 0:
+                    print('no data collected')
+                    success_flag = False
+                else:
+                    df_expert = pd.read_csv('ui/resources/record_expert.csv', header=None, names=column_names)
+                    df_expert = df_expert.dropna()
+                    # filter data frame for each step
+                    df_expert_step_1 = df_expert[df_expert['step'] == 'step_1']
+                    df_expert_step_2 = df_expert[df_expert['step'] == 'step_2']
+                    df_expert_step_3 = df_expert[df_expert['step'] == 'step_3']
+                    df_expert_step_4 = df_expert[df_expert['step'] == 'step_4']
+                    df_newbie_step_1 = df_newbie[df_newbie['step'] == 'step_1']
+                    df_newbie_step_2 = df_newbie[df_newbie['step'] == 'step_2']
+                    df_newbie_step_3 = df_newbie[df_newbie['step'] == 'step_3']
+                    df_newbie_step_4 = df_newbie[df_newbie['step'] == 'step_4']
+                    # perform the same data processing on each step dataset
+                    success_flag_dict['step_1'], difference_dict['step_1'], score_dict['step_1'], step_score_dict['step_1'] = self.process_data_frame(df_expert_step_1, df_newbie_step_1, 1)
+                    success_flag_dict['step_2'], difference_dict['step_2'], score_dict['step_2'], step_score_dict['step_2'] = self.process_data_frame(df_expert_step_2, df_newbie_step_2, 2)
+                    success_flag_dict['step_3'], difference_dict['step_3'], score_dict['step_3'], step_score_dict['step_3'] = self.process_data_frame(df_expert_step_3, df_newbie_step_3, 3)
+                    success_flag_dict['step_4'], difference_dict['step_4'], score_dict['step_4'], step_score_dict['step_4'] = self.process_data_frame(df_expert_step_4, df_newbie_step_4, 4)
+                    # aggregate success_flag from each step
+                    success_flag = success_flag_dict['step_1'] or success_flag_dict['step_2'] or success_flag_dict['step_3'] or success_flag_dict['step_4']
+                    # use step_score_dict to find out the ranking
+                    step_score_sorted_list = sorted(step_score_dict.items(), key=lambda x: x[1], reverse=True)
+                    step_score_percentage = [0, 0, 0, 0]
+                    for index in range(4):
+                        step_score_percentage[index] = int(sum(score_dict[f'step_{index+1}']) / 4)
+                    overall_score_percentage = int(sum(step_score_percentage) / 4)
             else:
                 print('archive_file_name is none')
                 success_flag = False

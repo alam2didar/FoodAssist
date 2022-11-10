@@ -4,15 +4,17 @@ from foodAssist import Placing_Meat_UI
 import worker_websocket
 import worker_recorder
 import worker_detection
+import worker_handpos
+import worker_evaluator
 
 class Initializer(qtc.QObject):
-  detectionParams = qtc.pyqtSignal(int, int, int, int, int)
+  hand_position = qtc.pyqtSignal(int, int, int, int, int, int)
+  detection_params = qtc.pyqtSignal(int, int, int, int, int)
   devices_connected = qtc.pyqtSignal()
   devices_disconnected = qtc.pyqtSignal()
-  # flag to start/block workers
-  # start_worker = False
-  start_worker = True
-  interval_between_uis = 20
+  # debug_mode to start/block workers
+  debug_mode = False
+  interval_between_uis = 15
 
   def __init__(self, last_class=Placing_Meat_UI):
     super().__init__()
@@ -32,9 +34,27 @@ class Initializer(qtc.QObject):
     # Initialize Depth Camera Intel Realsense
     #####
     # comment for no camera device
-    self.my_depth_camera = dcm.DepthCamera()
-    # self.my_depth_camera = None
+    if self.debug_mode:
+      self.my_depth_camera = None
+    else:
+      self.my_depth_camera = dcm.DepthCamera()
     #####
+
+    # Create WorkerHandPos thread
+    # 1 - create Worker and Thread inside the Form # no parent
+    self.obj = worker_handpos.WorkerHandPos(self.my_depth_camera)
+    self.thread_handpos = qtc.QThread()
+    # 2 - Connect Worker`s Signals to Form method slots to post data.
+    self.obj.hand_position.connect(self.onHandPosition)
+    # 3 - Move the Worker object to the Thread object
+    self.obj.moveToThread(self.thread_handpos)
+    # 4 - Connect Worker Signals to the Thread slots
+    self.obj.finished.connect(self.thread_handpos.quit)
+    # 5 - Connect Thread started signal to Worker operational slot method
+    self.thread_handpos.started.connect(self.obj.get_hand_position)
+    # 6 - Start the thread
+    if not self.debug_mode:
+      self.thread_handpos.start()
 
     # Create WorkerWebsocket thread
     # 1 - create Worker and Thread inside the Form # no parent
@@ -51,7 +71,7 @@ class Initializer(qtc.QObject):
     # 5 - Connect Thread started signal to Worker operational slot method
     self.thread_websocket.started.connect(self.obj_websocket.create_websocket)
     # 6 - Start the thread
-    if self.start_worker:
+    if not self.debug_mode:
       self.thread_websocket.start()
 
     # Create WorkerRecorder thread
@@ -60,18 +80,23 @@ class Initializer(qtc.QObject):
     self.obj_recorder.moveToThread(self.thread_recorder)
     self.obj_recorder.archive_finished.connect(self.obj_recorder.create_new)
     self.thread_recorder.started.connect(self.obj_recorder.archive_old)
-    if self.start_worker:
-      self.thread_recorder.start()
+    self.thread_recorder.start()
     
     # Create WorkerDetection thread
     self.obj_detection = worker_detection.WorkerDetection(self.my_depth_camera)
     self.thread_detection = qtc.QThread()
-    self.obj_detection.detectionParams.connect(self.onDetection)
+    self.obj_detection.detection_params.connect(self.onDetection)
     self.obj_detection.moveToThread(self.thread_detection)
     self.obj_detection.finished.connect(self.thread_detection.quit)
-    self.thread_detection.started.connect(self.obj_detection.detectStep)
-    if self.start_worker:
+    self.thread_detection.started.connect(self.obj_detection.detect_step)
+    if not self.debug_mode:
       self.thread_detection.start()
+
+    # Create WorkerEvaluator thread
+    self.obj_evaluator = worker_evaluator.WorkerEvaluator()
+    self.thread_evaluator = qtc.QThread()
+    self.obj_evaluator.moveToThread(self.thread_evaluator)
+    self.thread_evaluator.start()
 
   # check if message received
   def onWebsocketMessage(self, sensor_type, message):
@@ -82,14 +107,18 @@ class Initializer(qtc.QObject):
     else:
       print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
 
+  # send hand position paramas to the respective UI  
+  def onHandPosition(self, x, y, z, counter, cursor_x, cursor_y):
+    self.hand_position.emit(x, y, z, counter, cursor_x, cursor_y)
+
   # send detection box paramas to the respective UI  
   def onDetection(self, x, y, width, height, step):
       self.detected_step = step
       # calibrate x,y,w,h for projection with k=1.65 and (x,y) = (405,220)
       if x == 0 or y == 0:
-        self.detectionParams.emit(0,0,0,0,0)
+        self.detection_params.emit(0,0,0,0,0)
       else:
-        self.detectionParams.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
+        self.detection_params.emit(int(1.65*(x-405)), int(1.65*(y-220)), int(1.65*width), int(1.65*height), step)
 
   def onDeviceStart(self):
     self.devices_running = True
