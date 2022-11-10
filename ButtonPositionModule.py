@@ -19,7 +19,7 @@ class ButtonPositioner:
         self.nav_c = type('nav_c', (ButtonPositioner,), {'left': 1348, 'right': 1421, 'top': 712, 'bottom': 792, 'short': 1100, 'long': 1300})
         self.nav_d = type('nav_d', (ButtonPositioner,), {'left': 1447, 'right': 1522, 'top': 712, 'bottom': 792, 'short': 1100, 'long': 1300})
         # to calibrate
-        self.button_view = type('button_view', (ButtonPositioner,), {'left': 1155, 'right': 1232, 'top': 834, 'bottom': 912, 'short': 1100, 'long': 1300})
+        self.button_view = type('button_view', (ButtonPositioner,), {'left': 917, 'right': 1000, 'top': 545, 'bottom': 622, 'short': 1100, 'long': 1300})
         self.button_de = type('button_de', (ButtonPositioner,), {'left': 845, 'right': 925, 'top': 410, 'bottom': 485, 'short': 1100, 'long': 1300})
         self.button_en = type('button_en', (ButtonPositioner,), {'left': 972, 'right': 1058, 'top': 410, 'bottom': 485, 'short': 1100, 'long': 1300})
         self.button_left_shoulder = type('button_left_shoulder', (ButtonPositioner,), {'left': 511, 'right': 735, 'top': 236, 'bottom': 500, 'short': 1100, 'long': 1300})
