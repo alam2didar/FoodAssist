@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="150"
+   width="150"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="Button Left.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     width="150px"
+     inkscape:zoom="4.5364584"
+     inkscape:cx="104.4868"
+     inkscape:cy="86.851893"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
+  <path
+     d="m 71.249999,98.625 c 1,1 2.28125,1.46875 3.843751,1.40625 1.5625,-0.06247 2.84375,-0.593717 3.843749,-1.59375 1.125,-1.125 1.6875,-2.4375 1.6875,-3.937501 0,-1.499999 -0.5625,-2.812499 -1.6875,-3.9375 L 69,80.624999 h 28.6875 c 1.5,0 2.78125,-0.5625 3.84375,-1.6875 1.0625,-1.124999 1.59375,-2.437499 1.59375,-3.9375 0,-1.625 -0.53125,-2.96875 -1.59375,-4.031249 C 100.46875,69.90625 99.125,69.375 97.5,69.375 H 69 L 79.124999,59.249999 c 1,-1 1.46875,-2.28125 1.406251,-3.84375 C 80.468743,53.84375 79.937493,52.5625 78.937499,51.5625 77.8125,50.4375 76.5,49.875 74.999999,49.875 c -1.5,0 -2.8125,0.5625 -3.9375,1.6875 L 51.5625,71.062499 c -1.125,1.125 -1.6875,2.4375 -1.6875,3.9375 0,1.500001 0.5625,2.812501 1.6875,3.9375 z"
+     id="path2"
+     style="fill:#ffffff;stroke:none;stroke-width:3.75001;fill-opacity:1"
+     sodipodi:nodetypes="sccsscssssscsssssssss" />
+  <circle
+     cx="75"
+     cy="75"
+     fill="none"
+     id="circle2"
+     style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:5.69159;stroke-dasharray:none;stroke-opacity:1"
+     r="72.154205" />
+</svg>

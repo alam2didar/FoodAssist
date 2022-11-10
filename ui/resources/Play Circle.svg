@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="250"
+   height="250"
+   fill="#ffffff"
+   class="bi bi-play-circle"
+   viewBox="0 0 250 250"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="Play Circle.svg"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="2"
+     inkscape:cx="121.75"
+     inkscape:cy="130.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <path
+     d="m 90.367264,73.470126 a 8.7488074,8.7488074 0 0 1 9.098759,0.664909 l 61.241637,43.744035 a 8.7488074,8.7488074 0 0 1 0,14.24306 L 99.466023,175.86617 A 8.7488074,8.7488074 0 0 1 85.62541,168.74463 V 81.256564 a 8.7488074,8.7488074 0 0 1 4.741854,-7.786438 z"
+     id="path4"
+     style="fill:#ffffff;stroke-width:17.4977" />
+  <circle
+     style="display:inline;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:7.81451;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+     id="path263"
+     cx="125"
+     cy="125"
+     r="121.09274"
+     inkscape:label="path263" />
+</svg>
