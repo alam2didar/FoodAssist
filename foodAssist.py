@@ -5,7 +5,6 @@ import PyQt5.QtWidgets as qtw
 from PyQt5 import uic
 import res_rc
 import sys
-import time
 import steps.step_1_ui as step1Ui
 import steps.step_2_ui as step2Ui
 import steps.step_3_ui as step3Ui
