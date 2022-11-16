@@ -1,7 +1,7 @@
 # worker_handpos.py
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 import HandDetectionModule as hdm
-# import DepthContourFinderModule as dcfm
+import DepthContourFinderModule as dcfm
 import ButtonPositionModule as bpm
 
 
@@ -13,7 +13,7 @@ class WorkerHandPos(QObject):
         super().__init__()
         # Initialize components
         self.hand_detector = hdm.HandDetector()
-        # self.depth_contour_finder = dcfm.DepthContourFinder()
+        self.depth_contour_finder = dcfm.DepthContourFinder()
         self.button_positioner = bpm.ButtonPositioner()
         self.depth_camera = my_depth_camera
         self.worker_activated = True
@@ -44,10 +44,10 @@ class WorkerHandPos(QObject):
                 color_image_to_process, results = self.hand_detector.findHands(color_image)
                 # find specified knuckle coordinates INDEX_FINGER_MCP
                 if use_mediapipe:
-                    point = self.hand_detector.findPosition(color_image_to_process, results, targetId=5)
+                    point = self.hand_detector.findPosition(color_image_to_process, results, targetId=12)
                 # alternative 2 - find point based on depth contour
-                # if not point and use_depth_contour:
-                #     point = self.depth_contour_finder.findPosition(depth_colormap)
+                if not point and use_depth_contour:
+                    point = self.depth_contour_finder.findPosition(depth_colormap)
                 # after finding point - use knuckle coordinates to find distance
                 if point:
                     distance = self.hand_detector.getDistance(self.depth_camera, point, depth_image)
