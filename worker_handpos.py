@@ -41,15 +41,15 @@ class WorkerHandPos(QObject):
                 # get images
                 ret, depth_image, depth_colormap, color_image, bg_removed = self.depth_camera.getFrame()
 
-                # alternative 2 - find point based on depth contour
-                if use_depth_contour:
-                    point = self.depth_contour_finder.findPosition(depth_colormap)
-
                 # alternative 1 - find point based on mediapipe
                 # find specified knuckle coordinates
-                if not point and use_mediapipe:
+                if use_mediapipe:
                     color_image_to_process, results = self.hand_detector.findHands(color_image)
                     point = self.hand_detector.findPosition(color_image_to_process, results, targetId=12)
+
+                # alternative 2 - find point based on depth contour
+                if not point and use_depth_contour:
+                    point = self.depth_contour_finder.findPosition(depth_colormap)
 
                 # after finding point - use knuckle coordinates to find distance
                 if point:
