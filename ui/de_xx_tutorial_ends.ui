@@ -180,29 +180,6 @@ color: rgb(255, 255, 255);</string>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
-    <widget class="QLabel" name="score_flag">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>150</width>
-       <height>150</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources/res.qrc">:/img/Score Flag.svg</pixmap>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_text_score">
      <property name="font">
       <font>
@@ -224,10 +201,33 @@ color: rgb(0, 255, 0);</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="score_flag">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="resources/res.qrc">:/img/Score Flag.svg</pixmap>
      </property>
     </widget>
    </widget>
@@ -253,6 +253,20 @@ color: rgb(0, 255, 0);</string>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <widget class="QLabel" name="xp_bolt">
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="resources/res.qrc">:/img/XP Bolt.svg</pixmap>
+     </property>
+    </widget>
     <widget class="QLabel" name="label_text_xp">
      <property name="font">
       <font>
@@ -277,24 +291,10 @@ color: rgb(255, 255, 0);</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="xp_bolt">
-     <property name="maximumSize">
-      <size>
-       <width>150</width>
-       <height>150</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources/res.qrc">:/img/XP Bolt.svg</pixmap>
      </property>
     </widget>
    </widget>
