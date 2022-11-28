@@ -11,7 +11,7 @@ def zoom(img, zoom_factor=2):
 # sends the detection params and detected step
 class WorkerDetection(QObject):
     finished = pyqtSignal()
-    detectionParams = pyqtSignal(int, int, int, int, int)
+    detection_params = pyqtSignal(int, int, int, int, int)
     worker_activated = True
     
     def __init__(self, depth_camera):
@@ -27,7 +27,7 @@ class WorkerDetection(QObject):
         self.worker_activated = False
 
     @pyqtSlot()
-    def detectStep(self): # A slot takes no params
+    def detect_step(self): # A slot takes no params
         while self.worker_activated:
             net = cv2.dnn.readNet('yolov3_final_final.weights', 'yolov3_final.cfg')
             #net = cv2.dnn.readNet('yolov3-tiny.weights', 'yolov3-tiny.cfg')
@@ -99,13 +99,13 @@ class WorkerDetection(QObject):
                         pt2_y = int((y+h)/8)+centerY
                         pt2 = (pt2_x, pt2_y)
 
-                        self.detectionParams.emit(pt1_x, pt1_y, int(w/8), int(h/8), class_ids[i]+1)
+                        self.detection_params.emit(pt1_x, pt1_y, int(w/8), int(h/8), class_ids[i]+1)
 
                         cv2.rectangle(img_original, pt1, pt2, color, 2)
                         cv2.putText(img_original, label + " " + confidence, (pt1_x, pt1_y+20), font, 2, (255,255,255), 2)
                 else:
                     # if no detection, send box params (x,y,w,h) as 0
-                    self.detectionParams.emit(0, 0, 0, 0, 0)
+                    self.detection_params.emit(0, 0, 0, 0, 0)
                 
                 # record camera view
             #     record_camera_view.write(img_original)

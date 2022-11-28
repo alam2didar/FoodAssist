@@ -40,8 +40,8 @@ class DepthContourFinder:
         most_right_tip_x = 0
         most_right_tip_y = 0
         # offset for coordinates, using hand as cursor
-        offset_x = 0
-        offset_y = -50
+        offset_x = -50
+        offset_y = -100
         point = (0, 0)
         # loop over the contours
         for c in cnts:
