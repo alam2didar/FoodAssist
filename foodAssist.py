@@ -422,12 +422,9 @@ class Tutorial_Ends_UI(qtw.QWidget):
   def __init__(self, my_initializer):
     super().__init__()
     self.ui = uic.loadUi(f'ui/{my_initializer.lang}_xx_tutorial_ends.ui', self)
-    self.button_restart.clicked.connect(self.restart_button_pressed)
     self.button_exit.clicked.connect(self.exit_button_pressed)
     self.button_view.clicked.connect(self.button_view_clicked)
     # disable buttons
-    self.button_restart.setEnabled(False)
-    self.button_restart.setHidden(True)
     self.button_exit.setEnabled(False)
     self.button_exit.setHidden(True)
     self.button_view.setEnabled(False)
@@ -475,8 +472,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.my_initializer.step_score_sorted_list = step_score_sorted_list
     self.my_initializer.overall_score_percentage = overall_score_percentage
     # enable buttons
-    self.button_restart.setEnabled(True)
-    self.button_restart.setHidden(False)
     self.button_exit.setEnabled(True)
     self.button_exit.setHidden(False)
     # show result
@@ -532,8 +527,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     self.finger_tip_x = cursor_x
     self.finger_tip_y = cursor_y
     self.update()
-    if self.my_initializer.obj.button_positioner.check_in_area(x, y, z, self.my_initializer.obj.button_positioner.button_a) and self.my_initializer.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
-      self.button_restart.click()
     if self.my_initializer.obj.button_positioner.check_in_area(x, y, z, self.my_initializer.obj.button_positioner.button_b) and self.my_initializer.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
       self.button_exit.click()
     if self.my_initializer.obj.button_positioner.check_in_area(x, y, z, self.my_initializer.obj.button_positioner.button_view) and self.my_initializer.obj.worker_activated and counter > self.my_initializer.interval_between_uis:
@@ -546,14 +539,6 @@ class Tutorial_Ends_UI(qtw.QWidget):
     select_screen_and_show(self.target_ui)
     self.close()
 
-  @qtc.pyqtSlot()
-  def restart_button_pressed(self):
-    self.my_initializer.hand_position.disconnect()
-    self.my_initializer.last_class = Tutorial_Ends_UI
-    self.target_ui = Confirm_Restart_UI(self.my_initializer)
-    select_screen_and_show(self.target_ui)
-    self.close()
-  
   @qtc.pyqtSlot()
   def exit_button_pressed(self):
     self.my_initializer.hand_position.disconnect()
