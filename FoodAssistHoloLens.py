@@ -1,6 +1,5 @@
 import sys
 import initializer
-# import PyQt5.QtCore as qtc
 import PyQt5.QtWidgets as qtw
 
 app = qtw.QApplication([])
