@@ -1,7 +1,9 @@
 import mediapipe as mp
 import cv2
-import tensorflow as tf
-import numpy as np
+import csv
+import copy
+import itertools
+from keypoint_classifier.keypoint_classifier import KeyPointClassifier
 
 
 class HandDetector:
@@ -10,20 +12,24 @@ class HandDetector:
         self.mpHands = mp.solutions.hands
         self.hands = self.mpHands.Hands(imgMode, maxHands)
         self.mpDraw = mp.solutions.drawing_utils
-        # initialize tensorflow
-        self.model = tf.keras.models.load_model("model.h5")
+        # load model
+        self.keypoint_classifier = KeyPointClassifier()
+        # read labels
+        with open('model/keypoint_classifier/keypoint_classifier_label.csv',
+                encoding='utf-8-sig') as f:
+            self.keypoint_classifier_labels = csv.reader(f)
+            self.keypoint_classifier_labels = [
+                row[0] for row in self.keypoint_classifier_labels
+            ]
         # print("Initialized HandDetector.")
 
-    def findHands(self, img, draw=False):
+
+    def findHands(self, img):
         if img is not None:
             imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             results = self.hands.process(imgRGB)
-            # print(results.multi_hand_landmarks)
-        if results.multi_hand_landmarks:
-            for handLandmarks in results.multi_hand_landmarks:
-                if draw:
-                    self.mpDraw.draw_landmarks(img, handLandmarks, self.mpHands.HAND_CONNECTIONS)
         return img, results
+
 
     def findPosition(self, img, results, targetId=0, handIndex=0):
         point = None
@@ -37,6 +43,7 @@ class HandDetector:
                     point = (cX, cY)
         return point
 
+
     def getDistance(self, depth_camera, point, depth_image):
         distance = None
         if point:
@@ -46,30 +53,59 @@ class HandDetector:
                 distance = depth_image[point[1], point[0]] * depth_camera.depth_scale
         return distance
 
-    def getRecognition(self, results, color_image):
-        # FEATURE_LIST = ["Chop (feature 1)", "Vertical (feature 2)", "Flat (feature 3)"]
-        detected_feature = 0
+
+    def getPrediction(self, results, color_image):
         if results.multi_hand_landmarks:
-            input_buffer = []
-            for handLandmarks in results.multi_hand_landmarks:
-                for id, lm in enumerate(handLandmarks.landmark):
-                    height, width, channel = color_image.shape
-                    cX, cY = int(lm.x * width), int(lm.y * height)
-                    # print(id, cX, cY)
-                    # if id == 9:
-                    #     print(id, cX, cY)
-                    #     cv2.circle(img, (cX, cY), 20, (255, 0, 255), cv2.FILLED)
-                    input_buffer.append(cX)
-                    input_buffer.append(cY)
-                # after enumeration
-                input_array = np.array(input_buffer).reshape((-1, 42))
-                # print(input_array)
-                prediction = self.model.predict(input_array)
-                # print(prediction)
-                if prediction[0][0] > 0.5:
-                    detected_feature = 1
-                if prediction[0][1] > 0.5:
-                    detected_feature = 2
-                if prediction[0][2] > 0.5:
-                    detected_feature = 3
-        return detected_feature
+            for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
+                # Landmark calculation
+                landmark_list = self.calc_landmark_list(color_image, hand_landmarks)
+                # Conversion to relative coordinates / normalized coordinates
+                pre_processed_landmark_list = self.pre_process_landmark(landmark_list)
+                # Hand sign classification
+                hand_sign_id = self.keypoint_classifier(pre_processed_landmark_list)
+                # feature label
+                feature_label = self.keypoint_classifier_labels[hand_sign_id]
+        return feature_label
+
+
+    def calc_landmark_list(image, landmarks):
+        image_width, image_height = image.shape[1], image.shape[0]
+
+        landmark_point = []
+
+        # Keypoint
+        for _, landmark in enumerate(landmarks.landmark):
+            landmark_x = min(int(landmark.x * image_width), image_width - 1)
+            landmark_y = min(int(landmark.y * image_height), image_height - 1)
+            # landmark_z = landmark.z
+
+            landmark_point.append([landmark_x, landmark_y])
+
+        return landmark_point
+
+
+    def pre_process_landmark(landmark_list):
+        temp_landmark_list = copy.deepcopy(landmark_list)
+
+        # Convert to relative coordinates
+        base_x, base_y = 0, 0
+        for index, landmark_point in enumerate(temp_landmark_list):
+            if index == 0:
+                base_x, base_y = landmark_point[0], landmark_point[1]
+
+            temp_landmark_list[index][0] = temp_landmark_list[index][0] - base_x
+            temp_landmark_list[index][1] = temp_landmark_list[index][1] - base_y
+
+        # Convert to a one-dimensional list
+        temp_landmark_list = list(
+            itertools.chain.from_iterable(temp_landmark_list))
+
+        # Normalization
+        max_value = max(list(map(abs, temp_landmark_list)))
+
+        def normalize_(n):
+            return n / max_value
+
+        temp_landmark_list = list(map(normalize_, temp_landmark_list))
+
+        return temp_landmark_list

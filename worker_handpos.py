@@ -46,6 +46,9 @@ class WorkerHandPos(QObject):
                 if use_mediapipe:
                     color_image_to_process, results = self.hand_detector.findHands(color_image)
                     point = self.hand_detector.findPosition(color_image_to_process, results, targetId=12)
+                    # potential keypoint model to predict gestures
+                    feature_label = self.hand_detector.getPrediction(results, color_image_to_process)
+                    print("Predicted gesture: " + feature_label)
 
                 # alternative 2 - find point based on depth contour
                 if not point and use_depth_contour:
