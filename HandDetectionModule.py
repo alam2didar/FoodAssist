@@ -15,7 +15,7 @@ class HandDetector:
         # load model
         self.keypoint_classifier = KeyPointClassifier()
         # read labels
-        with open('model/keypoint_classifier/keypoint_classifier_label.csv',
+        with open('keypoint_classifier/keypoint_classifier_label.csv',
                 encoding='utf-8-sig') as f:
             self.keypoint_classifier_labels = csv.reader(f)
             self.keypoint_classifier_labels = [
