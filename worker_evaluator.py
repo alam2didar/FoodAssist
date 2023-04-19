@@ -10,13 +10,6 @@ class WorkerEvaluator(QObject):
     first_delay_reached = pyqtSignal()
     evaluation_result = pyqtSignal(bool, dict, dict, dict, list, int)
 
-    expert_amount_dict = {
-        'step_1_gesture_1': 6, 'step_1_gesture_2': 12, 'step_1_gesture_3': 4, 'step_1_gesture_4': 0,
-        'step_2_gesture_1': 18, 'step_2_gesture_2': 0, 'step_2_gesture_3': 0, 'step_1_gesture_4': 0,
-        'step_3_gesture_1': 2, 'step_3_gesture_2': 20, 'step_3_gesture_3': 4, 'step_1_gesture_4': 2,
-        'step_4_gesture_1': 8, 'step_4_gesture_2': 8, 'step_4_gesture_3': 0, 'step_1_gesture_4': 0
-    }
-
     @pyqtSlot()
     def first_delay(self):
         # self.remove_png_files()
