@@ -93,7 +93,7 @@ class WorkerEvaluator(QObject):
     def process_data_frame(self, data_frame_expert_step, data_frame_newbie_step, step_number):
         success_flag = False
         score_array = [0, 0, 0, 0]
-        step_score_dict = 0
+        step_score = 0
         df_position = None
         df_expert_position_amount = [0, 0, 0, 0]
         df_newbie_position_amount = [0, 0, 0, 0]
@@ -148,8 +148,8 @@ class WorkerEvaluator(QObject):
                     score_array[index] = 50
                 else:
                     score_array[index] = 100 - 5 * abs(amount_difference[index])
-            step_score_dict = int(sum(score_array)/len(score_array))
+            step_score = int(sum(score_array)/len(score_array))
             success_flag = True
         else:
             success_flag = False
-        return success_flag, amount_difference, score_array, step_score_dict
+        return success_flag, amount_difference, score_array, step_score
