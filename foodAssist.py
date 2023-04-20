@@ -9,6 +9,7 @@ import steps.step_1_ui as step1Ui
 import steps.step_2_ui as step2Ui
 import steps.step_3_ui as step3Ui
 import steps.step_4_ui as step4Ui
+import result_step_page_ui as resUi
 
 class FoodAssist(qtw.QWidget):
   def __init__(self, my_initializer):
@@ -602,7 +603,10 @@ class Menu_Default_UI(qtw.QWidget):
   @qtc.pyqtSlot()
   def back_button_pressed(self):
     self.my_initializer.hand_position.disconnect()
-    self.target_ui = self.my_initializer.last_class(self.my_initializer)
+    if self.my_initializer.last_class == resUi.Result_StepX_PageX_UI:
+      self.target_ui = self.my_initializer.last_class(self.my_initializer, self.my_initializer.step_number, self.my_initializer.page_number)
+    else:
+      self.target_ui = self.my_initializer.last_class(self.my_initializer)
     select_screen_and_show(self.target_ui)
     self.close()
 
