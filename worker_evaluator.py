@@ -5,10 +5,12 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import time
+import math
+
 
 class WorkerEvaluator(QObject):
     first_delay_reached = pyqtSignal()
-    evaluation_result = pyqtSignal(bool, dict, dict, dict, list, int)
+    evaluation_result = pyqtSignal(bool, dict, dict, dict, list, float)
 
     @pyqtSlot()
     def first_delay(self):
@@ -80,8 +82,9 @@ class WorkerEvaluator(QObject):
                     step_score_sorted_list = sorted(step_score_dict.items(), key=lambda x: x[1], reverse=True)
                     step_score_percentage = [0, 0, 0, 0]
                     for index in range(4):
-                        step_score_percentage[index] = int(sum(score_dict[f'step_{index+1}']) / 4)
-                    overall_score_percentage = int(sum(step_score_percentage) / 4)
+                        step_score_percentage[index] = sum(score_dict[f'step_{index+1}']) / 4
+                    overall_score_percentage = sum(step_score_percentage) / 4
+                    print('overall_score_percentage: ', overall_score_percentage)
             else:
                 print('archive_file_name is none')
                 success_flag = False
@@ -147,14 +150,13 @@ class WorkerEvaluator(QObject):
                     df_expert_position_amount[index] = 0
                 amount_difference[index] = abs(df_newbie_position_amount[index] - df_expert_position_amount[index])
                 # calculation of score_array for each gesture
-                if amount_difference[index] > 10:
-                    score_array[index] = 50
-                else:
-                    score_array[index] = 100 - 5 * abs(amount_difference[index])
+                score_array[index] = self.get_score(df_newbie_position_amount[index], df_expert_position_amount[index])
             # calculation of score in each step
-            step_score = int(sum(score_array) / len(score_array))
+            step_score = sum(score_array) / len(score_array)
             success_flag = True
-        return success_flag, amount_difference, score_array, step_score    
+            print('score_array, step_score: ', score_array, step_score)
+        return success_flag, amount_difference, score_array, step_score
+    
     def get_score(self, newbie_count, expert_count):
         if expert_count == 0:
             score = math.exp(-newbie_count)

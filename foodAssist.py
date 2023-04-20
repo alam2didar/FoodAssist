@@ -480,7 +480,8 @@ class Tutorial_Ends_UI(qtw.QWidget):
       # enable button_view
       self.button_view.setHidden(False)
       self.button_view.setEnabled(True)
-      if overall_score_percentage >= 80:
+      print('onEvaluationResult: overall_score_percentage:', overall_score_percentage)
+      if overall_score_percentage*100 >= 80:
         # display texts upon high score
         if self.my_initializer.lang == 'en':
           self.label_text_1.setText("Congratulation! You performed almost like an expert.")
@@ -500,7 +501,7 @@ class Tutorial_Ends_UI(qtw.QWidget):
       self.label_text_1.setHidden(False)
       self.label_text_2.setHidden(False)
       # to do - show score percentage
-      self.label_text_score.setText(f"{overall_score_percentage}%")
+      self.label_text_score.setText(f"{int(overall_score_percentage*100)}%")
       self.widget_xp.setHidden(False)
       self.widget_score.setHidden(False)
     else:
