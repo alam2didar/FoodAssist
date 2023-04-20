@@ -154,4 +154,10 @@ class WorkerEvaluator(QObject):
             # calculation of score in each step
             step_score = int(sum(score_array) / len(score_array))
             success_flag = True
-        return success_flag, amount_difference, score_array, step_score
+        return success_flag, amount_difference, score_array, step_score    
+    def get_score(self, newbie_count, expert_count):
+        if expert_count == 0:
+            score = math.exp(-newbie_count)
+        else:
+            score = (newbie_count/expert_count) if (newbie_count<=expert_count) else (math.exp((2/expert_count)*(expert_count-newbie_count)))
+        return score
