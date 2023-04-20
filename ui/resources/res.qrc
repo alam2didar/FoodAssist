@@ -5,30 +5,10 @@
     <file>No Sign.svg</file>
     <file>Germany.png</file>
     <file>United-kingdom.png</file>
-    <file>left_step1_gesture1.png</file>
-    <file>left_step1_gesture2.png</file>
-    <file>left_step1_gesture3.png</file>
-    <file>left_step2_gesture1_1.png</file>
-    <file>left_step2_gesture1_2.png</file>
-    <file>left_step3_gesture1.png</file>
-    <file>left_step3_gesture2_1.png</file>
-    <file>left_step3_gesture2_2.png</file>
-    <file>left_step3_gesture3.png</file>
-    <file>left_step3_gesture4.png</file>
-    <file>left_step4_gesture1.png</file>
-    <file>left_step4_gesture2.png</file>
-    <file>right_step1_gesture1.png</file>
-    <file>right_step1_gesture2.png</file>
-    <file>right_step1_gesture3.png</file>
-    <file>right_step2_gesture1_1.png</file>
-    <file>right_step2_gesture1_2.png</file>
-    <file>right_step3_gesture1.png</file>
-    <file>right_step3_gesture2_1.png</file>
-    <file>right_step3_gesture2_2.png</file>
-    <file>right_step3_gesture3.png</file>
-    <file>right_step3_gesture4.png</file>
-    <file>right_step4_gesture1.png</file>
-    <file>right_step4_gesture2.png</file>
+    <file>gesture1.png</file>
+    <file>gesture2.png</file>
+    <file>gesture3.png</file>
+    <file>gesture4.png</file>
     <file>Confirm Restart.png</file>
     <file>Icon Expert.png</file>
     <file>Icon User.png</file>

@@ -312,7 +312,7 @@ background-color: rgb(0, 0, 0, 0);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step2_gesture1_2.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture1.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -333,7 +333,7 @@ background-color: rgb(0, 0, 0, 0);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 1 (thumb grip)</string>
+     <string>Gesture 1</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -380,6 +380,63 @@ color: rgb(255, 255, 255);</string>
    <property name="wordWrap">
     <bool>true</bool>
    </property>
+  </widget>
+  <widget class="QSplitter" name="splitter_3">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>160</y>
+     <width>320</width>
+     <height>282</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+   <widget class="QLabel" name="image_required_4">
+    <property name="maximumSize">
+     <size>
+      <width>320</width>
+      <height>240</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources/res.qrc">:/img/gesture3.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="text_required_4">
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>22</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 22pt &quot;Arial&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Gesture 3</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>

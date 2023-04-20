@@ -416,7 +416,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step3_gesture4.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture4.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

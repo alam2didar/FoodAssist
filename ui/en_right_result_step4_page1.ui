@@ -146,6 +146,41 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_text_step">
+   <property name="geometry">
+    <rect>
+     <x>1650</x>
+     <y>20</y>
+     <width>250</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>48</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 48pt &quot;Arial&quot;;
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Step 4</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::RichText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QPushButton" name="button_exit">
    <property name="enabled">
     <bool>true</bool>
@@ -199,48 +234,20 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="icon_expert_1">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
+  <widget class="QLabel" name="label_plot_1">
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>220</y>
-     <width>100</width>
-     <height>100</height>
+     <y>180</y>
+     <width>850</width>
+     <height>340</height>
     </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
    </property>
    <property name="maximumSize">
     <size>
-     <width>100</width>
-     <height>100</height>
+     <width>1200</width>
+     <height>480</height>
     </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources/res.qrc">:/img/Icon Expert.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="image_step">
-   <property name="geometry">
-    <rect>
-     <x>1650</x>
-     <y>170</y>
-     <width>250</width>
-     <height>250</height>
-    </rect>
    </property>
    <property name="font">
     <font>
@@ -249,43 +256,6 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources/res.qrc">:/detected steps/Detected Step4 Button.png</pixmap>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="icon_reaction_1">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>1400</x>
-     <y>250</y>
-     <width>200</width>
-     <height>200</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>200</width>
-     <height>200</height>
-    </size>
    </property>
    <property name="text">
     <string/>
@@ -328,20 +298,14 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_plot_1">
+  <widget class="QLabel" name="image_step">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>180</y>
-     <width>850</width>
-     <height>340</height>
+     <x>1650</x>
+     <y>170</y>
+     <width>250</width>
+     <height>250</height>
     </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>1200</width>
-     <height>480</height>
-    </size>
    </property>
    <property name="font">
     <font>
@@ -354,37 +318,8 @@
    <property name="text">
     <string/>
    </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_text_step">
-   <property name="geometry">
-    <rect>
-     <x>1650</x>
-     <y>20</y>
-     <width>250</width>
-     <height>150</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>48</pointsize>
-     <weight>9</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 75 48pt &quot;Arial&quot;;
-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>Step 4</string>
-   </property>
-   <property name="textFormat">
-    <enum>Qt::RichText</enum>
+   <property name="pixmap">
+    <pixmap resource="resources/res.qrc">:/detected steps/Detected Step4 Button.png</pixmap>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -393,7 +328,72 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QSplitter" name="splitter_2">
+  <widget class="QLabel" name="icon_expert_1">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>220</y>
+     <width>100</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>100</height>
+    </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/res.qrc">:/img/Icon Expert.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="icon_reaction_1">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>1400</x>
+     <y>250</y>
+     <width>200</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>200</width>
+     <height>200</height>
+    </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QSplitter" name="splitter_5">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -405,7 +405,7 @@ color: rgb(255, 255, 255);</string>
    <property name="orientation">
     <enum>Qt::Vertical</enum>
    </property>
-   <widget class="QLabel" name="image_required_1">
+   <widget class="QLabel" name="image_required_4">
     <property name="maximumSize">
      <size>
       <width>320</width>
@@ -416,13 +416,13 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step4_gesture1.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture1.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="text_required_1">
+   <widget class="QLabel" name="text_required_4">
     <property name="font">
      <font>
       <family>Arial</family>
@@ -437,7 +437,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 1 (blade grip)</string>
+     <string>Gesture 1</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -485,17 +485,6 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
   </widget>
-  <zorder>label_plot_1</zorder>
-  <zorder>button_nav_left</zorder>
-  <zorder>button_nav_right</zorder>
-  <zorder>button_exit</zorder>
-  <zorder>icon_expert_1</zorder>
-  <zorder>image_step</zorder>
-  <zorder>icon_reaction_1</zorder>
-  <zorder>icon_newbie_1</zorder>
-  <zorder>label_text_step</zorder>
-  <zorder>splitter_2</zorder>
-  <zorder>label_trouble</zorder>
  </widget>
  <resources>
   <include location="resources/res.qrc"/>

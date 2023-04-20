@@ -416,7 +416,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step3_gesture4.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture4.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -437,7 +437,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Geste 4 (Handgriff)</string>
+     <string>Geste 4</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>

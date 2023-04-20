@@ -312,7 +312,7 @@ background-color: rgb(0, 0, 0, 0);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step4_gesture1.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture2.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -333,7 +333,7 @@ background-color: rgb(0, 0, 0, 0);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 1 (blade grip)</string>
+     <string>Gesture 2</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -404,7 +404,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step4_gesture2.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture3.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -425,7 +425,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 2 (handle grip)</string>
+     <string>Gesture 3</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>

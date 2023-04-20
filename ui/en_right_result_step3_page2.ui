@@ -199,16 +199,16 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="icon_expert_1">
+  <widget class="QLabel" name="icon_reaction_1">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>220</y>
-     <width>100</width>
-     <height>100</height>
+     <x>1400</x>
+     <y>250</y>
+     <width>200</width>
+     <height>200</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -219,15 +219,12 @@
    </property>
    <property name="maximumSize">
     <size>
-     <width>100</width>
-     <height>100</height>
+     <width>200</width>
+     <height>200</height>
     </size>
    </property>
    <property name="text">
     <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources/res.qrc">:/img/Icon Expert.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -263,16 +260,16 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="icon_reaction_1">
+  <widget class="QLabel" name="icon_expert_1">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>1400</x>
-     <y>250</y>
-     <width>200</width>
-     <height>200</height>
+     <x>490</x>
+     <y>220</y>
+     <width>100</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -283,9 +280,42 @@
    </property>
    <property name="maximumSize">
     <size>
-     <width>200</width>
-     <height>200</height>
+     <width>100</width>
+     <height>100</height>
     </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/res.qrc">:/img/Icon Expert.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_plot_1">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>180</y>
+     <width>850</width>
+     <height>340</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1200</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string/>
@@ -328,36 +358,6 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_plot_1">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>180</y>
-     <width>850</width>
-     <height>340</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>1200</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>48</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_text_step">
    <property name="geometry">
     <rect>
@@ -393,7 +393,7 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QSplitter" name="splitter_2">
+  <widget class="QSplitter" name="splitter_5">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -405,7 +405,7 @@ color: rgb(255, 255, 255);</string>
    <property name="orientation">
     <enum>Qt::Vertical</enum>
    </property>
-   <widget class="QLabel" name="image_required_1">
+   <widget class="QLabel" name="image_required_4">
     <property name="maximumSize">
      <size>
       <width>320</width>
@@ -416,13 +416,13 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step3_gesture2_1.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture2.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="text_required_1">
+   <widget class="QLabel" name="text_required_4">
     <property name="font">
      <font>
       <family>Arial</family>
@@ -437,7 +437,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 2 (handle grip)</string>
+     <string>Gesture 2</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -489,12 +489,12 @@ color: rgb(255, 255, 255);</string>
   <zorder>button_nav_left</zorder>
   <zorder>button_nav_right</zorder>
   <zorder>button_exit</zorder>
-  <zorder>icon_expert_1</zorder>
-  <zorder>image_step</zorder>
   <zorder>icon_reaction_1</zorder>
+  <zorder>image_step</zorder>
+  <zorder>icon_expert_1</zorder>
   <zorder>icon_newbie_1</zorder>
   <zorder>label_text_step</zorder>
-  <zorder>splitter_2</zorder>
+  <zorder>splitter_5</zorder>
   <zorder>label_trouble</zorder>
  </widget>
  <resources>

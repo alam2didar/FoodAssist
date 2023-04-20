@@ -347,7 +347,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step1_gesture2.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture3.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -368,64 +368,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Geste 2 (Handgriff)</string>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::PlainText</enum>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="wordWrap">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_4">
-   <property name="geometry">
-    <rect>
-     <x>800</x>
-     <y>160</y>
-     <width>320</width>
-     <height>282</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-   <widget class="QLabel" name="image_required_3">
-    <property name="maximumSize">
-     <size>
-      <width>320</width>
-      <height>240</height>
-     </size>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step1_gesture3.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="text_required_3">
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>22</pointsize>
-      <weight>9</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 75 22pt &quot;Arial&quot;;
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Geste 3 (Daumengriff)</string>
+     <string>Geste 3</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -461,7 +404,7 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources/res.qrc">:/img/right_step1_gesture1.png</pixmap>
+     <pixmap resource="resources/res.qrc">:/img/gesture2.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -482,7 +425,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Geste 1 (Klingengriff)</string>
+     <string>Geste 2</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
