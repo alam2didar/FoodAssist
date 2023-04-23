@@ -437,7 +437,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Gesture 4 (handle grip)</string>
+     <string>Gesture 4</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
