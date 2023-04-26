@@ -8,6 +8,7 @@ import ButtonPositionModule as bpm
 class WorkerHandPos(QObject):
     finished = pyqtSignal()
     hand_position = pyqtSignal(int, int, int, int, int, int)
+    vision_based_prob_message = pyqtSignal(str, float, float, float, float)
 
     def __init__(self, my_depth_camera):
         super().__init__()
@@ -47,8 +48,13 @@ class WorkerHandPos(QObject):
                     color_image_to_process, results = self.hand_detector.findHands(color_image)
                     point = self.hand_detector.findPosition(color_image_to_process, results, targetId=12)
                     # potential keypoint model to predict gestures
-                    feature_label = self.hand_detector.getPrediction(results, color_image_to_process)
-                    print("Predicted gesture: " + feature_label)
+                    vision_based_probs = self.hand_detector.getProbs(results, color_image_to_process)
+                    prob_0, prob_1, prob_2, prob_3 = vision_based_probs[0], vision_based_probs[1], vision_based_probs[2], vision_based_probs[3]
+                    # direct emission of probabilities
+                    sensor_type = "vision"
+                    self.vision_based_prob_message.emit(sensor_type, prob_0, prob_1, prob_2, prob_3)
+                    # feature_label = self.hand_detector.getPrediction(results, color_image_to_process)
+                    # print("Predicted gesture: " + feature_label)
 
                 # alternative 2 - find point based on depth contour
                 if not point and use_depth_contour:
