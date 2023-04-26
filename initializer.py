@@ -6,6 +6,9 @@ import worker_recorder
 import worker_detection
 import worker_handpos
 import worker_evaluator
+import copy
+import numpy as np
+
 
 class Initializer(qtc.QObject):
   hand_position = qtc.pyqtSignal(int, int, int, int, int, int)
@@ -30,6 +33,11 @@ class Initializer(qtc.QObject):
     self.lang = 'en'
     # users' knife hand (default is right)
     self.knife_hand = 'right'
+
+    # Create vision-based probabilities array
+    #####
+    self.vision_prob_array = []
+    #####
 
     # Initialize Depth Camera Intel Realsense
     #####
@@ -61,7 +69,10 @@ class Initializer(qtc.QObject):
     self.obj_websocket = worker_websocket.WorkerWebsocket()
     self.thread_websocket = qtc.QThread()
     # 2 - Connect Worker`s Signals to Form method slots to post data.
-    self.obj_websocket.websocket_message.connect(self.onWebsocketMessage)
+    # self.obj_websocket.websocket_message.connect(self.onWebsocketMessage)
+    # replace with directly emitted probabilities
+    self.obj_websocket.sensor_based_prob_message.connect(self.onSensorBasedProbs)
+    self.obj_websocket.vision_based_prob_message.connect(self.onVisionBasedProbs)
     self.obj_websocket.phone_and_watch_start.connect(self.onDeviceStart)
     self.obj_websocket.phone_and_watch_stop.connect(self.onDeviceStop)
     # 3 - Move the Worker object to the Thread object
@@ -98,14 +109,44 @@ class Initializer(qtc.QObject):
     self.obj_evaluator.moveToThread(self.thread_evaluator)
     self.thread_evaluator.start()
 
-  # check if message received
-  def onWebsocketMessage(self, sensor_type, message):
-    # get current step
-    if self.current_step:
-      self.obj_recorder.write_record(self.current_step, sensor_type, message)
-      print("writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
+  def onVisionBasedProbs(self, sensor_type, prob_0, prob_1, prob_2, prob_3):
+    vision_probs = [prob_0, prob_1, prob_2, prob_3]
+    self.vision_prob_array.append(vision_probs)
+
+  def onSensorBasedProbs(self, sensor_type, prob_0, prob_1, prob_2, prob_3):
+    # put sensor based probabilities into array
+    sensor_probs = [prob_0, prob_1, prob_2, prob_3]
+    if len(self.vision_prob_array) == 0:
+      # in case no vision based probabilities
+      fused_probs = sensor_probs
     else:
-      print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
+      # retrieve from container of vision based probabilities
+      temp_vision_prob_array = copy.deepcopy(self.vision_prob_array)
+      # clear container of vision based probabilities
+      self.vision_prob_array.clear()
+      # get mean values
+      vision_probs = np.mean(temp_vision_prob_array, axis=0)
+      # fuse vision and sensor based probabilities
+      fused_probs = np.mean([sensor_probs, vision_probs], axis=0)
+    # pick out the biggest number in an array
+    if np.max(fused_probs) > 0.5:
+      # get the index number of the biggest number in an array and plus 1 to get feature index
+      result_gesture = np.argmax(fused_probs) + 1
+      # get current step
+      if self.current_step:
+        self.obj_recorder.write_record(self.current_step, sensor_type, result_gesture)
+        print("writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", result_gesture)
+      else:
+        print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", result_gesture)
+
+  # # check if message received
+  # def onWebsocketMessage(self, sensor_type, message):
+  #   # get current step
+  #   if self.current_step:
+  #     self.obj_recorder.write_record(self.current_step, sensor_type, message)
+  #     print("writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
+  #   else:
+  #     print("not writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", message)
 
   # send hand position paramas to the respective UI  
   def onHandPosition(self, x, y, z, counter, cursor_x, cursor_y):
