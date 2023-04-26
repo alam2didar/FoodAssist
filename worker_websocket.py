@@ -12,6 +12,7 @@ class WorkerWebsocket(QObject):
     phone_and_watch_stop = pyqtSignal()
     websocket_finished = pyqtSignal()
     websocket_message = pyqtSignal(str, int)
+    sensor_based_prob_message = pyqtSignal(str, float, float, float, float)
     worker_activated = True
     wearable_transferring = False
 
@@ -34,28 +35,30 @@ class WorkerWebsocket(QObject):
                 prob_1 = float(json_dict["prob_1"])
                 prob_2 = float(json_dict["prob_2"])
                 prob_3 = float(json_dict["prob_3"])
-                # pick out the highest probability
-                temp_max = max(prob_0, prob_1, prob_2, prob_3)
-                if temp_max > 0.5:
-                    # pick out result_feature
-                    if prob_0 == temp_max:
-                        recognized_gesture = 1
-                    elif prob_1 == temp_max:
-                        recognized_gesture = 2
-                    elif prob_2 == temp_max:
-                        recognized_gesture = 3
-                    elif prob_3 == temp_max:
-                        recognized_gesture = 4
-                    # emit result_type, recognized_gesture (emitting gesture recognition from smart watch)
-                    self.websocket_message.emit(sensor_type, recognized_gesture)
-                else:
-                    # no matching probability over 0.5 found
-                    print("max value below 0.5: ", temp_max)
-            elif sensor_type == "motion":
-                # standard deviation of linear acceleration 
-                fused_sd = float(json_dict["prob_0"])
-                # emit result_type, fused_sd (emitting motion standard deviation from smart watch)
-                self.websocket_message.emit(sensor_type, fused_sd)
+                # direct emission of probabilities
+                self.sensor_based_prob_message.emit(sensor_type, prob_0, prob_1, prob_2, prob_3)
+                # # pick out the highest probability
+                # temp_max = max(prob_0, prob_1, prob_2, prob_3)
+                # if temp_max > 0.5:
+                #     # pick out result_feature
+                #     if prob_0 == temp_max:
+                #         recognized_gesture = 1
+                #     elif prob_1 == temp_max:
+                #         recognized_gesture = 2
+                #     elif prob_2 == temp_max:
+                #         recognized_gesture = 3
+                #     elif prob_3 == temp_max:
+                #         recognized_gesture = 4
+                #     # emit result_type, recognized_gesture (emitting gesture recognition from smart watch)
+                #     self.websocket_message.emit(sensor_type, recognized_gesture)
+                # else:
+                #     # no matching probability over 0.5 found
+                #     print("max value below 0.5: ", temp_max)
+            # elif sensor_type == "motion":
+            #     # standard deviation of linear acceleration 
+            #     fused_sd = float(json_dict["prob_0"])
+            #     # emit result_type, fused_sd (emitting motion standard deviation from smart watch)
+            #     self.websocket_message.emit(sensor_type, fused_sd)
         except json.JSONDecodeError:
             print("invalid JSON")
 
