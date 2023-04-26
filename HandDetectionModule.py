@@ -53,8 +53,7 @@ class HandDetector:
                 distance = depth_image[point[1], point[0]] * depth_camera.depth_scale
         return distance
 
-
-    def getPrediction(self, results, color_image):
+    def getProbs(self, results, color_image):
         if results.multi_hand_landmarks:
             for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
                 # Landmark calculation
@@ -62,10 +61,23 @@ class HandDetector:
                 # Conversion to relative coordinates / normalized coordinates
                 pre_processed_landmark_list = self.pre_process_landmark(landmark_list)
                 # Hand sign classification
-                hand_sign_id = self.keypoint_classifier(pre_processed_landmark_list)
+                vision_probs = self.keypoint_classifier(pre_processed_landmark_list)
                 # feature label
-                feature_label = self.keypoint_classifier_labels[hand_sign_id]
-        return feature_label
+                # feature_label = self.keypoint_classifier_labels[hand_sign_id]
+        return vision_probs
+
+    # def getPrediction(self, results, color_image):
+    #     if results.multi_hand_landmarks:
+    #         for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
+    #             # Landmark calculation
+    #             landmark_list = self.calc_landmark_list(color_image, hand_landmarks)
+    #             # Conversion to relative coordinates / normalized coordinates
+    #             pre_processed_landmark_list = self.pre_process_landmark(landmark_list)
+    #             # Hand sign classification
+    #             hand_sign_id = self.keypoint_classifier(pre_processed_landmark_list)
+    #             # feature label
+    #             feature_label = self.keypoint_classifier_labels[hand_sign_id]
+    #     return feature_label
 
 
     def calc_landmark_list(image, landmarks):
