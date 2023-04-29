@@ -51,6 +51,7 @@ class Initializer(qtc.QObject):
     # Create WorkerHandPos thread
     # 1 - create Worker and Thread inside the Form # no parent
     self.obj = worker_handpos.WorkerHandPos(self.my_depth_camera)
+    self.obj.vision_based_prob_message.connect(self.onVisionBasedProbs)
     self.thread_handpos = qtc.QThread()
     # 2 - Connect Worker`s Signals to Form method slots to post data.
     self.obj.hand_position.connect(self.onHandPosition)
@@ -72,7 +73,6 @@ class Initializer(qtc.QObject):
     # self.obj_websocket.websocket_message.connect(self.onWebsocketMessage)
     # replace with directly emitted probabilities
     self.obj_websocket.sensor_based_prob_message.connect(self.onSensorBasedProbs)
-    self.obj_websocket.vision_based_prob_message.connect(self.onVisionBasedProbs)
     self.obj_websocket.phone_and_watch_start.connect(self.onDeviceStart)
     self.obj_websocket.phone_and_watch_stop.connect(self.onDeviceStop)
     # 3 - Move the Worker object to the Thread object
