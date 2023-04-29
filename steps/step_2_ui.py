@@ -56,6 +56,7 @@ class Step_2_UI(qtw.QWidget):
     fa.draw_finger_tip_cursor(self)
     # Hand tracking thread
     self.my_initializer.hand_position.connect(self.onHandPositionArrival)
+    self.my_initializer.gesture_to_ui.connect(self.onGestureToUiArrival)
     self.my_initializer.obj.reset_counter()
 
     # configure animate button 
@@ -109,7 +110,15 @@ class Step_2_UI(qtw.QWidget):
     box_painter.drawPath(path)
     if self.finger_tip_y >= 560:
       self.cursor_widget.move(self.finger_tip_x, self.finger_tip_y)
-  
+
+  # check if the button is touched
+  def onGestureToUiArrival(self, result_gesture):
+    self.image_gesture.setPixmap(qtg.QPixmap(f':/img/gesture{result_gesture}.png'))
+    if self.my_initializer.lang == 'en':
+      self.text_gesture.setText(f'Detected: Gesture {result_gesture}')
+    else:
+      self.text_gesture.setText(f'Erkannt: Geste {result_gesture}')
+
   # check if the button is touched
   def onHandPositionArrival(self, x, y, z, counter, cursor_x, cursor_y):
     # draw cursor for finger tip

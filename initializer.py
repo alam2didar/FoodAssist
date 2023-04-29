@@ -12,6 +12,7 @@ import numpy as np
 
 class Initializer(qtc.QObject):
   hand_position = qtc.pyqtSignal(int, int, int, int, int, int)
+  gesture_to_ui = qtc.pyqtSignal(int)
   detection_params = qtc.pyqtSignal(int, int, int, int, int)
   devices_connected = qtc.pyqtSignal()
   devices_disconnected = qtc.pyqtSignal()
@@ -132,8 +133,11 @@ class Initializer(qtc.QObject):
     if np.max(fused_probs) > 0.5:
       # get the index number of the biggest number in an array and plus 1 to get feature index
       result_gesture = np.argmax(fused_probs) + 1
+      # debug
+      self.gesture_to_ui.emit(result_gesture)
       # get current step
       if self.current_step:
+        sensor_type = 'fused'
         self.obj_recorder.write_record(self.current_step, sensor_type, result_gesture)
         print("writing, current step: ", self.current_step, ", sensor type: ", sensor_type, ", message: ", result_gesture)
       else:
