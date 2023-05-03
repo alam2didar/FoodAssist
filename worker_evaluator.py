@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import math
 
 
 class WorkerEvaluator(QObject):
@@ -60,36 +61,41 @@ class WorkerEvaluator(QObject):
                 column_names = ['role', 'timestamp', 'step', 'sensor_type', 'recognized_gesture']
                 df_newbie = pd.read_csv(archive_file_name, header=None, names=column_names)
                 df_newbie = df_newbie.dropna()
-                df_expert = pd.read_csv('resources/record_expert.csv', header=None, names=column_names)
-                df_expert = df_expert.dropna()
-                # filter data frame for each step
-                df_expert_step_1 = df_expert[df_expert['step'] == 'step_1']
-                df_expert_step_2 = df_expert[df_expert['step'] == 'step_2']
-                df_expert_step_3 = df_expert[df_expert['step'] == 'step_3']
-                df_expert_step_4 = df_expert[df_expert['step'] == 'step_4']
-                df_newbie_step_1 = df_newbie[df_newbie['step'] == 'step_1']
-                df_newbie_step_2 = df_newbie[df_newbie['step'] == 'step_2']
-                df_newbie_step_3 = df_newbie[df_newbie['step'] == 'step_3']
-                df_newbie_step_4 = df_newbie[df_newbie['step'] == 'step_4']
-                # perform the same data processing on each step dataset
-                success_flag_dict['step_1'], difference_dict['step_1'], score_dict['step_1'], step_score_dict['step_1'] = self.process_data_frame(df_expert_step_1, df_newbie_step_1, 1)
-                success_flag_dict['step_2'], difference_dict['step_2'], score_dict['step_2'], step_score_dict['step_2'] = self.process_data_frame(df_expert_step_2, df_newbie_step_2, 2)
-                success_flag_dict['step_3'], difference_dict['step_3'], score_dict['step_3'], step_score_dict['step_3'] = self.process_data_frame(df_expert_step_3, df_newbie_step_3, 3)
-                success_flag_dict['step_4'], difference_dict['step_4'], score_dict['step_4'], step_score_dict['step_4'] = self.process_data_frame(df_expert_step_4, df_newbie_step_4, 4)
-                # aggregate success_flag from each step
-                success_flag = success_flag_dict['step_1'] or success_flag_dict['step_2'] or success_flag_dict['step_3'] or success_flag_dict['step_4']
-                # use step_score_dict to find out the ranking
-                step_score_sorted_list = sorted(step_score_dict.items(), key=lambda x: x[1], reverse=True)
-                step_score_percentage = [0, 0, 0, 0]
-                for index in range(4):
-                    step_score_percentage[index] = int(sum(score_dict[f'step_{index+1}']) / 4)
-                overall_score_percentage = int(sum(step_score_percentage) / 4)
+                if df_newbie.shape[0] == 0:
+                    print('no data collected')
+                    success_flag = False
+                else:
+                    df_expert = pd.read_csv('resources/record_expert.csv', header=None, names=column_names)
+                    df_expert = df_expert.dropna()
+                    # filter data frame for each step
+                    df_expert_step_1 = df_expert[df_expert['step'] == 'step_1']
+                    df_expert_step_2 = df_expert[df_expert['step'] == 'step_2']
+                    df_expert_step_3 = df_expert[df_expert['step'] == 'step_3']
+                    df_expert_step_4 = df_expert[df_expert['step'] == 'step_4']
+                    df_newbie_step_1 = df_newbie[df_newbie['step'] == 'step_1']
+                    df_newbie_step_2 = df_newbie[df_newbie['step'] == 'step_2']
+                    df_newbie_step_3 = df_newbie[df_newbie['step'] == 'step_3']
+                    df_newbie_step_4 = df_newbie[df_newbie['step'] == 'step_4']
+                    # perform the same data processing on each step dataset
+                    success_flag_dict['step_1'], difference_dict['step_1'], score_dict['step_1'], step_score_dict['step_1'] = self.process_data_frame(df_expert_step_1, df_newbie_step_1, 1)
+                    success_flag_dict['step_2'], difference_dict['step_2'], score_dict['step_2'], step_score_dict['step_2'] = self.process_data_frame(df_expert_step_2, df_newbie_step_2, 2)
+                    success_flag_dict['step_3'], difference_dict['step_3'], score_dict['step_3'], step_score_dict['step_3'] = self.process_data_frame(df_expert_step_3, df_newbie_step_3, 3)
+                    success_flag_dict['step_4'], difference_dict['step_4'], score_dict['step_4'], step_score_dict['step_4'] = self.process_data_frame(df_expert_step_4, df_newbie_step_4, 4)
+                    # aggregate success_flag from each step
+                    success_flag = success_flag_dict['step_1'] or success_flag_dict['step_2'] or success_flag_dict['step_3'] or success_flag_dict['step_4']
+                    # use step_score_dict to find out the ranking
+                    step_score_sorted_list = sorted(step_score_dict.items(), key=lambda x: x[1], reverse=True)
+                    step_score_percentage = [0, 0, 0, 0]
+                    for index in range(4):
+                        step_score_percentage[index] = int(sum(score_dict[f'step_{index+1}']) / 4)
+                    overall_score_percentage = int(sum(step_score_percentage) / 4)
             else:
                 print('archive_file_name is none')
                 success_flag = False
         self.evaluation_result.emit(success_flag, difference_dict, score_dict, step_score_dict, step_score_sorted_list, overall_score_percentage)
 
     @pyqtSlot()
+    # process data frame for each step
     def process_data_frame(self, data_frame_expert_step, data_frame_newbie_step, step_number):
         success_flag = False
         score_array = [0, 0, 0, 0]
@@ -108,7 +114,6 @@ class WorkerEvaluator(QObject):
             print('reaching point - error encountered filtering position and motion')
             success_flag = False
         # check df_position
-        # if not df_newbie_position.empty:
         for gesture_index in range(1, 5):
             # filter gesture x
             df_newbie_gesture_x = df_newbie_position[df_newbie_position['recognized_gesture'] == gesture_index]
@@ -137,19 +142,45 @@ class WorkerEvaluator(QObject):
                 os.remove(strFile)
             sns_count_plot.figure.savefig(strFile)
 
-        if sum(df_newbie_position_amount) != 0:
-            for gesture_index in range(1, 4):
-                amount_difference[gesture_index-1] = df_newbie_position_amount[gesture_index-1] - self.expert_amount_dict[f'step_{step_number}_gesture_{gesture_index}']
-            # calculation of score_array
-            for index in range(3):
-                if abs(amount_difference[0]) is None:
-                    score_array[index] = 0
-                elif abs(amount_difference[index]) > 10:
-                    score_array[index] = 50
-                else:
-                    score_array[index] = 100 - 5 * abs(amount_difference[index])
-            step_score = int(sum(score_array)/len(score_array))
-            success_flag = True
-        else:
+        if df_newbie_position_amount == [0, 0, 0, 0]:
+            # -1 represents no gesture performed
+            amount_difference = [-1, -1, -1, -1]
             success_flag = False
+        else:
+            # calculation of differences in 4 gestures in one step
+            for index in range(4):
+                if df_newbie_position_amount[index] is None:
+                    df_newbie_position_amount[index] = 0
+                if df_expert_position_amount[index] is None:
+                    df_expert_position_amount[index] = 0
+                amount_difference[index] = abs(df_newbie_position_amount[index] - df_expert_position_amount[index])
+                # calculation of score_array for each gesture
+                score_array[index] = self.get_score(df_newbie_position_amount[index], df_expert_position_amount[index])
+            # calculation of score in each step -> x 100 -> to get score from 0 to 100
+            step_score = int(sum(score_array) / len(score_array))
+            success_flag = True
+            print('score_array, step_score: ', score_array, step_score)
         return success_flag, amount_difference, score_array, step_score
+        #     # calculation of differences in 4 gestures in one step
+        #     for gesture_index in range(1, 4):
+        #         amount_difference[gesture_index-1] = df_newbie_position_amount[gesture_index-1] - self.expert_amount_dict[f'step_{step_number}_gesture_{gesture_index}']
+        #     # calculation of score_array
+        #     for index in range(3):
+        #         if abs(amount_difference[0]) is None:
+        #             score_array[index] = 0
+        #         elif abs(amount_difference[index]) > 10:
+        #             score_array[index] = 50
+        #         else:
+        #             score_array[index] = 100 - 5 * abs(amount_difference[index])
+        #     step_score = int(sum(score_array)/len(score_array))
+        #     success_flag = True
+        # return success_flag, amount_difference, score_array, step_score
+
+    def get_score(self, newbie_count, expert_count):
+        if expert_count == 0:
+            score = math.exp(-newbie_count)
+        else:
+            score = (newbie_count/expert_count) if (newbie_count<=expert_count) else (math.exp((2/expert_count)*(expert_count-newbie_count)))
+            # compensation for hololens score as integer
+            score = int(100 * score)
+        return score
